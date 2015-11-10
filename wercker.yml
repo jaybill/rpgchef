@@ -1,0 +1,70 @@
+# This references the default nodejs container from
+# the Docker Hub: https://registry.hub.docker.com/_/node/
+# If you want Nodesource's container you would reference nodesource/node
+# Read more about containers on our dev center
+# http://devcenter.wercker.com/docs/containers/index.html
+box: node
+build:
+  # The steps that will be executed on build
+  # Steps make up the actions in your pipeline
+  # Read more about steps on our dev center:
+  # http://devcenter.wercker.com/docs/steps/index.html
+  steps:
+    # A step that executes `npm install` command
+    - npm-install
+    - termie/bash-template@2015.135.749
+    - script:
+        name: mv env file
+        code: |-
+          mv env .env
+#    - hgen/gulp:
+#        tasks: test
+
+    - hgen/gulp:
+        tasks: build --release
+
+deploy:
+    steps:
+        - install-packages:
+            packages: rsync
+        - add-ssh-key:
+            keyname: DEPLOYMENT
+        - script:
+            name: add ssh key
+            code: |-
+                ssh-keyscan $AWS_HOST "$WERCKER_SSH_CONFIG_ADDITIONAL_HOSTS" >> ~/.ssh/known_hosts
+        - mktemp:
+            envvar: PRIVATEKEY_PATH
+        - create-file:
+            name: write key
+            filename: $PRIVATEKEY_PATH
+            content: $DEPLOYMENT_PRIVATE
+            overwrite: true
+            hide-from-log: true
+        - sjoerdmulder/rsync-deploy@0.1.0:
+            user: wercker
+            host: $AWS_HOST
+            source: ./build
+            directory: /var/www/rpgchef_next
+            sshkey: $PRIVATEKEY_FILE
+        - sjoerdmulder/rsync-deploy@0.1.0:
+            user: wercker
+            host: $AWS_HOST
+            source: ./node_modules
+            directory: /var/www/rpgchef_next
+            sshkey: $PRIVATEKEY_FILE
+        - script:
+            name: update services
+            code: |-
+                ssh -oStrictHostKeyChecking=no $AWS_USER@$AWS_HOST <<EOF
+                rm /var/www/rpgchef
+                rm -rf /var/www/rpgchef_previous
+                mv /var/www/rpgchef_current /var/www/rpgchef_previous
+                mv /var/www/rpgchef_next /var/www/rpgchef_current
+                ln -s /var/www/rpgchef_current /var/www/rpgchef
+                sudo service rpgchefd stop
+                sudo service rpgchefd start
+                sudo service rpgchefapid stop
+                sudo service rpgchefapid start
+                exit
+                EOF

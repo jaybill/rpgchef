@@ -5,8 +5,8 @@ import ReactDom from 'react-dom';
 import { Router, Route, DefaultRoute, NotFoundRoute } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 
-import App from './components/App';
-import Home from './components/Home';
+import App from '../components/App';
+import Home from '../components/Home';
 
 let history = createBrowserHistory();
 
@@ -17,7 +17,12 @@ if (window.addEventListener) {
 }
 
 function run() {
-  log.setLevel(process.env.LOG_LEVEL);
+  var logLevel = log.levels.DEBUG;
+  if (process.env.LOG_LEVEL) {
+    logLevel = parseInt(process.env.LOG_LEVEL);
+  }
+
+  log.setLevel(logLevel);
 
   ReactDom.render(
 

@@ -94,7 +94,7 @@ var config = {
 // -----------------------------------------------------------------------------
 
 var appConfig = _.merge({}, config, {
-  entry: './src/app.js',
+  entry: './src/frontend/app.js',
   output: {
     filename: 'app.js',
     path: './build/public/'
@@ -128,7 +128,7 @@ appConfig.resolve = {
 // -----------------------------------------------------------------------------
 
 var serverConfig = _.merge({}, config, {
-  entry: './src/server.js',
+  entry: './src/server/server.js',
   output: {
     filename: 'server.js',
     libraryTarget: 'commonjs2'
@@ -164,7 +164,7 @@ var serverConfig = _.merge({}, config, {
 // -----------------------------------------------------------------------------
 
 var apiConfig = _.merge({}, config, {
-  entry: './src/api.js',
+  entry: './src/api/api.js',
   output: {
     filename: 'api.js',
     libraryTarget: 'commonjs2'

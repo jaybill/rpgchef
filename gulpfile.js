@@ -66,10 +66,8 @@ if (errors.length) {
 }
 
 var logLevel = log.levels.DEBUG;
-if (process.env.LOGLEVEL) {
-  logLevel = parseInt(process.env.LOGLEVEL);
-} else {
-  process.env.LOG_LEVEL = "SILENT";
+if (process.env.LOG_LEVEL) {
+  logLevel = parseInt(process.env.LOG_LEVEL);
 }
 
 log.setLevel(logLevel);

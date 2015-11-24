@@ -2,11 +2,12 @@ import _ from 'lodash';
 import log from 'loglevel'
 import React from 'react'
 import ReactDom from 'react-dom';
-import { Router, Route, DefaultRoute, NotFoundRoute } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory'
+import { combineReducers, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import { reduxReactRouter, routerStateReducer, ReduxRouter } from 'redux-router';
 
-import App from '../components/App';
-import Home from '../components/Home';
+import AppRouter from '../components/AppRouter';
 
 let history = createBrowserHistory();
 
@@ -18,19 +19,18 @@ if (window.addEventListener) {
 
 function run() {
   var logLevel = log.levels.DEBUG;
+
+  const reducer = combineReducers({
+    router: routerStateReducer
+  });
+
   if (process.env.LOG_LEVEL) {
     logLevel = parseInt(process.env.LOG_LEVEL);
   }
 
   log.setLevel(logLevel);
 
-  ReactDom.render(
-
-    <Router history={history}><Route path='/' component={App}>
-        <Route path='/home' component={Home}>
-        </Route>
-       </Route>
-      </Router>, document.getElementById('content'));
+  ReactDom.render(<AppRouter history={history}/>, document.getElementById('content'));
 
 }
 

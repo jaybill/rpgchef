@@ -51,6 +51,7 @@
     "react-dom": "^0.14.2",
     "react-draggable": "^1.0.1",
     "react-router": "^1.0.0-rc4",
+    "redux-router": "^0.1.0",
     "sequelize": "^3.13.0",
     "sequelize-cli": "^2.1.0",
     "superagent": "^1.4.0",

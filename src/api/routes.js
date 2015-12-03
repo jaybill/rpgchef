@@ -4,7 +4,7 @@ var routes = [
   {
     method: 'POST',
     path: '/login',
-    config: Auth.handlers.login
+    config: Auth.handlers.login,
   },
   {
     method: 'GET',

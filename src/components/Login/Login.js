@@ -1,29 +1,36 @@
 import './Login.less';
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Input, Panel, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
 import log from 'loglevel';
+import { connect } from 'react-redux'
 
-export default class Login extends React.Component {
+export default class Login extends Component {
+
+  constructor() {
+    super()
+    this._login = this._login.bind(this);
+  }
+
+  _login() {
+    this.props.login({
+      username: this.refs.username.getValue(),
+      password: this.refs.password.getValue()
+    });
+  }
 
   handleKeyUp(e) {
     if (e.keyCode === 13) {
-      this.login();
+      this._login();
     }
-  }
-
-  login() {
-
-    log.debug("Logging in!");
   }
 
   render() {
     var loginError;
     var self = this;
 
-    if (this.state && this.state.error) {
-      log.debug(this.state.error);
+    if (this.props && this.props.error) {
       var msg;
-      switch (this.state.error) {
+      switch (this.props.error) {
         case "Unconfirmed email":
           msg = "You have not confirmed your email yet.";
           break;
@@ -52,7 +59,7 @@ export default class Login extends React.Component {
                             <Input ref="username" type='text' placeholder='Username' autoFocus={true} />
                             <Input ref="password" type='password' placeholder='Password' onKeyUp={this.handleKeyUp}/>
             <p><a href="/forgotpassword">Forgot password?</a></p>
-                            <Button bsStyle='primary' onClick={this.login}>Sign in</Button>
+                            <Button bsStyle='primary' onClick={this._login}>Sign in</Button>
                         </form>
                         
                     </Col>
@@ -60,6 +67,8 @@ export default class Login extends React.Component {
             </Grid>
       );
   }
-
 }
 
+Login.propTypes = {
+  login: PropTypes.func.isRequired
+}

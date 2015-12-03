@@ -1,11 +1,13 @@
 'use strict';
 
 import './App.less';
-import React from 'react';
+import React, { Component } from 'react';
 
 import log from 'loglevel';
 
-export default React.createClass({
+class App extends Component {
+
+
   render() {
 
     return (
@@ -15,4 +17,6 @@ export default React.createClass({
       );
   }
 
-});
+}
+
+export default App;

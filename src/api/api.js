@@ -2,6 +2,7 @@
 
 import Hapi from 'hapi';
 import HapiAuthCookie from 'hapi-auth-cookie';
+import HapiCorsHeaders from 'hapi-cors-headers';
 import Routes from './routes';
 import log from 'loglevel';
 import Db from './db';
@@ -15,7 +16,7 @@ log.setLevel(logLevel);
 
 var server = new Hapi.Server();
 server.connection({
-  port: process.env.API_PORT
+  port: process.env.API_PORT,
 });
 
 server.register([HapiAuthCookie], function(err) {
@@ -28,6 +29,7 @@ server.register([HapiAuthCookie], function(err) {
   });
 
   server.route(Routes);
+  server.ext('onPreResponse', HapiCorsHeaders);
 
   server.start(function() {
     console.log('Server running at:', server.info.uri);

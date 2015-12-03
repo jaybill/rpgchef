@@ -1,8 +1,7 @@
-import keyMirror from 'react/lib/keyMirror';
+import keyMirror from 'keymirror';
 
-
-var km = keyMirror(
-    LOGIN: null
-);
+var km = keyMirror({
+  LOGIN: null
+});
 
 export default km;

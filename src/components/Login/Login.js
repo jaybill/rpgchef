@@ -9,6 +9,7 @@ export default class Login extends Component {
   constructor() {
     super()
     this._login = this._login.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
   _login() {
@@ -27,24 +28,10 @@ export default class Login extends Component {
   render() {
     var loginError;
     var self = this;
+    var {session} = this.props;
+    if (session && session.error) {
 
-    if (this.props && this.props.error) {
-      var msg;
-      switch (this.props.error) {
-        case "Unconfirmed email":
-          msg = "You have not confirmed your email yet.";
-          break;
-        case "Inactive account":
-          msg = "Your account is no longer active.";
-          break;
-        case "bad credentials":
-          msg = "Incorrect username or password.";
-          break;
-        default:
-          msg = "Incorrect username or password.";
-      }
-
-      loginError = <Alert bsStyle='danger' key="Login-error" ref='error' className="Login-error">{msg}</Alert>;
+      loginError = <Alert bsStyle='danger' key="Login-error" ref='error' className="Login-error">{session.error}</Alert>;
     }
 
     return (
@@ -56,10 +43,10 @@ export default class Login extends Component {
         {loginError}
 
                         <form>
-                            <Input ref="username" type='text' placeholder='Username' autoFocus={true} />
-                            <Input ref="password" type='password' placeholder='Password' onKeyUp={this.handleKeyUp}/>
+                            <Input ref="username" type='text'  disabled={session.loggingIn} placeholder='Username' autoFocus={true} />
+                            <Input ref="password" type='password'  disabled={session.loggingIn} placeholder='Password' onKeyUp={this.handleKeyUp}/>
             <p><a href="/forgotpassword">Forgot password?</a></p>
-                            <Button bsStyle='primary' onClick={this._login}>Sign in</Button>
+                            <Button bsStyle='primary'  disabled={session.loggingIn} onClick={this._login}>Sign in</Button>
                         </form>
                         
                     </Col>

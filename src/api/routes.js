@@ -15,6 +15,11 @@ var routes = [
     method: 'POST',
     path: '/register',
     config: Auth.handlers.register
+  },
+  {
+    method: 'GET',
+    path: '/me',
+    config: Auth.handlers.me
   }
 
 ];

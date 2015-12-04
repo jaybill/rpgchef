@@ -1,8 +1,14 @@
 import popsicle from 'popsicle';
 import urijs from 'urijs';
 
-export const doLogin = function(credentials) {
+export const login = function(credentials) {
   return callServer('/login', 'POST', null, credentials);
+}
+export const logout = function() {
+  return callServer('/logout', 'GET');
+}
+export const me = function() {
+  return callServer('/me', 'GET');
 }
 function callServer(url, method, query, data, headers) {
 
@@ -21,4 +27,10 @@ function callServer(url, method, query, data, headers) {
 
   );
 
+}
+
+export default {
+  login,
+  logout,
+  me
 }

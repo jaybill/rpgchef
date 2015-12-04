@@ -1,4 +1,4 @@
-'use strict';
+'3use strict';
 
 // Include Gulp and other build automation tools and utilities
 // See: https://github.com/gulpjs/gulp/blob/master/docs/API.md
@@ -267,8 +267,11 @@ gulp.task('sync', ['serve', 'api'], function(cb) {
     notify: true,
     https: false,
     proxy: 'localhost:' + process.env.SERVER_PORT,
+    scriptPath: function(relative) {
+      return relative;
+    },
     host: domain,
-    open: 'external'
+    open: false
   }, cb);
 
   process.on('exit', function() {

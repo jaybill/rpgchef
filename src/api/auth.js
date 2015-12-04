@@ -56,6 +56,18 @@ Auth.handlers = {
     }
   },
 
+  me: {
+    auth: 'session',
+    plugins: {
+      'hapi-auth-cookie': {
+        redirectTo: false
+      }
+    },
+    handler: (request, reply) => {
+      return reply(request.auth.credentials);
+    }
+  },
+
   login: {
     auth: {
       mode: 'try',

@@ -1,4 +1,4 @@
-'3use strict';
+'use strict';
 
 // Include Gulp and other build automation tools and utilities
 // See: https://github.com/gulpjs/gulp/blob/master/docs/API.md

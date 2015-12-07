@@ -22,7 +22,10 @@ function callServer(url, method, query, data, headers) {
     method: method,
     body: data,
     headers: headers,
-    url: uri.toString()
+    url: uri.toString(),
+    options: {
+      withCredentials: true
+    }
   }
 
   );

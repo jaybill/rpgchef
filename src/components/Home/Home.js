@@ -6,6 +6,8 @@ import { Button, Navbar, NavBrand, Nav, NavItem, NavDropdown, MenuItem } from 'r
 import log from 'loglevel';
 import { RouteHandler } from 'react-router';
 
+
+
 export var componentDef = {
 
   componentWillMount() {},
@@ -13,6 +15,7 @@ export var componentDef = {
   render() {
 
     return (
+
       <div className="Home">
                 <div className="container">
                     <Navbar fixedTop><NavBrand><a href="#">RPG Chef</a></NavBrand>
@@ -30,6 +33,7 @@ export var componentDef = {
                     <div className="Home-Holder">{this.props.children}</div>
                 </div>
             </div>
+
       );
   }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-import App from '../components/App';
-import Home from '../components/Home';
+import App from './containers/AppContainer';
+import Home from './containers/HomeContainer';
 import Login from './containers/LoginContainer';
 
 

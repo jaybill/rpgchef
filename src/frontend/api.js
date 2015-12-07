@@ -26,9 +26,7 @@ function callServer(url, method, query, data, headers) {
     options: {
       withCredentials: true
     }
-  }
-
-  );
+  });
 
 }
 

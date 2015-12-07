@@ -6,6 +6,7 @@ function session(state = {
     isLoaded: false,
     isLoggedIn: false,
     loggingIn: false,
+    loggingOut: false,
     error: null,
     user: null
   }, action) {
@@ -57,6 +58,34 @@ function session(state = {
       return Object.assign({}, state, {
         isLoggedIn: false,
         loggingIn: false,
+        user: null,
+        error: action.payload
+      });
+
+      break;
+
+    case ActionConstants.LOGOUT_START:
+      return Object.assign({}, state, {
+        isLoggedIn: false,
+        loggingOut: true,
+        error: null,
+        user: null
+      });
+      break;
+
+    case ActionConstants.LOGOUT_SUCCESS:
+      return Object.assign({}, state, {
+        isLoggedIn: false,
+        loggingOut: false,
+        error: null,
+        user: null
+      });
+      break;
+
+    case ActionConstants.LOGOUT_FAILURE:
+      return Object.assign({}, state, {
+        isLoggedIn: false,
+        loggingOut: false,
         user: null,
         error: action.payload
       });

@@ -20,6 +20,7 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("LOGIN"));
   km = Object.assign(km, asyncKeys("LOGOUT"));
   km = Object.assign(km, asyncKeys("ME"));
+  km = Object.assign(km, asyncKeys("REGISTER"));
 
   return km;
 

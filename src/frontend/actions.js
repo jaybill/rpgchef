@@ -5,7 +5,6 @@ import _ from 'lodash';
 
 import ActionConstants from './actionconstants';
 
-
 function createAsyncActionGroup(namePrefix, config) {
   let actionGroup = {};
 
@@ -71,5 +70,45 @@ export const logout = function() {
       dispatch(logoutActions.failure("Logout failed."));
       return err;
     });
+  }
+};
+
+// REGISTER
+const registerActions = createAsyncActionGroup("register", {});
+export const registerFailure = registerActions.failure;
+
+export const register = function(registration) {
+  log.debug("Register action!");
+  return dispatch => {
+    dispatch(registerActions.start());
+    Api.register(registration).then((result) => {
+      log.debug(result);
+      if (result.status == 200) {
+        log.debug(result.body);
+        dispatch(registerActions.success(result.body.username));
+        return;
+      } else {
+        if (result.body.statusCode == 422) {
+          dispatch(registerActions.failure(["That email address is already in use."]));
+          return;
+        }
+        log.debug(result.body);
+        let message = "";
+        if (result.body.message) {
+          var re = /\[(.*?)\]/;
+          var m;
+
+          if ((m = re.exec(result.body.message)) !== null) {
+            if (m.index === re.lastIndex) {
+              re.lastIndex++;
+            }
+            message = m[0].substring(1, m[0].length - 1);
+          }
+        }
+
+        dispatch(registerActions.failure([message]));
+      }
+      return;
+    }).catch(err => dispatch(registerActions.failure(["Registration failed"])));
   }
 };

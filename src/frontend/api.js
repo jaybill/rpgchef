@@ -4,6 +4,9 @@ import urijs from 'urijs';
 export const login = function(credentials) {
   return callServer('/login', 'POST', null, credentials);
 }
+export const register = function(registration) {
+  return callServer('/register', 'POST', null, registration);
+}
 export const logout = function() {
   return callServer('/logout', 'GET');
 }
@@ -33,5 +36,6 @@ function callServer(url, method, query, data, headers) {
 export default {
   login,
   logout,
-  me
+  me,
+  register
 }

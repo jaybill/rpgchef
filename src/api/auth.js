@@ -11,8 +11,8 @@ Auth.handlers = {
   register: {
     validate: {
       payload: {
-        username: Joi.string().email().required(),
-        password: Joi.string().alphanum().min(3).required()
+        username: Joi.string().email().required().label('Email Address'),
+        password: Joi.string().alphanum().min(3).required().label('Password')
       }
     },
     handler: (request, reply) => {
@@ -116,7 +116,5 @@ Auth.handlers = {
     }
   }
 }
-
-
 
 export default Auth;

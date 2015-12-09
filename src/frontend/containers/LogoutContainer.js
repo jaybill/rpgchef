@@ -9,11 +9,7 @@ class LogoutContainer extends Component {
 
   componentWillMount() {
     const {dispatch, session} = this.props;
-
-    if (session.isLoggedIn) {
-      dispatch(logout());
-    }
-
+    dispatch(logout());
     dispatch(updatePath("/"));
   }
 

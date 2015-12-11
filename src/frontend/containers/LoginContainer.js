@@ -3,8 +3,8 @@ import log from 'loglevel';
 import { connect } from 'react-redux'
 import { login } from '../actions';
 import { updatePath } from 'redux-simple-router';
-
 import Login from '../../components/Login';
+import SimplePage from '../../components/SimplePage';
 
 class LoginContainer extends Component {
 
@@ -31,10 +31,10 @@ class LoginContainer extends Component {
 
   render() {
     const {dispatch, session} = this.props;
-    return <Login
+    return <SimplePage><Login
       session={session}
       login={credentials => dispatch(login(credentials))}
-      />
+      /></SimplePage>
   }
 }
 

@@ -1,5 +1,5 @@
-import './Register.less'
-
+import './Register.less';
+import '../SimplePage';
 import React from 'react';
 import { Alert, Input, Grid, Row, Col, Button } from 'react-bootstrap';
 import _ from 'lodash';

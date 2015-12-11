@@ -17,6 +17,16 @@ var routes = [
     config: Auth.handlers.register
   },
   {
+    method: 'POST',
+    path: '/confirm',
+    config: Auth.handlers.confirm
+  },
+  {
+    method: 'POST',
+    path: '/forgotpassword',
+    config: Auth.handlers.forgotPassword
+  },
+  {
     method: 'GET',
     path: '/me',
     config: Auth.handlers.me

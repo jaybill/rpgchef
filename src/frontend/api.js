@@ -4,6 +4,14 @@ import urijs from 'urijs';
 export const login = function(credentials) {
   return callServer('/login', 'POST', null, credentials);
 }
+export const confirm = function(code) {
+  return callServer('/confirm', 'POST', null, code);
+}
+export const forgotPassword = function(username) {
+  return callServer('/forgotpassword', 'POST', null, {
+    username: username
+  });
+}
 export const register = function(registration) {
   return callServer('/register', 'POST', null, registration);
 }
@@ -37,5 +45,7 @@ export default {
   login,
   logout,
   me,
-  register
+  register,
+  confirm,
+  forgotPassword
 }

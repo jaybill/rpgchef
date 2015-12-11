@@ -6,6 +6,8 @@ import Home from './containers/HomeContainer';
 import Login from './containers/LoginContainer';
 import Logout from './containers/LogoutContainer';
 import Register from './containers/RegisterContainer';
+import Confirm from './containers/ConfirmContainer';
+import ForgotPassword from './containers/ForgotPasswordContainer';
 
 export default function getRoutes() {
   return (
@@ -17,6 +19,8 @@ export default function getRoutes() {
     </Route>
    // Doing this here instead of inside of the App route to avoid promise problems.
    <Route path="/logout" component={Logout}/>
+   <Route path="/confirm" component={Confirm}/>
+   <Route path="/forgotpassword" component={ForgotPassword}/>
    </Route>
     );
 }

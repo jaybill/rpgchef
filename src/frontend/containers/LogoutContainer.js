@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Logout from '../../components/Logout';
 import { updatePath } from 'redux-simple-router';
 import { logout } from '../actions';
+import SimplePage from '../../components/SimplePage';
 
 class LogoutContainer extends Component {
 
@@ -15,7 +16,7 @@ class LogoutContainer extends Component {
 
 
   render() {
-    return <Logout/>;
+    return <SimplePage><Logout/></SimplePage>;
   }
 
 }

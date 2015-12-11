@@ -1,13 +1,13 @@
 import Bcrypt from '../bcrypt';
 import mailgun from 'mailgun-js';
 import _ from 'lodash';
-import md5 from 'md5';
 import log from 'loglevel';
 import Sequelize from 'sequelize';
 import DbConn from '../dbconn';
+import { getHash } from '../util';
 import Uri from 'urijs';
 
-var Users = DbConn.define('users',
+const Users = DbConn.define('users',
   {
     id: {
       type: Sequelize.BIGINT,
@@ -52,8 +52,9 @@ var Users = DbConn.define('users',
     }
   });
 
+
 var sendWelcomeEmail = (user, options) => {
-  var hash = md5(user.get('id') + user.get('username') + process.env.SALT);
+  var hash = getHash(user.get('id'), user.get('username'));
   var url = new Uri(process.env.SERVER_URL + "/confirm");
   url.query({
     username: user.get('username'),

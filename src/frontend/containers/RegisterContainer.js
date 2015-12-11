@@ -5,6 +5,7 @@ import { register as doRegister, registerFailure } from '../actions';
 import { updatePath } from 'redux-simple-router';
 
 import Register from '../../components/Register';
+import SimplePage from '../../components/SimplePage';
 
 class RegisterContainer extends Component {
 
@@ -34,13 +35,13 @@ class RegisterContainer extends Component {
     const self = this;
     const {dispatch, register} = this.props;
     log.debug(register);
-    return <Register
+    return <SimplePage><Register
       onRegister={formdata => self.onRegister(formdata)}
       emailSentTo={register.emailSentTo}
       errors={register.errors}
       registering={register.registering}
       complete={register.complete}
-      />
+      /></SimplePage>
   }
 }
 

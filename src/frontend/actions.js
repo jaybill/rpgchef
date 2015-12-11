@@ -98,7 +98,7 @@ export const register = function(registration) {
     Api.register(registration).then((result) => {
       log.debug(result);
       if (result.status == 200) {
-        log.debug(result.body);
+
         dispatch(registerActions.success(result.body.username));
         return;
       } else {
@@ -106,7 +106,7 @@ export const register = function(registration) {
           dispatch(registerActions.failure(["That email address is already in use."]));
           return;
         }
-        log.debug(result.body);
+
         let message = "";
         if (result.body.message) {
           message = extractMessage(result.body.message);
@@ -146,15 +146,48 @@ export const verifyReset = function(code) {
   return dispatch => {
     dispatch(verifyResetActions.start());
     Api.verifyReset(code).then((result) => {
-      log.debug(result);
       if (result.status == 200) {
-        dispatch(verifyResetActions.success(result.body));
+        dispatch(verifyResetActions.success());
       } else {
-        log.debug(result.body);
         dispatch(verifyResetActions.failure("Verify Reset failed."));
       }
       return;
-    }).catch(err => dispatch(verifyResetActions.failure("Verify Reset failed.")));
+    }).catch(err => {
+      log.debug("Err from verify", err);
+      dispatch(verifyResetActions.failure("Verify Reset failed."))
+    });
+
+  }
+};
+
+// RESETPASSWORD
+const resetPasswordActions = createAsyncActionGroup("resetPassword", {});
+
+export const resetPasswordFailure = resetPasswordActions.failure;
+
+export const resetPassword = function(newpass) {
+  return dispatch => {
+    dispatch(resetPasswordActions.start());
+    Api.resetPassword(newpass).then((result) => {
+      if (result.status == 200) {
+        dispatch(resetPasswordActions.success());
+      } else {
+        if (result.status == 400) {
+          let message = "";
+          if (result.body.message) {
+            message = extractMessage(result.body.message);
+          }
+          dispatch(resetPasswordActions.failure(message));
+        } else {
+          dispatch(resetPasswordActions.failure("Password Reset failed."));
+        }
+
+      }
+      return;
+    }).catch(err => {
+      dispatch(resetPasswordActions.failure("Password reset failed."))
+    });
+
   }
 };
 
@@ -179,7 +212,6 @@ export const forgotPassword = function(username) {
           } else {
             throw new Error("Nope");
           }
-
 
         }
 

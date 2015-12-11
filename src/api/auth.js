@@ -84,7 +84,87 @@ Auth.handlers = {
 
     }
   },
+  verifyReset: {
+    validate: {
+      payload: {
+        username: Joi.string().email().required().label('Email Address'),
+        hash: Joi.string().required().label("Hash")
+      }
+    },
+    handler: (request, reply) => {
 
+      return Db.Users.findOne({
+        where: {
+          username: request.payload.username
+        }
+      }).then((user) => {
+        log.debug("user", user);
+        if (!user) {
+          throw {
+            name: "UserNotFoundError",
+            message: "Username does not exist"
+          };
+          return;
+        }
+        const hash = getHash(user.get('id'), user.get('username'));
+        log.debug(hash, request.payload.hash);
+        if (hash != request.payload.hash) {
+          throw {
+            name: "HashCheckFailed",
+            message: "The hash is not valid for this username"
+          };
+          return;
+        }
+        reply("OK");
+
+      }).catch(err => reply(Boom.create(406, err.message)))
+
+    }
+  },
+  resetPassword: {
+    validate: {
+      payload: {
+        username: Joi.string().email().required().label('Email Address'),
+        hash: Joi.string().required().label("Hash"),
+        password: Joi.string().alphanum().min(3).required().label('Password')
+      }
+    },
+    handler: (request, reply) => {
+
+      return Db.Users.findOne({
+        where: {
+          username: request.payload.username
+        }
+      }).then((user) => {
+        log.debug("user", user);
+        if (!user) {
+          throw {
+            name: "UserNotFoundError",
+            message: "Username does not exist"
+          };
+          return;
+        }
+        const hash = getHash(user.get('id'), user.get('username'));
+        log.debug(hash, request.payload.hash);
+        if (hash != request.payload.hash) {
+          throw {
+            name: "HashCheckFailed",
+            message: "The hash is not valid for this username"
+          };
+          return;
+        }
+
+        user.set('password', request.payload.password);
+
+        user.save().then((result) => {
+          reply("OK");
+        }).catch(err => reply(Boom.create(500, err.message)));
+      }).catch(err => {
+        reply(Boom.create(406, err.message))
+      })
+
+    }
+  },
   register: {
     validate: {
       payload: {

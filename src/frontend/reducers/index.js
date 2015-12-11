@@ -9,7 +9,8 @@ const app = combineReducers({
   register,
   session,
   confirm,
-  forgotPassword
+  forgotPassword,
+  resetPassword
 });
 
 export default {

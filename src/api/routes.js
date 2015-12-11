@@ -27,6 +27,16 @@ var routes = [
     config: Auth.handlers.forgotPassword
   },
   {
+    method: 'POST',
+    path: '/verifyreset',
+    config: Auth.handlers.verifyReset
+  },
+  {
+    method: 'POST',
+    path: '/resetpassword',
+    config: Auth.handlers.resetPassword
+  },
+  {
     method: 'GET',
     path: '/me',
     config: Auth.handlers.me

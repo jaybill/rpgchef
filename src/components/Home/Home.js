@@ -28,7 +28,7 @@ export var componentDef = {
                         <NavDropdown id="sources" title="Sources">
                             <MenuItem href="/sources/effects">Weapon Effects</MenuItem>
                         </NavDropdown>
-</Nav>
+            </Nav>
                     </Navbar>
                     <div className="Home-Holder">{this.props.children}</div>
                 </div>

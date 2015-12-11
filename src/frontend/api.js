@@ -7,6 +7,12 @@ export const login = function(credentials) {
 export const confirm = function(code) {
   return callServer('/confirm', 'POST', null, code);
 }
+export const verifyReset = function(code) {
+  return callServer('/verifyreset', 'POST', null, code);
+}
+export const resetPassword = function(newpass) {
+  return callServer('/resetpassword', 'POST', null, newpass);
+}
 export const forgotPassword = function(username) {
   return callServer('/forgotpassword', 'POST', null, {
     username: username
@@ -47,5 +53,7 @@ export default {
   me,
   register,
   confirm,
-  forgotPassword
+  forgotPassword,
+  verifyReset,
+  resetPassword
 }

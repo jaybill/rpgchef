@@ -29,7 +29,7 @@ class ConfirmContainer extends Component {
     } else {
 
       let msg = 'Email confirmed.';
-      let success = 'true';
+      let success = true;
       if (confirm.error) {
         msg = confirm.error;
         success = false;

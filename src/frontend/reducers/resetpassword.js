@@ -1,7 +1,7 @@
 import ActionConstants from '../actionconstants';
 import log from 'loglevel';
 
-const resetPassword = function(state = {
+export const resetPassword = function(state = {
     error: null,
     verifying: true,
     verified: false,
@@ -78,5 +78,3 @@ const resetPassword = function(state = {
 
 };
 
-
-export default resetPassword;

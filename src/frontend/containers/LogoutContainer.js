@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { connect } from 'react-redux'
 import Logout from '../../components/Logout';
 import { updatePath } from 'redux-simple-router';
-import { logout } from '../actions';
+import { logout } from '../actions/logout';
 import SimplePage from '../../components/SimplePage';
 
 class LogoutContainer extends Component {

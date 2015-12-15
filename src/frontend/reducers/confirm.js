@@ -1,6 +1,6 @@
 import ActionConstants from '../actionconstants';
 
-const confirm = function(state = {
+export const confirm = function(state = {
     error: null,
     confirming: true
   }, action) {
@@ -33,4 +33,3 @@ const confirm = function(state = {
       break;
   }
 }
-export default confirm;

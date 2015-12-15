@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux'
-import { register as doRegister, registerFailure } from '../actions';
+import { register as doRegister, registerFailure } from '../actions/register';
 import { updatePath } from 'redux-simple-router';
 
 import Register from '../../components/Register';

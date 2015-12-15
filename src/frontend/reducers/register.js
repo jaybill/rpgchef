@@ -1,6 +1,6 @@
 import ActionConstants from '../actionconstants';
 
-const register = function(state = {
+export const register = function(state = {
     errors: [],
     registering: false,
     emailSentTo: null,
@@ -43,4 +43,3 @@ const register = function(state = {
   }
 
 }
-export default register;

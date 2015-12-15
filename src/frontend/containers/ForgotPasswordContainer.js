@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux'
-import { forgotPassword as doForgotPassword } from '../actions';
+import { forgotPassword as doForgotPassword } from '../actions/forgotpassword';
 
 import ForgotPassword from '../../components/ForgotPassword';
 import SimplePage from '../../components/SimplePage';

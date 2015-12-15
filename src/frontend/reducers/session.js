@@ -1,6 +1,6 @@
 import ActionConstants from '../actionconstants';
 
-const session = function(state = {
+export function session(state = {
     isLoaded: false,
     isLoggedIn: false,
     loggingIn: false,
@@ -96,4 +96,3 @@ const session = function(state = {
   }
 
 }
-export default session;

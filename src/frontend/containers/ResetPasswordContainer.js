@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux'
 import ResetPassword from '../../components/ResetPassword';
-import { verifyReset, resetPassword as doReset, resetPasswordFailure } from '../actions';
+import { verifyReset, resetPassword as doReset, resetPasswordFailure } from '../actions/resetpassword';
 import urijs from 'urijs';
 import SimplePage from '../../components/SimplePage';
 

@@ -1,6 +1,6 @@
 import ActionConstants from '../actionconstants';
 
-const forgotPassword = function(state = {
+export const forgotPassword = function(state = {
     error: null,
     sending: false,
     complete: false
@@ -39,4 +39,3 @@ const forgotPassword = function(state = {
 
   }
 }
-export default forgotPassword;

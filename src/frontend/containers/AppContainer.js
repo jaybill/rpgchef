@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux'
 import App from '../../components/App';
-import { me } from '../actions';
+import { me } from '../actions/me';
 
 class AppContainer extends Component {
 
@@ -28,6 +28,5 @@ function select(state) {
     session: state.app.session
   };
 }
-
 
 export default connect(select)(AppContainer);

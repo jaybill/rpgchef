@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { connect } from 'react-redux'
 import Confirm from '../../components/Confirm';
 import { updatePath } from 'redux-simple-router';
-import { confirm } from '../actions';
+import { confirm } from '../actions/confirm';
 import urijs from 'urijs';
 import SimplePage from '../../components/SimplePage';
 

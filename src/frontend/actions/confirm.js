@@ -1,6 +1,6 @@
 import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
-import Api from '../api';
+import { confirm as confirmCall } from '../api';
 
 // CONFIRM
 const confirmActions = createAsyncActionGroup("confirm", {});
@@ -8,7 +8,7 @@ const confirmActions = createAsyncActionGroup("confirm", {});
 export const confirm = function(code) {
   return dispatch => {
     dispatch(confirmActions.start());
-    Api.confirm(code).then((result) => {
+    confirmCall(code).then((result) => {
 
       if (result.status == 200) {
         dispatch(confirmActions.success(result.body));

@@ -1,13 +1,13 @@
 import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
-import Api from '../api';
+import { me as meCall } from '../api';
 
 // ME
 const meActions = createAsyncActionGroup("me", {});
 export const me = function() {
   return dispatch => {
     dispatch(meActions.start());
-    Api.me().then((result) => {
+    meCall().then((result) => {
       if (result.status == 200) {
         dispatch(meActions.success(result.body));
       } else {

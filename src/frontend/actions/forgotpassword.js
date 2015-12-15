@@ -1,6 +1,6 @@
 import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
-import Api from '../api';
+import { forgotPassword as forgotPasswordCall } from '../api';
 
 // FORGOTPASSWORD
 const forgotPasswordActions = createAsyncActionGroup("forgotPassword", {});
@@ -8,7 +8,7 @@ const forgotPasswordActions = createAsyncActionGroup("forgotPassword", {});
 export const forgotPassword = function(username) {
   return dispatch => {
     dispatch(forgotPasswordActions.start());
-    Api.forgotPassword(username).then((result) => {
+    forgotPasswordCall(username).then((result) => {
 
       if (result.status == 200) {
         dispatch(forgotPasswordActions.success(result.body));

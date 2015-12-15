@@ -1,6 +1,6 @@
 import { createAsyncActionGroup, extractMessage } from './util';
 import { createAction } from 'redux-actions';
-import Api from '../api';
+import { verifyReset as verifyResetCall, resetPassword as resetPasswordCall } from '../api';
 
 // VERIFYRESET
 const verifyResetActions = createAsyncActionGroup("verifyReset", {});
@@ -8,7 +8,7 @@ const verifyResetActions = createAsyncActionGroup("verifyReset", {});
 export const verifyReset = function(code) {
   return dispatch => {
     dispatch(verifyResetActions.start());
-    Api.verifyReset(code).then((result) => {
+    verifyResetCall(code).then((result) => {
       if (result.status == 200) {
         dispatch(verifyResetActions.success());
       } else {
@@ -31,7 +31,7 @@ export const resetPasswordFailure = resetPasswordActions.failure;
 export const resetPassword = function(newpass) {
   return dispatch => {
     dispatch(resetPasswordActions.start());
-    Api.resetPassword(newpass).then((result) => {
+    resetPasswordCall(newpass).then((result) => {
       if (result.status == 200) {
         dispatch(resetPasswordActions.success());
       } else {

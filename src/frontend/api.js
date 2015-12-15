@@ -46,14 +46,3 @@ function callServer(url, method, query, data, headers) {
   });
 
 }
-
-export default {
-  login,
-  logout,
-  me,
-  register,
-  confirm,
-  forgotPassword,
-  verifyReset,
-  resetPassword
-}

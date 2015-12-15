@@ -1,6 +1,6 @@
 import { createAsyncActionGroup, extractMessage } from './util';
 import { createAction } from 'redux-actions';
-import Api from '../api';
+import { register as registerCall } from '../api';
 
 // REGISTER
 const registerActions = createAsyncActionGroup("register", {});
@@ -10,7 +10,7 @@ export const register = function(registration) {
 
   return dispatch => {
     dispatch(registerActions.start());
-    Api.register(registration).then((result) => {
+    registerCall(registration).then((result) => {
 
       if (result.status == 200) {
 

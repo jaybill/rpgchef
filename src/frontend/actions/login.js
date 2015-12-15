@@ -1,6 +1,6 @@
 import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
-import Api from '../api';
+import { login as loginCall } from '../api';
 
 // LOGIN
 const loginActions = createAsyncActionGroup("login", {});
@@ -8,7 +8,7 @@ const loginActions = createAsyncActionGroup("login", {});
 export const login = function(credentials) {
   return dispatch => {
     dispatch(loginActions.start());
-    Api.login(credentials).then((result) => {
+    loginCall(credentials).then((result) => {
 
       if (result.status == 200) {
         dispatch(loginActions.success(result.body));

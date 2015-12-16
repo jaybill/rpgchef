@@ -9,6 +9,8 @@ import Register from './containers/RegisterContainer';
 import Confirm from './containers/ConfirmContainer';
 import ForgotPassword from './containers/ForgotPasswordContainer';
 import ResetPassword from './containers/ResetPasswordContainer';
+import Account from './containers/AccountContainer';
+
 
 import Welcome from '../components/Welcome';
 import NotFound from '../components/NotFound';
@@ -20,6 +22,7 @@ export default function getRoutes() {
       <Route path="home" component={Home}/>
       <Route path="login" component={Login}/>
       <Route path="register" component={Register}/>
+      <Route path="account" component={Account}/>
       <IndexRoute component={Welcome}/>
     </Route>
    // Doing this here instead of inside of the App route to avoid promise problems.

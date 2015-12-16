@@ -21,6 +21,9 @@ export const forgotPassword = function(username) {
 export const register = function(registration) {
   return callServer('/register', 'POST', null, registration);
 }
+export const account = function(account) {
+  return callServer('/account', 'POST', null, account);
+}
 export const logout = function() {
   return callServer('/logout', 'GET');
 }

@@ -5,28 +5,35 @@ export const account = function(state = {
     working: false,
     failed: false,
     succeeded: false,
-    payload: null
+    user: {}
   }, action) {
 
   switch (action.type) {
+
+    case ActionConstants.ACCOUNT_UPDATE:
+      return Object.assign({}, state, {
+        user: action.payload
+      });
+      break;
+
 
     case ActionConstants.ACCOUNT_START:
       return Object.assign({}, state, {
         message: null,
         working: true,
         failed: false,
-        succeeded: false,
-        payload: null
+        succeeded: false
+
       });
       break;
 
     case ActionConstants.ACCOUNT_SUCCESS:
       return Object.assign({}, state, {
-        message: null,
+        message: "Account updated.",
         working: false,
         failed: false,
         succeeded: true,
-        payload: action.payload
+        user: action.payload
       });
       break;
 
@@ -35,8 +42,8 @@ export const account = function(state = {
         message: action.payload,
         working: false,
         failed: true,
-        succeeded: false,
-        payload: null
+        succeeded: false
+
       });
       break;
 

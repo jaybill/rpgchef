@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux'
-import { account as doAccount } from '../actions/account';
+import { account as doAccount, update } from '../actions/account';
 import Account from '../../components/Account';
 
 class AccountContainer extends Component {
@@ -11,27 +11,36 @@ class AccountContainer extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(formdata) {
+  componentWillMount() {
+    const {dispatch, session} = this.props;
+    dispatch(update({
+      username: session.user.username
+    }));
 
-    const {dispatch, account} = this.props;
+  }
 
+  onSubmit(user) {
+
+    const {dispatch} = this.props;
     // Local validation, if required.
 
-      
     // Dispatch action if everything is okay.
-    dispatch(doAccount(formdata));
+    log.debug("account", user);
+    dispatch(doAccount(user));
 
   }
 
   render() {
     const self = this;
-    const {dispatch, account} = this.props;
+    const {dispatch, account, session} = this.props;
+    log.debug(session);
 
     return <Account
       onSubmit={(formdata) => self.onSubmit(formdata)}
       working={account.working}
       message={account.message}
       failed={account.failed}
+      user={account.user}
       succeeded={account.succeeded}
       />
   }
@@ -40,7 +49,8 @@ class AccountContainer extends Component {
 function select(state) {
 
   return {
-    account: state.app.account
+    account: state.app.account,
+    session: state.app.session
   };
 }
 

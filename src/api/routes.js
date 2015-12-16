@@ -18,6 +18,11 @@ var routes = [
   },
   {
     method: 'POST',
+    path: '/account',
+    config: Auth.handlers.accountUpdate
+  },
+  {
+    method: 'POST',
     path: '/confirm',
     config: Auth.handlers.confirm
   },

@@ -9,10 +9,88 @@ import { getHash, sendPasswordResetEmail } from './util';
 var Auth = {};
 
 Auth.handlers = {
+
+  accountUpdate: {
+    auth: 'session',
+    plugins: {
+      'hapi-auth-cookie': {
+        redirectTo: false
+      }
+    },
+    validate: {
+      payload: {
+        username: Joi.string().email().required().label('Username'),
+        password: Joi.string().alphanum().min(3).label('Password')
+      }
+    },
+    handler: (request, reply) => {
+      const userId = request.auth.credentials.id;
+
+      return Db.Users.findOne({
+        where: {
+
+          username: request.payload.username,
+          id: {
+            $ne: userId
+          }
+
+        }
+      }).then((user) => {
+
+        if (user) {
+          throw {
+            name: "UsernameTakenError",
+            message: "That email address is already in use."
+          };
+
+        }
+
+      }).then(() => {
+
+        return Db.Users.findById(userId).then((user) => {
+
+          if (request.payload.password) {
+            user.set("password", request.payload.password);
+          }
+
+          if (user.get("username") != request.payload.username) {
+            user.set("username", request.payload.username);
+            user.set("emailConfirmed", false);
+          }
+          user.save().then((updatedUser) => {
+            reply(updatedUser);
+          }).catch(err => {
+            throw (err)
+          });
+
+        }).catch((err) => {
+          reply(Boom.create(500, err.message));
+        });
+
+      }).catch((err) => {
+        if (err) {
+          if (err.name == "UsernameTakenError") {
+            reply(Boom.create(422, err.message));
+          } else {
+            reply(Boom.create(500, err.message));
+          }
+        }
+      });
+
+
+
+
+
+    }
+  },
+
+
+
+
   forgotPassword: {
     validate: {
       payload: {
-        username: Joi.string().email().required().label('Email Address'),
+        username: Joi.string().email().required().label('Email Address')
       }
     },
     handler: (request, reply) => {

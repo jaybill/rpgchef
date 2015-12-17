@@ -58,6 +58,7 @@ Auth.handlers = {
             user.set("emailConfirmed", false);
           }
           user.save().then((updatedUser) => {
+            request.auth.session.set(user);
             reply(updatedUser);
           }).catch(err => {
             throw (err)

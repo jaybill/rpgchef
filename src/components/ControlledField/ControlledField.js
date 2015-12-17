@@ -36,6 +36,7 @@ var commonDef = {
 var textareaRender = {
   render() {
     return (<textarea
+      disabled={this.props.disabled}
       placeholder={this.props.placeholder}
       className={this.props.className}
       value={this.props.value}
@@ -49,6 +50,7 @@ var textareaRender = {
 var inputTextRender = {
   render() {
     return (<input
+      disabled={this.props.disabled}
       type="text"
       placeholder={this.props.placeholder}
       className={this.props.className}
@@ -62,6 +64,7 @@ var inputTextRender = {
 var inputPasswordRender = {
   render() {
     return (<input
+      disabled={this.props.disabled}
       type="password"
       placeholder={this.props.placeholder}
       className={this.props.className}

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux'
-import { account as doAccount, update } from '../actions/account';
+import { account as doAccount, failure } from '../actions/account';
 import Account from '../../components/Account';
+import RequireAuth from './RequireAuth';
 
 class AccountContainer extends Component {
 
@@ -13,20 +14,36 @@ class AccountContainer extends Component {
 
   componentWillMount() {
     const {dispatch, session} = this.props;
-    dispatch(update({
-      username: session.user.username
-    }));
-
+    if (session.isLoggedIn && !this.props.working) {
+      this.setState({
+        user: session.user
+      });
+    }
   }
 
-  onSubmit(user) {
+  onSubmit(formdata) {
 
     const {dispatch} = this.props;
     // Local validation, if required.
 
-    // Dispatch action if everything is okay.
-    log.debug("account", user);
-    dispatch(doAccount(user));
+    let updatedUser = {
+      username: formdata.username
+    };
+
+    if (formdata.pass1.length > 0) {
+      if ( (formdata.pass1 == formdata.pass2) ) {
+        updatedUser.password = formdata.pass1;
+      } else {
+        dispatch(failure("Passwords do not match."));
+        return;
+      }
+    }
+
+    this.setState({
+      user: updatedUser
+    });
+
+    dispatch(doAccount(updatedUser));
 
   }
 
@@ -35,14 +52,14 @@ class AccountContainer extends Component {
     const {dispatch, account, session} = this.props;
     log.debug(session);
 
-    return <Account
+    return <RequireAuth><Account
       onSubmit={(formdata) => self.onSubmit(formdata)}
       working={account.working}
       message={account.message}
       failed={account.failed}
-      user={account.user}
+      user={this.state.user}
       succeeded={account.succeeded}
-      />
+      /></RequireAuth>
   }
 }
 

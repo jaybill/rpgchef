@@ -90,6 +90,16 @@ export function session(state = {
 
       break;
 
+    case ActionConstants.SESSION_USERNAME_UPDATE:
+      const newUser = state.user;
+      state.user.username = action.payload;
+
+      return Object.assign({}, state, {
+        user: newUser
+      });
+      break;
+
+
     default:
       return state;
 

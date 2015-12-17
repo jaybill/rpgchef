@@ -33,7 +33,11 @@ export default class Account extends Component {
   }
 
   onSubmit() {
-    this.props.onSubmit(this.state);
+    this.props.onSubmit({
+      username: this.state.username,
+      pass1: this.refs.pass1.getValue(),
+      pass2: this.refs.pass2.getValue()
+    });
   }
 
   onKeyUp(e) {
@@ -56,6 +60,7 @@ export default class Account extends Component {
       displayMessage = <Alert bsStyle="danger">{message}</Alert>
     }
 
+
     return (<div className="Account">
         <Grid>
             <Row>
@@ -70,9 +75,16 @@ export default class Account extends Component {
       className="form-control"
       value={this.state.username}
       name="username"
+      disabled={this.working}
       onFieldChange={this.onFieldChange}/>
-            </div>            
-            <Button onClick={this.onSubmit} bsStyle="primary" bsSize="large">Submit</Button>
+            </div>   
+
+            <Input type="password" disabled={this.working}
+      ref="pass1" autoComplete="off" label="Password " placeholder="(Leave blank for no change.)" />
+            <Input type="password" disabled={this.working}
+      ref="pass2" autoComplete="off" label="Password (Again)" placeholder="Password (again)" />
+         
+            <Button disabled={working} onClick={this.onSubmit} bsStyle="primary" bsSize="large">Submit</Button>
             </Col>
             </Row>
         </Grid>

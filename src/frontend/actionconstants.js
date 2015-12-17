@@ -29,6 +29,12 @@ function makeKeys() {
   let accountKeys = asyncKeys("ACCOUNT");
   accountKeys["ACCOUNT_UPDATE"] = null;
   km = Object.assign(km, accountKeys);
+
+  let extraKeys = {};
+  extraKeys["SESSION_USERNAME_UPDATE"] = null;
+
+  km = Object.assign(km, extraKeys);
+
   return km;
 
 }

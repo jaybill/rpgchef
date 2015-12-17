@@ -5,20 +5,17 @@ import { account as accountCall } from '../api';
 import ActionConstants from '../actionconstants';
 
 const accountActions = createAsyncActionGroup("account", {});
+const sessionUsernameUpdate = createAction(ActionConstants.SESSION_USERNAME_UPDATE);
 
-export const update = createAction(ActionConstants.ACCOUNT_UPDATE);
+export const failure = accountActions.failure;
 
 export const account = function(user) {
 
-
   return dispatch => {
-    dispatch(update(user));
-
     dispatch(accountActions.start());
-    accountCall({
-      username: user.username
-    }).then((result) => {
+    accountCall(user).then((result) => {
       if (result.status == 200) {
+        dispatch(sessionUsernameUpdate(user.username));
         dispatch(accountActions.success(result.body));
       } else {
         if (result.body.statusCode == 400) {

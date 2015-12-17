@@ -10,13 +10,6 @@ export const account = function(state = {
 
   switch (action.type) {
 
-    case ActionConstants.ACCOUNT_UPDATE:
-      return Object.assign({}, state, {
-        user: action.payload
-      });
-      break;
-
-
     case ActionConstants.ACCOUNT_START:
       return Object.assign({}, state, {
         message: null,

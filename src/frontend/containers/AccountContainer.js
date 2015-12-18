@@ -25,7 +25,6 @@ class AccountContainer extends Component {
   onSubmit(formdata) {
 
     const {dispatch} = this.props;
-    // Local validation, if required.
 
     let updatedUser = {
       username: formdata.username
@@ -51,7 +50,6 @@ class AccountContainer extends Component {
   render() {
     const self = this;
     const {dispatch, account, session} = this.props;
-
 
     return <Account
       onSubmit={(formdata) => self.onSubmit(formdata)}

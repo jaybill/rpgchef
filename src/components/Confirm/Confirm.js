@@ -11,7 +11,7 @@ class Confirm extends Component {
 
   render() {
     let style = "success";
-    let link = <Link to="/home">Log in</Link>;
+    let link = <Link to="/app/home">Log in</Link>;
 
     const {success, message} = this.props;
 

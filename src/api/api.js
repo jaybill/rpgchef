@@ -32,11 +32,11 @@ server.register([HapiAuthCookie], function(err) {
   server.ext('onPreResponse', HapiCorsHeaders);
 
   server.start(function() {
-    console.log('Server running at:', server.info.uri);
+
     if (process.send) {
       process.send('online');
     } else {
-      console.log('The API server is running at http://localhost:' + server.get('port'));
+      console.log('Server running at:', server.info.uri);
     }
 
   });

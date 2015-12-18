@@ -14,6 +14,11 @@ server.use(bodyParser.urlencoded({
   extended: true
 }));
 
+server.get('/mailinglist', (req, res, next) => {
+  res.sendFile(path.join(__dirname + "/public/mailinglist.html"));
+});
+
+
 server.all('*', (req, res, next) => {
   res.sendFile(path.join(__dirname + "/public/index.html"));
 });

@@ -17,20 +17,20 @@ import NotFound from '../components/NotFound';
 
 export default function getRoutes() {
   return (
-    <Route path="root">
-    <Route path="/" component={App}>
+    <Route path="/">
+    <Route path="app" component={App}>
       <Route path="home" component={Home}/>
-      <Route path="login" component={Login}/>
-      <Route path="register" component={Register}/>
       <Route path="account" component={Account}/>
-      <IndexRoute component={Welcome}/>
     </Route>
-   // Doing this here instead of inside of the App route to avoid promise problems.
-   <Route path="/logout" component={Logout}/>
-   <Route path="/confirm" component={Confirm}/>
-   <Route path="/forgotpassword" component={ForgotPassword}/>
-   <Route path="/resetpassword" component={ResetPassword}/>
+   // Routes that don't require authentication
+   <Route path="register" component={Register}/>
+   <Route path="login" component={Login}/>
+   <Route path="logout" component={Logout}/>
+   <Route path="confirm" component={Confirm}/>
+   <Route path="forgotpassword" component={ForgotPassword}/>
+   <Route path="resetpassword" component={ResetPassword}/>
    <Route path="/*" component={NotFound}/>
+   <IndexRoute component={Welcome}/>
    </Route>
     );
 }

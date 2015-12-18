@@ -10,8 +10,6 @@ export const resetPassword = function(state = {
     resetError: null
   }, action) {
 
-  log.debug(action.type);
-
   switch (action.type) {
 
     case ActionConstants.VERIFYRESET_START:

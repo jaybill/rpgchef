@@ -5,6 +5,7 @@ import { login } from '../actions/login';
 import { updatePath } from 'redux-simple-router';
 import Login from '../../components/Login';
 import SimplePage from '../../components/SimplePage';
+import urijs from 'urijs';
 
 class LoginContainer extends Component {
 
@@ -13,20 +14,30 @@ class LoginContainer extends Component {
     this.redirect = this.redirect.bind(this);
   }
 
-  redirect(dispatch, session) {
+  redirect(dispatch, session, routing) {
+
     if (session.isLoggedIn && session.isLoaded) {
-      dispatch(updatePath('/home'));
+
+      const uri = new urijs(routing.path);
+      const params = uri.search(true);
+
+      if (params.redirectTo) {
+        dispatch(updatePath(params.redirectTo));
+      } else {
+        dispatch(updatePath('/app/home'));
+      }
+
     }
   }
 
   componentWillMount() {
-    const {dispatch, session} = this.props;
-    this.redirect(dispatch, session);
+    const {dispatch, session, routing} = this.props;
+    this.redirect(dispatch, session, routing);
   }
 
   componentWillReceiveProps(props) {
-    const {dispatch, session} = props;
-    this.redirect(dispatch, session);
+    const {dispatch, session, routing} = props;
+    this.redirect(dispatch, session, routing);
   }
 
   render() {
@@ -40,6 +51,7 @@ class LoginContainer extends Component {
 
 function select(state) {
   return {
+    routing: state.routing,
     session: state.app.session
   };
 }

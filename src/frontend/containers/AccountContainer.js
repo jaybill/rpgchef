@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { connect } from 'react-redux'
 import { account as doAccount, failure } from '../actions/account';
 import Account from '../../components/Account';
-import RequireAuth from './RequireAuth';
+
 
 class AccountContainer extends Component {
 
@@ -13,12 +13,13 @@ class AccountContainer extends Component {
   }
 
   componentWillMount() {
-    const {dispatch, session} = this.props;
-    if (session.isLoggedIn && !this.props.working) {
-      this.setState({
-        user: session.user
-      });
-    }
+
+    const {session} = this.props;
+
+    this.setState({
+      user: session.user
+    });
+
   }
 
   onSubmit(formdata) {
@@ -50,16 +51,16 @@ class AccountContainer extends Component {
   render() {
     const self = this;
     const {dispatch, account, session} = this.props;
-    log.debug(session);
 
-    return <RequireAuth><Account
+
+    return <Account
       onSubmit={(formdata) => self.onSubmit(formdata)}
       working={account.working}
       message={account.message}
       failed={account.failed}
       user={this.state.user}
       succeeded={account.succeeded}
-      /></RequireAuth>
+      />
   }
 }
 

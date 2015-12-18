@@ -4,13 +4,11 @@ import { connect } from 'react-redux'
 import { updatePath } from 'redux-simple-router';
 
 import Home from '../../components/Home';
-import RequireAuth from './RequireAuth';
-
 
 class HomeContainer extends Component {
   render() {
     const {dispatch, session} = this.props;
-    return <RequireAuth><Home/></RequireAuth>
+    return <Home/>
   }
 }
 

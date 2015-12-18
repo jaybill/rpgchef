@@ -45,6 +45,7 @@ export function session(state = {
 
     case ActionConstants.LOGIN_SUCCESS:
       return Object.assign({}, state, {
+        isLoaded: true,
         isLoggedIn: true,
         loggingIn: false,
         error: null,
@@ -54,6 +55,7 @@ export function session(state = {
 
     case ActionConstants.LOGIN_FAILURE:
       return Object.assign({}, state, {
+        isLoaded: true,
         isLoggedIn: false,
         loggingIn: false,
         user: null,

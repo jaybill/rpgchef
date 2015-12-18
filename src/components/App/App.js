@@ -26,6 +26,14 @@ class App extends Component {
                             <MenuItem href="/sources/effects">Weapon Effects</MenuItem>
                         </NavDropdown>
             </Nav>
+            <Nav pullRight>
+                  <NavDropdown id="user" title={this.props.user.username}>
+
+                            <MenuItem href="/app/account">Account</MenuItem>
+                            <MenuItem href="/logout">Log out</MenuItem>
+
+                        </NavDropdown>
+</Nav>
                     </Navbar>
                     <div className="App-Holder">{this.props.children}</div>
                 </div>

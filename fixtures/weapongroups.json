@@ -1,0 +1,179 @@
+{
+    "RECORDS": [
+        {
+            "id": 0,
+            "parentId": null,
+            "name": "Basic"
+        },
+        {
+            "id": 1,
+            "parentId": 0,
+            "name": "Mace"
+        },
+        {
+            "id": 2,
+            "parentId": 0,
+            "name": "Axe"
+        },
+        {
+            "id": 3,
+            "parentId": 0,
+            "name": "Sword"
+        },
+        {
+            "id": 4,
+            "parentId": 0,
+            "name": "Spear"
+        },
+        {
+            "id": 5,
+            "parentId": 0,
+            "name": "Pick"
+        },
+        {
+            "id": 6,
+            "parentId": null,
+            "name": "Finesse"
+        },
+        {
+            "id": 7,
+            "parentId": 6,
+            "name": "Dagger"
+        },
+        {
+            "id": 8,
+            "parentId": 6,
+            "name": "Sword"
+        },
+        {
+            "id": 9,
+            "parentId": 6,
+            "name": "Staff"
+        },
+        {
+            "id": 10,
+            "parentId": 6,
+            "name": "Whip"
+        },
+        {
+            "id": 11,
+            "parentId": null,
+            "name": "Martial"
+        },
+        {
+            "id": 12,
+            "parentId": 11,
+            "name": "Sword"
+        },
+        {
+            "id": 13,
+            "parentId": 11,
+            "name": "Axe"
+        },
+        {
+            "id": 14,
+            "parentId": 11,
+            "name": "Flail"
+        },
+        {
+            "id": 15,
+            "parentId": 11,
+            "name": "Mace"
+        },
+        {
+            "id": 16,
+            "parentId": 11,
+            "name": "Shield"
+        },
+        {
+            "id": 17,
+            "parentId": 11,
+            "name": "Hammer"
+        },
+        {
+            "id": 18,
+            "parentId": null,
+            "name": "Heavy"
+        },
+        {
+            "id": 19,
+            "parentId": 18,
+            "name": "Spear"
+        },
+        {
+            "id": 20,
+            "parentId": 18,
+            "name": "Axe"
+        },
+        {
+            "id": 21,
+            "parentId": 18,
+            "name": "Sword"
+        },
+        {
+            "id": 22,
+            "parentId": 18,
+            "name": "Hammer"
+        },
+        {
+            "id": 23,
+            "parentId": null,
+            "name": "Simple Missle"
+        },
+        {
+            "id": 24,
+            "parentId": 23,
+            "name": "Crossbow"
+        },
+        {
+            "id": 25,
+            "parentId": 23,
+            "name": "Spear"
+        },
+        {
+            "id": 26,
+            "parentId": 23,
+            "name": "Sling"
+        },
+        {
+            "id": 27,
+            "parentId": null,
+            "name": "Martial Missile"
+        },
+        {
+            "id": 28,
+            "parentId": 27,
+            "name": "Crossbow"
+        },
+        {
+            "id": 29,
+            "parentId": 27,
+            "name": "Spear"
+        },
+        {
+            "id": 30,
+            "parentId": 27,
+            "name": "Bow"
+        },
+        {
+            "id": 31,
+            "parentId": 27,
+            "name": "Hammer"
+        },
+        {
+            "id": 32,
+            "parentId": null,
+            "name": "Heavy Martial Missile"
+        },
+        {
+            "id": 33,
+            "parentId": 32,
+            "name": "Crossbow"
+        },
+        {
+            "id": 34,
+            "parentId": 32,
+            "name": "Bow"
+        }
+    ]
+}

@@ -2,11 +2,11 @@ import log from 'loglevel';
 import Boom from 'boom';
 import Joi from 'joi';
 import _ from 'lodash';
-import Db from './db';
-import Bcrypt from './bcrypt';
-import { getHash, sendPasswordResetEmail } from './util';
+import Db from '../db';
+import Bcrypt from '../bcrypt';
+import { getHash, sendPasswordResetEmail } from '../util';
 
-var Auth = {};
+const Auth = {};
 
 Auth.handlers = {
 

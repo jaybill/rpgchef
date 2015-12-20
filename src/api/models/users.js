@@ -3,56 +3,61 @@ import mailgun from 'mailgun-js';
 import _ from 'lodash';
 import log from 'loglevel';
 import Sequelize from 'sequelize';
-import DbConn from '../dbconn';
 import { getHash } from '../util';
 import Uri from 'urijs';
 
-const Users = DbConn.define('users',
-  {
-    id: {
-      type: Sequelize.BIGINT,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    username: {
-      type: Sequelize.STRING,
-      validate: {
-        isEmail: true
-      }
-    },
-    password: {
-      type: Sequelize.TEXT,
-      allowNull: false
-    },
-    emailConfirmed: Sequelize.BOOLEAN,
-    active: Sequelize.BOOLEAN
-
-  }, {
-    instanceMethods: {
-      toJSON: function() {
-        var values = this.get();
-        delete values.password;
-        return values;
+export default function NewUsers(DbConn) {
+  const Users = DbConn.define('users',
+    {
+      id: {
+        type: Sequelize.BIGINT,
+        primaryKey: true,
+        autoIncrement: true
       },
-      email: function(message) {
-        message.from = 'RPG Chef <jaybill@rpgchef.com>';
-        message.to = this.get('username');
-        var mg = mailgun({
-          apiKey: process.env.MAILGUN_API_KEY,
-          domain: process.env.MAILGUN_DOMAIN
-        });
+      username: {
+        type: Sequelize.STRING,
+        validate: {
+          isEmail: true
+        }
+      },
+      password: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      emailConfirmed: Sequelize.BOOLEAN,
+      active: Sequelize.BOOLEAN
 
-        mg.messages().send(message, function(error, body) {
-          if (error) {
-            log.error(error);
-          }
-        });
-        return;
+    }, {
+      instanceMethods: {
+        toJSON: function() {
+          var values = this.get();
+          delete values.password;
+          return values;
+        },
+        email: function(message) {
+          message.from = 'RPG Chef <jaybill@rpgchef.com>';
+          message.to = this.get('username');
+          var mg = mailgun({
+            apiKey: process.env.MAILGUN_API_KEY,
+            domain: process.env.MAILGUN_DOMAIN
+          });
+
+          mg.messages().send(message, function(error, body) {
+            if (error) {
+              log.error(error);
+            }
+          });
+          return;
+        }
       }
-    }
-  });
+    });
+  Users.beforeCreate(hashPasswordHook);
+  Users.afterCreate(sendWelcomeEmail);
+  Users.beforeUpdate(hashPasswordHook);
 
+  return Users;
 
+}
 var sendWelcomeEmail = (user, options) => {
   var hash = getHash(user.get('id'), user.get('username'));
   var url = new Uri(process.env.SERVER_URL + "/confirm");
@@ -82,8 +87,3 @@ var hashPasswordHook = (instance, options) => {
   });
 
 }
-Users.beforeCreate(hashPasswordHook);
-Users.afterCreate(sendWelcomeEmail);
-Users.beforeUpdate(hashPasswordHook);
-
-export default Users;

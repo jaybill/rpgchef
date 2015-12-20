@@ -1,0 +1,373 @@
+{
+    "RECORDS": [
+        {
+            "id": 0,
+            "name": "Club",
+            "priceInCp": 10,
+            "damage": "1d4 bludgeoning",
+            "weightInLb": 3,
+            "properties": null,
+            "groupId": 1
+        },
+        {
+            "id": 1,
+            "name": "Greatclub",
+            "priceInCp": 20,
+            "damage": "1d8 bludgeoning",
+            "weightInLb": 15,
+            "properties": "Two-Handed",
+            "groupId": 1
+        },
+        {
+            "id": 2,
+            "name": "Handaxe",
+            "priceInCp": 500,
+            "damage": "1d4 slashing",
+            "weightInLb": 5,
+            "properties": "Range 30\/120",
+            "groupId": 2
+        },
+        {
+            "id": 3,
+            "name": "Mace",
+            "priceInCp": 500,
+            "damage": "1d6 bludgeoning",
+            "weightInLb": 8,
+            "properties": null,
+            "groupId": 1
+        },
+        {
+            "id": 4,
+            "name": "Scythe",
+            "priceInCp": 50,
+            "damage": "1d8 slashing",
+            "weightInLb": 10,
+            "properties": "Two-Handed",
+            "groupId": 2
+        },
+        {
+            "id": 5,
+            "name": "Sickle",
+            "priceInCp": 20,
+            "damage": "1d6 slashing",
+            "weightInLb": 5,
+            "properties": null,
+            "groupId": 3
+        },
+        {
+            "id": 6,
+            "name": "Spear",
+            "priceInCp": 100,
+            "damage": "1d6 piercing",
+            "weightInLb": 5,
+            "properties": null,
+            "groupId": 4
+        },
+        {
+            "id": 7,
+            "name": "Trident",
+            "priceInCp": 500,
+            "damage": "1d6 piercing",
+            "weightInLb": 6,
+            "properties": null,
+            "groupId": 4
+        },
+        {
+            "id": 8,
+            "name": "War Pick",
+            "priceInCp": 500,
+            "damage": "1d6 piercing",
+            "weightInLb": 6,
+            "properties": null,
+            "groupId": 5
+        },
+        {
+            "id": 9,
+            "name": "Dagger",
+            "priceInCp": 200,
+            "damage": "1d4 piercing",
+            "weightInLb": 1,
+            "properties": "Range 20\/80",
+            "groupId": 7
+        },
+        {
+            "id": 10,
+            "name": "Katana",
+            "priceInCp": 3500,
+            "damage": "1d8 slashing",
+            "weightInLb": 3,
+            "properties": "Two-Handed",
+            "groupId": 8
+        },
+        {
+            "id": 11,
+            "name": "Quarterstaff",
+            "priceInCp": 20,
+            "damage": "1d8 bludgeoning",
+            "weightInLb": 4,
+            "properties": "Two-Handed",
+            "groupId": 9
+        },
+        {
+            "id": 12,
+            "name": "Rapier",
+            "priceInCp": 2500,
+            "damage": "1d6 piercing",
+            "weightInLb": 2,
+            "properties": null,
+            "groupId": 8
+        },
+        {
+            "id": 13,
+            "name": "Scimitar",
+            "priceInCp": 2500,
+            "damage": "1d6 slashing",
+            "weightInLb": 4,
+            "properties": null,
+            "groupId": 8
+        },
+        {
+            "id": 14,
+            "name": "Short Sword",
+            "priceInCp": 1000,
+            "damage": "1d6 piercing",
+            "weightInLb": 3,
+            "properties": null,
+            "groupId": 8
+        },
+        {
+            "id": 15,
+            "name": "Spiked Chain",
+            "priceInCp": 1500,
+            "damage": "1d6 piercing",
+            "weightInLb": 5,
+            "properties": "Reach, Two-Handed",
+            "groupId": 10
+        },
+        {
+            "id": 16,
+            "name": "Whip",
+            "priceInCp": 200,
+            "damage": "1d4 slashing",
+            "weightInLb": 2,
+            "properties": "Reach",
+            "groupId": 10
+        },
+        {
+            "id": 17,
+            "name": "Bastard Sword",
+            "priceInCp": 3500,
+            "damage": "1d10 slashing",
+            "weightInLb": 10,
+            "properties": "Two-Handed",
+            "groupId": 12
+        },
+        {
+            "id": 18,
+            "name": "Battleaxe",
+            "priceInCp": 1000,
+            "damage": "1d8 slashing",
+            "weightInLb": 10,
+            "properties": null,
+            "groupId": 13
+        },
+        {
+            "id": 19,
+            "name": "Flail",
+            "priceInCp": 1000,
+            "damage": "1d8 bludgeoning",
+            "weightInLb": 2,
+            "properties": null,
+            "groupId": 14
+        },
+        {
+            "id": 20,
+            "name": "Longsword",
+            "priceInCp": 1500,
+            "damage": "1d8 slashing",
+            "weightInLb": 5,
+            "properties": null,
+            "groupId": 12
+        },
+        {
+            "id": 21,
+            "name": "Morningstar",
+            "priceInCp": 1500,
+            "damage": "1d8 bludgeoning & piercing",
+            "weightInLb": 12,
+            "properties": null,
+            "groupId": 15
+        },
+        {
+            "id": 22,
+            "name": "Shield",
+            "priceInCp": 1000,
+            "damage": "1d6 bludgeoning",
+            "weightInLb": 5,
+            "properties": null,
+            "groupId": 16
+        },
+        {
+            "id": 23,
+            "name": "Throwing Axe",
+            "priceInCp": 500,
+            "damage": "1d6 slashing",
+            "weightInLb": 7,
+            "properties": "Range 20\/80",
+            "groupId": 13
+        },
+        {
+            "id": 24,
+            "name": "Warhammer",
+            "priceInCp": 1500,
+            "damage": "1d8 bludgeoning",
+            "weightInLb": 8,
+            "properties": null,
+            "groupId": 17
+        },
+        {
+            "id": 25,
+            "name": "Glaive",
+            "priceInCp": 1000,
+            "damage": "1d10 slashing",
+            "weightInLb": 15,
+            "properties": "Reach, Two-Handed",
+            "groupId": 19
+        },
+        {
+            "id": 26,
+            "name": "Greataxe",
+            "priceInCp": 3000,
+            "damage": "1d12 slashing",
+            "weightInLb": 15,
+            "properties": "Two-Handed",
+            "groupId": 20
+        },
+        {
+            "id": 27,
+            "name": "Greatsword",
+            "priceInCp": 5000,
+            "damage": "1d12 slashing",
+            "weightInLb": 10,
+            "properties": "Two-Handed",
+            "groupId": 21
+        },
+        {
+            "id": 28,
+            "name": "Lance",
+            "priceInCp": 1000,
+            "damage": "1d12 piercing",
+            "weightInLb": 10,
+            "properties": "Reach, Two-Handed, Special",
+            "groupId": 19
+        },
+        {
+            "id": 29,
+            "name": "Longspear",
+            "priceInCp": 500,
+            "damage": "1d10 piercing",
+            "weightInLb": 5,
+            "properties": "Reach, Two-Handed",
+            "groupId": 19
+        },
+        {
+            "id": 30,
+            "name": "Halberd",
+            "priceInCp": 1000,
+            "damage": "1d10 slashing",
+            "weightInLb": 15,
+            "properties": "Reach, Two-Handed",
+            "groupId": 20
+        },
+        {
+            "id": 31,
+            "name": "Maul",
+            "priceInCp": 1000,
+            "damage": "1d12 bludgeoning",
+            "weightInLb": 25,
+            "properties": "Two-Handed",
+            "groupId": 22
+        },
+        {
+            "id": 32,
+            "name": "Crossbow, Hand",
+            "priceInCp": 1000,
+            "damage": "1d6 piercing",
+            "weightInLb": 3,
+            "properties": "Range 30\/120, Special",
+            "groupId": 24
+        },
+        {
+            "id": 33,
+            "name": "Dart",
+            "priceInCp": 5,
+            "damage": "1d4 piercing",
+            "weightInLb": 1,
+            "properties": "Range 30\/120",
+            "groupId": 25
+        },
+        {
+            "id": 34,
+            "name": "Sling",
+            "priceInCp": 10,
+            "damage": "1d4 bludgeoning",
+            "weightInLb": 1,
+            "properties": "Range 30\/120",
+            "groupId": 26
+        },
+        {
+            "id": 35,
+            "name": "Crossbow, Light",
+            "priceInCp": 2500,
+            "damage": "1d8 piercing",
+            "weightInLb": 6,
+            "properties": "Range 80\/320, Two-Handed, Special",
+            "groupId": 28
+        },
+        {
+            "id": 36,
+            "name": "Javelin",
+            "priceInCp": 50,
+            "damage": "1d6 piercing",
+            "weightInLb": 5,
+            "properties": "Range 30\/120",
+            "groupId": 29
+        },
+        {
+            "id": 37,
+            "name": "Shortbow",
+            "priceInCp": 2500,
+            "damage": "1d6 piercing",
+            "weightInLb": 2,
+            "properties": "Range 80\/320, Two-Handed",
+            "groupId": 30
+        },
+        {
+            "id": 38,
+            "name": "Throwing Hammer",
+            "priceInCp": 200,
+            "damage": "1d6 bludgeoning",
+            "weightInLb": 7,
+            "properties": "Range 20\/80",
+            "groupId": 31
+        },
+        {
+            "id": 39,
+            "name": "Crossbow, Heavy",
+            "priceInCp": 5000,
+            "damage": "1d10 piercing",
+            "weightInLb": 10,
+            "properties": "Range 100\/400, Two-Handed, Special",
+            "groupId": 33
+        },
+        {
+            "id": 40,
+            "name": "Longbow",
+            "priceInCp": 5000,
+            "damage": "1d8 piercing",
+            "weightInLb": 3,
+            "properties": "Range 150\/600, Two-Handed",
+            "groupId": 34
+        }
+    ]
+}

@@ -1,4 +1,5 @@
-import Auth from './auth';
+import Auth from './handlers/auth';
+import Generate from './handlers/generate';
 
 var routes = [
   {
@@ -45,6 +46,11 @@ var routes = [
     method: 'GET',
     path: '/me',
     config: Auth.handlers.me
+  },
+  {
+    method: 'GET',
+    path: '/generate/weapons',
+    config: Generate.handlers.weapons
   }
 
 ];

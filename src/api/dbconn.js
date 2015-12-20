@@ -7,5 +7,6 @@ var sequelize = new Sequelize(process.env.POSTGRES, {
     idle: 10000
   }
 });
+;
 
 export default sequelize;

@@ -46,7 +46,8 @@ var required = [
   "SERVER_PORT",
   "API_URL",
   "API_PORT",
-  "LOG_LEVEL"
+  "LOG_LEVEL",
+  "POSTGRES"
 ];
 
 var errors = [];
@@ -352,5 +353,9 @@ gulp.task('migration:create', function(cb) {
   }
 
 });
+
+
+
+
 
 

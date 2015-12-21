@@ -30,6 +30,9 @@ export const logout = function() {
 export const me = function() {
   return callServer('/me', 'GET');
 }
+export const weapons = function() {
+  return callServer('/generate/weapons', 'GET');
+}
 function callServer(url, method, query, data, headers) {
 
   const uri = new urijs(process.env.API_URL + url);

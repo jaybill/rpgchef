@@ -5,6 +5,7 @@ import { confirm } from './confirm';
 import { forgotPassword } from './forgotpassword';
 import { resetPassword } from './resetpassword';
 import { account } from './account';
+import { weapons } from './weapons';
 
 const app = combineReducers({
   register,
@@ -12,7 +13,8 @@ const app = combineReducers({
   confirm,
   forgotPassword,
   resetPassword,
-  account
+  account,
+  weapons
 });
 
 export default {

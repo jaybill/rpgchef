@@ -25,6 +25,7 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("FORGOTPASSWORD"));
   km = Object.assign(km, asyncKeys("RESETPASSWORD"));
   km = Object.assign(km, asyncKeys("VERIFYRESET"));
+  km = Object.assign(km, asyncKeys("WEAPONS"));
 
   let accountKeys = asyncKeys("ACCOUNT");
   accountKeys["ACCOUNT_UPDATE"] = null;

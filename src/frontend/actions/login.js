@@ -20,7 +20,7 @@ export const login = function(credentials) {
 
         dispatch(loginActions.failure("Login failed."));
       }
-      return;
+      return null;
     }).catch(err => {
       log.error(err);
       dispatch(loginActions.failure("Login failed"));

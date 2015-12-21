@@ -9,6 +9,7 @@ export const logout = function() {
     dispatch(logoutActions.start());
     logoutCall().then((result) => {
       dispatch(logoutActions.success());
+      return null;
     }).catch(err => {
       dispatch(logoutActions.failure("Logout failed."));
       return err;

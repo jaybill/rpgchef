@@ -10,7 +10,7 @@ import Confirm from './containers/ConfirmContainer';
 import ForgotPassword from './containers/ForgotPasswordContainer';
 import ResetPassword from './containers/ResetPasswordContainer';
 import Account from './containers/AccountContainer';
-
+import Weapons from './containers/WeaponsContainer';
 
 import Welcome from '../components/Welcome';
 import NotFound from '../components/NotFound';
@@ -21,6 +21,7 @@ export default function getRoutes() {
     <Route path="app" component={App}>
       <Route path="home" component={Home}/>
       <Route path="account" component={Account}/>
+      <Route path="weapons" component={Weapons}/>
     </Route>
    // Routes that don't require authentication
    <Route path="register" component={Register}/>

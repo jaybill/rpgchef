@@ -13,7 +13,7 @@ export const me = function() {
       } else {
         dispatch(meActions.failure("Not logged in."));
       }
-      return;
+      return null;
     }).catch(err => dispatch(meActions.failure("Get session failed.")));
   }
 };

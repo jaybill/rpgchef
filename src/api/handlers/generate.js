@@ -35,9 +35,8 @@ Generate.handlers = {
           });
 
           const group = _.find(ww.weaponGroups, (wg) => {
-            return subGroup.parentId == wg.id;
+            return subgroup.parentId == wg.id;
           });
-
 
           wwg.push({
             id: w.id,
@@ -48,7 +47,6 @@ Generate.handlers = {
             group: group.name,
             subgroup: subgroup.name
           });
-
 
         });
 

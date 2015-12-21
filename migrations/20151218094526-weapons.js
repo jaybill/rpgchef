@@ -1,6 +1,3 @@
-var sequelize_fixtures = require('sequelize-fixtures');
-var db = require("../build/db");
-
 module.exports = {
   up: function(queryInterface, Sequelize) {
 
@@ -48,7 +45,7 @@ module.exports = {
         },
         "properties": {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: true
         },
 
         groupId: {

@@ -44,6 +44,7 @@ Generate.handlers = {
             priceInCp: w.priceInCp,
             weightInLb: w.weightInLb,
             properties: w.properties,
+            damage: w.damage,
             group: group.name,
             subgroup: subgroup.name
           });

@@ -8,7 +8,6 @@ import log from 'loglevel';
 
 class App extends Component {
 
-
   render() {
 
     return (
@@ -19,7 +18,7 @@ class App extends Component {
             <Nav>
                         <NavDropdown id="generate" title="Generate">
 
-                            <MenuItem href="/generate/weapon">Weapon</MenuItem>
+                            <MenuItem href="/app/weapons">Weapon</MenuItem>
 
                         </NavDropdown>
                         <NavDropdown id="sources" title="Sources">

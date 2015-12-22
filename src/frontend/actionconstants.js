@@ -16,7 +16,7 @@ function asyncKeys(prefix) {
 
 function makeKeys() {
   let km = {};
-
+  let extraKeys = {};
   km = Object.assign(km, asyncKeys("LOGIN"));
   km = Object.assign(km, asyncKeys("LOGOUT"));
   km = Object.assign(km, asyncKeys("ME"));
@@ -27,15 +27,13 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("VERIFYRESET"));
   km = Object.assign(km, asyncKeys("WEAPONS"));
 
-  let accountKeys = asyncKeys("ACCOUNT");
-  accountKeys["ACCOUNT_UPDATE"] = null;
-  km = Object.assign(km, accountKeys);
+  km = Object.assign(km, asyncKeys("ACCOUNT"));
 
-  let extraKeys = {};
+  extraKeys["ACCOUNT_UPDATE"] = null;
   extraKeys["SESSION_USERNAME_UPDATE"] = null;
+  extraKeys["RANDOM_WEAPONS_DONE"] = null;
 
   km = Object.assign(km, extraKeys);
-
   return km;
 
 }

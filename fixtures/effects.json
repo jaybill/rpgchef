@@ -1,0 +1,33 @@
+[
+  {
+    "effect": "On a successful hit, does an additional 1d8 fire damage.",
+    "nouns": [
+      "Fiery",
+      "Flaming"
+    ],
+    "adjectives": [
+      "Fire",
+      "Flame"
+    ],
+    "titles": [
+      "JoDahn",
+      "The Firemage"
+    ]
+  },
+  {
+    "effect": "On a successful hit, does an additional 1d8 ice damage.",
+    "nouns": [
+      "Icy",
+      "Freezing"
+    ],
+    "adjectives": [
+      "Cold",
+      "Snow"
+    ],
+    "titles": [
+      "Santa",
+      "The Wintermage"
+    ]
+  }
+]
+

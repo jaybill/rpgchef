@@ -51,6 +51,11 @@ var routes = [
     method: 'GET',
     path: '/generate/weapons',
     config: Generate.handlers.weapons
+  },
+  {
+    method: 'GET',
+    path: '/generate/effects',
+    config: Generate.handlers.effects
   }
 
 ];

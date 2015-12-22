@@ -2,7 +2,7 @@ import log from 'loglevel';
 import Boom from 'boom';
 import Joi from 'joi';
 import _ from 'lodash';
-import Db from '../db';
+import Db, { conn } from '../db';
 
 const Generate = {};
 
@@ -60,6 +60,58 @@ Generate.handlers = {
 
 
 
+    }
+  },
+  effects: {
+    auth: 'session',
+    plugins: {
+      'hapi-auth-cookie': {
+        redirectTo: false
+      }
+    },
+    validate: {
+      query: {
+        count: Joi.number().min(1).max(2)
+      }
+    },
+    handler: (request, reply) => {
+
+      const r = [];
+
+      Db.Effects.findAll({
+        offset: [
+          "floor(random()*(select count(*) from effects))"
+        ],
+        limit: 1
+      }).then((effects) => {
+
+
+        r.push(effects[0]);
+        if (request.query.count == 2) {
+          return Db.Effects.findAll({
+            where: {
+              id: {
+                $ne: effects[0].id
+              }
+            },
+            offset: [
+              "floor(random()*((select count(*) from effects)-1))"
+            ],
+            limit: 1
+          });
+        } else {
+          return null;
+        }
+
+      }).then((effects) => {
+        if (effects) {
+          r.push(effects[0]);
+        }
+        reply(r);
+      }).catch(err => {
+        log.error(err);
+        reply([]);
+      });
     }
   }
 }

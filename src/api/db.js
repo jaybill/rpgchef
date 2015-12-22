@@ -1,12 +1,13 @@
+import DbConn from './dbconn';
 import Users from './models/users';
 import WeaponGroups from './models/weapongroups';
 import Weapons from './models/weapons';
-import DbConn from './dbconn';
-
+import Effects from './models/effects';
 
 const users = Users(DbConn);
 const weaponGroups = WeaponGroups(DbConn);
 const weapons = Weapons(DbConn);
+const effects = Effects(DbConn);
 
 // RELATIONSHIPS
 
@@ -24,8 +25,11 @@ weaponGroups.hasMany(weapons, {
 var Db = {
   Users: users,
   WeaponGroups: weaponGroups,
-  Weapons: weapons
+  Weapons: weapons,
+  Effects: effects
 };
+
+export const conn = DbConn;
 
 export default Db;
 

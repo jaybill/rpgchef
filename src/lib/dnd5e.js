@@ -5,10 +5,20 @@ export default class DnD5e {
   constructor(data) {
     this.data = data;
     this.randomWeapons = this.randomWeapons.bind(this);
-
   }
 
   randomWeapons(count = 1) {
+    const {weapons, effects} = this.data;
+    if (!weapons) {
+      throw new Error("To use randomWeapons, you must supply the DnD5e class with an object that has a 'weapons' property tha contains an array of weapon objects.");
+      return;
+    }
+
+    if (!effects) {
+      throw new Error("To use randomWeapons, you must supply the DnD5e class with an object that has an 'effects' property tha contains an array of effects objects.");
+      return;
+    }
+
 
     return _.sample(this.data.weapons, count);
 

@@ -33,6 +33,14 @@ export const me = function() {
 export const weapons = function() {
   return callServer('/generate/weapons', 'GET');
 }
+export const effects = function(count) {
+  const query = {};
+  if (count) {
+    query.count = count;
+  }
+
+  return callServer('/generate/effects', 'GET', query);
+}
 function callServer(url, method, query, data, headers) {
 
   const uri = new urijs(process.env.API_URL + url);

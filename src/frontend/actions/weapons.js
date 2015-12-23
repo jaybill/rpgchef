@@ -1,55 +1,66 @@
 import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
 import log from 'loglevel';
-import { weapons as weaponsCall } from '../api';
+import { weapons as weaponsCall, effects as effectsCall } from '../api';
 import store from 'store';
 import DnD5e from '../../lib/dnd5e';
 import ActionConstants from "../actionconstants";
 
 
-export const randomWeapons = function(count) {
-
-
-  return dispatch => {
-
-    const dnd5e = new DnD5e({
-      weapons: store.get('weapons')
-    });
-
-    dispatch(createAction(ActionConstants.RANDOM_WEAPONS_DONE)(dnd5e.randomWeapons()));
-
-  }
-
-}
 const weaponsActions = createAsyncActionGroup("weapons", {});
 
-export const weapons = function() {
+export const weapons = function(count) {
 
   return dispatch => {
 
     const w = store.get('weapons');
 
-    if (w) {
-      log.debug("Loading weapons from cache");
-      dispatch(weaponsActions.success(w));
-      return;
-    } else {
-      log.debug("Loading weapons from API");
-      dispatch(weaponsActions.start());
-      weaponsCall().then((result) => {
-        if (result.status == 200) {
-          store.set('weapons', result.body);
-
+    const getAllWeapons = () => {
+      return new Promise((resolve, reject) => {
+        if (w) {
+          log.debug("Loading weapons from cache");
+          resolve(w);
         } else {
-          log.error(result);
-          throw new Error(result);
+          log.debug("Loading weapons from API");
+          weaponsCall().then((result) => {
+            if (result.status == 200) {
+              store.set('weapons', result.body);
+              resolve(weapons);
+            } else {
+              log.error(results);
+              reject(result);
+            }
+          }, (err) => {
+            log.error(err);
+            reject(err)
+          });
         }
-        return null;
-      }).catch(err => {
-        log.debug(err);
-        dispatch(weaponsActions.failure("get weapons failed"))
       });
-    }
+    };
+
+    let allWeapons = [];
+
+    dispatch(weaponsActions.start());
+    getAllWeapons().then((weapons) => {
+      allWeapons = weapons;
+      return effectsCall(count);
+    }).then((results) => {
+
+      if (results.status == 200) {
+        const dnd5e = new DnD5e({
+          weapons: allWeapons,
+          effects: results.body
+        });
+
+        dispatch(weaponsActions.success(dnd5e.randomWeapons()));
+      } else {
+        throw new Error(results);
+      }
+    }).catch(err => {
+      log.debug(err);
+      dispatch(weaponsActions.failure("get weapons failed"));
+    });
+
   }
 
 };

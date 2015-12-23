@@ -5,19 +5,10 @@ export const weapons = function(state = {
     working: false,
     failed: false,
     succeeded: false,
-    weapons: null,
-    randomWeapons: null
+    weapons: null
   }, action) {
 
   switch (action.type) {
-
-    case ActionConstants.RANDOM_WEAPONS_DONE:
-      return Object.assign({}, state, {
-        weapons: null,
-        randomWeapons: action.payload
-      });
-
-      break;
 
     case ActionConstants.WEAPONS_START:
       return Object.assign({}, state, {

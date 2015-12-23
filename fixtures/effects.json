@@ -2,12 +2,12 @@
   {
     "effect": "On a successful hit, does an additional 1d8 fire damage.",
     "nouns": [
-      "Fiery",
-      "Flaming"
+      "Flame",
+      "Fire"
     ],
     "adjectives": [
-      "Fire",
-      "Flame"
+      "Fiery",
+      "Flaming"
     ],
     "titles": [
       "JoDahn",
@@ -17,12 +17,12 @@
   {
     "effect": "On a successful hit, does an additional 1d8 ice damage.",
     "nouns": [
-      "Icy",
-      "Freezing"
-    ],
-    "adjectives": [
       "Cold",
       "Snow"
+    ],
+    "adjectives": [
+      "Icy",
+      "Freezing"
     ],
     "titles": [
       "Santa",

@@ -15,7 +15,7 @@ export default class Welcome extends Component {
                 <Jumbotron>
                     <Grid>
                     <Row>
-                    <Col md={2}>
+                    <Col xs={1} sm={1} md={2}>
                     <img className="img-responsive" src="/assets/logo.gif"/>
                     </Col>
                     <Col md={10}>

@@ -33,10 +33,13 @@ export const me = function() {
 export const weapons = function() {
   return callServer('/generate/weapons', 'GET');
 }
-export const effects = function(count) {
+export const effects = function(effectCount, weaponCount) {
   const query = {};
-  if (count) {
-    query.count = count;
+  if (effectCount) {
+    query.effectCount = effectCount;
+  }
+  if (weaponCount) {
+    query.weaponCount = weaponCount;
   }
 
   return callServer('/generate/effects', 'GET', query);

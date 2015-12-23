@@ -9,7 +9,7 @@ import ActionConstants from "../actionconstants";
 
 const weaponsActions = createAsyncActionGroup("weapons", {});
 
-export const weapons = function(count) {
+export const weapons = function(effectCount, weaponCount) {
 
   return dispatch => {
 
@@ -43,7 +43,7 @@ export const weapons = function(count) {
     dispatch(weaponsActions.start());
     getAllWeapons().then((weapons) => {
       allWeapons = weapons;
-      return effectsCall(count);
+      return effectsCall(effectCount, weaponCount);
     }).then((results) => {
 
       if (results.status == 200) {
@@ -52,7 +52,7 @@ export const weapons = function(count) {
           effects: results.body
         });
 
-        dispatch(weaponsActions.success(dnd5e.randomWeapons()));
+        dispatch(weaponsActions.success(dnd5e.randomWeapons(effectCount, weaponCount)));
       } else {
         throw new Error(results);
       }

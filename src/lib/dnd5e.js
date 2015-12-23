@@ -5,28 +5,9 @@ export default class DnD5e {
   constructor(data) {
     this.data = data;
     this.randomWeapons = this.randomWeapons.bind(this);
-
-
-
   }
 
-  randomWeapons(count = 1, props = 1) {
-
-    if (count > 2) {
-      count = 2;
-    }
-
-    if (props > 2) {
-      props = 2;
-    }
-
-    if (count < 1) {
-      count = 1;
-    }
-
-    if (props < 1) {
-      props = 1;
-    }
+  randomWeapons(effectCount = 1, weaponCount = 1) {
 
     const {weapons, effects} = this.data;
     if (!weapons) {
@@ -51,7 +32,7 @@ export default class DnD5e {
       ]
     };
 
-    const magicWeapons = _.sample(weapons, count);
+    const magicWeapons = _.sample(weapons, weaponCount);
 
     for (let i = 0; i < magicWeapons.length; i++) {
 
@@ -71,30 +52,30 @@ export default class DnD5e {
 
       const r = {};
 
-      if (props == 1) {
+      if (effectCount == 1) {
         pattern = _.sample(patterns.oneProp);
         const template = _.template(pattern);
         magicWeapons[i].name = template({
-          adj: _.sample(effects[0].adjectives),
-          noun: _.sample(effects[0].nouns),
-          title: _.sample(effects[0].titles),
+          adj: _.sample(effects[i][0].adjectives),
+          noun: _.sample(effects[i][0].nouns),
+          title: _.sample(effects[i][0].titles),
           item: magicWeapons[i].name
         });
 
-        magicWeapons[i].properties += effects[0].effect;
+        magicWeapons[i].properties += effects[i][0].effect;
 
       } else {
         pattern = _.sample(patterns.twoProp);
         const template = _.template(pattern);
         magicWeapons[i].name = template({
-          adj: _.sample(effects[0].adjectives),
-          noun: _.sample(effects[1].nouns),
-          title: _.sample(effects[1].titles),
+          adj: _.sample(effects[i][0].adjectives),
+          noun: _.sample(effects[i][1].nouns),
+          title: _.sample(effects[i][1].titles),
           item: magicWeapons[i].name
         });
 
-        magicWeapons[i].properties += effects[0].effect;
-        magicWeapons[i].properties += " Additionally, " + effects[1].effect;
+        magicWeapons[i].properties += effects[i][0].effect;
+        magicWeapons[i].properties += " Additionally, " + effects[i][1].effect;
 
 
       }

@@ -71,46 +71,53 @@ Generate.handlers = {
     },
     validate: {
       query: {
-        count: Joi.number().min(1).max(2)
+        effectCount: Joi.number().min(1).max(2).required(),
+        weaponCount: Joi.number().min(1).max(10).required()
       }
     },
     handler: (request, reply) => {
 
-      const r = [];
-
-      Db.Effects.findAll({
-        offset: [
-          "floor(random()*(select count(*) from effects))"
-        ],
-        limit: 1
-      }).then((effects) => {
-
-
-        r.push(effects[0]);
-        if (request.query.count == 2) {
-          return Db.Effects.findAll({
-            where: {
-              id: {
-                $ne: effects[0].id
-              }
-            },
+      const promises = [];
+      for (let i = 0; i < request.query.weaponCount; i++) {
+        const r = [];
+        promises.push(
+          Db.Effects.findAll({
             offset: [
-              "floor(random()*((select count(*) from effects)-1))"
+              "floor(random()*(select count(*) from effects))"
             ],
             limit: 1
-          });
-        } else {
-          return null;
-        }
+          }).then((effects) => {
 
-      }).then((effects) => {
-        if (effects) {
-          r.push(effects[0]);
-        }
-        reply(r);
-      }).catch(err => {
-        log.error(err);
-        reply([]);
+            r.push(effects[0]);
+            if (request.query.effectCount == 2) {
+              return Db.Effects.findAll({
+                where: {
+                  id: {
+                    $ne: effects[0].id
+                  }
+                },
+                offset: [
+                  "floor(random()*((select count(*) from effects)-1))"
+                ],
+                limit: 1
+              });
+            } else {
+              return null;
+            }
+
+          }).then((effects) => {
+            if (effects) {
+              r.push(effects[0]);
+            }
+            return (r);
+          }).catch(err => {
+            log.error(err);
+            return [];
+          })
+        );
+      }
+      return Promise.all(promises).then((results) => {
+        reply(results);
       });
     }
   }

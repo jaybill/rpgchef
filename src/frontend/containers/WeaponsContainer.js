@@ -14,7 +14,7 @@ class WeaponsContainer extends Component {
 
   loadRandomWeapons() {
     const {dispatch, weapons} = this.props;
-    dispatch(doWeapons());
+    dispatch(doWeapons(2, 3));
   }
 
   render() {

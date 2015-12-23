@@ -75,7 +75,12 @@ export default class DnD5e {
         });
 
         magicWeapons[i].properties += effects[i][0].effect;
-        magicWeapons[i].properties += " Additionally, " + effects[i][1].effect;
+
+        let se = effects[i][1].effect;
+
+        se = se[0].toLowerCase() + se.slice(1);
+
+        magicWeapons[i].properties += " Additionally, " + se;
 
 
       }

@@ -3,11 +3,17 @@ import React, { Component, PropTypes } from 'react';
 import { Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
 import _ from 'lodash';
 import WeaponCard from '../WeaponCard';
+import log from 'loglevel';
 
 export default class Weapons extends Component {
 
   constructor() {
     super();
+    this.loadWeapons = this.loadWeapons.bind(this);
+  }
+
+  loadWeapons() {
+    this.props.loadWeapons(this.refs.effectCount.getValue(), this.refs.weaponCount.getValue());
   }
 
 
@@ -35,13 +41,31 @@ export default class Weapons extends Component {
             </Col>
             </Row>
             <Row>
-            <Col md={6}>
-            <div className="controls">
-            <Button bsStyle="primary" onClick={this.props.onLoadButton}>Generate Weapons</Button>
-            </div>
+            <Col md={3}>
+            
+            <Input ref="weaponCount" labelClassName="col-md-4" wrapperClassName="col-md-8" label="Weapons" type="select">
+            <option value={1}>1</option>
+            <option value={3}>3</option>
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            </Input>
             </Col>
+            <Col md={3}>
+            <Input ref="effectCount" labelClassName="col-md-4" wrapperClassName="col-md-8" label="Effects" type="select">
+            <option value={1}>One</option>
+            <option value={2}>Two</option>
+            </Input>
+           
+            </Col>
+            <Col md={2}>
+            
+            <Button disabled={working} block bsStyle="primary"
+      onClick={this.loadWeapons}>Generate Weapons</Button>
+            </Col>
+
             </Row>
             <Row><Col md={12}>
+            <hr/>
             {allWeapons}
             </Col></Row>
         </Grid>

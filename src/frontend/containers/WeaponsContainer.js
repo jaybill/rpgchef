@@ -12,9 +12,9 @@ class WeaponsContainer extends Component {
     this.loadRandomWeapons = this.loadRandomWeapons.bind(this);
   }
 
-  loadRandomWeapons() {
+  loadRandomWeapons(effectCount, weaponCount) {
     const {dispatch, weapons} = this.props;
-    dispatch(doWeapons(2, 3));
+    dispatch(doWeapons(effectCount, weaponCount));
   }
 
   render() {
@@ -27,7 +27,7 @@ class WeaponsContainer extends Component {
       failed={weapons.failed}
       succeeded={weapons.succeeded}
       randomWeapons={weapons.weapons}
-      onLoadButton={this.loadRandomWeapons}
+      loadWeapons={this.loadRandomWeapons}
       />
   }
 }

@@ -321,7 +321,7 @@ gulp.task('test', ['testmanifest', 'bundle'], function() {
 
 var dbURL;
 if (gutil.env.db == "prod") {
-  dbURL = process.env.PROD_POSTGRES;
+  dbURL = process.env.POSTGRES_PROD;
 } else {
   dbURL = process.env.POSTGRES;
 }
@@ -358,6 +358,24 @@ gulp.task('migration:create', function(cb) {
 
   } else {
     console.log("Please specify a name for this migration, i.e. --name users");
+  }
+
+});
+
+gulp.task('loadfixture', function(cb) {
+
+  if (gutil.env.name) {
+    var name = gutil.env.name;
+    var cmd = "./node_modules/.bin/pji -c "
+      + dbURL + " -t " + name + " --file ./fixtures/" + name + ".json";
+    exec(cmd, function(err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
+      cb(err);
+    });
+
+  } else {
+    console.log("Please specify the name of the table, i.e. --name effects");
   }
 
 });

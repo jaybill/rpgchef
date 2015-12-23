@@ -123,6 +123,7 @@
     "less-loader": "^2.2.1",
     "minimist": "^1.2.0",
     "napa": "^2.0.2",
+    "pg-json-import": "0.0.4",
     "protractor": "^2.5.1",
     "psi": "^1.0.6",
     "react-tools": "^0.13.3",

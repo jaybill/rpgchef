@@ -30,8 +30,8 @@ export default class Weapons extends Component {
     return (<div className="Weapons">
         <Grid>
             <Row>
-            <Col md={6} mdOffset={3}>
-            <h2>Weapons</h2>
+            <Col md={6}>
+            <h3>Weapons</h3>
             </Col>
             </Row>
             <Row>

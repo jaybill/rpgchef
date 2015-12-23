@@ -75,7 +75,15 @@ log.setLevel(logLevel);
 $.util.log("Log level is " + log.getLevel());
 
 var uri = new URI(process.env.SERVER_URL);
-var domain = uri.subdomain() + "." + uri.domain();
+var subdomain = uri.subdomain();
+var domain;
+
+if (subdomain) {
+  domain = subdomain + "." + uri.domain();
+} else {
+  domain = uri.domain();
+}
+
 $.util.log("Domain " + domain);
 
 // The default task

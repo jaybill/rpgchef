@@ -1,5 +1,8 @@
 import { Link } from 'react-router';
-import { Button, Navbar, NavBrand, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Button, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+
+import Navbar from 'react-bootstrap/lib/Navbar';
 
 import './App.less';
 import React, { Component } from 'react';
@@ -8,34 +11,39 @@ import log from 'loglevel';
 
 class App extends Component {
 
+
+
   render() {
 
     return (
       <div className="App">
 
-                <div className="container">
-                    <Navbar fixedTop><NavBrand><a href="#">RPG Chef</a></NavBrand>
-            <Nav>
-                        <NavDropdown id="generate" title="Generate">
+        <div className="container">
 
-                            <MenuItem href="/app/weapons">Weapon</MenuItem>
+<Navbar fixedTop>
+    <Navbar.Header>
+      <Navbar.Brand>
+        RPG Chef
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    </Navbar.Header>
+    <Navbar.Collapse>
+      <Nav>
+        <NavDropdown eventKey={1}  title="Generate" id="basic-nav-dropdown">
+            <LinkContainer to="/app/weapons"><MenuItem  eventKey={1.1}>Weapon</MenuItem></LinkContainer>
+        </NavDropdown>
+      </Nav>
+      <Nav pullRight>
+        <NavDropdown eventKey={2}  title={this.props.user.username} id="account-nav-dropdown">
+            <LinkContainer to="/app/account"><MenuItem eventKey={2.1}>Account</MenuItem></LinkContainer>
+            <LinkContainer to="/logout"><MenuItem eventKey={2.2}>Log out</MenuItem></LinkContainer>
+        </NavDropdown>
+      </Nav>
+    </Navbar.Collapse>
+  </Navbar>
 
-                        </NavDropdown>
-                        <NavDropdown id="sources" title="Sources">
-                            <MenuItem href="/sources/effects">Weapon Effects</MenuItem>
-                        </NavDropdown>
-            </Nav>
-            <Nav pullRight>
-                  <NavDropdown id="user" title={this.props.user.username}>
-
-                            <MenuItem href="/app/account">Account</MenuItem>
-                            <MenuItem href="/logout">Log out</MenuItem>
-
-                        </NavDropdown>
-</Nav>
-                    </Navbar>
-                    <div className="App-Holder">{this.props.children}</div>
-                </div>
+        <div className="App-Holder">{this.props.children}</div>
+        </div>
         </div>
 
       );

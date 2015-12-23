@@ -20,7 +20,7 @@ var GLOBALS = {
 var babelQuery = {
   cacheDirectory: true,
   presets: ['es2015', 'stage-0', 'react'],
-  plugins: ["check-es2015-constants", "transform-es2015-block-scoping", "transform-es2015-constants"]
+  plugins: ["check-es2015-constants", "transform-es2015-block-scoping", "transform-es2015-constants", "transform-runtime"]
 };
 
 //
@@ -73,13 +73,13 @@ var config = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: babelQuery
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: babelQuery
       }
     ]

@@ -1,0 +1,58 @@
+{
+    "effects": [
+        "Becomes a +1 weapon after a long rest in <%= place %>. Reverts to normal upon leaving.",
+        "The bearer gains +1 to <%= abilityScore %> saving throws.",
+        "The bearer gains +1 to <%= check %> checks.",
+        "This weapon's damage type can be replaced with <%= damageType %>.",
+        "Behaves as a +1 weapon when attacking <%= victim %>."
+    ],
+    "words": {
+        "victim":[
+            ""
+        ],
+        "damageType": [
+            "Acid",
+            "Fire",
+            "Cold",
+            "Poison",
+            "Necrotic",
+            "Radiant",
+            "Lightning",
+            "Psychic",
+            "Thunder",
+            "Force"
+        ],
+        "abilityScore": [
+            "Strength",
+            "Dexterity",
+            "Constitution",
+            "Intelligence",
+            "Wisdom",
+            "Charisma"
+        ],
+        "place": [
+            "a forrest",
+            "a desert",
+            "cities"
+        ],
+        "checks": [
+            "Acrobatics (Dex)",
+            "Animal Handling (Wis)",
+            "Arcana (Int)",
+            "Athletics (Str)",
+            "Deception (Cha)",
+            "History (Int)",
+            "Insight (Wis)",
+            "Intimidation (Cha)",
+            "Investigation (Int)",
+            "Medicine (Wis)",
+            "Nature (Int)",
+            "Perception (Wis)",
+            "Performance (Cha)",
+            "Persuasion (Cha)",
+            "Religion (Int)",
+            "Sleight of Hand (Dex)",
+            "Stealth (Dex)"
+        ]
+    }
+}

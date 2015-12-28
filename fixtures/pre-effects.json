@@ -1,14 +1,129 @@
 {
     "effects": [
-        "Becomes a +1 weapon after a long rest in <%= place %>. Reverts to normal upon leaving.",
-        "The bearer gains +1 to <%= abilityScore %> saving throws.",
-        "The bearer gains +1 to <%= check %> checks.",
-        "This weapon's damage type can be replaced with <%= damageType %>.",
-        "Behaves as a +1 weapon when attacking <%= victim %>."
+        {
+            "effect": "Becomes a +1 weapon after a long rest <%= placePrepo %>. Reverts to normal upon leaving.",
+            "words": [
+                "placePrepo"
+            ]
+        },
+        {
+            "effect": "The bearer gains advantage on attack rolls when attacking any creature that does <%= damageType %> damage.",
+            "words": [
+                "damageType"
+            ]
+        },
+        {
+            "effect": "The bearer can cast <%= spell %> once per day.",
+            "words": [
+                "spell"
+            ]
+        },
+        {
+            "effect": "Contains 1d4 charges of <%= spell %>. Cannot be recharged.",
+            "words": [
+                "spell"
+            ]
+        },
+        {
+            "effect": "The bearer gains +1 to <%= abilityScore %> saving throws.",
+            "words": [
+                "abilityScore"
+            ]
+        },
+        {
+            "effect": "The bearer gains +1 to <%= skill %> checks.",
+            "words": [
+                "skill"
+            ]
+        },
+        {
+            "effect": "Gives the bearer advantage on <%= skill %> checks.",
+            "words": [
+                "skill"
+            ]
+        },
+        {
+            "effect": "Gives the bearer advantage on <%= abilityScore %> saving throws.",
+            "words": [
+                "abilityScore"
+            ]
+        },
+        {
+            "effect": "This weapon's damage type can be replaced with <%= damageType %>.",
+            "words": [
+                "damageType"
+            ]
+        },
+        {
+            "effect": "Gives the bearer resistance to <%= damageType %> damage.",
+            "words": [
+                "damageType"
+            ]
+        },
+        {
+            "effect": "Behaves as a +1 weapon when attacking <%= monsterType %>.",
+            "words": [
+                "monsterType"
+            ]
+        },
+        {
+            "effect": "When attacking the bearer, <%= monsterType %> have disadvantage on attack rolls.",
+            "words": [
+                "monsterType"
+            ]
+        },
+        {
+            "effect": "This weapon glows when any <%= monsterType %> are within 100 feet.",
+            "words": [
+                "monsterType"
+            ]
+        },
+        {
+            "effect": "Any <%= monsterType %> within 50 feet have disadvantage on attack rolls.",
+            "words": [
+                "monsterType"
+            ]
+        },
+        {
+            "effect": "Any <%= race %> within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
+            "words": [
+                "race"
+            ]
+        }
     ],
     "words": {
-        "victim":[
-            ""
+        "spell": [
+            "Burning Hands (Level 3)",
+            "Chill Touch (Level 3)",
+            "Acid Splash (Level 3)",
+            "Witch Bolt (Level 3)",
+            "Eldritch Blast (Level 3)"
+        ],
+        "race": [
+            "humans",
+            "elves",
+            "halflings",
+            "dwarves",
+            "dragonborn",
+            "tieflings",
+            "gnomes"
+        ],
+        "color": [
+            "blue",
+            "red",
+            "orange",
+            "purple",
+            "green"
+        ],
+        "monsterType": [
+            "undead",
+            "goblinoids",
+            "giants",
+            "fiends",
+            "monstrosities",
+            "constructs",
+            "elementals",
+            "dragons"
         ],
         "damageType": [
             "Acid",
@@ -30,12 +145,19 @@
             "Wisdom",
             "Charisma"
         ],
-        "place": [
-            "a forrest",
-            "a desert",
-            "cities"
+        "placePrepo": [
+            "in a forest",
+            "outdoors",
+            "underground",
+            "in a jungle",
+            "near a volcano",
+            "in a dungeon",
+            "anywhere there is snow on the ground",
+            "anywhere within a mile of an ocean",
+            "in a desert",
+            "in a city"
         ],
-        "checks": [
+        "skill": [
             "Acrobatics (Dex)",
             "Animal Handling (Wis)",
             "Arcana (Int)",

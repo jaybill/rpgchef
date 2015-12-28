@@ -191,6 +191,7 @@ gulp.task('build:watch', function(cb) {
   });
 });
 
+
 // Launch a Node.js/API server
 gulp.task('api', ['build:watch'], function(cb) {
   var started = false;
@@ -382,6 +383,17 @@ gulp.task('loadfixture', function(cb) {
 
 
 
+// build temporary loader
+gulp.task('loader', ['bundle'], function(cb) {
+
+  var cmd = "node build/loader.js";
+  exec(cmd, function(err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+
+});
 
 
 

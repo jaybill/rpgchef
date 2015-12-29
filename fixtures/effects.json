@@ -36,7 +36,8 @@
         "effect": "Becomes a +1 weapon after a long rest outdoors. Reverts to normal upon leaving.",
         "nouns": [
             "The Open Air",
-            "Claustrophobia"
+            "Claustrophobia",
+            "The Plains"
         ],
         "adjectives": [
             "Claustrophobic"
@@ -44,7 +45,8 @@
         "titles": [
             "The Claustrophobic",
             "The Outdoorsman",
-            "The Ranger"
+            "The Ranger",
+            "The Openlander"
         ]
     },
     {
@@ -172,10 +174,10 @@
             "Acid Defense"
         ],
         "adjectives": [
-            "Acid Repelling"
+            "Acid Resistant"
         ],
         "titles": [
-            "The Acid Tamer",
+            "The Acid Handler",
             "The Acid Defender"
         ]
     },
@@ -185,10 +187,10 @@
             "Fire Defense"
         ],
         "adjectives": [
-            "Fire Repelling"
+            "Fire Resistant"
         ],
         "titles": [
-            "The Fire Tamer",
+            "The Fire Handler",
             "The Fire Defender"
         ]
     },
@@ -200,12 +202,12 @@
             "The Fireside"
         ],
         "adjectives": [
-            "Cold Repelling",
+            "Cold Resistant",
             "Fireside",
             "Hearth"
         ],
         "titles": [
-            "The Cold Tamer",
+            "The Cold Handler",
             "The Cold Defender"
         ]
     },
@@ -216,7 +218,7 @@
             "The Antidote"
         ],
         "adjectives": [
-            "Poison Repelling",
+            "Poison Resistant",
             "Antidotal"
         ],
         "titles": [
@@ -229,10 +231,10 @@
             "Necrosis Defense"
         ],
         "adjectives": [
-            "Necrosis Repelling"
+            "Necrosis Resistant"
         ],
         "titles": [
-            "The Necrosis Tamer",
+            "The Necrosis Handler",
             "The Necrosis Defender"
         ]
     },
@@ -242,10 +244,10 @@
             "Radiance Defense"
         ],
         "adjectives": [
-            "Radiance Repelling"
+            "Radiance Resistant"
         ],
         "titles": [
-            "The Radiance Tamer",
+            "The Radiance Handler",
             "The Radiance Defender"
         ]
     },
@@ -256,11 +258,11 @@
             "Grounding"
         ],
         "adjectives": [
-            "Lightning Repelling",
+            "Lightning Resistant",
             "Grounded"
         ],
         "titles": [
-            "The Lightning Tamer",
+            "The Lightning Handler",
             "The Lightning Defender"
         ]
     },
@@ -288,7 +290,7 @@
         ],
         "titles": [
             "The Storm Calmer",
-            "The Thunder Tamer"
+            "The Thunder Handler"
         ]
     },
     {
@@ -298,11 +300,11 @@
             "The Immovable Object"
         ],
         "adjectives": [
-            "Force Repelling",
+            "Force Resistant",
             "Immovable"
         ],
         "titles": [
-            "The Force Tamer",
+            "The Force Handler",
             "The Force Defender",
             "The Immovable Object"
         ]
@@ -419,17 +421,16 @@
             "Morbid",
             "Corrupting"
         ],
-        "titles": []
+        "titles": [
+            "The Corruptor",
+            "The Sea Hag"
+        ]
     },
     {
         "effect": "The bearer gains +1 to Strength saving throws.",
         "nouns": [
-            "Force",
             "Forcefulness",
             "Intensity",
-            "Potency",
-            "Effectiveness",
-            "Durability",
             "Enduringness",
             "Power",
             "Powerfulness"
@@ -445,6 +446,1040 @@
             "Brutes",
             "Barbarians",
             "The Orc Mother"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Dexterity saving throws.",
+        "nouns": [
+            "Adeptness",
+            "Nimbleness",
+            "Dexterity",
+            "Dodging"
+        ],
+        "adjectives": [
+            "Dexterous",
+            "Nibmle"
+        ],
+        "titles": [
+            "The Dodger",
+            "The Rogue"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Constitution saving throws.",
+        "nouns": [
+            "Health",
+            "Stamina",
+            "Durability",
+            "Vital Force",
+            "Essence",
+            "Giants"
+        ],
+        "adjectives": [
+            "Vital"
+        ],
+        "titles": [
+            "The Rock Golem"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Intelligence saving throws.",
+        "nouns": [
+            "Virtuosos",
+            "Sorcerers",
+            "Magicians"
+        ],
+        "adjectives": [
+            "Sorcerous",
+            "Wizardly"
+        ],
+        "titles": [
+            "The Wizard",
+            "The Mage",
+            "The Magician"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Wisdom saving throws.",
+        "nouns": [
+            "Wisdom",
+            "Knowledge"
+        ],
+        "adjectives": [
+            "Wise",
+            "Adept"
+        ],
+        "titles": [
+            "The Adept"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Charisma saving throws.",
+        "nouns": [
+            "Bards",
+            "Beguilers"
+        ],
+        "adjectives": [
+            "Beguiling"
+        ],
+        "titles": [
+            "The Bard",
+            "Beguiler"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Acrobatics (Dex) checks.",
+        "nouns": [
+            "Acrobats"
+        ],
+        "adjectives": [
+            "Acrobatic"
+        ],
+        "titles": [
+            "The Acrobat"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Animal Handling (Wis) checks.",
+        "nouns": [
+            "Beastmasters"
+        ],
+        "adjectives": [
+            "Beastmastering"
+        ],
+        "titles": [
+            "The Beastmaster"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Arcana (Int) checks.",
+        "nouns": [
+            "Arcane Knowledge"
+        ],
+        "adjectives": [
+            "Arcane"
+        ],
+        "titles": [
+            "The Sorcerer",
+            "The Mage"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Athletics (Str) checks.",
+        "nouns": [
+            "Fighters",
+            "Barbarians"
+        ],
+        "adjectives": [
+            "Empowering",
+            "Power"
+        ],
+        "titles": [
+            "The Fighter",
+            "The Stevedor",
+            "The Longshoreman"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Deception (Cha) checks.",
+        "nouns": [
+            "Liars",
+            "Deceivers",
+            "Prevaricators",
+            "Cheats",
+            "Tricksters"
+        ],
+        "adjectives": [
+            "Lying",
+            "Deception",
+            "Prevarication",
+            "Cheating",
+            "Tricky"
+        ],
+        "titles": [
+            "The Liar",
+            "The Deceiver",
+            "The Cheat",
+            "The Prevaricator",
+            "The Trickster"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to History (Int) checks.",
+        "nouns": [
+            "Loremasters",
+            "Librarians"
+        ],
+        "adjectives": [
+            "Well-Read",
+            "Knowledgeable",
+            "Learned",
+            "Lettered"
+        ],
+        "titles": [
+            "The Loremaster",
+            "The Librarian"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Insight (Wis) checks.",
+        "nouns": [
+            "Enlightenment",
+            "Enlightening",
+            "Sages"
+        ],
+        "adjectives": [
+            "Knowing",
+            "Enlightened"
+        ],
+        "titles": [
+            "The Wise Man",
+            "The Sage"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Intimidation (Cha) checks.",
+        "nouns": [
+            "The Fist",
+            "Brawlers",
+            "Fear"
+        ],
+        "adjectives": [
+            "Intimidating",
+            "Frightening"
+        ],
+        "titles": [
+            "The Brawler"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Investigation (Int) checks.",
+        "nouns": [
+            "Investigating",
+            "Enquiry",
+            "Inquiry",
+            "Research"
+        ],
+        "adjectives": [
+            "Inquiring"
+        ],
+        "titles": [
+            "The Inquirer",
+            "The Detective"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Medicine (Wis) checks.",
+        "nouns": [
+            "The Shaman"
+        ],
+        "adjectives": [
+            "Shamanic"
+        ],
+        "titles": [
+            "The Shaman"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Nature (Int) checks.",
+        "nouns": [
+            "Woodsmen",
+            "The Woodsman",
+            "Leaves",
+            "Wood Elves"
+        ],
+        "adjectives": [
+            "Forest",
+            "Leaf"
+        ],
+        "titles": [
+            "The Woodsman"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Perception (Wis) checks.",
+        "nouns": [
+            "Awareness",
+            "Perception",
+            "Understanding",
+            "Mindfulness"
+        ],
+        "adjectives": [
+            "Mindful",
+            "Aware",
+            "Perceptive",
+            "Cognizant"
+        ],
+        "titles": [
+            "The Deviant"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Performance (Cha) checks.",
+        "nouns": [
+            "Bards",
+            "Thespians"
+        ],
+        "adjectives": [
+            "Singing"
+        ],
+        "titles": [
+            "The Bard",
+            "The Thespian"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Persuasion (Cha) checks.",
+        "nouns": [
+            "Strong Will",
+            "Influence",
+            "Persuasion",
+            "Chieftains"
+        ],
+        "adjectives": [
+            "Persuasive",
+            "Influential"
+        ],
+        "titles": [
+            "The Chieftain"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Religion (Int) checks.",
+        "nouns": [
+            "Priests",
+            "Friars",
+            "Monks",
+            "Clerics",
+            "The Cloth",
+            "Holiness",
+            "Piety"
+        ],
+        "adjectives": [
+            "Holy",
+            "Zealous",
+            "Pious"
+        ],
+        "titles": [
+            "The Zealot",
+            "The Monk",
+            "The Priestess",
+            "The Cleric"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Sleight of Hand (Dex) checks.",
+        "nouns": [
+            "Pickpockets",
+            "Petty Theft",
+            "Stealing",
+            "Flourish"
+        ],
+        "adjectives": [
+            "Quick-handed"
+        ],
+        "titles": [
+            "The Pickpocket"
+        ]
+    },
+    {
+        "effect": "The bearer gains +1 to Stealth (Dex) checks.",
+        "nouns": [
+            "Stillness",
+            "Quiet",
+            "Sneakiness"
+        ],
+        "adjectives": [
+            "Still",
+            "Quiet",
+            "Sneaky"
+        ],
+        "titles": [
+            "The Sneak"
+        ]
+    },
+    {
+        "effect": "Gives the bearer advantage on Charisma saving throws.",
+        "nouns": [],
+        "adjectives": [],
+        "titles": []
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Acid.",
+        "nouns": [
+            "Acid"
+        ],
+        "adjectives": [
+            "Caustic",
+            "Mordant",
+            "Corrosive",
+            "Acidic"
+        ],
+        "titles": [
+            "The Aboleth",
+            "The Frog"
+        ]
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Fire.",
+        "nouns": [
+            "Flames",
+            "Fire"
+        ],
+        "adjectives": [
+            "Burning",
+            "Flaming"
+        ],
+        "titles": [
+            "The Firemage",
+            "The Fire Elemental",
+            "The Dragon"
+        ]
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Cold.",
+        "nouns": [
+            "Cold",
+            "Winter",
+            "Frost",
+            "Winter Wolves",
+            "Frost Giants"
+        ],
+        "adjectives": [
+            "Freezing"
+        ],
+        "titles": [
+            "The Winter Wolf",
+            "The Frost Giant"
+        ]
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Poison.",
+        "nouns": [
+            "Poison",
+            "Poisoning",
+            "Snakes",
+            "Venom"
+        ],
+        "adjectives": [
+            "Poisonous",
+            "Venomous"
+        ],
+        "titles": [
+            "The Snake",
+            "The Bone Naga"
+        ]
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Necrotic.",
+        "nouns": [
+            "Unholiness",
+            "Impurity",
+            "Corrupting"
+        ],
+        "adjectives": [
+            "Undead",
+            "Impure",
+            "Corrupting"
+        ],
+        "titles": [
+            "The Nothic",
+            "The Banshee"
+        ]
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Radiant.",
+        "nouns": [
+            "Light",
+            "Holy Fire",
+            "Cleansing Fire"
+        ],
+        "adjectives": [
+            "Solar",
+            "Radiant",
+            "Cleansing"
+        ],
+        "titles": [
+            "The Planetar",
+            "The Priest"
+        ]
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Lightning.",
+        "nouns": [
+            "Lightning",
+            "Shocking",
+            "Balors"
+        ],
+        "adjectives": [
+            "Lightning",
+            "Shocking"
+        ],
+        "titles": [
+            "The Balor",
+            "The Will-o-wisp"
+        ]
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Psychic.",
+        "nouns": [
+            "Shadow Demons",
+            "Mind Flayers",
+            "Fomorians"
+        ],
+        "adjectives": [
+            "Mind Flaying"
+        ],
+        "titles": [
+            "The Shadow Demon",
+            "The Mind Flayer",
+            "The Fomorian"
+        ]
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Thunder.",
+        "nouns": [
+            "Thunder",
+            "Storms",
+            "The Destroyer",
+            "Destruction"
+        ],
+        "adjectives": [
+            "Thunder",
+            "Storm",
+            "Destructive"
+        ],
+        "titles": [
+            "Stormfell",
+            "Destroyer"
+        ]
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Force.",
+        "nouns": [
+            "Ghosts",
+            "Spectral",
+            "Wraiths"
+        ],
+        "adjectives": [
+            "Ghostly",
+            "Spectral"
+        ],
+        "titles": [
+            "The Ghost",
+            "The Specter",
+            "The Wraith"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Acid damage.",
+        "nouns": [
+            "Acid Protection"
+        ],
+        "adjectives": [
+            "Acid Resistant"
+        ],
+        "titles": [
+            "Acid Protector"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Fire damage.",
+        "nouns": [
+            "Fire Protection",
+            "Cambions"
+        ],
+        "adjectives": [
+            "Fire Resistant"
+        ],
+        "titles": [
+            "The Cambion"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Cold damage.",
+        "nouns": [
+            "Cold Protection"
+        ],
+        "adjectives": [
+            "Cold Resistant"
+        ],
+        "titles": [
+            "The Barlgura"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Poison damage.",
+        "nouns": [
+            "Poison Protection"
+        ],
+        "adjectives": [
+            "Poison Resistant"
+        ],
+        "titles": [
+            "The Hezrou"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Necrotic damage.",
+        "nouns": [
+            "Wights",
+            "Necrosis Protection"
+        ],
+        "adjectives": [
+            "Necrosis Resistant"
+        ],
+        "titles": [
+            "The Wight"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Radiant damage.",
+        "nouns": [
+            "Radiance Protection",
+            "Angels"
+        ],
+        "adjectives": [
+            "Radiance Resistance"
+        ],
+        "titles": [
+            "The Angel"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Lightning damage.",
+        "nouns": [
+            "The Dretch",
+            "Lightning Protection"
+        ],
+        "adjectives": [
+            "Lightning Resistant"
+        ],
+        "titles": [
+            "The Dretch"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Psychic damage.",
+        "nouns": [
+            "Revenants",
+            "Psychic Protection"
+        ],
+        "adjectives": [
+            "Psychic Resistant"
+        ],
+        "titles": [
+            "The Revenant"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Thunder damage.",
+        "nouns": [
+            "Thunder Protection"
+        ],
+        "adjectives": [
+            "Thunder Resistant"
+        ],
+        "titles": [
+            "Stormgard"
+        ]
+    },
+    {
+        "effect": "Gives the bearer resistance to Force damage.",
+        "nouns": [
+            "Force Protection"
+        ],
+        "adjectives": [
+            "Force Resistant",
+            "Ghostly"
+        ],
+        "titles": [
+            "The Empyrean"
+        ]
+    },
+    {
+        "effect": "Behaves as a +1 weapon when attacking undead.",
+        "nouns": [
+            "Zombie Slaying",
+            "Zombiesbane"
+        ],
+        "adjectives": [
+            "Zombie Slaying"
+        ],
+        "titles": [
+            "The Zombie Slayer"
+        ]
+    },
+    {
+        "effect": "Behaves as a +1 weapon when attacking goblinoids.",
+        "nouns": [
+            "Goblin Slaying",
+            "Goblinsbane"
+        ],
+        "adjectives": [
+            "Goblin Slaying"
+        ],
+        "titles": [
+            "The Goblin Slayer"
+        ]
+    },
+    {
+        "effect": "Behaves as a +1 weapon when attacking giants.",
+        "nouns": [
+            "Giant Slaying",
+            "Giantsbane"
+        ],
+        "adjectives": [
+            "Giant Slaying"
+        ],
+        "titles": [
+            "The Giant Slayer"
+        ]
+    },
+    {
+        "effect": "Behaves as a +1 weapon when attacking fiends.",
+        "nouns": [
+            "Fiend Slaying"
+        ],
+        "adjectives": [
+            "Fiend Slaying"
+        ],
+        "titles": [
+            "The Fiend Slayer"
+        ]
+    },
+    {
+        "effect": "Behaves as a +1 weapon when attacking monstrosities.",
+        "nouns": [
+            "Monstrosity Slaying"
+        ],
+        "adjectives": [
+            "Monstrosity Slaying"
+        ],
+        "titles": [
+            "The Monstrosity Slayer"
+        ]
+    },
+    {
+        "effect": "Behaves as a +1 weapon when attacking constructs.",
+        "nouns": [
+            "Construct Destruction"
+        ],
+        "adjectives": [
+            "Construct Destroying"
+        ],
+        "titles": [
+            "The Construct Destroyer"
+        ]
+    },
+    {
+        "effect": "Behaves as a +1 weapon when attacking elementals.",
+        "nouns": [
+            "Elemental Dominance"
+        ],
+        "adjectives": [
+            "Elemental Dominating"
+        ],
+        "titles": [
+            "The Elemental Dominator"
+        ]
+    },
+    {
+        "effect": "Behaves as a +1 weapon when attacking dragons.",
+        "nouns": [
+            "Dragon Slaying",
+            "Dragonsbane"
+        ],
+        "adjectives": [
+            "Dragon Slaying"
+        ],
+        "titles": [
+            "The Dragon Slayer"
+        ]
+    },
+    {
+        "effect": "When attacking the bearer, undead have disadvantage on attack rolls.",
+        "nouns": [
+            "Protection from The Undead",
+            "Undead Defense"
+        ],
+        "adjectives": [
+            "Undead Defending"
+        ],
+        "titles": [
+            "The Undead Defender"
+        ]
+    },
+    {
+        "effect": "When attacking the bearer, goblinoids have disadvantage on attack rolls.",
+        "nouns": [
+            "Protection from Goblins",
+            "Goblin Defense"
+        ],
+        "adjectives": [
+            "Goblin Defending"
+        ],
+        "titles": [
+            "The Goblin Defender"
+        ]
+    },
+    {
+        "effect": "When attacking the bearer, giants have disadvantage on attack rolls.",
+        "nouns": [
+            "Protection from Giants",
+            "Giant Defense"
+        ],
+        "adjectives": [
+            "Giant Defending"
+        ],
+        "titles": [
+            "The Giant Defender"
+        ]
+    },
+    {
+        "effect": "When attacking the bearer, fiends have disadvantage on attack rolls.",
+        "nouns": [
+            "Protection from Fiends",
+            "Fiend Defense"
+        ],
+        "adjectives": [
+            "Fiend Defending"
+        ],
+        "titles": [
+            "The Fiend Defender"
+        ]
+    },
+    {
+        "effect": "When attacking the bearer, monstrosities have disadvantage on attack rolls.",
+        "nouns": [
+            "Monstrosity Defense",
+            "Protection from Monstrosities"
+        ],
+        "adjectives": [
+            "Monstrosity Defending"
+        ],
+        "titles": [
+            "The Monstrosity Defender"
+        ]
+    },
+    {
+        "effect": "When attacking the bearer, constructs have disadvantage on attack rolls.",
+        "nouns": [
+            "Construct Defense",
+            "Protection from Constructs"
+        ],
+        "adjectives": [
+            "Construct Defending"
+        ],
+        "titles": [
+            "The Construct Defender"
+        ]
+    },
+    {
+        "effect": "When attacking the bearer, elementals have disadvantage on attack rolls.",
+        "nouns": [
+            "Elemental Defense",
+            "Protection from Elementals"
+        ],
+        "adjectives": [
+            "Elemental Defending"
+        ],
+        "titles": [
+            "The Elemental Defender"
+        ]
+    },
+    {
+        "effect": "When attacking the bearer, dragons have disadvantage on attack rolls.",
+        "nouns": [
+            "Dragon Defense",
+            "Protection from Dragons"
+        ],
+        "adjectives": [
+            "Dragon Defending"
+        ],
+        "titles": [
+            "The Dragon Defender"
+        ]
+    },
+    {
+        "effect": "This weapon glows when any undead are within 100 feet.",
+        "nouns": [
+            "Undead Detection"
+        ],
+        "adjectives": [
+            "Undead Detecting"
+        ],
+        "titles": [
+            "The Undead Seeker"
+        ]
+    },
+    {
+        "effect": "This weapon glows when any goblinoids are within 100 feet.",
+        "nouns": [
+            "Goblin Detection"
+        ],
+        "adjectives": [
+            "Goblin Detecting"
+        ],
+        "titles": [
+            "The Goblin Seeker"
+        ]
+    },
+    {
+        "effect": "This weapon glows when any giants are within 1000 feet.",
+        "nouns": [
+            "Giant Detection"
+        ],
+        "adjectives": [
+            "Giant Detecting"
+        ],
+        "titles": [
+            "The Giant Seeker"
+        ]
+    },
+    {
+        "effect": "This weapon glows when any fiends are within 100 feet.",
+        "nouns": [
+            "Fiend Detection"
+        ],
+        "adjectives": [
+            "Fiend Detecting"
+        ],
+        "titles": [
+            "The Fiend Seeker"
+        ]
+    },
+    {
+        "effect": "This weapon glows when any monstrosities are within 100 feet.",
+        "nouns": [
+            "Monstrosity Detection"
+        ],
+        "adjectives": [
+            "Monstrosity Detecting"
+        ],
+        "titles": [
+            "The Monstrosity Seeker"
+        ]
+    },
+    {
+        "effect": "This weapon glows when any constructs are within 100 feet.",
+        "nouns": [
+            "Construct Detection"
+        ],
+        "adjectives": [
+            "Construct Detecting"
+        ],
+        "titles": [
+            "The Construct Seeker"
+        ]
+    },
+    {
+        "effect": "This weapon glows when any elementals are within 100 feet.",
+        "nouns": [
+            "Elemental Detection"
+        ],
+        "adjectives": [
+            "Elemental Detecting"
+        ],
+        "titles": [
+            "The Elemental Seeker"
+        ]
+    },
+    {
+        "effect": "This weapon glows when any dragons are within a mile.",
+        "nouns": [
+            "Dragon Detection"
+        ],
+        "adjectives": [
+            "Dragon Detecting"
+        ],
+        "titles": [
+            "The Dragon Seeker"
+        ]
+    },
+    {
+        "effect": "Any humans within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
+        "nouns": [
+            "Humankind"
+        ],
+        "adjectives": [
+            "Humankind Inspiring"
+        ],
+        "titles": [
+            "The Humankind Inspirer"
+        ]
+    },
+    {
+        "effect": "Any elves within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
+        "nouns": [
+            "Elfkind"
+        ],
+        "adjectives": [
+            "Elfkind Inspiring"
+        ],
+        "titles": [
+            "The Elfkind Inspirer"
+        ]
+    },
+    {
+        "effect": "Any halflings within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
+        "nouns": [
+            "Halflings"
+        ],
+        "adjectives": [
+            "Halfing Inspiring"
+        ],
+        "titles": [
+            "The Halfling Inspirer"
+        ]
+    },
+    {
+        "effect": "Any dwarves within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
+        "nouns": [
+            "Dwarves"
+        ],
+        "adjectives": [
+            "Dwarf Inspiring"
+        ],
+        "titles": [
+            "The Dwarf Inspirer"
+        ]
+    },
+    {
+        "effect": "Any dragonborn within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
+        "nouns": [
+            "The Dragonborn"
+        ],
+        "adjectives": [
+            "Dragonborn Inspiring"
+        ],
+        "titles": [
+            "The Dragonborn Inspirer"
+        ]
+    },
+    {
+        "effect": "Any tieflings within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
+        "nouns": [
+            "The Tiefling"
+        ],
+        "adjectives": [
+            "Tiefling Inspiring"
+        ],
+        "titles": [
+            "The Tiefling Inspirer"
+        ]
+    },
+    {
+        "effect": "Any gnomes within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
+        "nouns": [
+            "Gnomes",
+            "Gnomekind"
+        ],
+        "adjectives": [
+            "Gnome Inspiring"
+        ],
+        "titles": [
+            "The Gnome Inspirer"
         ]
     }
 ]

@@ -799,12 +799,6 @@
         ]
     },
     {
-        "effect": "Gives the bearer advantage on Charisma saving throws.",
-        "nouns": [],
-        "adjectives": [],
-        "titles": []
-    },
-    {
         "effect": "This weapon's damage type can be replaced with Acid.",
         "nouns": [
             "Acid"

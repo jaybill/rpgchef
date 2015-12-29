@@ -10,6 +10,10 @@ export default function NewEffects(DbConn) {
       autoIncrement: true,
       allowNull: false
     },
+    priceInCp: {
+      type: Sequelize.BIGINT,
+      allowNull: true
+    },
     effect: {
       type: Sequelize.TEXT,
       allowNull: false

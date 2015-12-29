@@ -5,10 +5,18 @@ export const weapons = function(state = {
     working: false,
     failed: false,
     succeeded: false,
-    weapons: null
+    weapons: null,
+    defaultWeaponsLoaded: false
   }, action) {
 
   switch (action.type) {
+
+    case ActionConstants.DEFAULTWEAPONS_SUCCESS:
+      return Object.assign({}, state, {
+        defaultWeaponsLoaded: true
+      });
+
+      break;
 
     case ActionConstants.WEAPONS_START:
       return Object.assign({}, state, {

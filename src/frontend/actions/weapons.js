@@ -9,43 +9,61 @@ import ActionConstants from "../actionconstants";
 
 const weaponsActions = createAsyncActionGroup("weapons", {});
 
+const defaultWeaponActions = createAsyncActionGroup("defaultWeapons", {});
+
+const getAllWeapons = () => {
+  const w = store.get('weapons');
+
+  return new Promise((resolve, reject) => {
+    if (w) {
+      log.debug("Loading weapons from cache");
+      resolve(w);
+    } else {
+      log.debug("Loading weapons from API");
+      weaponsCall().then((result) => {
+        if (result.status == 200) {
+          store.set('weapons', result.body);
+          resolve(weapons);
+        } else {
+          log.error(results);
+          reject(result);
+        }
+      }, (err) => {
+        log.error(err);
+        reject(err)
+      });
+    }
+  });
+};
+
+export const defaultWeapons = () => {
+
+  return dispatch => {
+    dispatch(defaultWeaponActions.start());
+    getAllWeapons().then(() => {
+      dispatch(defaultWeaponActions.success());
+      return;
+    }).catch((err) => {
+      dispatch(defaultWeaponActions.failure(err));
+      return;
+    });
+  }
+
+}
 export const weapons = function(effectCount, weaponCount) {
 
   return dispatch => {
+    const allWeapons = store.get('weapons');
 
-    const w = store.get('weapons');
-
-    const getAllWeapons = () => {
-      return new Promise((resolve, reject) => {
-        if (w) {
-          log.debug("Loading weapons from cache");
-          resolve(w);
-        } else {
-          log.debug("Loading weapons from API");
-          weaponsCall().then((result) => {
-            if (result.status == 200) {
-              store.set('weapons', result.body);
-              resolve(weapons);
-            } else {
-              log.error(results);
-              reject(result);
-            }
-          }, (err) => {
-            log.error(err);
-            reject(err)
-          });
-        }
-      });
-    };
-
-    let allWeapons = [];
+    if (!allWeapons || !allWeapons.length) {
+      log.error("Default weapons not loaded.");
+      dispatch(defaultWeapons());
+      dispatch(weaponsActions.failure("get weapons failed, default weapons not loaded"));
+      return
+    }
 
     dispatch(weaponsActions.start());
-    getAllWeapons().then((weapons) => {
-      allWeapons = weapons;
-      return effectsCall(effectCount, weaponCount);
-    }).then((results) => {
-
+    effectsCall(effectCount, weaponCount).then((results) => {
       if (results.status == 200) {
         const dnd5e = new DnD5e({
           weapons: allWeapons,

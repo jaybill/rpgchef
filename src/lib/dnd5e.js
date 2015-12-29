@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import log from 'loglevel';
 
 export default class DnD5e {
 
@@ -64,6 +65,10 @@ export default class DnD5e {
 
         magicWeapons[i].properties += effects[i][0].effect;
 
+        magicWeapons[i].priceInCp = parseInt(magicWeapons[i].priceInCp)
+          + parseInt(effects[i][0].priceInCp);
+
+
       } else {
         pattern = _.sample(patterns.twoProp);
         const template = _.template(pattern);
@@ -82,7 +87,9 @@ export default class DnD5e {
 
         magicWeapons[i].properties += " Additionally, " + se;
 
-
+        magicWeapons[i].priceInCp = parseInt(magicWeapons[i].priceInCp)
+          + parseInt(effects[i][0].priceInCp)
+          + parseInt(effects[i][1].priceInCp);
       }
 
 

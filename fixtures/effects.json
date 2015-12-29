@@ -31,7 +31,7 @@
             "Greenness",
             "Viridity"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest outdoors. Reverts to normal upon leaving.",
@@ -49,7 +49,7 @@
             "Claustrophobia",
             "The Plains"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest underground. Reverts to normal upon leaving.",
@@ -63,7 +63,7 @@
         "nouns": [
             "The Underground"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest in a jungle. Reverts to normal upon leaving.",
@@ -77,7 +77,7 @@
             "Vine",
             "Jungle"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest near a volcano. Reverts to normal upon leaving.",
@@ -93,7 +93,7 @@
             "The Inferno",
             "Infernos"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest in a dungeon. Reverts to normal upon leaving.",
@@ -110,7 +110,7 @@
             "The Labyrinth",
             "The Keep"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest anywhere there is snow on the ground. Reverts to normal upon leaving.",
@@ -125,7 +125,7 @@
             "The Snow",
             "The Winter"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest anywhere within a mile of an ocean. Reverts to normal upon leaving.",
@@ -143,7 +143,7 @@
             "The Ocean",
             "The Sea"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest in a desert. Reverts to normal upon leaving.",
@@ -160,7 +160,7 @@
             "The Sand",
             "The Desert"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest in a city. Reverts to normal upon leaving.",
@@ -176,7 +176,7 @@
             "The City",
             "Civilization"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Acid damage.",
@@ -190,7 +190,7 @@
         "nouns": [
             "Acid Defense"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Fire damage.",
@@ -204,7 +204,7 @@
         "nouns": [
             "Fire Defense"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Cold damage.",
@@ -222,7 +222,7 @@
             "The Hearth",
             "The Fireside"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Poison damage.",
@@ -237,7 +237,7 @@
             "Poison Defense",
             "The Antidote"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Necrotic damage.",
@@ -251,7 +251,7 @@
         "nouns": [
             "Necrosis Defense"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Radiant damage.",
@@ -265,7 +265,7 @@
         "nouns": [
             "Radiance Defense"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Lightning damage.",
@@ -281,7 +281,7 @@
             "Lightning Defense",
             "Grounding"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Psychic damage.",
@@ -294,7 +294,7 @@
         "nouns": [
             "The Mind Calmer"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Thunder damage.",
@@ -310,7 +310,7 @@
             "Thunder's Bane",
             "Storm Calming"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Force damage.",
@@ -327,7 +327,7 @@
             "Force Defense",
             "The Immovable Object"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer can cast Burning Hands (Level 1, PHB p. 220) once per day.",
@@ -344,7 +344,7 @@
             "Flame",
             "Burning"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer can cast Chill Touch (Level 1, PHB p. 221) once per day.",
@@ -361,7 +361,7 @@
             "Cold",
             "Winter"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer can cast Acid Splash (Level 1, PHB p. 211) once per day.",
@@ -378,7 +378,7 @@
             "Corrosion",
             "Corroding"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer can cast Witch Bolt (Level 1, PHB p. 289) once per day.",
@@ -394,7 +394,7 @@
             "Lightning",
             "Electricity"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Contains 1d4 charges of Ensnaring Strike (Level 1, PHB p. 237). Cannot be recharged.",
@@ -411,7 +411,7 @@
             "Vines",
             "Piercing Vines"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Contains 1d4 charges of Thunderwave (Level 1, PHB p. 282). Cannot be recharged.",
@@ -430,7 +430,7 @@
             "Booming",
             "The Storm"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Lightning.",
@@ -447,7 +447,7 @@
             "Shocking",
             "Balors"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Contains 1d4 charges of Ray of Sickness (Level 1, PHB p. 271). Cannot be recharged.",
@@ -468,7 +468,7 @@
             "Malady",
             "Ill Health"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Strength saving throws.",
@@ -491,7 +491,7 @@
             "Power",
             "Powerfulness"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Dexterity saving throws.",
@@ -509,7 +509,7 @@
             "Dexterity",
             "Dodging"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Constitution saving throws.",
@@ -527,7 +527,7 @@
             "Essence",
             "Giants"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Intelligence saving throws.",
@@ -545,7 +545,7 @@
             "Sorcerers",
             "Magicians"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Wisdom saving throws.",
@@ -560,7 +560,7 @@
             "Wisdom",
             "Knowledge"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Charisma saving throws.",
@@ -575,7 +575,7 @@
             "Bards",
             "Beguilers"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Acrobatics (Dex) checks.",
@@ -588,7 +588,7 @@
         "nouns": [
             "Acrobats"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Animal Handling (Wis) checks.",
@@ -601,7 +601,7 @@
         "nouns": [
             "Beastmasters"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Arcana (Int) checks.",
@@ -615,7 +615,7 @@
         "nouns": [
             "Arcane Knowledge"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Athletics (Str) checks.",
@@ -632,7 +632,7 @@
             "Fighters",
             "Barbarians"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Deception (Cha) checks.",
@@ -657,7 +657,7 @@
             "Cheats",
             "Tricksters"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to History (Int) checks.",
@@ -675,7 +675,7 @@
             "Loremasters",
             "Librarians"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Insight (Wis) checks.",
@@ -692,7 +692,7 @@
             "Enlightening",
             "Sages"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Intimidation (Cha) checks.",
@@ -708,7 +708,7 @@
             "Brawlers",
             "Fear"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Investigation (Int) checks.",
@@ -725,7 +725,7 @@
             "Inquiry",
             "Research"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Medicine (Wis) checks.",
@@ -738,7 +738,7 @@
         "nouns": [
             "The Shaman"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Nature (Int) checks.",
@@ -755,7 +755,7 @@
             "Leaves",
             "Wood Elves"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Perception (Wis) checks.",
@@ -774,7 +774,7 @@
             "Understanding",
             "Mindfulness"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Performance (Cha) checks.",
@@ -789,7 +789,7 @@
             "Bards",
             "Thespians"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Persuasion (Cha) checks.",
@@ -806,7 +806,7 @@
             "Persuasion",
             "Chieftains"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Religion (Int) checks.",
@@ -830,7 +830,7 @@
             "Holiness",
             "Piety"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Sleight of Hand (Dex) checks.",
@@ -846,7 +846,7 @@
             "Stealing",
             "Flourish"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "The bearer gains +1 to Stealth (Dex) checks.",
@@ -863,7 +863,7 @@
             "Quiet",
             "Sneakiness"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Acid.",
@@ -880,7 +880,7 @@
         "nouns": [
             "Acid"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Fire.",
@@ -897,7 +897,7 @@
             "Flames",
             "Fire"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Cold.",
@@ -915,7 +915,7 @@
             "Winter Wolves",
             "Frost Giants"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Poison.",
@@ -933,7 +933,7 @@
             "Snakes",
             "Venom"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Necrotic.",
@@ -951,7 +951,7 @@
             "Impurity",
             "Corrupting"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Radiant.",
@@ -969,7 +969,7 @@
             "Holy Fire",
             "Cleansing Fire"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Psychic.",
@@ -986,7 +986,7 @@
             "Mind Flayers",
             "Fomorians"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Thunder.",
@@ -1005,7 +1005,7 @@
             "The Destroyer",
             "Destruction"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon's damage type can be replaced with Force.",
@@ -1023,7 +1023,7 @@
             "Spectral",
             "Wraiths"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Acid damage.",
@@ -1036,7 +1036,7 @@
         "nouns": [
             "Acid Protection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Fire damage.",
@@ -1050,7 +1050,7 @@
             "Fire Protection",
             "Cambions"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Cold damage.",
@@ -1063,7 +1063,7 @@
         "nouns": [
             "Cold Protection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Poison damage.",
@@ -1076,7 +1076,7 @@
         "nouns": [
             "Poison Protection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Necrotic damage.",
@@ -1090,7 +1090,7 @@
             "Wights",
             "Necrosis Protection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Radiant damage.",
@@ -1104,7 +1104,7 @@
             "Radiance Protection",
             "Angels"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Lightning damage.",
@@ -1118,7 +1118,7 @@
             "The Dretch",
             "Lightning Protection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Psychic damage.",
@@ -1132,7 +1132,7 @@
             "Revenants",
             "Psychic Protection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Thunder damage.",
@@ -1145,7 +1145,7 @@
         "nouns": [
             "Thunder Protection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Gives the bearer resistance to Force damage.",
@@ -1159,7 +1159,7 @@
         "nouns": [
             "Force Protection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking undead.",
@@ -1173,7 +1173,7 @@
             "Zombie Slaying",
             "Zombiesbane"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking goblinoids.",
@@ -1187,7 +1187,7 @@
             "Goblin Slaying",
             "Goblinsbane"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking giants.",
@@ -1201,7 +1201,7 @@
             "Giant Slaying",
             "Giantsbane"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking fiends.",
@@ -1214,7 +1214,7 @@
         "nouns": [
             "Fiend Slaying"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking monstrosities.",
@@ -1227,7 +1227,7 @@
         "nouns": [
             "Monstrosity Slaying"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking constructs.",
@@ -1240,7 +1240,7 @@
         "nouns": [
             "Construct Destruction"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking elementals.",
@@ -1253,7 +1253,7 @@
         "nouns": [
             "Elemental Dominance"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking dragons.",
@@ -1267,7 +1267,7 @@
             "Dragon Slaying",
             "Dragonsbane"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "When attacking the bearer, undead have disadvantage on attack rolls.",
@@ -1281,7 +1281,7 @@
             "Protection from The Undead",
             "Undead Defense"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "When attacking the bearer, goblinoids have disadvantage on attack rolls.",
@@ -1295,7 +1295,7 @@
             "Protection from Goblins",
             "Goblin Defense"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "When attacking the bearer, giants have disadvantage on attack rolls.",
@@ -1309,7 +1309,7 @@
             "Protection from Giants",
             "Giant Defense"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "When attacking the bearer, fiends have disadvantage on attack rolls.",
@@ -1323,7 +1323,7 @@
             "Protection from Fiends",
             "Fiend Defense"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "When attacking the bearer, monstrosities have disadvantage on attack rolls.",
@@ -1337,7 +1337,7 @@
             "Monstrosity Defense",
             "Protection from Monstrosities"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "When attacking the bearer, constructs have disadvantage on attack rolls.",
@@ -1351,7 +1351,7 @@
             "Construct Defense",
             "Protection from Constructs"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "When attacking the bearer, elementals have disadvantage on attack rolls.",
@@ -1365,7 +1365,7 @@
             "Elemental Defense",
             "Protection from Elementals"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "When attacking the bearer, dragons have disadvantage on attack rolls.",
@@ -1379,7 +1379,7 @@
             "Dragon Defense",
             "Protection from Dragons"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon glows when any undead are within 100 feet.",
@@ -1392,7 +1392,7 @@
         "nouns": [
             "Undead Detection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon glows when any goblinoids are within 100 feet.",
@@ -1405,7 +1405,7 @@
         "nouns": [
             "Goblin Detection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon glows when any giants are within 1000 feet.",
@@ -1418,7 +1418,7 @@
         "nouns": [
             "Giant Detection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon glows when any fiends are within 100 feet.",
@@ -1431,7 +1431,7 @@
         "nouns": [
             "Fiend Detection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon glows when any monstrosities are within 100 feet.",
@@ -1444,7 +1444,7 @@
         "nouns": [
             "Monstrosity Detection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon glows when any constructs are within 100 feet.",
@@ -1457,7 +1457,7 @@
         "nouns": [
             "Construct Detection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon glows when any elementals are within 100 feet.",
@@ -1470,7 +1470,7 @@
         "nouns": [
             "Elemental Detection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "This weapon glows when any dragons are within a mile.",
@@ -1483,7 +1483,7 @@
         "nouns": [
             "Dragon Detection"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Any humans within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
@@ -1496,7 +1496,7 @@
         "nouns": [
             "Humankind"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Any elves within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
@@ -1509,7 +1509,7 @@
         "nouns": [
             "Elfkind"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Any halflings within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
@@ -1522,7 +1522,7 @@
         "nouns": [
             "Halflings"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Any dwarves within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
@@ -1535,7 +1535,7 @@
         "nouns": [
             "Dwarves"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Any dragonborn within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
@@ -1548,7 +1548,7 @@
         "nouns": [
             "The Dragonborn"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Any tieflings within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
@@ -1561,7 +1561,7 @@
         "nouns": [
             "The Tiefling"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     },
     {
         "effect": "Any gnomes within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
@@ -1575,6 +1575,6 @@
             "Gnomes",
             "Gnomekind"
         ],
-        "priceInCp": "2500"
+        "priceInCp": "25000"
     }
 ]

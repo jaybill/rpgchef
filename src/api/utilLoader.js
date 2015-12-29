@@ -89,7 +89,17 @@ export const exportEffects = () => {
 
   return Db.Effects.findAll().then((dbEffects) => {
 
-    console.log(JSON.stringify(dbEffects));
+    const newEffects = _.map(dbEffects, (d) => {
+      return {
+        effect: d.effect,
+        titles: d.titles,
+        adjectives: d.adjectives,
+        nouns: d.nouns,
+        priceInCp: d.priceInCp
+      }
+    });
+
+    console.log(JSON.stringify(newEffects));
 
   }).catch(err => {
     console.log(err);

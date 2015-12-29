@@ -1,13 +1,13 @@
 [
     {
         "effect": "Becomes a +1 weapon after a long rest in a forest. Reverts to normal upon leaving.",
-        "nouns": [
-            "The Wood",
-            "The Woods",
-            "The Woodland",
-            "Timber",
-            "Greenness",
-            "Viridity"
+        "titles": [
+            "The Arbormage",
+            "The Timbermage",
+            "The Forest Dweller",
+            "The Conservationist",
+            "The Environmentalist",
+            "The Woodland Ranger"
         ],
         "adjectives": [
             "Verdant",
@@ -23,108 +23,115 @@
             "Dendroid",
             "Dendroidal"
         ],
-        "titles": [
-            "The Arbormage",
-            "The Timbermage",
-            "The Forest Dweller",
-            "The Conservationist",
-            "The Environmentalist",
-            "The Woodland Ranger"
-        ]
+        "nouns": [
+            "The Wood",
+            "The Woods",
+            "The Woodland",
+            "Timber",
+            "Greenness",
+            "Viridity"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest outdoors. Reverts to normal upon leaving.",
-        "nouns": [
-            "The Open Air",
-            "Claustrophobia",
-            "The Plains"
-        ],
-        "adjectives": [
-            "Claustrophobic"
-        ],
         "titles": [
             "The Claustrophobic",
             "The Outdoorsman",
             "The Ranger",
             "The Openlander"
-        ]
+        ],
+        "adjectives": [
+            "Claustrophobic"
+        ],
+        "nouns": [
+            "The Open Air",
+            "Claustrophobia",
+            "The Plains"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest underground. Reverts to normal upon leaving.",
-        "nouns": [
-            "The Underground"
+        "titles": [
+            "The Cave Dweller"
         ],
         "adjectives": [
             "Underground",
             "Subterranean"
         ],
-        "titles": [
-            "The Cave Dweller"
-        ]
+        "nouns": [
+            "The Underground"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest in a jungle. Reverts to normal upon leaving.",
-        "nouns": [
-            "Vine",
-            "Jungle"
+        "titles": [
+            "The Jungle Dweller"
         ],
         "adjectives": [
             "Jungle"
         ],
-        "titles": [
-            "The Jungle Dweller"
-        ]
+        "nouns": [
+            "Vine",
+            "Jungle"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest near a volcano. Reverts to normal upon leaving.",
+        "titles": [
+            "The Vulcanist"
+        ],
+        "adjectives": [
+            "Igneous"
+        ],
         "nouns": [
             "The Volcano",
             "Volcanoes",
             "The Inferno",
             "Infernos"
         ],
-        "adjectives": [
-            "Igneous"
-        ],
-        "titles": [
-            "The Vulcanist"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest in a dungeon. Reverts to normal upon leaving.",
+        "titles": [
+            "The Dungeoneer",
+            "The Dungeon Mage"
+        ],
+        "adjectives": [
+            "Dungeon"
+        ],
         "nouns": [
             "The Dungeon",
             "The Lair",
             "The Labyrinth",
             "The Keep"
         ],
-        "adjectives": [
-            "Dungeon"
-        ],
-        "titles": [
-            "The Dungeoneer",
-            "The Dungeon Mage"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest anywhere there is snow on the ground. Reverts to normal upon leaving.",
-        "nouns": [
-            "The Snow",
-            "The Winter"
+        "titles": [
+            "The Snowmage"
         ],
         "adjectives": [
             "Snowy",
             "Winter"
         ],
-        "titles": [
-            "The Snowmage"
-        ]
+        "nouns": [
+            "The Snow",
+            "The Winter"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest anywhere within a mile of an ocean. Reverts to normal upon leaving.",
-        "nouns": [
-            "The Ocean",
-            "The Sea"
+        "titles": [
+            "The Mariner",
+            "The Seafarer"
         ],
         "adjectives": [
             "Oceanic",
@@ -132,288 +139,321 @@
             "Maritime",
             "Marine"
         ],
-        "titles": [
-            "The Mariner",
-            "The Seafarer"
-        ]
+        "nouns": [
+            "The Ocean",
+            "The Sea"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest in a desert. Reverts to normal upon leaving.",
-        "nouns": [
-            "The Sand",
-            "The Desert"
+        "titles": [
+            "The Sand Dweller",
+            "The Desert Dweller",
+            "The Desert Ranger"
         ],
         "adjectives": [
             "Arid",
             "Desiccate"
         ],
-        "titles": [
-            "The Sand Dweller",
-            "The Desert Dweller",
-            "The Desert Ranger"
-        ]
+        "nouns": [
+            "The Sand",
+            "The Desert"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Becomes a +1 weapon after a long rest in a city. Reverts to normal upon leaving.",
-        "nouns": [
-            "The City",
-            "Civilization"
+        "titles": [
+            "The City Dweller",
+            "The Cosmopolitan"
         ],
         "adjectives": [
             "Urban",
             "Cosmopolitan"
         ],
-        "titles": [
-            "The City Dweller",
-            "The Cosmopolitan"
-        ]
+        "nouns": [
+            "The City",
+            "Civilization"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Acid damage.",
-        "nouns": [
-            "Acid Defense"
+        "titles": [
+            "The Acid Handler",
+            "The Acid Defender"
         ],
         "adjectives": [
             "Acid Resistant"
         ],
-        "titles": [
-            "The Acid Handler",
-            "The Acid Defender"
-        ]
+        "nouns": [
+            "Acid Defense"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Fire damage.",
-        "nouns": [
-            "Fire Defense"
+        "titles": [
+            "The Fire Handler",
+            "The Fire Defender"
         ],
         "adjectives": [
             "Fire Resistant"
         ],
-        "titles": [
-            "The Fire Handler",
-            "The Fire Defender"
-        ]
+        "nouns": [
+            "Fire Defense"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Cold damage.",
-        "nouns": [
-            "Cold Defense",
-            "The Hearth",
-            "The Fireside"
+        "titles": [
+            "The Cold Handler",
+            "The Cold Defender"
         ],
         "adjectives": [
             "Cold Resistant",
             "Fireside",
             "Hearth"
         ],
-        "titles": [
-            "The Cold Handler",
-            "The Cold Defender"
-        ]
+        "nouns": [
+            "Cold Defense",
+            "The Hearth",
+            "The Fireside"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Poison damage.",
-        "nouns": [
-            "Poison Defense",
-            "The Antidote"
+        "titles": [
+            "The Poison Neutralizer"
         ],
         "adjectives": [
             "Poison Resistant",
             "Antidotal"
         ],
-        "titles": [
-            "The Poison Neutralizer"
-        ]
+        "nouns": [
+            "Poison Defense",
+            "The Antidote"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Necrotic damage.",
-        "nouns": [
-            "Necrosis Defense"
+        "titles": [
+            "The Necrosis Handler",
+            "The Necrosis Defender"
         ],
         "adjectives": [
             "Necrosis Resistant"
         ],
-        "titles": [
-            "The Necrosis Handler",
-            "The Necrosis Defender"
-        ]
+        "nouns": [
+            "Necrosis Defense"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Radiant damage.",
-        "nouns": [
-            "Radiance Defense"
+        "titles": [
+            "The Radiance Handler",
+            "The Radiance Defender"
         ],
         "adjectives": [
             "Radiance Resistant"
         ],
-        "titles": [
-            "The Radiance Handler",
-            "The Radiance Defender"
-        ]
+        "nouns": [
+            "Radiance Defense"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Lightning damage.",
-        "nouns": [
-            "Lightning Defense",
-            "Grounding"
+        "titles": [
+            "The Lightning Handler",
+            "The Lightning Defender"
         ],
         "adjectives": [
             "Lightning Resistant",
             "Grounded"
         ],
-        "titles": [
-            "The Lightning Handler",
-            "The Lightning Defender"
-        ]
+        "nouns": [
+            "Lightning Defense",
+            "Grounding"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Psychic damage.",
-        "nouns": [
+        "titles": [
             "The Mind Calmer"
         ],
         "adjectives": [
             "Mind Calming"
         ],
-        "titles": [
+        "nouns": [
             "The Mind Calmer"
-        ]
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Thunder damage.",
-        "nouns": [
-            "Thunder's Bane",
-            "Storm Calming"
+        "titles": [
+            "The Storm Calmer",
+            "The Thunder Handler"
         ],
         "adjectives": [
             "Thunder Taming",
             "Storm Calming"
         ],
-        "titles": [
-            "The Storm Calmer",
-            "The Thunder Handler"
-        ]
+        "nouns": [
+            "Thunder's Bane",
+            "Storm Calming"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to AC when being attacked with anything that does Force damage.",
-        "nouns": [
-            "Force Defense",
+        "titles": [
+            "The Force Handler",
+            "The Force Defender",
             "The Immovable Object"
         ],
         "adjectives": [
             "Force Resistant",
             "Immovable"
         ],
-        "titles": [
-            "The Force Handler",
-            "The Force Defender",
+        "nouns": [
+            "Force Defense",
             "The Immovable Object"
-        ]
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer can cast Burning Hands (Level 1, PHB p. 220) once per day.",
-        "nouns": [
-            "Fire",
-            "Flame",
-            "Burning"
+        "titles": [
+            "The Firemage",
+            "The Fire Elemental"
         ],
         "adjectives": [
             "Flaming",
             "Fiery"
         ],
-        "titles": [
-            "The Firemage",
-            "The Fire Elemental"
-        ]
+        "nouns": [
+            "Fire",
+            "Flame",
+            "Burning"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer can cast Chill Touch (Level 1, PHB p. 221) once per day.",
-        "nouns": [
-            "Cold",
-            "Winter"
+        "titles": [
+            "The Wintermage",
+            "The Arctic Ranger",
+            "The Ice Wolf"
         ],
         "adjectives": [
             "Cold",
             "Winter"
         ],
-        "titles": [
-            "The Wintermage",
-            "The Arctic Ranger",
-            "The Ice Wolf"
-        ]
+        "nouns": [
+            "Cold",
+            "Winter"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer can cast Acid Splash (Level 1, PHB p. 211) once per day.",
-        "nouns": [
-            "Corrosion",
-            "Corroding"
+        "titles": [
+            "The Corrosionist",
+            "The Acid Master"
         ],
         "adjectives": [
             "Corrosive",
             "Mordant",
             "Caustic"
         ],
-        "titles": [
-            "The Corrosionist",
-            "The Acid Master"
-        ]
+        "nouns": [
+            "Corrosion",
+            "Corroding"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer can cast Witch Bolt (Level 1, PHB p. 289) once per day.",
-        "nouns": [
-            "Lightning",
-            "Electricity"
+        "titles": [
+            "The Lightning Rod",
+            "The Lightning Mage"
         ],
         "adjectives": [
             "Electric",
             "Lightning"
         ],
-        "titles": [
-            "The Lightning Rod",
-            "The Lightning Mage"
-        ]
+        "nouns": [
+            "Lightning",
+            "Electricity"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Contains 1d4 charges of Ensnaring Strike (Level 1, PHB p. 237). Cannot be recharged.",
+        "titles": [
+            "The Thornpiercer"
+        ],
+        "adjectives": [
+            "Piercing",
+            "Thorny"
+        ],
         "nouns": [
             "Thorns",
             "The Thorn",
             "Vines",
             "Piercing Vines"
         ],
-        "adjectives": [
-            "Piercing",
-            "Thorny"
-        ],
-        "titles": [
-            "The Thornpiercer"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "Contains 1d4 charges of Thunderwave (Level 1, PHB p. 282). Cannot be recharged.",
-        "nouns": [
-            "Thunder",
-            "Booming",
-            "The Storm"
+        "titles": [
+            "The Thunder God",
+            "The Stormbringer",
+            "The Thundermage"
         ],
         "adjectives": [
             "Booming",
             "Thunderous",
             "Stormy"
         ],
+        "nouns": [
+            "Thunder",
+            "Booming",
+            "The Storm"
+        ],
+        "priceInCp": "2500"
+    },
+    {
+        "effect": "This weapon's damage type can be replaced with Lightning.",
         "titles": [
-            "The Thunder God",
-            "The Stormbringer",
-            "The Thundermage"
-        ]
+            "The Balor",
+            "The Will-o-wisp"
+        ],
+        "adjectives": [
+            "Lightning",
+            "Shocking"
+        ],
+        "nouns": [
+            "Lightning",
+            "Shocking",
+            "Balors"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Contains 1d4 charges of Ray of Sickness (Level 1, PHB p. 271). Cannot be recharged.",
-        "nouns": [
-            "Sickness",
-            "Disease",
-            "Illness",
-            "Malady",
-            "Ill Health"
+        "titles": [
+            "The Corruptor",
+            "The Sea Hag"
         ],
         "adjectives": [
             "Diseased",
@@ -421,19 +461,22 @@
             "Morbid",
             "Corrupting"
         ],
-        "titles": [
-            "The Corruptor",
-            "The Sea Hag"
-        ]
+        "nouns": [
+            "Sickness",
+            "Disease",
+            "Illness",
+            "Malady",
+            "Ill Health"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Strength saving throws.",
-        "nouns": [
-            "Forcefulness",
-            "Intensity",
-            "Enduringness",
-            "Power",
-            "Powerfulness"
+        "titles": [
+            "The Barbarian",
+            "Brutes",
+            "Barbarians",
+            "The Orc Mother"
         ],
         "adjectives": [
             "Potent",
@@ -441,32 +484,41 @@
             "Solid",
             "Substantial"
         ],
-        "titles": [
-            "The Barbarian",
-            "Brutes",
-            "Barbarians",
-            "The Orc Mother"
-        ]
+        "nouns": [
+            "Forcefulness",
+            "Intensity",
+            "Enduringness",
+            "Power",
+            "Powerfulness"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Dexterity saving throws.",
+        "titles": [
+            "The Dodger",
+            "The Rogue"
+        ],
+        "adjectives": [
+            "Dexterous",
+            "Nibmle"
+        ],
         "nouns": [
             "Adeptness",
             "Nimbleness",
             "Dexterity",
             "Dodging"
         ],
-        "adjectives": [
-            "Dexterous",
-            "Nibmle"
-        ],
-        "titles": [
-            "The Dodger",
-            "The Rogue"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Constitution saving throws.",
+        "titles": [
+            "The Rock Golem"
+        ],
+        "adjectives": [
+            "Vital"
+        ],
         "nouns": [
             "Health",
             "Stamina",
@@ -475,119 +527,121 @@
             "Essence",
             "Giants"
         ],
-        "adjectives": [
-            "Vital"
-        ],
-        "titles": [
-            "The Rock Golem"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Intelligence saving throws.",
-        "nouns": [
-            "Virtuosos",
-            "Sorcerers",
-            "Magicians"
+        "titles": [
+            "The Wizard",
+            "The Mage",
+            "The Magician"
         ],
         "adjectives": [
             "Sorcerous",
             "Wizardly"
         ],
-        "titles": [
-            "The Wizard",
-            "The Mage",
-            "The Magician"
-        ]
+        "nouns": [
+            "Virtuosos",
+            "Sorcerers",
+            "Magicians"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Wisdom saving throws.",
-        "nouns": [
-            "Wisdom",
-            "Knowledge"
+        "titles": [
+            "The Adept"
         ],
         "adjectives": [
             "Wise",
             "Adept"
         ],
-        "titles": [
-            "The Adept"
-        ]
+        "nouns": [
+            "Wisdom",
+            "Knowledge"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Charisma saving throws.",
-        "nouns": [
-            "Bards",
-            "Beguilers"
+        "titles": [
+            "The Bard",
+            "Beguiler"
         ],
         "adjectives": [
             "Beguiling"
         ],
-        "titles": [
-            "The Bard",
-            "Beguiler"
-        ]
+        "nouns": [
+            "Bards",
+            "Beguilers"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Acrobatics (Dex) checks.",
-        "nouns": [
-            "Acrobats"
+        "titles": [
+            "The Acrobat"
         ],
         "adjectives": [
             "Acrobatic"
         ],
-        "titles": [
-            "The Acrobat"
-        ]
+        "nouns": [
+            "Acrobats"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Animal Handling (Wis) checks.",
-        "nouns": [
-            "Beastmasters"
+        "titles": [
+            "The Beastmaster"
         ],
         "adjectives": [
             "Beastmastering"
         ],
-        "titles": [
-            "The Beastmaster"
-        ]
+        "nouns": [
+            "Beastmasters"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Arcana (Int) checks.",
-        "nouns": [
-            "Arcane Knowledge"
+        "titles": [
+            "The Sorcerer",
+            "The Mage"
         ],
         "adjectives": [
             "Arcane"
         ],
-        "titles": [
-            "The Sorcerer",
-            "The Mage"
-        ]
+        "nouns": [
+            "Arcane Knowledge"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Athletics (Str) checks.",
-        "nouns": [
-            "Fighters",
-            "Barbarians"
+        "titles": [
+            "The Fighter",
+            "The Stevedor",
+            "The Longshoreman"
         ],
         "adjectives": [
             "Empowering",
             "Power"
         ],
-        "titles": [
-            "The Fighter",
-            "The Stevedor",
-            "The Longshoreman"
-        ]
+        "nouns": [
+            "Fighters",
+            "Barbarians"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Deception (Cha) checks.",
-        "nouns": [
-            "Liars",
-            "Deceivers",
-            "Prevaricators",
-            "Cheats",
-            "Tricksters"
+        "titles": [
+            "The Liar",
+            "The Deceiver",
+            "The Cheat",
+            "The Prevaricator",
+            "The Trickster"
         ],
         "adjectives": [
             "Lying",
@@ -596,19 +650,20 @@
             "Cheating",
             "Tricky"
         ],
-        "titles": [
-            "The Liar",
-            "The Deceiver",
-            "The Cheat",
-            "The Prevaricator",
-            "The Trickster"
-        ]
+        "nouns": [
+            "Liars",
+            "Deceivers",
+            "Prevaricators",
+            "Cheats",
+            "Tricksters"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to History (Int) checks.",
-        "nouns": [
-            "Loremasters",
-            "Librarians"
+        "titles": [
+            "The Loremaster",
+            "The Librarian"
         ],
         "adjectives": [
             "Well-Read",
@@ -616,93 +671,96 @@
             "Learned",
             "Lettered"
         ],
-        "titles": [
-            "The Loremaster",
-            "The Librarian"
-        ]
+        "nouns": [
+            "Loremasters",
+            "Librarians"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Insight (Wis) checks.",
-        "nouns": [
-            "Enlightenment",
-            "Enlightening",
-            "Sages"
+        "titles": [
+            "The Wise Man",
+            "The Sage"
         ],
         "adjectives": [
             "Knowing",
             "Enlightened"
         ],
-        "titles": [
-            "The Wise Man",
-            "The Sage"
-        ]
+        "nouns": [
+            "Enlightenment",
+            "Enlightening",
+            "Sages"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Intimidation (Cha) checks.",
-        "nouns": [
-            "The Fist",
-            "Brawlers",
-            "Fear"
+        "titles": [
+            "The Brawler"
         ],
         "adjectives": [
             "Intimidating",
             "Frightening"
         ],
-        "titles": [
-            "The Brawler"
-        ]
+        "nouns": [
+            "The Fist",
+            "Brawlers",
+            "Fear"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Investigation (Int) checks.",
+        "titles": [
+            "The Inquirer",
+            "The Detective"
+        ],
+        "adjectives": [
+            "Inquiring"
+        ],
         "nouns": [
             "Investigating",
             "Enquiry",
             "Inquiry",
             "Research"
         ],
-        "adjectives": [
-            "Inquiring"
-        ],
-        "titles": [
-            "The Inquirer",
-            "The Detective"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Medicine (Wis) checks.",
-        "nouns": [
+        "titles": [
             "The Shaman"
         ],
         "adjectives": [
             "Shamanic"
         ],
-        "titles": [
+        "nouns": [
             "The Shaman"
-        ]
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Nature (Int) checks.",
+        "titles": [
+            "The Woodsman"
+        ],
+        "adjectives": [
+            "Forest",
+            "Leaf"
+        ],
         "nouns": [
             "Woodsmen",
             "The Woodsman",
             "Leaves",
             "Wood Elves"
         ],
-        "adjectives": [
-            "Forest",
-            "Leaf"
-        ],
-        "titles": [
-            "The Woodsman"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Perception (Wis) checks.",
-        "nouns": [
-            "Awareness",
-            "Perception",
-            "Understanding",
-            "Mindfulness"
+        "titles": [
+            "The Deviant"
         ],
         "adjectives": [
             "Mindful",
@@ -710,42 +768,59 @@
             "Perceptive",
             "Cognizant"
         ],
-        "titles": [
-            "The Deviant"
-        ]
+        "nouns": [
+            "Awareness",
+            "Perception",
+            "Understanding",
+            "Mindfulness"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Performance (Cha) checks.",
-        "nouns": [
-            "Bards",
-            "Thespians"
+        "titles": [
+            "The Bard",
+            "The Thespian"
         ],
         "adjectives": [
             "Singing"
         ],
-        "titles": [
-            "The Bard",
-            "The Thespian"
-        ]
+        "nouns": [
+            "Bards",
+            "Thespians"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Persuasion (Cha) checks.",
+        "titles": [
+            "The Chieftain"
+        ],
+        "adjectives": [
+            "Persuasive",
+            "Influential"
+        ],
         "nouns": [
             "Strong Will",
             "Influence",
             "Persuasion",
             "Chieftains"
         ],
-        "adjectives": [
-            "Persuasive",
-            "Influential"
-        ],
-        "titles": [
-            "The Chieftain"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Religion (Int) checks.",
+        "titles": [
+            "The Zealot",
+            "The Monk",
+            "The Priestess",
+            "The Cleric"
+        ],
+        "adjectives": [
+            "Holy",
+            "Zealous",
+            "Pious"
+        ],
         "nouns": [
             "Priests",
             "Friars",
@@ -755,53 +830,46 @@
             "Holiness",
             "Piety"
         ],
-        "adjectives": [
-            "Holy",
-            "Zealous",
-            "Pious"
-        ],
-        "titles": [
-            "The Zealot",
-            "The Monk",
-            "The Priestess",
-            "The Cleric"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Sleight of Hand (Dex) checks.",
+        "titles": [
+            "The Pickpocket"
+        ],
+        "adjectives": [
+            "Quick-handed"
+        ],
         "nouns": [
             "Pickpockets",
             "Petty Theft",
             "Stealing",
             "Flourish"
         ],
-        "adjectives": [
-            "Quick-handed"
-        ],
-        "titles": [
-            "The Pickpocket"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "The bearer gains +1 to Stealth (Dex) checks.",
-        "nouns": [
-            "Stillness",
-            "Quiet",
-            "Sneakiness"
+        "titles": [
+            "The Sneak"
         ],
         "adjectives": [
             "Still",
             "Quiet",
             "Sneaky"
         ],
-        "titles": [
-            "The Sneak"
-        ]
+        "nouns": [
+            "Stillness",
+            "Quiet",
+            "Sneakiness"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon's damage type can be replaced with Acid.",
-        "nouns": [
-            "Acid"
+        "titles": [
+            "The Aboleth",
+            "The Frog"
         ],
         "adjectives": [
             "Caustic",
@@ -809,29 +877,37 @@
             "Corrosive",
             "Acidic"
         ],
-        "titles": [
-            "The Aboleth",
-            "The Frog"
-        ]
+        "nouns": [
+            "Acid"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon's damage type can be replaced with Fire.",
-        "nouns": [
-            "Flames",
-            "Fire"
+        "titles": [
+            "The Firemage",
+            "The Fire Elemental",
+            "The Dragon"
         ],
         "adjectives": [
             "Burning",
             "Flaming"
         ],
-        "titles": [
-            "The Firemage",
-            "The Fire Elemental",
-            "The Dragon"
-        ]
+        "nouns": [
+            "Flames",
+            "Fire"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon's damage type can be replaced with Cold.",
+        "titles": [
+            "The Winter Wolf",
+            "The Frost Giant"
+        ],
+        "adjectives": [
+            "Freezing"
+        ],
         "nouns": [
             "Cold",
             "Winter",
@@ -839,641 +915,666 @@
             "Winter Wolves",
             "Frost Giants"
         ],
-        "adjectives": [
-            "Freezing"
-        ],
-        "titles": [
-            "The Winter Wolf",
-            "The Frost Giant"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon's damage type can be replaced with Poison.",
+        "titles": [
+            "The Snake",
+            "The Bone Naga"
+        ],
+        "adjectives": [
+            "Poisonous",
+            "Venomous"
+        ],
         "nouns": [
             "Poison",
             "Poisoning",
             "Snakes",
             "Venom"
         ],
-        "adjectives": [
-            "Poisonous",
-            "Venomous"
-        ],
-        "titles": [
-            "The Snake",
-            "The Bone Naga"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon's damage type can be replaced with Necrotic.",
-        "nouns": [
-            "Unholiness",
-            "Impurity",
-            "Corrupting"
+        "titles": [
+            "The Nothic",
+            "The Banshee"
         ],
         "adjectives": [
             "Undead",
             "Impure",
             "Corrupting"
         ],
-        "titles": [
-            "The Nothic",
-            "The Banshee"
-        ]
+        "nouns": [
+            "Unholiness",
+            "Impurity",
+            "Corrupting"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon's damage type can be replaced with Radiant.",
-        "nouns": [
-            "Light",
-            "Holy Fire",
-            "Cleansing Fire"
+        "titles": [
+            "The Planetar",
+            "The Priest"
         ],
         "adjectives": [
             "Solar",
             "Radiant",
             "Cleansing"
         ],
-        "titles": [
-            "The Planetar",
-            "The Priest"
-        ]
-    },
-    {
-        "effect": "This weapon's damage type can be replaced with Lightning.",
         "nouns": [
-            "Lightning",
-            "Shocking",
-            "Balors"
+            "Light",
+            "Holy Fire",
+            "Cleansing Fire"
         ],
-        "adjectives": [
-            "Lightning",
-            "Shocking"
-        ],
-        "titles": [
-            "The Balor",
-            "The Will-o-wisp"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon's damage type can be replaced with Psychic.",
+        "titles": [
+            "The Shadow Demon",
+            "The Mind Flayer",
+            "The Fomorian"
+        ],
+        "adjectives": [
+            "Mind Flaying"
+        ],
         "nouns": [
             "Shadow Demons",
             "Mind Flayers",
             "Fomorians"
         ],
-        "adjectives": [
-            "Mind Flaying"
-        ],
-        "titles": [
-            "The Shadow Demon",
-            "The Mind Flayer",
-            "The Fomorian"
-        ]
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon's damage type can be replaced with Thunder.",
-        "nouns": [
-            "Thunder",
-            "Storms",
-            "The Destroyer",
-            "Destruction"
+        "titles": [
+            "Stormfell",
+            "Destroyer"
         ],
         "adjectives": [
             "Thunder",
             "Storm",
             "Destructive"
         ],
-        "titles": [
-            "Stormfell",
-            "Destroyer"
-        ]
+        "nouns": [
+            "Thunder",
+            "Storms",
+            "The Destroyer",
+            "Destruction"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon's damage type can be replaced with Force.",
-        "nouns": [
-            "Ghosts",
-            "Spectral",
-            "Wraiths"
+        "titles": [
+            "The Ghost",
+            "The Specter",
+            "The Wraith"
         ],
         "adjectives": [
             "Ghostly",
             "Spectral"
         ],
-        "titles": [
-            "The Ghost",
-            "The Specter",
-            "The Wraith"
-        ]
+        "nouns": [
+            "Ghosts",
+            "Spectral",
+            "Wraiths"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Acid damage.",
-        "nouns": [
-            "Acid Protection"
+        "titles": [
+            "Acid Protector"
         ],
         "adjectives": [
             "Acid Resistant"
         ],
-        "titles": [
-            "Acid Protector"
-        ]
+        "nouns": [
+            "Acid Protection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Fire damage.",
-        "nouns": [
-            "Fire Protection",
-            "Cambions"
+        "titles": [
+            "The Cambion"
         ],
         "adjectives": [
             "Fire Resistant"
         ],
-        "titles": [
-            "The Cambion"
-        ]
+        "nouns": [
+            "Fire Protection",
+            "Cambions"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Cold damage.",
-        "nouns": [
-            "Cold Protection"
+        "titles": [
+            "The Barlgura"
         ],
         "adjectives": [
             "Cold Resistant"
         ],
-        "titles": [
-            "The Barlgura"
-        ]
+        "nouns": [
+            "Cold Protection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Poison damage.",
-        "nouns": [
-            "Poison Protection"
+        "titles": [
+            "The Hezrou"
         ],
         "adjectives": [
             "Poison Resistant"
         ],
-        "titles": [
-            "The Hezrou"
-        ]
+        "nouns": [
+            "Poison Protection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Necrotic damage.",
-        "nouns": [
-            "Wights",
-            "Necrosis Protection"
+        "titles": [
+            "The Wight"
         ],
         "adjectives": [
             "Necrosis Resistant"
         ],
-        "titles": [
-            "The Wight"
-        ]
+        "nouns": [
+            "Wights",
+            "Necrosis Protection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Radiant damage.",
-        "nouns": [
-            "Radiance Protection",
-            "Angels"
+        "titles": [
+            "The Angel"
         ],
         "adjectives": [
             "Radiance Resistance"
         ],
-        "titles": [
-            "The Angel"
-        ]
+        "nouns": [
+            "Radiance Protection",
+            "Angels"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Lightning damage.",
-        "nouns": [
-            "The Dretch",
-            "Lightning Protection"
+        "titles": [
+            "The Dretch"
         ],
         "adjectives": [
             "Lightning Resistant"
         ],
-        "titles": [
-            "The Dretch"
-        ]
+        "nouns": [
+            "The Dretch",
+            "Lightning Protection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Psychic damage.",
-        "nouns": [
-            "Revenants",
-            "Psychic Protection"
+        "titles": [
+            "The Revenant"
         ],
         "adjectives": [
             "Psychic Resistant"
         ],
-        "titles": [
-            "The Revenant"
-        ]
+        "nouns": [
+            "Revenants",
+            "Psychic Protection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Thunder damage.",
-        "nouns": [
-            "Thunder Protection"
+        "titles": [
+            "Stormgard"
         ],
         "adjectives": [
             "Thunder Resistant"
         ],
-        "titles": [
-            "Stormgard"
-        ]
+        "nouns": [
+            "Thunder Protection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Gives the bearer resistance to Force damage.",
-        "nouns": [
-            "Force Protection"
+        "titles": [
+            "The Empyrean"
         ],
         "adjectives": [
             "Force Resistant",
             "Ghostly"
         ],
-        "titles": [
-            "The Empyrean"
-        ]
+        "nouns": [
+            "Force Protection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking undead.",
-        "nouns": [
-            "Zombie Slaying",
-            "Zombiesbane"
+        "titles": [
+            "The Zombie Slayer"
         ],
         "adjectives": [
             "Zombie Slaying"
         ],
-        "titles": [
-            "The Zombie Slayer"
-        ]
+        "nouns": [
+            "Zombie Slaying",
+            "Zombiesbane"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking goblinoids.",
-        "nouns": [
-            "Goblin Slaying",
-            "Goblinsbane"
+        "titles": [
+            "The Goblin Slayer"
         ],
         "adjectives": [
             "Goblin Slaying"
         ],
-        "titles": [
-            "The Goblin Slayer"
-        ]
+        "nouns": [
+            "Goblin Slaying",
+            "Goblinsbane"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking giants.",
-        "nouns": [
-            "Giant Slaying",
-            "Giantsbane"
+        "titles": [
+            "The Giant Slayer"
         ],
         "adjectives": [
             "Giant Slaying"
         ],
-        "titles": [
-            "The Giant Slayer"
-        ]
+        "nouns": [
+            "Giant Slaying",
+            "Giantsbane"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking fiends.",
-        "nouns": [
-            "Fiend Slaying"
+        "titles": [
+            "The Fiend Slayer"
         ],
         "adjectives": [
             "Fiend Slaying"
         ],
-        "titles": [
-            "The Fiend Slayer"
-        ]
+        "nouns": [
+            "Fiend Slaying"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking monstrosities.",
-        "nouns": [
-            "Monstrosity Slaying"
+        "titles": [
+            "The Monstrosity Slayer"
         ],
         "adjectives": [
             "Monstrosity Slaying"
         ],
-        "titles": [
-            "The Monstrosity Slayer"
-        ]
+        "nouns": [
+            "Monstrosity Slaying"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking constructs.",
-        "nouns": [
-            "Construct Destruction"
+        "titles": [
+            "The Construct Destroyer"
         ],
         "adjectives": [
             "Construct Destroying"
         ],
-        "titles": [
-            "The Construct Destroyer"
-        ]
+        "nouns": [
+            "Construct Destruction"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking elementals.",
-        "nouns": [
-            "Elemental Dominance"
+        "titles": [
+            "The Elemental Dominator"
         ],
         "adjectives": [
             "Elemental Dominating"
         ],
-        "titles": [
-            "The Elemental Dominator"
-        ]
+        "nouns": [
+            "Elemental Dominance"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Behaves as a +1 weapon when attacking dragons.",
-        "nouns": [
-            "Dragon Slaying",
-            "Dragonsbane"
+        "titles": [
+            "The Dragon Slayer"
         ],
         "adjectives": [
             "Dragon Slaying"
         ],
-        "titles": [
-            "The Dragon Slayer"
-        ]
+        "nouns": [
+            "Dragon Slaying",
+            "Dragonsbane"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "When attacking the bearer, undead have disadvantage on attack rolls.",
-        "nouns": [
-            "Protection from The Undead",
-            "Undead Defense"
+        "titles": [
+            "The Undead Defender"
         ],
         "adjectives": [
             "Undead Defending"
         ],
-        "titles": [
-            "The Undead Defender"
-        ]
+        "nouns": [
+            "Protection from The Undead",
+            "Undead Defense"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "When attacking the bearer, goblinoids have disadvantage on attack rolls.",
-        "nouns": [
-            "Protection from Goblins",
-            "Goblin Defense"
+        "titles": [
+            "The Goblin Defender"
         ],
         "adjectives": [
             "Goblin Defending"
         ],
-        "titles": [
-            "The Goblin Defender"
-        ]
+        "nouns": [
+            "Protection from Goblins",
+            "Goblin Defense"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "When attacking the bearer, giants have disadvantage on attack rolls.",
-        "nouns": [
-            "Protection from Giants",
-            "Giant Defense"
+        "titles": [
+            "The Giant Defender"
         ],
         "adjectives": [
             "Giant Defending"
         ],
-        "titles": [
-            "The Giant Defender"
-        ]
+        "nouns": [
+            "Protection from Giants",
+            "Giant Defense"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "When attacking the bearer, fiends have disadvantage on attack rolls.",
-        "nouns": [
-            "Protection from Fiends",
-            "Fiend Defense"
+        "titles": [
+            "The Fiend Defender"
         ],
         "adjectives": [
             "Fiend Defending"
         ],
-        "titles": [
-            "The Fiend Defender"
-        ]
+        "nouns": [
+            "Protection from Fiends",
+            "Fiend Defense"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "When attacking the bearer, monstrosities have disadvantage on attack rolls.",
-        "nouns": [
-            "Monstrosity Defense",
-            "Protection from Monstrosities"
+        "titles": [
+            "The Monstrosity Defender"
         ],
         "adjectives": [
             "Monstrosity Defending"
         ],
-        "titles": [
-            "The Monstrosity Defender"
-        ]
+        "nouns": [
+            "Monstrosity Defense",
+            "Protection from Monstrosities"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "When attacking the bearer, constructs have disadvantage on attack rolls.",
-        "nouns": [
-            "Construct Defense",
-            "Protection from Constructs"
+        "titles": [
+            "The Construct Defender"
         ],
         "adjectives": [
             "Construct Defending"
         ],
-        "titles": [
-            "The Construct Defender"
-        ]
+        "nouns": [
+            "Construct Defense",
+            "Protection from Constructs"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "When attacking the bearer, elementals have disadvantage on attack rolls.",
-        "nouns": [
-            "Elemental Defense",
-            "Protection from Elementals"
+        "titles": [
+            "The Elemental Defender"
         ],
         "adjectives": [
             "Elemental Defending"
         ],
-        "titles": [
-            "The Elemental Defender"
-        ]
+        "nouns": [
+            "Elemental Defense",
+            "Protection from Elementals"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "When attacking the bearer, dragons have disadvantage on attack rolls.",
-        "nouns": [
-            "Dragon Defense",
-            "Protection from Dragons"
+        "titles": [
+            "The Dragon Defender"
         ],
         "adjectives": [
             "Dragon Defending"
         ],
-        "titles": [
-            "The Dragon Defender"
-        ]
+        "nouns": [
+            "Dragon Defense",
+            "Protection from Dragons"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon glows when any undead are within 100 feet.",
-        "nouns": [
-            "Undead Detection"
+        "titles": [
+            "The Undead Seeker"
         ],
         "adjectives": [
             "Undead Detecting"
         ],
-        "titles": [
-            "The Undead Seeker"
-        ]
+        "nouns": [
+            "Undead Detection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon glows when any goblinoids are within 100 feet.",
-        "nouns": [
-            "Goblin Detection"
+        "titles": [
+            "The Goblin Seeker"
         ],
         "adjectives": [
             "Goblin Detecting"
         ],
-        "titles": [
-            "The Goblin Seeker"
-        ]
+        "nouns": [
+            "Goblin Detection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon glows when any giants are within 1000 feet.",
-        "nouns": [
-            "Giant Detection"
+        "titles": [
+            "The Giant Seeker"
         ],
         "adjectives": [
             "Giant Detecting"
         ],
-        "titles": [
-            "The Giant Seeker"
-        ]
+        "nouns": [
+            "Giant Detection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon glows when any fiends are within 100 feet.",
-        "nouns": [
-            "Fiend Detection"
+        "titles": [
+            "The Fiend Seeker"
         ],
         "adjectives": [
             "Fiend Detecting"
         ],
-        "titles": [
-            "The Fiend Seeker"
-        ]
+        "nouns": [
+            "Fiend Detection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon glows when any monstrosities are within 100 feet.",
-        "nouns": [
-            "Monstrosity Detection"
+        "titles": [
+            "The Monstrosity Seeker"
         ],
         "adjectives": [
             "Monstrosity Detecting"
         ],
-        "titles": [
-            "The Monstrosity Seeker"
-        ]
+        "nouns": [
+            "Monstrosity Detection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon glows when any constructs are within 100 feet.",
-        "nouns": [
-            "Construct Detection"
+        "titles": [
+            "The Construct Seeker"
         ],
         "adjectives": [
             "Construct Detecting"
         ],
-        "titles": [
-            "The Construct Seeker"
-        ]
+        "nouns": [
+            "Construct Detection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon glows when any elementals are within 100 feet.",
-        "nouns": [
-            "Elemental Detection"
+        "titles": [
+            "The Elemental Seeker"
         ],
         "adjectives": [
             "Elemental Detecting"
         ],
-        "titles": [
-            "The Elemental Seeker"
-        ]
+        "nouns": [
+            "Elemental Detection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "This weapon glows when any dragons are within a mile.",
-        "nouns": [
-            "Dragon Detection"
+        "titles": [
+            "The Dragon Seeker"
         ],
         "adjectives": [
             "Dragon Detecting"
         ],
-        "titles": [
-            "The Dragon Seeker"
-        ]
+        "nouns": [
+            "Dragon Detection"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Any humans within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
-        "nouns": [
-            "Humankind"
+        "titles": [
+            "The Humankind Inspirer"
         ],
         "adjectives": [
             "Humankind Inspiring"
         ],
-        "titles": [
-            "The Humankind Inspirer"
-        ]
+        "nouns": [
+            "Humankind"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Any elves within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
-        "nouns": [
-            "Elfkind"
+        "titles": [
+            "The Elfkind Inspirer"
         ],
         "adjectives": [
             "Elfkind Inspiring"
         ],
-        "titles": [
-            "The Elfkind Inspirer"
-        ]
+        "nouns": [
+            "Elfkind"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Any halflings within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
-        "nouns": [
-            "Halflings"
+        "titles": [
+            "The Halfling Inspirer"
         ],
         "adjectives": [
             "Halfing Inspiring"
         ],
-        "titles": [
-            "The Halfling Inspirer"
-        ]
+        "nouns": [
+            "Halflings"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Any dwarves within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
-        "nouns": [
-            "Dwarves"
+        "titles": [
+            "The Dwarf Inspirer"
         ],
         "adjectives": [
             "Dwarf Inspiring"
         ],
-        "titles": [
-            "The Dwarf Inspirer"
-        ]
+        "nouns": [
+            "Dwarves"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Any dragonborn within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
-        "nouns": [
-            "The Dragonborn"
+        "titles": [
+            "The Dragonborn Inspirer"
         ],
         "adjectives": [
             "Dragonborn Inspiring"
         ],
-        "titles": [
-            "The Dragonborn Inspirer"
-        ]
+        "nouns": [
+            "The Dragonborn"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Any tieflings within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
-        "nouns": [
-            "The Tiefling"
+        "titles": [
+            "The Tiefling Inspirer"
         ],
         "adjectives": [
             "Tiefling Inspiring"
         ],
-        "titles": [
-            "The Tiefling Inspirer"
-        ]
+        "nouns": [
+            "The Tiefling"
+        ],
+        "priceInCp": "2500"
     },
     {
         "effect": "Any gnomes within 50 feet of the bearer (including the bearer) gain advantage on attack rolls.",
-        "nouns": [
-            "Gnomes",
-            "Gnomekind"
+        "titles": [
+            "The Gnome Inspirer"
         ],
         "adjectives": [
             "Gnome Inspiring"
         ],
-        "titles": [
-            "The Gnome Inspirer"
-        ]
+        "nouns": [
+            "Gnomes",
+            "Gnomekind"
+        ],
+        "priceInCp": "2500"
     }
 ]

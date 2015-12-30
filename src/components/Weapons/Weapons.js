@@ -60,7 +60,7 @@ export default class Weapons extends Component {
             <Col md={2}>
             
             <Button disabled={working} block bsStyle="primary"
-      onClick={this.loadWeapons}>Generate Weapons</Button>
+      onClick={this.loadWeapons}>Generate</Button>
             </Col>
 
             </Row>

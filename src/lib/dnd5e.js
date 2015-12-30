@@ -29,7 +29,7 @@ export default class DnD5e {
       damageTypes.push("piercing");
     }
 
-    updates.damage += damageTypes.join(" and ");
+    updates.damage += " " + damageTypes.join(" and ");
 
     const props = [];
 
@@ -72,7 +72,12 @@ export default class DnD5e {
     if (weapon.versatile) {
       props.push("Versatile (" + weapon.versatile + ")");
     }
-    updates.properties += _.capitalize(props.join(", ") + ". Requires attunement. ");
+    if (props.length) {
+      updates.properties += _.capitalize(props.join(", ") + ". ");
+    }
+
+    updates.properties += "Requires attunement. ";
+
     return Object.assign({}, weapon, updates);
 
   }

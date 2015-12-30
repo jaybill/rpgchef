@@ -13,9 +13,10 @@ const defaultWeaponActions = createAsyncActionGroup("defaultWeapons", {});
 
 const getAllWeapons = () => {
   const w = store.get('weapons');
+  const wv = store.get('weaponsVersion');
 
   return new Promise((resolve, reject) => {
-    if (w) {
+    if (w && parseInt(wv) == 1) {
       log.debug("Loading weapons from cache");
       resolve(w);
     } else {
@@ -23,6 +24,7 @@ const getAllWeapons = () => {
       weaponsCall().then((result) => {
         if (result.status == 200) {
           store.set('weapons', result.body);
+          store.set('weaponsVersion', "1");
           resolve(weapons);
         } else {
           log.error(results);

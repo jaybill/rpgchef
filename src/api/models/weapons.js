@@ -8,28 +8,32 @@ export default function NewWeapon(DbConn) {
       id: {
         type: Sequelize.BIGINT,
         primaryKey: true,
+        autoIncrement: true,
         allowNull: false
       },
       name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      damage: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      priceInCp: {
-        type: Sequelize.BIGINT,
-        allowNull: true
-      },
-      weightInLb: {
-        type: Sequelize.FLOAT,
-        allowNull: true
-      },
-      "properties": {
-        type: Sequelize.STRING,
-        allowNull: false
-      }
+      "damage": Sequelize.STRING,
+      "damageSlashing": Sequelize.BOOLEAN,
+      "damageBludgeoning": Sequelize.BOOLEAN,
+      "damagePiercing": Sequelize.BOOLEAN,
+      "martial": Sequelize.BOOLEAN,
+      "ammunition": Sequelize.BOOLEAN,
+      "finesse": Sequelize.BOOLEAN,
+      "heavy": Sequelize.BOOLEAN,
+      "light": Sequelize.BOOLEAN,
+      "loading": Sequelize.BOOLEAN,
+      "rangeMinInFt": Sequelize.BIGINT,
+      "rangeMaxInFt": Sequelize.BIGINT,
+      "reach": Sequelize.BOOLEAN,
+      "thrown": Sequelize.BOOLEAN,
+      "twoHanded": Sequelize.BOOLEAN,
+      "versatile": Sequelize.STRING,
+      "priceInCp": Sequelize.BIGINT,
+      "weightInLb": Sequelize.FLOAT
+
     }, {
       timestamps: false
     }

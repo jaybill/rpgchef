@@ -20,9 +20,6 @@ export default class WeaponCard extends Component {
         <h3>{this.props.weapon.name}</h3>
         <hr/>
             <Row>
-                <Col md={4}><b>Type:</b> {weapon.group}</Col>
-            </Row>
-            <Row>
                 <Col md={4}><b>Weight:</b> {weapon.weightInLb} pounds</Col>
                 <Col md={5}><b>Damage:</b> {weapon.damage}</Col>
                 <Col md={3}><b>Price:</b> {priceStr}</Col>
@@ -31,7 +28,7 @@ export default class WeaponCard extends Component {
             
             <Row>
                 <Col md={12}>
-                        <b>Properties: </b> {weapon.properties}
+                        {weapon.properties}
                 </Col>
             </Row>
         </Panel></div>);

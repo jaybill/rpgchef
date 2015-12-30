@@ -165,7 +165,7 @@
         "twoHanded": false,
         "versatile": null,
         "priceInCp": 5,
-        "weightInLb": 1
+        "weightInLb": 0.25
     },
     {
         "name": "Flail",

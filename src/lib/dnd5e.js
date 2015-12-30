@@ -6,7 +6,77 @@ export default class DnD5e {
   constructor(data) {
     this.data = data;
     this.randomWeapons = this.randomWeapons.bind(this);
+    this.getBaseProperties = this.getBaseProperties.bind(this);
   }
+
+  getBaseProperties(weapon) {
+    const updates = {
+      properties: _.capitalize(weapon.name) + ". ",
+      damage: weapon.damage
+    };
+
+    var damageTypes = [];
+
+    if (weapon.damageSlashing) {
+      damageTypes.push("slashing");
+    }
+
+    if (weapon.damageBludgeoning) {
+      damageTypes.push("bludgeoning");
+    }
+
+    if (weapon.damagePiercing) {
+      damageTypes.push("piercing");
+    }
+
+    updates.damage += damageTypes.join(" and ");
+
+    const props = [];
+
+    if (weapon.martial) {
+      props.push("martial");
+    }
+
+    if (weapon.ammunition) {
+      props.push("ammunition (range " + weapon.rangeMinInFt + "/" + weapon.rangeMaxInFt + ")");
+    }
+
+    if (weapon.finesse) {
+      props.push("finesse");
+    }
+
+    if (weapon.heavy) {
+      props.push("heavy");
+    }
+
+    if (weapon.light) {
+      props.push("light");
+    }
+
+    if (weapon.loading) {
+      props.push("loading");
+    }
+
+    if (weapon.reach) {
+      props.push("reach");
+    }
+
+    if (weapon.thrown) {
+      props.push("thrown (range " + weapon.rangeMinInFt + "/" + weapon.rangeMaxInFt + ")");
+    }
+
+    if (weapon.twoHanded) {
+      props.push("two-handed");
+    }
+
+    if (weapon.versatile) {
+      props.push("Versatile (" + weapon.versatile + ")");
+    }
+    updates.properties += _.capitalize(props.join(", ") + ". Requires attunement. ");
+    return Object.assign({}, weapon, updates);
+
+  }
+
 
   randomWeapons(effectCount = 1, weaponCount = 1) {
 
@@ -39,17 +109,7 @@ export default class DnD5e {
 
       let pattern;
 
-
-      magicWeapons[i].properties = _.trim(magicWeapons[i].properties);
-
-      if (magicWeapons[i].properties.length && magicWeapons[i].properties[magicWeapons[i].properties.length - 1] != ".") {
-        magicWeapons[i].properties += ". ";
-      }
-      if (magicWeapons[i].group != "Basic") {
-        magicWeapons[i].properties = magicWeapons[i].group + ". Requires attunement. " + magicWeapons[i].properties;
-      } else {
-        magicWeapons[i].properties = "Requires attunement. " + magicWeapons[i].properties;
-      }
+      magicWeapons[i] = this.getBaseProperties(magicWeapons[i]);
 
       const r = {};
 

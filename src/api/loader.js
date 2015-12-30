@@ -1,14 +1,14 @@
 import Minimist from 'minimist';
 import log from 'loglevel';
 import _ from 'lodash';
-import { synonyms, parsePreEffects, exportEffects } from './utilLoader';
+import { synonyms, parsePreEffects, exportEffects, newWeapons } from './utilLoader';
 
 
 var argv = Minimist(process.argv.slice(2));
 
 const mode = argv._[0];
 
-const availableModes = ["preeffects", "synonyms", "export"];
+const availableModes = ["preeffects", "synonyms", "export", "weapons"];
 
 switch (mode) {
 
@@ -27,6 +27,10 @@ switch (mode) {
 
   case "export":
     exportEffects();
+    break;
+
+  case "weapons":
+    newWeapons();
     break;
 
   default:

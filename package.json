@@ -84,6 +84,7 @@
     "browser-sync": "^2.9.12",
     "client-oauth2": "^1.0.0",
     "css-loader": "^0.22.0",
+    "csv-parse": "^1.0.1",
     "del": "^2.0.2",
     "envify": "^3.4.0",
     "esformatter-jsx": "^2.3.9",

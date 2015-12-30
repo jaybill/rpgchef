@@ -4,6 +4,8 @@ import _ from 'lodash';
 import fs from 'fs';
 import popsicle from 'popsicle';
 import Db from './db';
+import CsvParse from 'csv-parse';
+import { convertToCoppers } from '../lib/util';
 
 export const parsePreEffects = () => {
 
@@ -105,6 +107,89 @@ export const exportEffects = () => {
     console.log(err);
   }).finally(() => {
     process.exit();
+  });
+
+}
+export const newWeapons = () => {
+
+  const w = fs.readFileSync('./fixtures/weapons.csv', {
+    encoding: 'utf-8'
+  });
+
+
+
+  const loadWeapons = (wl) => {
+
+    return new Promise((resolve, reject) => {
+      try {
+        CsvParse(wl, {
+          columns: true
+        }, (err, output) => {
+          if (!err) {
+            resolve(output);
+          } else {
+            reject(err);
+          }
+        });
+      } catch ( err ) {
+        reject(err);
+      }
+    });
+
+  };
+
+  const tfx = (v) => {
+    if (v == "X") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+
+
+  loadWeapons(w).then((wl) => {
+    const nw = _.map(wl, (ww) => {
+
+      let rangeMinInFt = null;
+      let rangeMaxInFt = null;
+
+      if (ww.range) {
+        const parts = ww.range.split("/");
+        rangeMinInFt = parseInt(parts[0]);
+        rangeMaxInFt = parseInt(parts[1]);
+      }
+
+
+      return {
+        name: ww.name,
+        damage: "",
+        damageSlashing: tfx(ww.damageSlashing),
+        damageBludgeoning: tfx(ww.damageBludgeoning),
+        damagePiercing: tfx(ww.damagePiercing),
+        martial: tfx(ww.martial),
+        ammunition: tfx(ww.ammunition),
+        finesse: tfx(ww.finesse),
+        heavy: tfx(ww.heavy),
+        light: tfx(ww.light),
+        loading: tfx(ww.loading),
+        rangeMinInFt: rangeMinInFt || null,
+        rangeMaxInFt: rangeMaxInFt || null,
+        reach: tfx(ww.reach),
+        thrown: tfx(ww.thrown),
+        twoHanded: tfx(ww.twoHanded),
+        versatile: ww.versatile || null,
+        priceInCp: convertToCoppers(ww.cost.slice(2) + ww.cost.slice(0, 2)),
+        weightInLb: parseInt(ww.weight)
+      }
+
+    });
+
+    console.log(JSON.stringify(nw));
+    process.exit();
+
+  }).catch((err) => {
+    console.log("Error!", err);
   });
 
 }

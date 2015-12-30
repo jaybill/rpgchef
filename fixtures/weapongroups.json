@@ -136,7 +136,7 @@
   },
   {
     "id": 27,
-    "name": "Martial Missile",
+    "name": "Martial Ranged",
     "parentId": null
   },
   {
@@ -161,7 +161,7 @@
   },
   {
     "id": 32,
-    "name": "Heavy Martial Missile",
+    "name": "Heavy Martial Ranged",
     "parentId": null
   },
   {

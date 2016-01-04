@@ -30,7 +30,11 @@ export default class Weapons extends Component {
 
     let i = 0;
     _.forIn(randomWeapons, (weapon) => {
-      allWeapons.push(<WeaponCard weapon={weapon} key={i++}/>);
+
+      const control = <Button>Save</Button>;
+
+      allWeapons.push(<WeaponCard weapon={weapon} controls={control} key={i++}/>);
+
     });
 
     return (<div className="Weapons">

@@ -14,9 +14,13 @@ export default class WeaponCard extends Component {
 
     const d = new DnD5e();
     const priceStr = d.getCurrencyString(weapon.priceInCp);
-
+    let controlDisplay;
+    if (this.props.controls) {
+      controlDisplay = <div className="pull-right">{this.props.controls}</div>
+    }
 
     return (<div className="WeaponCard"><Panel bsStyle='primary' bsSize="large">
+            {controlDisplay}
         <h3>{this.props.weapon.name}</h3>
         <hr/>
             <Row>

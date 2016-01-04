@@ -1,5 +1,6 @@
 import Auth from './handlers/auth';
 import Generate from './handlers/generate';
+import My from './handlers/my';
 
 var routes = [
   {
@@ -56,7 +57,19 @@ var routes = [
     method: 'GET',
     path: '/generate/effects',
     config: Generate.handlers.effects
+  },
+  {
+    method: 'GET',
+    path: '/my/weapons',
+    config: My.handlers.weapons
+  },
+  {
+    method: 'POST',
+    path: '/my/weapon',
+    config: My.handlers.upsertUserWeapon
   }
+
+
 
 ];
 

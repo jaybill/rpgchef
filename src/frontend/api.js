@@ -44,6 +44,9 @@ export const effects = function(effectCount, weaponCount) {
 
   return callServer('/generate/effects', 'GET', query);
 }
+export const userweapon = function(userweapon) {
+  return callServer('/account', 'POST', null, userweapon);
+}
 function callServer(url, method, query, data, headers) {
 
   const uri = new urijs(process.env.API_URL + url);

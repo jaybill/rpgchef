@@ -1,0 +1,6 @@
+{
+  "name": "UserWeapon",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./UserWeapon.js"
+}

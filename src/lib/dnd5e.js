@@ -76,8 +76,6 @@ export default class DnD5e {
       updates.properties += _.capitalize(props.join(", ") + ". ");
     }
 
-    updates.properties += "Requires attunement. ";
-
     return Object.assign({}, weapon, updates);
 
   }
@@ -128,7 +126,7 @@ export default class DnD5e {
           item: magicWeapons[i].name
         });
 
-        magicWeapons[i].properties += effects[i][0].effect;
+        magicWeapons[i].magicProps = "Requires attunement. " + effects[i][0].effect;
 
         magicWeapons[i].priceInCp = parseInt(magicWeapons[i].priceInCp)
           + parseInt(effects[i][0].priceInCp);
@@ -144,13 +142,13 @@ export default class DnD5e {
           item: magicWeapons[i].name
         });
 
-        magicWeapons[i].properties += effects[i][0].effect;
+        magicWeapons[i].magicProps = "Requires attunement. " + effects[i][0].effect;
 
         let se = effects[i][1].effect;
 
         se = se[0].toLowerCase() + se.slice(1);
 
-        magicWeapons[i].properties += " Additionally, " + se;
+        magicWeapons[i].magicProps += " Additionally, " + se;
 
         magicWeapons[i].priceInCp = parseInt(magicWeapons[i].priceInCp)
           + parseInt(effects[i][0].priceInCp)

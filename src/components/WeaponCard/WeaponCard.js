@@ -32,13 +32,11 @@ export default class WeaponCard extends Component {
             
             <Row>
                 <Col md={12}>
-                        {weapon.properties}
+                   {weapon.properties} {weapon.magicProps}
                 </Col>
             </Row>
         </Panel></div>);
-
   }
-
 }
 
 WeaponCard.propTypes = {

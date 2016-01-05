@@ -1,6 +1,6 @@
 import './GWeaponCardCtrls.less';
 import React, { Component, PropTypes } from 'react';
-import { Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Glyphicon, Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 
 export default class GWeaponCardCtrls extends Component {
 
@@ -32,7 +32,9 @@ export default class GWeaponCardCtrls extends Component {
             {displayMessage}
             <ButtonToolbar>
             <ButtonGroup>
-            <Button bsStyle="primary" onClick={this.saveFunc}>Save</Button>
+            <Button bsSize="xs" bsStyle="primary" onClick={this.saveFunc}>
+            <Glyphicon glyph="floppy-disk"/> Save
+            </Button>
             </ButtonGroup>
             </ButtonToolbar>
         </div>);

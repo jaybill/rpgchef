@@ -33,14 +33,14 @@ export default class Weapons extends Component {
     _.forIn(randomWeapons, (weapon) => {
 
       const saveFunc = (ww) => {
-        log.debug(ww);
+        this.props.saveWeapon(ww);
       };
 
       const saveable = {
         weaponId: weapon.id,
         name: weapon.name,
         priceInCp: weapon.priceInCp,
-        magicProps: weapon.properties
+        magicProps: weapon.magicProps
       };
       const control = <GWeaponCardCtrls saveFunc={saveFunc} weapon={saveable}/>;
 

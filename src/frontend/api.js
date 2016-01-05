@@ -45,7 +45,7 @@ export const effects = function(effectCount, weaponCount) {
   return callServer('/generate/effects', 'GET', query);
 }
 export const userweapon = function(userweapon) {
-  return callServer('/account', 'POST', null, userweapon);
+  return callServer('/my/weapon', 'POST', null, userweapon);
 }
 function callServer(url, method, query, data, headers) {
 

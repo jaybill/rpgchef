@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux'
 import { weapons as doWeapons, defaultWeapons } from '../actions/weapons';
+import { userweapon as doUserweapon } from '../actions/userweapon';
+
 import Weapons from '../../components/Weapons';
 import { Button } from 'react-bootstrap';
 
@@ -10,6 +12,12 @@ class WeaponsContainer extends Component {
   constructor() {
     super();
     this.loadRandomWeapons = this.loadRandomWeapons.bind(this);
+    this.saveWeapon = this.saveWeapon.bind(this);
+  }
+
+  saveWeapon(saveable) {
+    const {dispatch} = this.props;
+    dispatch(doUserweapon(saveable));
   }
 
   componentWillMount() {
@@ -34,6 +42,7 @@ class WeaponsContainer extends Component {
       succeeded={weapons.succeeded}
       randomWeapons={weapons.weapons}
       loadWeapons={this.loadRandomWeapons}
+      saveWeapon={this.saveWeapon}
       />
   }
 }

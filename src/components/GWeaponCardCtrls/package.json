@@ -1,0 +1,6 @@
+{
+  "name": "GWeaponCardCtrls",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./GWeaponCardCtrls.js"
+}

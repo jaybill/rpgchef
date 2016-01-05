@@ -4,6 +4,7 @@ import { Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
 import _ from 'lodash';
 import WeaponCard from '../WeaponCard';
 import log from 'loglevel';
+import GWeaponCardCtrls from '../GWeaponCardCtrls';
 
 export default class Weapons extends Component {
 
@@ -31,7 +32,17 @@ export default class Weapons extends Component {
     let i = 0;
     _.forIn(randomWeapons, (weapon) => {
 
-      const control = <Button>Save</Button>;
+      const saveFunc = (ww) => {
+        log.debug(ww);
+      };
+
+      const saveable = {
+        weaponId: weapon.id,
+        name: weapon.name,
+        priceInCp: weapon.priceInCp,
+        magicProps: weapon.properties
+      };
+      const control = <GWeaponCardCtrls saveFunc={saveFunc} weapon={saveable}/>;
 
       allWeapons.push(<WeaponCard weapon={weapon} controls={control} key={i++}/>);
 

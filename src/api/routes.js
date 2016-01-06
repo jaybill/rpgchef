@@ -64,13 +64,20 @@ var routes = [
     config: My.handlers.weapons
   },
   {
-    method: 'POST',
+    method: ['POST'],
     path: '/my/weapon',
     config: My.handlers.upsertUserWeapon
+  },
+  {
+    method: 'GET',
+    path: '/my/weapon/{id?}',
+    config: My.handlers.getUserWeapon
+  },
+  {
+    method: 'DELETE',
+    path: '/my/weapon/{id?}',
+    config: My.handlers.deleteUserWeapon
   }
-
-
-
 ];
 
 export default routes;

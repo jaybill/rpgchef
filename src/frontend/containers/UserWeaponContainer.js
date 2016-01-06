@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux'
-import { userweapon as doUserweapon } from '../actions/userweapon';
+import { userweaponUpsert } from '../actions/userweapon';
 import UserWeapon from '../../components/UserWeapon';
 
 class UserWeaponContainer extends Component {
@@ -17,9 +17,9 @@ class UserWeaponContainer extends Component {
 
     // Local validation, if required.
 
-      
+
     // Dispatch action if everything is okay.
-    dispatch(doUserweapon(formdata));
+    dispatch(userweaponUpsert(formdata));
 
   }
 

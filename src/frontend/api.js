@@ -1,39 +1,48 @@
 import popsicle from 'popsicle';
 import urijs from 'urijs';
 
-export const login = function(credentials) {
+export const login = (credentials) => {
   return callServer('/login', 'POST', null, credentials);
 }
-export const confirm = function(code) {
+export const confirm = (code) => {
   return callServer('/confirm', 'POST', null, code);
-}
-export const verifyReset = function(code) {
+};
+
+export const verifyReset = (code) => {
   return callServer('/verifyreset', 'POST', null, code);
-}
-export const resetPassword = function(newpass) {
+};
+
+export const resetPassword = (newpass) => {
   return callServer('/resetpassword', 'POST', null, newpass);
-}
-export const forgotPassword = function(username) {
+};
+
+export const forgotPassword = (username) => {
   return callServer('/forgotpassword', 'POST', null, {
     username: username
   });
-}
-export const register = function(registration) {
+};
+
+export const register = (registration) => {
   return callServer('/register', 'POST', null, registration);
-}
-export const account = function(account) {
+};
+
+export const account = (account) => {
   return callServer('/account', 'POST', null, account);
-}
-export const logout = function() {
+};
+
+export const logout = () => {
   return callServer('/logout', 'GET');
-}
-export const me = function() {
+};
+
+export const me = () => {
   return callServer('/me', 'GET');
-}
-export const weapons = function() {
+};
+
+export const weapons = () => {
   return callServer('/generate/weapons', 'GET');
-}
-export const effects = function(effectCount, weaponCount) {
+};
+
+export const effects = (effectCount, weaponCount) => {
   const query = {};
   if (effectCount) {
     query.effectCount = effectCount;
@@ -43,10 +52,24 @@ export const effects = function(effectCount, weaponCount) {
   }
 
   return callServer('/generate/effects', 'GET', query);
-}
-export const userweapon = function(userweapon) {
+};
+
+export const userweaponUpsert = (userweapon) => {
   return callServer('/my/weapon', 'POST', null, userweapon);
-}
+};
+
+export const userweaponsGet = (id) => {
+  return callServer('/my/weapons', 'GET');
+};
+
+export const userweaponGet = (id) => {
+  return callServer('/my/weapon/' + id, 'GET');
+};
+
+export const userweaponDelete = (id) => {
+  return callServer('/my/weapon/' + id, 'DELETE');
+};
+
 function callServer(url, method, query, data, headers) {
 
   const uri = new urijs(process.env.API_URL + url);

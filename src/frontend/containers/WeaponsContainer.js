@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux'
 import { weapons as doWeapons, defaultWeapons } from '../actions/weapons';
-import { userweapon as doUserweapon } from '../actions/userweapon';
+import { userweaponUpsert } from '../actions/userweapon';
 
 import Weapons from '../../components/Weapons';
 import { Button } from 'react-bootstrap';
@@ -17,7 +17,7 @@ class WeaponsContainer extends Component {
 
   saveWeapon(saveable) {
     const {dispatch} = this.props;
-    dispatch(doUserweapon(saveable));
+    dispatch(userweaponUpsert(saveable));
   }
 
   componentWillMount() {
@@ -33,24 +33,30 @@ class WeaponsContainer extends Component {
 
   render() {
     const self = this;
-    const {dispatch, weapons} = this.props;
+    const {dispatch, weapons, defaultWeapons, userweapon} = this.props;
 
-    return <Weapons
-      working={weapons.working}
-      message={weapons.message}
-      failed={weapons.failed}
-      succeeded={weapons.succeeded}
-      randomWeapons={weapons.weapons}
-      loadWeapons={this.loadRandomWeapons}
-      saveWeapon={this.saveWeapon}
-      />
+    if (defaultWeapons) {
+      return <Weapons
+        working={weapons.working || userweapon.post.working}
+        message={weapons.message}
+        failed={weapons.failed}
+        succeeded={weapons.succeeded}
+        randomWeapons={weapons.weapons}
+        loadWeapons={this.loadRandomWeapons}
+        saveWeapon={this.saveWeapon}
+        />
+    }
+    return <div>Loading...</div>
+
   }
 }
 
 function select(state) {
 
   return {
-    weapons: state.app.weapons
+    weapons: state.app.weapons.post,
+    userweapon: state.app.userweapon,
+    defaultWeapons: state.app.weapons.defaultWeaponsLoaded
   };
 }
 

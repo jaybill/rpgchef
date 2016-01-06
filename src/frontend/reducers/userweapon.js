@@ -1,47 +1,18 @@
-import ActionConstants from '../actionconstants';
+import { asyncState, updateStateAsync } from './util';
 
-export const userweapon = function(state = {
-    message: null,
-    working: false,
-    failed: false,
-    succeeded: false,
-    payload: null
-  }, action) {
+export const userweapon = function(state, action) {
 
-  switch (action.type) {
-
-    case ActionConstants.USERWEAPON_START:
-      return Object.assign({}, state, {
-        message: null,
-        working: true,
-        failed: false,
-        succeeded: false,
-        payload: null
-      });
-      break;
-
-    case ActionConstants.USERWEAPON_SUCCESS:
-      return Object.assign({}, state, {
-        message: null,
-        working: false,
-        failed: false,
-        succeeded: true,
-        payload: action.payload
-      });
-      break;
-
-    case ActionConstants.USERWEAPON_FAILURE:
-      return Object.assign({}, state, {
-        message: action.payload,
-        working: false,
-        failed: true,
-        succeeded: false,
-        payload: null
-      });
-      break;
-
-    default:
-      return state;
-      break;
+  if (!state) {
+    state = {
+      post: Object.assign({}, asyncState)
+    };
   }
+
+  const newState = {};
+  newState.post = updateStateAsync(state.post, action, "USERWEAPON_POST");
+
+
+
+  return newState;
+
 }

@@ -1,11 +1,14 @@
 import ActionConstants from '../actionconstants';
+import { asyncState } from './util';
 
 export const weapons = function(state = {
-    message: null,
-    working: false,
-    failed: false,
-    succeeded: false,
-    weapons: null,
+    post: {
+      message: null,
+      working: false,
+      failed: false,
+      succeeded: false,
+      weapons: null,
+    },
     defaultWeaponsLoaded: false
   }, action) {
 
@@ -20,32 +23,38 @@ export const weapons = function(state = {
 
     case ActionConstants.WEAPONS_START:
       return Object.assign({}, state, {
-        message: null,
-        working: true,
-        failed: false,
-        succeeded: false,
-        weapons: null
+        post: {
+          message: null,
+          working: true,
+          failed: false,
+          succeeded: false,
+          weapons: null
+        }
 
       });
       break;
 
     case ActionConstants.WEAPONS_SUCCESS:
       return Object.assign({}, state, {
-        message: null,
-        working: false,
-        failed: false,
-        succeeded: true,
-        weapons: action.payload
+        post: {
+          message: null,
+          working: false,
+          failed: false,
+          succeeded: true,
+          weapons: action.payload
+        }
       });
       break;
 
     case ActionConstants.WEAPONS_FAILURE:
       return Object.assign({}, state, {
-        message: action.payload,
-        working: false,
-        failed: true,
-        succeeded: false,
-        weapons: null
+        post: {
+          message: action.payload,
+          working: false,
+          failed: true,
+          succeeded: false,
+          weapons: null
+        }
       });
       break;
 

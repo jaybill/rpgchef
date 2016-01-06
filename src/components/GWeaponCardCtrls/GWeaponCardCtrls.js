@@ -32,7 +32,7 @@ export default class GWeaponCardCtrls extends Component {
             {displayMessage}
             <ButtonToolbar>
             <ButtonGroup>
-            <Button bsSize="xs" bsStyle="primary" onClick={this.saveFunc}>
+            <Button disabled={working} bsSize="xs" bsStyle="primary" onClick={this.saveFunc}>
             <Glyphicon glyph="floppy-disk"/> Save
             </Button>
             </ButtonGroup>

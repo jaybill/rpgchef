@@ -42,7 +42,7 @@ export default class Weapons extends Component {
         priceInCp: weapon.priceInCp,
         magicProps: weapon.magicProps
       };
-      const control = <GWeaponCardCtrls saveFunc={saveFunc} weapon={saveable}/>;
+      const control = <GWeaponCardCtrls working={working} saveFunc={saveFunc} weapon={saveable}/>;
 
       allWeapons.push(<WeaponCard weapon={weapon} controls={control} key={i++}/>);
 

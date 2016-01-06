@@ -6,7 +6,83 @@ import Db, { conn } from '../db';
 
 const My = {};
 
+
 My.handlers = {
+
+  deleteUserWeapon: {
+    auth: 'session',
+    plugins: {
+      'hapi-auth-cookie': {
+        redirectTo: false
+      }
+    },
+    validate: {
+      params: {
+        id: Joi.number().integer().required().min(0).label("Id"),
+      }
+    },
+
+    handler: (request, reply) => {
+      const userId = request.auth.credentials.id;
+      Db.UserWeapons.findById(request.params.id).then((uw) => {
+        if (uw) {
+          if (uw.get("userId") != userId) {
+            reply(Boom.create(403,
+              "Userweapon with id [" + request.params.id + "] does not belong to you"));
+          } else {
+            uw.destroy().then(() => {
+              reply("OK");
+            }).catch(err => {
+              throw err
+            });
+          }
+        } else {
+          reply(Boom.create(404, "No userweapon with id [" + request.params.id + "]"));
+        }
+
+      }).then((uw) => {
+
+      }).catch(err => {
+        log.error(err);
+        reply(Boom.create(500))
+      });
+    }
+  },
+
+
+  getUserWeapon: {
+    auth: 'session',
+    plugins: {
+      'hapi-auth-cookie': {
+        redirectTo: false
+      }
+    },
+    validate: {
+      params: {
+        id: Joi.number().integer().required().min(0).label("Id"),
+      }
+    },
+
+    handler: (request, reply) => {
+      const userId = request.auth.credentials.id;
+      Db.UserWeapons.findById(request.params.id).then((uw) => {
+        if (uw) {
+          if (uw.get("userId") != userId) {
+            reply(Boom.create(403,
+              "Userweapon with id [" + request.params.id + "] does not belong to you"));
+          } else {
+            reply(_.omit(uw.dataValues, 'userId'));
+          }
+        } else {
+          reply(Boom.create(404, "No userweapon with id [" + request.params.id + "]"));
+        }
+
+      }).catch(err => {
+        log.error(err);
+        reply(Boom.create(500))
+      });
+    }
+  },
 
   upsertUserWeapon: {
     auth: 'session',

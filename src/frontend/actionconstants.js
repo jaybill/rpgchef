@@ -27,7 +27,9 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("VERIFYRESET"));
   km = Object.assign(km, asyncKeys("WEAPONS"));
   km = Object.assign(km, asyncKeys("DEFAULTWEAPONS"));
-  km = Object.assign(km, asyncKeys("USERWEAPON"));
+  km = Object.assign(km, asyncKeys("USERWEAPON_POST"));
+
+
   km = Object.assign(km, asyncKeys("ACCOUNT"));
 
   extraKeys["ACCOUNT_UPDATE"] = null;

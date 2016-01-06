@@ -1,13 +1,13 @@
 import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
 import log from 'loglevel';
-import { userweapon as userweaponCall } from '../api';
+import { userweaponUpsert as doUserweaponUpsert } from '../api';
 
-const userweaponActions = createAsyncActionGroup("userweapon", {});
-export const userweapon = function(uw) {
+const userweaponActions = createAsyncActionGroup("userweapon_post", {});
+export const userweaponUpsert = function(uw) {
   return dispatch => {
     dispatch(userweaponActions.start());
-    userweaponCall(uw).then((result) => {
+    doUserweaponUpsert(uw).then((result) => {
       if (result.status == 200) {
         dispatch(userweaponActions.success(result.body));
       } else {

@@ -30,13 +30,19 @@ class App extends Component {
     <Navbar.Collapse>
       <Nav>
         <NavDropdown eventKey={1}  title="Generate" id="basic-nav-dropdown">
-            <LinkContainer to="/app/weapons"><MenuItem  eventKey={1.1}>Weapon</MenuItem></LinkContainer>
+            <LinkContainer to="/app/weapons"><MenuItem  eventKey={1.1}>Weapons</MenuItem></LinkContainer>
         </NavDropdown>
       </Nav>
+      <Nav>
+        <NavDropdown eventKey={2}  title="My Stuff" id="basic-nav-dropdown">
+            <LinkContainer to="/app/myweapons"><MenuItem  eventKey={2.1}>Weapons</MenuItem></LinkContainer>
+        </NavDropdown>
+      </Nav>
+
       <Nav pullRight>
-        <NavDropdown eventKey={2}  title={this.props.user.username} id="account-nav-dropdown">
-            <LinkContainer to="/app/account"><MenuItem eventKey={2.1}>Account</MenuItem></LinkContainer>
-            <LinkContainer to="/logout"><MenuItem eventKey={2.2}>Log out</MenuItem></LinkContainer>
+        <NavDropdown eventKey={9}  title={this.props.user.username} id="account-nav-dropdown">
+            <LinkContainer to="/app/account"><MenuItem eventKey={9.1}>Account</MenuItem></LinkContainer>
+            <LinkContainer to="/logout"><MenuItem eventKey={9.2}>Log out</MenuItem></LinkContainer>
         </NavDropdown>
       </Nav>
     </Navbar.Collapse>

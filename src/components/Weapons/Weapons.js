@@ -43,7 +43,6 @@ export default class Weapons extends Component {
         magicProps: weapon.magicProps
       };
       const control = <GWeaponCardCtrls working={working} saveFunc={saveFunc} weapon={saveable}/>;
-
       allWeapons.push(<WeaponCard weapon={weapon} controls={control} key={i++}/>);
 
     });

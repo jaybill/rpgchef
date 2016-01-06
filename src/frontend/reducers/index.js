@@ -7,6 +7,7 @@ import { resetPassword } from './resetpassword';
 import { account } from './account';
 import { weapons } from './weapons';
 import { userweapon } from './userweapon';
+import { userweaponlist } from './userweaponlist';
 
 const app = combineReducers({
   register,
@@ -16,7 +17,8 @@ const app = combineReducers({
   resetPassword,
   account,
   weapons,
-  userweapon
+  userweapon,
+  userweaponlist
 });
 
 export default {

@@ -3,13 +3,13 @@ import { createAction } from 'redux-actions';
 import log from 'loglevel';
 import { userweaponUpsert as doUserweaponUpsert } from '../api';
 
-const userweaponActions = createAsyncActionGroup("userweapon_post", {});
+const userweaponPostActions = createAsyncActionGroup("USERWEAPON_POST", {});
 export const userweaponUpsert = function(uw) {
   return dispatch => {
-    dispatch(userweaponActions.start());
+    dispatch(userweaponPostActions.start());
     doUserweaponUpsert(uw).then((result) => {
       if (result.status == 200) {
-        dispatch(userweaponActions.success(result.body));
+        dispatch(userweaponPostActions.success(result.body));
       } else {
         log.error(result);
         throw new Error("Bad response");
@@ -17,7 +17,7 @@ export const userweaponUpsert = function(uw) {
       return;
     }).catch(err => {
       log.debug(err);
-      dispatch(userweaponActions.failure("userweapon failed"))
+      dispatch(userweaponPostActions.failure("userweapon failed"))
     });
   }
 };

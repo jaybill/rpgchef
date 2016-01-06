@@ -8,9 +8,7 @@ export default class DnD5e {
     this.randomWeapons = this.randomWeapons.bind(this);
     this.getBaseProperties = this.getBaseProperties.bind(this);
     this.mergedWeapons = this.mergedWeapons.bind(this);
-
   }
-
 
   getBaseProperties(weapon) {
     const updates = {
@@ -103,6 +101,7 @@ export default class DnD5e {
         }));
 
         const updates = {
+          id: magicWeapon.id,
           name: magicWeapon.name,
           properties: baseWeapon.properties + " " + magicWeapon.magicProps,
           priceInCp: magicWeapon.priceInCp

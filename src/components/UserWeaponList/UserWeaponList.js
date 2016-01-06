@@ -2,6 +2,9 @@ import './UserWeaponList.less';
 import React, { Component, PropTypes } from 'react';
 import { Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
 import WeaponCard from '../WeaponCard';
+import MWeaponCardCtrls from '../MWeaponCardCtrls';
+import log from 'loglevel';
+
 
 export default class UserWeaponList extends Component {
 
@@ -27,7 +30,7 @@ export default class UserWeaponList extends Component {
 
     let displayMessage;
     const allWeapons = [];
-    const {message, succeeded, failed, working, weapons} = this.props;
+    const {message, succeeded, failed, working, weapons, delFunc} = this.props;
 
     if (failed) {
       displayMessage = <Alert bsStyle="danger">Unable to load your weapons.</Alert>
@@ -36,11 +39,15 @@ export default class UserWeaponList extends Component {
     let i = 0;
     _.forIn(weapons, (weapon) => {
 
-
-      const control = <span></span>;
+      const tDelFunc = (id) => {
+        delFunc(id);
+      };
+      const control = <MWeaponCardCtrls weapon={weapon} delFunc={tDelFunc}/>;
       allWeapons.push(<WeaponCard weapon={weapon} controls={control} key={i++}/>);
 
     });
+
+
 
     return (<div className="UserWeaponList">
      <Grid>

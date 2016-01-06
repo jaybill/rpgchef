@@ -28,6 +28,7 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("WEAPONS"));
   km = Object.assign(km, asyncKeys("DEFAULTWEAPONS"));
   km = Object.assign(km, asyncKeys("USERWEAPON_POST"));
+  km = Object.assign(km, asyncKeys("USERWEAPON_DELETE"));
   km = Object.assign(km, asyncKeys("USERWEAPONLIST"));
 
   km = Object.assign(km, asyncKeys("ACCOUNT"));
@@ -35,6 +36,7 @@ function makeKeys() {
   extraKeys["ACCOUNT_UPDATE"] = null;
   extraKeys["SESSION_USERNAME_UPDATE"] = null;
   extraKeys["RANDOM_WEAPONS_DONE"] = null;
+  extraKeys["USERWEAPON_REMOVE"] = null;
 
   km = Object.assign(km, extraKeys);
   return km;

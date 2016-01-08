@@ -3,6 +3,7 @@ import Boom from 'boom';
 import Joi from 'joi';
 import _ from 'lodash';
 import Db, { conn } from '../db';
+import Sequelize from 'sequelize';
 
 const Generate = {};
 
@@ -46,9 +47,7 @@ Generate.handlers = {
         const r = [];
         promises.push(
           Db.Effects.findAll({
-            offset: [
-              "floor(random()*(select count(*) from effects))"
-            ],
+            offset: Sequelize.literal("floor(random()*(select count(*) from effects))"),
             limit: 1
           }).then((effects) => {
 

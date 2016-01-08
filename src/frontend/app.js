@@ -10,6 +10,8 @@ import log from 'loglevel';
 
 import reducers from './reducers';
 import getRoutes from './routes';
+import analytics from './analytics';
+
 
 const reducer = combineReducers(Object.assign({}, reducers, {
   routing: routeReducer

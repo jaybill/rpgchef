@@ -45,7 +45,6 @@ var required = [
   "SERVER_URL",
   "SERVER_PORT",
   "API_URL",
-  "API_PORT",
   "LOG_LEVEL",
   "POSTGRES"
 ];
@@ -192,41 +191,8 @@ gulp.task('build:watch', function(cb) {
 });
 
 
-// Launch a Node.js/API server
-gulp.task('api', ['build:watch'], function(cb) {
-  var started = false;
-  src.server = [
-    'build/api.js'
-  ];
 
-  var cp = require('child_process');
-  var server = (function startup() {
-    var child = cp.fork('build/api.js', {});
-    child.once('message', function(message) {
-      if (message.match(/^online$/)) {
-        if (browserSync) {
-          browserSync.reload();
-        }
-        if (!started) {
-          started = true;
-          gulp.watch(src.server, function() {
-            $.util.log('Restarting api server.');
-            server.kill('SIGTERM');
-            server = startup();
-          });
-          cb();
-        }
-      }
-    });
-    return child;
-  })();
-
-  process.on('exit', function() {
-    server.kill('SIGTERM');
-  });
-});
-
-// Launch a Node.js/Express server
+// Launch the Node.js/Hapi server
 gulp.task('serve', ['build:watch'], function(cb) {
   src.server = [
     'build/server.js'
@@ -270,7 +236,7 @@ gulp.task('serve', ['build:watch'], function(cb) {
 });
 
 // Launch BrowserSync development server
-gulp.task('sync', ['serve', 'api'], function(cb) {
+gulp.task('sync', ['serve'], function(cb) {
   $.util.log("Starting browsersync");
   browserSync = require('browser-sync');
   browserSync({

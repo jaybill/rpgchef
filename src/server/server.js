@@ -1,32 +1,46 @@
 'use strict';
 
-import bodyParser from 'body-parser';
-import compression from 'compression';
-import express from 'express';
-import path from 'path';
+import Hapi from 'hapi';
+import HapiAuthCookie from 'hapi-auth-cookie';
+import HapiCorsHeaders from 'hapi-cors-headers';
+import Routes from './routes';
+import log from 'loglevel';
+import Db from './db';
+import inert from 'inert';
 
-var server = express();
 
-server.set('port', (process.env.SERVER_PORT || 8080));
-server.use(compression());
-server.use(express.static(path.join(__dirname + "/public")));
-server.use(bodyParser.urlencoded({
-  extended: true
-}));
+var logLevel = log.levels.DEBUG;
+if (process.env.LOG_LEVEL) {
+  logLevel = parseInt(process.env.LOG_LEVEL);
+}
 
-server.get('/mailinglist', (req, res, next) => {
-  res.sendFile(path.join(__dirname + "/public/mailinglist.html"));
+log.setLevel(logLevel);
+
+var server = new Hapi.Server();
+server.connection({
+  port: process.env.SERVER_PORT,
 });
 
+server.register([HapiAuthCookie, inert], function(err) {
 
-server.all('*', (req, res, next) => {
-  res.sendFile(path.join(__dirname + "/public/index.html"));
-});
+  server.auth.strategy('session', 'cookie', {
+    password: process.env.COOKIE_SECRET, // cookie secret
+    cookie: 'session', // Cookie name
+    isSecure: false, // required for non-https applications
+    ttl: 24 * 60 * 60 * 1000 // Set session to 1 day
+  });
 
-server.listen(server.get('port'), function() {
-  if (process.send) {
-    process.send('online');
-  } else {
-    console.log('The server is running at http://localhost:' + server.get('port'));
-  }
+  server.route(Routes);
+
+  server.ext('onPreResponse', HapiCorsHeaders);
+
+  server.start(function() {
+
+    if (process.send) {
+      process.send('online');
+    } else {
+      console.log('Server running at:', server.info.uri);
+    }
+
+  });
 });

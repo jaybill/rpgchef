@@ -123,7 +123,7 @@ appConfig.resolve = {
 
 
 //
-// Configuration for the server-side bundle (server.js)
+// Configuration for the server bundle (api.js)
 // -----------------------------------------------------------------------------
 
 var serverConfig = _.merge({}, config, {
@@ -160,51 +160,12 @@ var serverConfig = _.merge({}, config, {
 
 
 
-
-//
-// Configuration for the api bundle (api.js)
-// -----------------------------------------------------------------------------
-
-var apiConfig = _.merge({}, config, {
-  entry: './src/api/api.js',
-  output: {
-    filename: 'api.js',
-    libraryTarget: 'commonjs2'
-  },
-  target: 'node',
-  externals: /^[a-z\-0-9]+$/,
-  node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    __filename: false,
-    __dirname: false
-  },
-  plugins: config.plugins.concat(
-    ignore,
-    new webpack.DefinePlugin(_.merge(GLOBALS, {
-      '__SERVER__': true
-    }))
-  ),
-  module: {
-    loaders: config.module.loaders.map(function(loader) {
-      // Remove style-loader
-      return _.merge(loader, {
-        loader: loader.loader = loader.loader.replace('style-loader!', '')
-      });
-    })
-  }
-});
-
-
-
 //
 // Configuration for the loader bundle (loader.js)
 // -----------------------------------------------------------------------------
 
 var loaderConfig = _.merge({}, config, {
-  entry: './src/api/loader.js',
+  entry: './src/server/loader.js',
   output: {
     filename: 'loader.js',
     libraryTarget: 'commonjs2'
@@ -235,4 +196,4 @@ var loaderConfig = _.merge({}, config, {
   }
 });
 
-module.exports = [loaderConfig, appConfig, apiConfig, serverConfig];
+module.exports = [loaderConfig, appConfig, serverConfig];

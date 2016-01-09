@@ -59,9 +59,8 @@ Generate.handlers = {
                     $ne: effects[0].id
                   }
                 },
-                offset: [
-                  "floor(random()*((select count(*) from effects)-1))"
-                ],
+                offset: Sequelize
+                  .literal("floor(random()*((select count(*) from effects)-1))"),
                 limit: 1
               });
             } else {

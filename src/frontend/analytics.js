@@ -1,12 +1,27 @@
-import ga from './ga';
+import log from 'loglevel';
 
-function analytics(state, options) {
+export const analytics = (path, options) => {
   if (!options) {
     options = {};
   }
-  options.page = state.path;
+  options.page = path;
+  log.debug("logging pageview of: " + path);
   ga('send', 'pageview', options);
-}
+};
 
+export const logEvent = (category, action, label) => {
 
-module.exports = analytics;
+  log.debug("logging event: ", category, action, label);
+  ga('send', {
+    hitType: 'event',
+    eventCategory: category,
+    eventAction: action,
+    eventLabel: label
+  });
+
+};
+
+export const pageView = (path) => {
+
+  analytics(path);
+};

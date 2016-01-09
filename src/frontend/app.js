@@ -10,7 +10,17 @@ import log from 'loglevel';
 
 import reducers from './reducers';
 import getRoutes from './routes';
-import analytics from './analytics';
+import { pageView } from './analytics';
+import PathKnower from './pathknower';
+import './ga';
+
+
+var logLevel = log.levels.DEBUG;
+if (process.env.LOG_LEVEL) {
+  logLevel = parseInt(process.env.LOG_LEVEL);
+}
+
+log.setLevel(logLevel);
 
 
 const reducer = combineReducers(Object.assign({}, reducers, {
@@ -35,8 +45,11 @@ function run() {
       <Router history={history}>
         {getRoutes()}
       </Router>
-    </Provider>
-  
+
+      </Provider>
+          <Provider store={store}>
+          <PathKnower tell={pageView}/>
+      </Provider>
   </div>,
     document.getElementById('root')
   );

@@ -22,7 +22,7 @@ export default class Welcome extends Component {
                     <h1>RPG Chef</h1>
                     <p>RPG Chef is a tool for creating and maintaining assets for table top role-playing games.<br/>
                     We&apos;re currently in very limited beta testing.</p>
-                    <Button href="/mailinglist" bsSize="large" bsStyle="primary">Request Beta Invitation</Button>
+                    <Button href="/mailinglist.html" bsSize="large" bsStyle="primary">Request Beta Invitation</Button>
 
                     </Col>
                     </Row>

@@ -5,7 +5,7 @@ import { weapons as weaponsCall, effects as effectsCall } from '../api';
 import store from 'store';
 import DnD5e from '../../lib/dnd5e';
 import ActionConstants from "../actionconstants";
-
+import { logEvent } from '../analytics';
 
 const weaponsActions = createAsyncActionGroup("weapons", {});
 
@@ -55,6 +55,9 @@ export const defaultWeapons = () => {
 export const weapons = function(effectCount, weaponCount) {
 
   return dispatch => {
+    logEvent("Generate", "Weapons",
+      "Effects: " + effectCount + ", Count: " + weaponCount);
+
     const allWeapons = store.get('weapons');
 
     if (!allWeapons || !allWeapons.length) {

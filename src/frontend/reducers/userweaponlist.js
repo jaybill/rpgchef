@@ -9,11 +9,11 @@ export const userweaponlist = function(state = {
     succeeded: false,
     payload: null
   }, action) {
-  log.debug(action.type);
+
   switch (action.type) {
 
     case ActionConstants.USERWEAPON_REMOVE:
-      log.debug(action, state.payload);
+
       return Object.assign({}, state, {
         payload: _.filter(state.payload, (i) => {
           return i.id != action.payload

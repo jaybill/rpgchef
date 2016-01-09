@@ -8,7 +8,7 @@ import { account } from './account';
 import { weapons } from './weapons';
 import { userweapon } from './userweapon';
 import { userweaponlist } from './userweaponlist';
-import {ga } from './ga';
+import { pathknower } from './pathknower';
 
 const app = combineReducers({
   register,
@@ -19,8 +19,8 @@ const app = combineReducers({
   account,
   weapons,
   userweapon,
-    userweaponlist,
-    ga
+  userweaponlist,
+  pathknower
 });
 
 export default {

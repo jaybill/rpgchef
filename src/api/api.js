@@ -6,6 +6,8 @@ import HapiCorsHeaders from 'hapi-cors-headers';
 import Routes from './routes';
 import log from 'loglevel';
 import Db from './db';
+import inert from 'inert';
+
 
 var logLevel = log.levels.DEBUG;
 if (process.env.LOG_LEVEL) {
@@ -19,7 +21,7 @@ server.connection({
   port: process.env.API_PORT,
 });
 
-server.register([HapiAuthCookie], function(err) {
+server.register([HapiAuthCookie, inert], function(err) {
 
   server.auth.strategy('session', 'cookie', {
     password: process.env.COOKIE_SECRET, // cookie secret
@@ -29,6 +31,7 @@ server.register([HapiAuthCookie], function(err) {
   });
 
   server.route(Routes);
+
   server.ext('onPreResponse', HapiCorsHeaders);
 
   server.start(function() {

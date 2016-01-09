@@ -64,7 +64,5 @@ deploy:
                 ln -s /var/www/rpgchef_current /var/www/rpgchef
                 sudo service rpgchefd stop
                 sudo service rpgchefd start
-                sudo service rpgchefapid stop
-                sudo service rpgchefapid start
                 exit
                 EOF

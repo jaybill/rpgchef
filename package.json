@@ -19,7 +19,7 @@
     "compression": "^1.6.0",
     "cookie-parser": "^1.4.0",
     "cookie-session": "^1.2.0",
-    "dmscreen-theme": "file:theme",
+    "rpgchef-theme": "file:theme",
     "dotenv": "^1.2.0",
     "es6-promise": "^3.0.2",
     "express": "^4.13.3",

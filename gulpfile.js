@@ -101,7 +101,7 @@ gulp.task('clean', del.bind(
 gulp.task('vendor', function() {
 
   return gulp.src([
-    '*/dmscreen-theme/**/*',
+    '*/rpgchef-theme/**/*',
     '*/font-awesome/**/*'
   ], {
     "base": "./node_modules"

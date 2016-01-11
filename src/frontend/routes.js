@@ -14,7 +14,10 @@ import Weapons from './containers/WeaponsContainer';
 import UserWeaponList from './containers/UserWeaponListContainer';
 
 import Welcome from '../components/Welcome';
+import TermsOfService from '../components/TermsOfService';
+import PrivacyPolicy from '../components/PrivacyPolicy';
 import NotFound from '../components/NotFound';
+import About from '../components/About';
 
 export default function getRoutes() {
   return (
@@ -28,6 +31,9 @@ export default function getRoutes() {
    // Routes that don't require authentication
    <Route path="register" component={Register}/>
    <Route path="login" component={Login}/>
+   <Route path="about" component={About}/>
+   <Route path="terms" component={TermsOfService}/>
+   <Route path="privacy" component={PrivacyPolicy}/>
    <Route path="logout" component={Logout}/>
    <Route path="confirm" component={Confirm}/>
    <Route path="forgotpassword" component={ForgotPassword}/>

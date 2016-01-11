@@ -8,12 +8,13 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
 import log from 'loglevel';
 
+import './app.less';
+
 import reducers from './reducers';
 import getRoutes from './routes';
 import { pageView } from './analytics';
 import PathKnower from './pathknower';
 import './ga';
-
 
 var logLevel = log.levels.DEBUG;
 if (process.env.LOG_LEVEL) {
@@ -21,7 +22,6 @@ if (process.env.LOG_LEVEL) {
 }
 
 log.setLevel(logLevel);
-
 
 const reducer = combineReducers(Object.assign({}, reducers, {
   routing: routeReducer

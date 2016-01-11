@@ -1,6 +1,7 @@
 import './Register.less';
 import '../SimplePage';
 import React from 'react';
+import {Link} from 'react-router';
 import { Alert, Input, Grid, Row, Col, Button } from 'react-bootstrap';
 import _ from 'lodash';
 import log from 'loglevel';
@@ -13,14 +14,11 @@ export default class Register extends React.Component {
   }
 
   _register() {
-
-
     this.props.onRegister({
       username: this.refs.email.getValue(),
       pass1: this.refs.pass1.getValue(),
       pass2: this.refs.pass2.getValue()
     });
-
   }
 
   render() {
@@ -50,20 +48,15 @@ export default class Register extends React.Component {
             <h2>Register</h2>
             {errorDisplay}
 
-
             <Input type="email" ref="email" label="Email Address" placeholder="Enter email" />
-
             <Input type="password" ref="pass1" label="Password" placeholder="Password" />
-
             <Input type="password" ref="pass2" label="Password (Again)" placeholder="Password (again)" />
+            <p>By creating an account, you agree to the <Link to="/terms">Terms</Link> and the <Link to="/privacy">Privacy Policy</Link>.</p>
 
-            <Button onClick={this._register} bsStyle="primary" bsSize="large">Register</Button>
-
+            <Button onClick={this._register} bsStyle="primary" bsSize="large">Create Account</Button>         
             </Col>
             </Row>
         </Grid>
-
-
       );
     }
     return (<div className="Register">{wh}</div>);

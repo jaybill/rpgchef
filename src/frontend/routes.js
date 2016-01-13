@@ -12,12 +12,14 @@ import ResetPassword from './containers/ResetPasswordContainer';
 import Account from './containers/AccountContainer';
 import Weapons from './containers/WeaponsContainer';
 import UserWeaponList from './containers/UserWeaponListContainer';
+import Subscribe from './containers/SubscribeContainer';
 
 import Welcome from '../components/Welcome';
 import TermsOfService from '../components/TermsOfService';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import NotFound from '../components/NotFound';
 import About from '../components/About';
+
 
 export default function getRoutes() {
   return (
@@ -27,6 +29,7 @@ export default function getRoutes() {
       <Route path="account" component={Account}/>
       <Route path="weapons" component={Weapons}/>
       <Route path="myweapons" component={UserWeaponList}/>
+      <Route path="subscribe" component={Subscribe}/>
     </Route>
    // Routes that don't require authentication
    <Route path="register" component={Register}/>

@@ -30,8 +30,10 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("USERWEAPON_POST"));
   km = Object.assign(km, asyncKeys("USERWEAPON_DELETE"));
   km = Object.assign(km, asyncKeys("USERWEAPONLIST"));
-
   km = Object.assign(km, asyncKeys("ACCOUNT"));
+  km = Object.assign(km, asyncKeys("SUBSCRIBE_POST"));
+  km = Object.assign(km, asyncKeys("SUBSCRIBE_GET"));
+  km = Object.assign(km, asyncKeys("SUBSCRIBE_DEL"));
 
   extraKeys["ACCOUNT_UPDATE"] = null;
   extraKeys["SESSION_USERNAME_UPDATE"] = null;

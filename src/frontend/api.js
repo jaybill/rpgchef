@@ -70,6 +70,36 @@ export const userweaponDelete = (id) => {
   return callServer('/my/weapon/' + id, 'DELETE');
 };
 
+export const subscribePost = (subscription) => {
+  return callServer('/payment/subscribe', 'POST', null, subscription);
+};
+
+export const subscribeGet = () => {
+  return callServer('/payment/subscribe', 'GET');
+};
+
+export const getStripeToken = (cc) => {
+
+  return new Promise((resolve, reject) => {
+
+    Stripe.card.createToken({
+      number: cc.number,
+      cvc: cc.cvc,
+      exp_month: cc.exp_month,
+      exp_year: cc.exp_year
+    }, (status, response) => {
+
+      if (response.error) {
+        reject(response.error);
+      } else {
+        resolve(response);
+      }
+    });
+
+
+  });
+
+}
 function callServer(url, method, query, data, headers) {
 
   const uri = new urijs(process.env.API_URL + url);

@@ -1,7 +1,7 @@
 import './SimplePage.less';
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Navbar, NavbarBrand, Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
+import { Navbar, NavbarBrand, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 export default class SimplePage extends Component {

@@ -1,8 +1,11 @@
 import Auth from './handlers/auth';
 import Generate from './handlers/generate';
 import My from './handlers/my';
+import Payment from './handlers/payment';
+
 import path from 'path';
 import URIjs from 'urijs';
+
 var routes = [
   {
     method: 'POST',
@@ -78,6 +81,16 @@ var routes = [
     method: 'DELETE',
     path: '/api/my/weapon/{id?}',
     config: My.handlers.deleteUserWeapon
+  },
+  {
+    method: ['POST'],
+    path: '/api/payment/subscribe',
+    config: Payment.handlers.subscribe
+  },
+  {
+    method: ['GET'],
+    path: '/api/payment/subscribe',
+    config: Payment.handlers.details
   },
   {
     method: 'GET',

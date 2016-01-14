@@ -118,7 +118,9 @@ export default class Subscribe extends Component {
               <dt>Expires</dt>
               <dd>{card.exp_month}/{card.exp_year}</dd>
               </dl>
-              <p><LinkContainer to="/app/unsubscribe"><Button bsSize="xs" bsStyle="danger">Cancel Subscription</Button></LinkContainer></p>
+              <p><LinkContainer to="/app/cancel">
+              <Button bsSize="xs" bsStyle="danger">Cancel Subscription</Button>
+              </LinkContainer></p>
               </div>
       }
     }

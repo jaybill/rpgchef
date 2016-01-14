@@ -13,6 +13,7 @@ import Account from './containers/AccountContainer';
 import Weapons from './containers/WeaponsContainer';
 import UserWeaponList from './containers/UserWeaponListContainer';
 import Subscribe from './containers/SubscribeContainer';
+import Cancel from './containers/CancelContainer';
 
 import Welcome from '../components/Welcome';
 import TermsOfService from '../components/TermsOfService';
@@ -30,6 +31,7 @@ export default function getRoutes() {
       <Route path="weapons" component={Weapons}/>
       <Route path="myweapons" component={UserWeaponList}/>
       <Route path="subscribe" component={Subscribe}/>
+      <Route path="cancel" component={Cancel}/>
     </Route>
    // Routes that don't require authentication
    <Route path="register" component={Register}/>

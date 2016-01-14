@@ -78,6 +78,11 @@ export const subscribeGet = () => {
   return callServer('/payment/subscribe', 'GET');
 };
 
+export const subscribeDel = () => {
+  return callServer('/payment/subscribe', 'DELETE');
+};
+
+
 export const getStripeToken = (cc) => {
 
   return new Promise((resolve, reject) => {

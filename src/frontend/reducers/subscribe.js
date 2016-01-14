@@ -16,7 +16,6 @@ export const subscribe = function(state, action) {
   newState.get = updateStateAsync(state.get, action, "SUBSCRIBE_GET");
   newState.del = updateStateAsync(state.del, action, "SUBSCRIBE_DEL");
 
-
   return newState;
 
 }

@@ -27,6 +27,20 @@ const assignPlan = (customerId, plan) => {
 
 };
 
+const deleteCustomer = (customerId) => {
+
+  return new Promise((resolve, reject) => {
+    stripe.customers.del(customerId, (err, confirmation) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(confirmation);
+      }
+    });
+  });
+};
+
+
 const createCustomer = (userId, tokenId) => {
 
   return new Promise((resolve, reject) => {
@@ -93,6 +107,40 @@ Payment.handlers = {
       });
 
 
+    }
+  },
+  cancel: {
+    auth: 'session',
+    plugins: {
+      'hapi-auth-cookie': {
+        redirectTo: false
+      }
+    },
+    handler: (request, reply) => {
+      const userId = request.auth.credentials.id;
+
+      let dbCustomer;
+      let sConfirmation;
+      Db.StripeUsers.findOne({
+        where: {
+          userId: userId
+        }
+      }).then((customer) => {
+        if (!customer) {
+          throw new Error("No subscription for user " + userId);
+        } else {
+          dbCustomer = customer;
+        }
+        return deleteCustomer(customer.customer.id);
+      }).then((confirmation) => {
+        sConfirmation = confirmation;
+        return dbCustomer.destroy();
+      }).then((del) => {
+        reply(sConfirmation);
+      }).catch(err => {
+        log.error(err);
+        reply(Boom.create(500, err.message));
+      });
     }
   },
   details: {

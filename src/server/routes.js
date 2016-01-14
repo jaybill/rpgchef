@@ -93,6 +93,12 @@ var routes = [
     config: Payment.handlers.details
   },
   {
+    method: ['DELETE'],
+    path: '/api/payment/subscribe',
+    config: Payment.handlers.cancel
+  },
+
+  {
     method: 'GET',
     path: '/{file*}',
     handler: {

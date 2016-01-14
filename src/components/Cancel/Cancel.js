@@ -1,6 +1,6 @@
 import './Cancel.less';
 import React, { Component, PropTypes } from 'react';
-import { Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
+import { Well, Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 export default class Cancel extends Component {
@@ -57,11 +57,14 @@ export default class Cancel extends Component {
     }
 
     return (<div className="Cancel">
-        <Grid>
+
+            <Grid>
             <Row>
             <Col md={6} mdOffset={3}>
             <h2>Cancel</h2>
+            <Well>
             {wtr}
+            </Well>
             </Col>
             </Row>
         </Grid>

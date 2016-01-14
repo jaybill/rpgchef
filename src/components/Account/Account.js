@@ -1,6 +1,6 @@
 import './Account.less';
 import React, { Component, PropTypes } from 'react';
-import { Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
+import { Panel, Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
 import log from 'loglevel';
 import { CtrldInputText } from '../ControlledField';
 
@@ -62,10 +62,12 @@ export default class Account extends Component {
 
 
     return (<div className="Account">
-        <Grid>
+            <h2>Account</h2>
+            <Panel bsStyle="primary">
+            <Grid>
             <Row>
             <Col md={6} mdOffset={3}>
-            <h2>Account</h2>
+
 
             {displayMessage}
 
@@ -87,7 +89,8 @@ export default class Account extends Component {
             <Button disabled={working} onClick={this.onSubmit} bsStyle="primary" bsSize="large">Submit</Button>
             </Col>
             </Row>
-        </Grid>
+            </Grid>
+            </Panel>
         </div>);
   }
 }

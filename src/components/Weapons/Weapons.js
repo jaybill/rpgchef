@@ -1,6 +1,6 @@
 import './Weapons.less';
 import React, { Component, PropTypes } from 'react';
-import { Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
+import { Panel, Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
 import _ from 'lodash';
 import WeaponCard from '../WeaponCard';
 import log from 'loglevel';
@@ -48,15 +48,13 @@ export default class Weapons extends Component {
     });
 
     return (<div className="Weapons">
+
+        <h2>Weapons</h2>
+
+        <Panel bsStyle="primary">
         <Grid>
             <Row>
-            <Col md={6}>
-            <h3>Weapons</h3>
-            </Col>
-            </Row>
-            <Row>
-            <Col md={3}>
-            
+            <Col md={3}>            
             <Input ref="weaponCount" labelClassName="col-md-4" wrapperClassName="col-md-8" label="Weapons" type="select">
             <option value={1}>1</option>
             <option value={3}>3</option>
@@ -78,11 +76,13 @@ export default class Weapons extends Component {
             </Col>
 
             </Row>
-            <Row><Col md={12}>
-            <hr/>
+            </Grid>
+
+            </Panel>
+ 
+            
             {allWeapons}
-            </Col></Row>
-        </Grid>
+
         </div>);
   }
 }

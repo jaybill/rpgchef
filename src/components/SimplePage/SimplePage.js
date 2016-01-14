@@ -1,13 +1,13 @@
 import './SimplePage.less';
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Navbar, NavbarBrand, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Well, Navbar, NavbarBrand, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 export default class SimplePage extends Component {
   render() {
     return (
-      <div className="Home">
+      <div className="SimplePage">
                 <div className="container">
 <Navbar fixedTop>
     <Navbar.Header>
@@ -31,7 +31,11 @@ export default class SimplePage extends Component {
     </Navbar.Collapse>
   </Navbar>
 
-                    <div className="SimplePage-Holder">{this.props.children}</div>
+            <div className="SimplePage-Holder">
+            <Well className="pageWell" bsSize="large">
+        {this.props.children}
+            </Well>
+        </div>
                 </div>
       </div>
       );

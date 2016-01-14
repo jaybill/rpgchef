@@ -1,9 +1,10 @@
 import './Subscribe.less';
 import React, { Component, PropTypes } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Tooltip, Label, Input, Button, Grid, Row, Col, Alert, Panel } from 'react-bootstrap';
+import { Well, Tooltip, Label, Input, Button, Grid, Row, Col, Alert, Panel } from 'react-bootstrap';
 import _ from 'lodash';
 import log from 'loglevel';
+import Loading from '../Loading';
 export default class Subscribe extends Component {
 
   constructor() {
@@ -66,21 +67,26 @@ export default class Subscribe extends Component {
 
     });
 
-    if (!this.props.subscribeGet.payload && this.props.subscribeGet.succeeded) {
-
-      const {message, succeeded, failed, working} = this.props.subscribePost;
-
-      if (succeeded) {
-        displayMessage = <Alert bsStyle="success">Your payment was accepted. Thanks!</Alert>
-      }
-
-      if (failed) {
-        displayMessage = <Alert bsStyle="danger">{message}</Alert>
-      }
+    if (this.props.subscribeGet.working || this.props.subscribePost.working) {
+      wtr = <Loading/>;
+    } else {
 
 
-      const cvcLabel = (<span>CVV <a href="https://www.cvvnumber.com/cvv.html" target="new"><i className="fa fa-question-circle"></i></a></span>);
-      const subForm = (<div><Input ref="plan" type="select" label="Subscription Plan" placeholder="select">
+      if (!this.props.subscribeGet.payload && this.props.subscribeGet.succeeded) {
+
+        const {message, succeeded, failed, working} = this.props.subscribePost;
+
+        if (succeeded) {
+          displayMessage = <Alert bsStyle="success">Your payment was accepted. Thanks!</Alert>
+        }
+
+        if (failed) {
+          displayMessage = <Alert bsStyle="danger">{message}</Alert>
+        }
+
+
+        const cvcLabel = (<span>CVV <a href="https://www.cvvnumber.com/cvv.html" target="new"><i className="fa fa-question-circle"></i></a></span>);
+        const subForm = (<Well><Input ref="plan" type="select" label="Subscription Plan" placeholder="select">
             <option value="EVOKER">Evoker - $1.99/month</option>
             <option value="CONJURER">Conjurer - $4.99/month</option>
             <option value="WIZARD">Wizard - $9.99/month</option>
@@ -98,18 +104,18 @@ export default class Subscribe extends Component {
             </Col>
             </Row>            
             <Button onClick={this.onSubmit} bsStyle="primary" bsSize="large">Subscribe</Button>
-                                                                                                                                                                     </div>);
+                                                                                                                                                                     </Well>);
 
-      if (!succeeded) {
-        wtr = subForm;
-      }
-    } else {
-      const sg = this.props.subscribeGet;
+        if (!succeeded) {
+          wtr = subForm;
+        }
+      } else {
+        const sg = this.props.subscribeGet;
 
-      if (sg.succeeded) {
-        const {subscription} = sg.payload;
-        const card = sg.payload.customer.sources.data[0];
-        wtr = <div>
+        if (sg.succeeded) {
+          const {subscription} = sg.payload;
+          const card = sg.payload.customer.sources.data[0];
+          wtr = <Well>
               <dl>
               <dt>Current plan</dt>
               <dd>{subscription.plan.name}</dd>
@@ -121,27 +127,32 @@ export default class Subscribe extends Component {
               <p><LinkContainer to="/app/cancel">
               <Button bsSize="xs" bsStyle="danger">Cancel Subscription</Button>
               </LinkContainer></p>
-              </div>
+              </Well>
+        }
       }
     }
     return (<div className="Subscribe">
+
         <Grid>
             <Row>
             <Col md={12}>
             <h2>Subscribe</h2>
-
-            <p>RPG Chef is a "pay what you want" subscription service. We&apos;re not talking about <em>donations</em> here. We do ask that you pay for the service if you actively use it. We just think you should decide how much you pay and that payment should be on the honor system. What we <em>don&apos;t</em> have are "premium accounts" where people who pay us get access to special features and other people don&apos;t. Instead, we&apos;ve created a couple of subscription plans that are loosely based on how much you use our site:</p> 
+            <Well>
+            <p>RPG Chef is a "pay what you want" subscription service. We&apos;re not talking about <em>donations</em> here. We do ask that you pay for the service if you actively use it. We just think you should decide how much you pay and that payment should be on the honor system. What we <em>don&apos;t</em> have are "premium accounts" where people who pay us get access to special features and other people don&apos;t. Instead, we&apos;ve created a couple of subscription plans that are loosely based on how much you use our site:</p>
+            </Well>
             <Row>
             {panels}
             </Row>
             </Col>
             <Col md={6}>
             <h2>Payment Details</h2>
+            
             {displayMessage}
             {wtr}
             </Col>
             </Row>
-        </Grid>
+              </Grid>
+              
         </div>);
   }
 }

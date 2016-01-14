@@ -1,6 +1,6 @@
 import './UserWeaponList.less';
 import React, { Component, PropTypes } from 'react';
-import { Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
+import { Panel, Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
 import WeaponCard from '../WeaponCard';
 import MWeaponCardCtrls from '../MWeaponCardCtrls';
 import log from 'loglevel';
@@ -50,17 +50,9 @@ export default class UserWeaponList extends Component {
 
 
     return (<div className="UserWeaponList">
-     <Grid>
-            <Row>
-            <Col md={6}>
-            <h3>My Weapons</h3>
-            </Col>
-            </Row>
-            <Row><Col md={12}>
-            <hr/>
+            <h2>My Weapons</h2>
             {allWeapons}
-            </Col></Row>
-        </Grid>
+
         </div>);
   }
 }

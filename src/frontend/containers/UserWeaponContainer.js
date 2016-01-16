@@ -20,20 +20,17 @@ class UserWeaponContainer extends Component {
 
     // Dispatch action if everything is okay.
     dispatch(userweaponUpsert(formdata));
-
   }
 
   render() {
     const self = this;
     const {dispatch, userweapon} = this.props;
 
-    return <UserWeapon
-      onSubmit={(formdata) => self.onSubmit(formdata)}
-      working={userweapon.working}
-      message={userweapon.message}
-      failed={userweapon.failed}
-      succeeded={userweapon.succeeded}
-      />
+    return <UserWeapon onSubmit={ (formdata) => self.onSubmit(formdata) }
+             working={ userweapon.working }
+             message={ userweapon.message }
+             failed={ userweapon.failed }
+             succeeded={ userweapon.succeeded } />
   }
 }
 

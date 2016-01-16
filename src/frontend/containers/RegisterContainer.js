@@ -28,20 +28,19 @@ class RegisterContainer extends Component {
       username: formdata.username,
       password: formdata.pass1
     }));
-
   }
 
   render() {
     const self = this;
     const {dispatch, register} = this.props;
     log.debug(register);
-    return <SimplePage><Register
-      onRegister={formdata => self.onRegister(formdata)}
-      emailSentTo={register.emailSentTo}
-      errors={register.errors}
-      registering={register.registering}
-      complete={register.complete}
-      /></SimplePage>
+    return <SimplePage>
+             <Register onRegister={ formdata => self.onRegister(formdata) }
+               emailSentTo={ register.emailSentTo }
+               errors={ register.errors }
+               registering={ register.registering }
+               complete={ register.complete } />
+           </SimplePage>
   }
 }
 

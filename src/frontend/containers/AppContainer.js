@@ -29,16 +29,18 @@ class AppContainer extends Component {
       });
       dispatch(updatePath(uri.toString()));
     }
-
-
   }
 
   render() {
     const {dispatch, session} = this.props;
-    var wtr = <div>Loading...</div>;
+    var wtr = <div>
+                Loading...
+              </div>;
     if (session.isLoaded & session.isLoggedIn) {
 
-      wtr = <App user={session.user}>{this.props.children}</App>;
+      wtr = <App user={ session.user }>
+              { this.props.children }
+            </App>;
 
     }
 

@@ -28,16 +28,15 @@ export default class MWeaponCardCtrls extends Component {
     }
 
     return (<div className="MWeaponCardCtrls">
-
-            {displayMessage}
-            <ButtonToolbar>
-            <ButtonGroup>
-            <Button disabled={working} bsSize="xs" bsStyle="danger" onClick={this.delFunc}>
-            <Glyphicon glyph="trash"/> Delete
-            </Button>
-            </ButtonGroup>
-            </ButtonToolbar>
-        </div>);
+              { displayMessage }
+              <ButtonToolbar>
+                <ButtonGroup>
+                  <Button disabled={ working } bsSize="xs" bsStyle="danger" onClick={ this.delFunc }>
+                    <Glyphicon glyph="trash" /> Delete
+                  </Button>
+                </ButtonGroup>
+              </ButtonToolbar>
+            </div>);
   }
 }
 

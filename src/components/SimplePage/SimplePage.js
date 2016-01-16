@@ -8,35 +8,39 @@ export default class SimplePage extends Component {
   render() {
     return (
       <div className="SimplePage">
-                <div className="container">
-<Navbar fixedTop>
-    <Navbar.Header>
-<LinkContainer to="/">
-            <Navbar.Brand>
-        RPG Chef
-      </Navbar.Brand>
-</LinkContainer>
-            <Navbar.Toggle />
-    </Navbar.Header>
-    <Navbar.Collapse>
-            <Nav pullRight>
-            <LinkContainer to="/about"><NavItem  eventKey={2}>About</NavItem></LinkContainer>
-            <NavDropdown eventKey={3}  title="Legal" id="legal">
-            <LinkContainer to="/terms"><MenuItem  eventKey={3.1}>Terms of Service</MenuItem></LinkContainer>
-            <LinkContainer to="/privacy"><MenuItem  eventKey={3.2}>Privacy Policy</MenuItem></LinkContainer>
-            </NavDropdown>
-                        <LinkContainer to="/login"><NavItem  eventKey={2}>Log in</NavItem></LinkContainer>
-            </Nav>
-
-    </Navbar.Collapse>
-  </Navbar>
-
-            <div className="SimplePage-Holder">
-            <Well className="pageWell" bsSize="large">
-        {this.props.children}
-            </Well>
+        <div className="container">
+          <Navbar fixedTop>
+            <Navbar.Header>
+              <LinkContainer to="/">
+                <Navbar.Brand>
+                  RPG Chef
+                </Navbar.Brand>
+              </LinkContainer>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+              <Nav pullRight>
+                <LinkContainer to="/about">
+                  <NavItem eventKey={ 2 }>About</NavItem>
+                </LinkContainer>
+                <NavDropdown eventKey={ 3 } title="Legal" id="legal">
+                  <LinkContainer to="/terms">
+                    <MenuItem eventKey={ 3.1 }>Terms of Service</MenuItem>
+                  </LinkContainer>
+                  <LinkContainer to="/privacy">
+                    <MenuItem eventKey={ 3.2 }>Privacy Policy</MenuItem>
+                  </LinkContainer>
+                </NavDropdown>
+                <LinkContainer to="/login">
+                  <NavItem eventKey={ 2 }>Log in</NavItem>
+                </LinkContainer>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <div className="SimplePage-Holder">
+            { this.props.children }
+          </div>
         </div>
-                </div>
       </div>
       );
   }

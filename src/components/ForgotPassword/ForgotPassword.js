@@ -27,35 +27,35 @@ export default class ForgotPassword extends Component {
     const {complete, error} = this.props;
 
     if (complete && !error) {
-      formDisplay = <Col md={6}><Alert bsStyle="success">
-            <h4>Reset Instructions Sent</h4>
-            <p>Check your email to continue.</p>
-        </Alert></Col>;
+      formDisplay = <Col md={ 6 }>
+                      <Alert bsStyle="success">
+                        <h4>Reset Instructions Sent</h4>
+                        <p>Check your email to continue.</p>
+                      </Alert>
+                    </Col>;
     } else {
       if (error) {
-        errorDisplay = <Alert bsStyle="danger">{error}</Alert>;
+        errorDisplay = <Alert bsStyle="danger">
+                         { error }
+                       </Alert>;
       }
 
-      formDisplay = <Col md={6}>
-            <h1>Forgot Password</h1>
-
-            {errorDisplay}
-            <p>Enter your username (usually your email) below and we will send you an email about how to change your password.</p>
-
-            <Input ref="username" type='text' placeholder='username (email address)' autoFocus={true} />
-            <Button bsStyle='primary' onClick={this.sendReset}>Send Reset Instructions</Button>
-            </Col>
+      formDisplay = <Col md={ 6 }>
+                      <h1>Forgot Password</h1>
+                      { errorDisplay }
+                      <p>Enter your username (usually your email) below and we will send you an email about how to change your password.</p>
+                      <Input ref="username" type='text' placeholder='username (email address)' autoFocus={ true } />
+                      <Button bsStyle='primary' onClick={ this.sendReset }>Send Reset Instructions</Button>
+                    </Col>
     }
 
     return (
       <div className="ForgotPassword">
-     
-            <Grid>
-            <Row>
-            {formDisplay}
-            </Row>
-            </Grid>
-
+        <Grid>
+          <Row>
+            { formDisplay }
+          </Row>
+        </Grid>
       </div>
 
       );

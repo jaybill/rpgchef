@@ -31,27 +31,28 @@ export default class Login extends Component {
     var {session} = this.props;
     if (session && session.error) {
 
-      loginError = <Alert bsStyle='danger' key="Login-error" ref='error' className="Login-error">{session.error}</Alert>;
+      loginError = <Alert bsStyle='danger' key="Login-error" ref='error' className="Login-error">
+                     { session.error }
+                   </Alert>;
     }
 
     return (
-      <Grid className="Login">
-                <Row>
-                    <Col className="Login-wrapper" xs={6} md={4} xsOffset={3} mdOffset={4}>
-                        <h1>Log in</h1>
-
-        {loginError}
-
-                        <form>
-                            <Input ref="username" type='text'  disabled={session.loggingIn} placeholder='Username' autoFocus={true} />
-                            <Input ref="password" type='password'  disabled={session.loggingIn} placeholder='Password' onKeyUp={this.handleKeyUp}/>
-            <p><a href="/forgotpassword">Forgot password?</a></p>
-                            <Button bsStyle='primary'  disabled={session.loggingIn} onClick={this._login}>Sign in</Button>
-                        </form>
-                        
-                    </Col>
-                </Row>
-            </Grid>
+      <div className="Login">
+        <h2>Login</h2>
+        <Grid>
+          <Row className="no-gutter">
+            <Col md={ 6 }>
+              <Panel className="semi" bsStyle="primary">
+                { loginError }
+                <Input ref="username" type='text' disabled={ session.loggingIn } placeholder='Username' autoFocus={ true } />
+                <Input ref="password" type='password' disabled={ session.loggingIn } placeholder='Password' onKeyUp={ this.handleKeyUp } />
+                <p><a href="/forgotpassword">Forgot password?</a></p>
+                <Button bsStyle='primary' disabled={ session.loggingIn } onClick={ this._login }>Sign in</Button>
+              </Panel>
+            </Col>
+          </Row>
+        </Grid>
+      </div>
       );
   }
 }

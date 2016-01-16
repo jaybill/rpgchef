@@ -42,18 +42,17 @@ export default class UserWeaponList extends Component {
       const tDelFunc = (id) => {
         delFunc(id);
       };
-      const control = <MWeaponCardCtrls weapon={weapon} delFunc={tDelFunc}/>;
-      allWeapons.push(<WeaponCard weapon={weapon} controls={control} key={i++}/>);
+      const control = <MWeaponCardCtrls weapon={ weapon } delFunc={ tDelFunc } />;
+      allWeapons.push(<WeaponCard weapon={ weapon } controls={ control } key={ i++ } />);
 
     });
 
 
 
     return (<div className="UserWeaponList">
-            <h2>My Weapons</h2>
-            {allWeapons}
-
-        </div>);
+              <h2>My Weapons</h2>
+              { allWeapons }
+            </div>);
   }
 }
 

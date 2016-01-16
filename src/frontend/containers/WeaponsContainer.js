@@ -23,7 +23,6 @@ class WeaponsContainer extends Component {
   componentWillMount() {
     const {dispatch, weapons} = this.props;
     dispatch(defaultWeapons());
-
   }
 
   loadRandomWeapons(effectCount, weaponCount) {
@@ -36,18 +35,17 @@ class WeaponsContainer extends Component {
     const {dispatch, weapons, defaultWeapons, userweapon} = this.props;
 
     if (defaultWeapons) {
-      return <Weapons
-        working={weapons.working || userweapon.post.working}
-        message={weapons.message}
-        failed={weapons.failed}
-        succeeded={weapons.succeeded}
-        randomWeapons={weapons.weapons}
-        loadWeapons={this.loadRandomWeapons}
-        saveWeapon={this.saveWeapon}
-        />
+      return <Weapons working={ weapons.working || userweapon.post.working }
+               message={ weapons.message }
+               failed={ weapons.failed }
+               succeeded={ weapons.succeeded }
+               randomWeapons={ weapons.weapons }
+               loadWeapons={ this.loadRandomWeapons }
+               saveWeapon={ this.saveWeapon } />
     }
-    return <div>Loading...</div>
-
+    return <div>
+             Loading...
+           </div>
   }
 }
 

@@ -22,8 +22,12 @@ class Confirm extends Component {
 
     return (
       <div className="Confirm">
-            <Alert bsStyle={style} >{this.props.message}</Alert>
-            <p>{link}</p>
+        <Alert bsStyle={ style }>
+          { this.props.message }
+        </Alert>
+        <p>
+          { link }
+        </p>
       </div>
       );
   }

@@ -16,26 +16,35 @@ export default class WeaponCard extends Component {
     const priceStr = d.getCurrencyString(weapon.priceInCp);
     let controlDisplay;
     if (this.props.controls) {
-      controlDisplay = <div className="pull-right">{this.props.controls}</div>
+      controlDisplay = <div className="pull-right">
+                         { this.props.controls }
+                       </div>
     }
 
-    return (<div className="WeaponCard"><Panel bsStyle='primary' bsSize="large">
-            {controlDisplay}
-        <h3>{this.props.weapon.name}</h3>
-        <hr/>
-            <Row>
-                <Col md={4}><b>Weight:</b> {weapon.weightInLb} pounds</Col>
-                <Col md={5}><b>Damage:</b> {weapon.damage}</Col>
-                <Col md={3}><b>Price:</b> {priceStr}</Col>
-            </Row>
-            <hr/>
-            
-            <Row>
-                <Col md={12}>
-                   {weapon.properties} {weapon.magicProps}
-                </Col>
-            </Row>
-        </Panel></div>);
+    return (<div className="WeaponCard">
+              <Panel bsStyle='primary' bsSize="large">
+                { controlDisplay }
+                <h3>{ this.props.weapon.name }</h3>
+                <hr/>
+                <Row>
+                  <Col md={ 4 }><b>Weight:</b>
+                    { weapon.weightInLb } pounds</Col>
+                  <Col md={ 5 }><b>Damage:</b>
+                    { weapon.damage }
+                  </Col>
+                  <Col md={ 3 }><b>Price:</b>
+                    { priceStr }
+                  </Col>
+                </Row>
+                <hr/>
+                <Row>
+                  <Col md={ 12 }>
+                    { weapon.properties }
+                    { weapon.magicProps }
+                  </Col>
+                </Row>
+              </Panel>
+            </div>);
   }
 }
 

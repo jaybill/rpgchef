@@ -14,7 +14,9 @@ import { pageView } from './analytics';
 import PathKnower from './pathknower';
 import './ga';
 
-Stripe.setPublishableKey(process.env.STRIPE_PK);
+if (Stripe) {
+  Stripe.setPublishableKey(process.env.STRIPE_PK);
+}
 
 var logLevel = log.levels.DEBUG;
 if (process.env.LOG_LEVEL) {

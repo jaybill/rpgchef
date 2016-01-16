@@ -11,15 +11,14 @@ export default class Welcome extends Component {
   render() {
     return (
       <SimplePage>
-      <div className="Welcome">
-                <Jumbotron>
-                    
-                    <h1>RPG Chef</h1>
-                    <p>A tool for creating and maintaining assets for table top role-playing games.<br/>
-                    We&apos;re currently in very limited beta testing.</p>
-                    <Button href="/mailinglist.html" bsSize="large" bsStyle="primary">Request Beta Invitation</Button>
-                </Jumbotron>
-            </div>
+        <div className="Welcome">
+          <Jumbotron>
+            <h1>RPG Chef</h1>
+            <p>A tool for creating and maintaining assets for table top role-playing games.
+              <br/> We&apos;re currently in very limited beta testing.</p>
+            <Button href="/mailinglist.html" bsSize="large" bsStyle="primary">Request Beta Invitation</Button>
+          </Jumbotron>
+        </div>
       </SimplePage>
       );
   }

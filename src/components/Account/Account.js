@@ -53,45 +53,38 @@ export default class Account extends Component {
     const {message, succeeded, failed, working} = this.props;
 
     if (succeeded) {
-      displayMessage = <Alert bsStyle="success">{message}</Alert>
+      displayMessage = <Alert bsStyle="success">
+                         { message }
+                       </Alert>
     }
 
     if (failed) {
-      displayMessage = <Alert bsStyle="danger">{message}</Alert>
+      displayMessage = <Alert bsStyle="danger">
+                         { message }
+                       </Alert>
     }
 
 
     return (<div className="Account">
-            <h2>Account</h2>
-            <Panel bsStyle="primary">
-            <Grid>
-            <Row>
-            <Col md={6} mdOffset={3}>
-
-
-            {displayMessage}
-
-            <div className="form-group">
-            <label>Username</label>
-            <CtrldInputText type="email"
-      className="form-control"
-      value={this.state.username}
-      name="username"
-      disabled={this.working}
-      onFieldChange={this.onFieldChange}/>
-            </div>   
-
-            <Input type="password" disabled={this.working}
-      ref="pass1" autoComplete="off" label="Password " placeholder="(Leave blank for no change.)" />
-            <Input type="password" disabled={this.working}
-      ref="pass2" autoComplete="off" label="Password (Again)" placeholder="Password (again)" />
-         
-            <Button disabled={working} onClick={this.onSubmit} bsStyle="primary" bsSize="large">Submit</Button>
-            </Col>
-            </Row>
-            </Grid>
-            </Panel>
-        </div>);
+              <h2>Account</h2>
+              <Grid>
+                <Row className="no-gutter">
+                  <Col md={ 6 }>
+                    <Panel bsStyle="primary">
+                      { displayMessage }
+                      <div className="form-group">
+                        <label>Username</label>
+                        <CtrldInputText type="email" className="form-control" value={ this.state.username } name="username" disabled={ this.working } onFieldChange={ this.onFieldChange }
+                        />
+                      </div>
+                      <Input type="password" disabled={ this.working } ref="pass1" autoComplete="off" label="Password " placeholder="(Leave blank for no change.)" />
+                      <Input type="password" disabled={ this.working } ref="pass2" autoComplete="off" label="Password (Again)" placeholder="Password (again)" />
+                      <Button disabled={ working } onClick={ this.onSubmit } bsStyle="primary" bsSize="large">Submit</Button>
+                    </Panel>
+                  </Col>
+                </Row>
+              </Grid>
+            </div>);
   }
 }
 

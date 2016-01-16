@@ -32,30 +32,36 @@ export default class ResetPassword extends Component {
     var wh;
 
     if (resetError) {
-      errorDisplay = <Alert bsStyle="danger">{resetError}</Alert>
+      errorDisplay = <Alert bsStyle="danger">
+                       { resetError }
+                     </Alert>
     }
 
     if (reset) {
-      wh = (<Alert bsStyle="success"><h4>Password Reset Successful</h4>
-            <p>You can now <Link to="/login">log in</Link> with your new password.</p>
+      wh = (<Alert bsStyle="success">
+              <h4>Password Reset Successful</h4>
+              <p>You can now
+                <Link to="/login">log in</Link> with your new password.</p>
             </Alert>);
     } else {
       wh = (
         <Grid>
-            <Row>
-            <Col md={6} mdOffset={3}>
-            <h2>Reset Password</h2>
-            {errorDisplay}
-            <Input type="password" ref="pass1" autoComplete="off" label="Password" placeholder="Password" />
-            <Input type="password" ref="pass2" autoComplete="off" label="Password (Again)" placeholder="Password (again)" />
-            <Button onClick={this.onReset} bsStyle="primary" bsSize="large">Reset Password</Button>
+          <Row>
+            <Col md={ 6 } mdOffset={ 3 }>
+              <h2>Reset Password</h2>
+              { errorDisplay }
+              <Input type="password" ref="pass1" autoComplete="off" label="Password" placeholder="Password" />
+              <Input type="password" ref="pass2" autoComplete="off" label="Password (Again)" placeholder="Password (again)" />
+              <Button onClick={ this.onReset } bsStyle="primary" bsSize="large">Reset Password</Button>
             </Col>
-            </Row>
+          </Row>
         </Grid>
 
 
       );
     }
-    return (<div className="ResetPassword">{wh}</div>);
+    return (<div className="ResetPassword">
+              { wh }
+            </div>);
   }
 }

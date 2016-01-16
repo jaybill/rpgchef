@@ -28,16 +28,15 @@ export default class GWeaponCardCtrls extends Component {
     }
 
     return (<div className="GWeaponCardCtrls">
-
-            {displayMessage}
-            <ButtonToolbar>
-            <ButtonGroup>
-            <Button disabled={working} bsSize="xs" bsStyle="primary" onClick={this.saveFunc}>
-            <Glyphicon glyph="floppy-disk"/> Save
-            </Button>
-            </ButtonGroup>
-            </ButtonToolbar>
-        </div>);
+              { displayMessage }
+              <ButtonToolbar>
+                <ButtonGroup>
+                  <Button disabled={ working } bsSize="xs" bsStyle="primary" onClick={ this.saveFunc }>
+                    <Glyphicon glyph="floppy-disk" /> Save
+                  </Button>
+                </ButtonGroup>
+              </ButtonToolbar>
+            </div>);
   }
 }
 

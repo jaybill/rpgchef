@@ -16,7 +16,9 @@ class LogoutContainer extends Component {
 
 
   render() {
-    return <SimplePage><Logout/></SimplePage>;
+    return <SimplePage>
+             <Logout/>
+           </SimplePage>;
   }
 
 }

@@ -20,20 +20,17 @@ class CancelContainer extends Component {
 
     // Dispatch action if everything is okay.
     dispatch(doCancel(formdata));
-
   }
 
   render() {
     const self = this;
     const {dispatch, cancel} = this.props;
 
-    return <Cancel
-      onSubmit={(formdata) => self.onSubmit(formdata)}
-      working={cancel.working}
-      message={cancel.message}
-      failed={cancel.failed}
-      succeeded={cancel.succeeded}
-      />
+    return <Cancel onSubmit={ (formdata) => self.onSubmit(formdata) }
+             working={ cancel.working }
+             message={ cancel.message }
+             failed={ cancel.failed }
+             succeeded={ cancel.succeeded } />
   }
 }
 

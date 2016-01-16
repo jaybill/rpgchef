@@ -15,9 +15,9 @@ var _ = require('lodash');
 var insert = require('gulp-insert');
 var log = require('loglevel');
 var URI = require('urijs');
-
 var exec = require('child_process').exec;
 var gutil = require('gulp-util');
+var esformatter = require('gulp-esformatter');
 
 // Settings
 var RELEASE = !!argv.release; // Minimize and optimize during a build?
@@ -122,6 +122,17 @@ gulp.task('assets', function() {
       title: 'assets'
     }));
 });
+
+// format
+gulp.task('format', function(cb) {
+  var cmd = " ./node_modules/.bin/esformatter -i src/**/*.js";
+  exec(cmd, function(err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+});
+
 
 // Bundle
 gulp.task('bundle', function(cb) {

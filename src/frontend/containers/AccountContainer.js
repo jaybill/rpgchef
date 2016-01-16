@@ -19,7 +19,6 @@ class AccountContainer extends Component {
     this.setState({
       user: session.user
     });
-
   }
 
   onSubmit(formdata) {
@@ -44,21 +43,18 @@ class AccountContainer extends Component {
     });
 
     dispatch(doAccount(updatedUser));
-
   }
 
   render() {
     const self = this;
     const {dispatch, account, session} = this.props;
 
-    return <Account
-      onSubmit={(formdata) => self.onSubmit(formdata)}
-      working={account.working}
-      message={account.message}
-      failed={account.failed}
-      user={this.state.user}
-      succeeded={account.succeeded}
-      />
+    return <Account onSubmit={ (formdata) => self.onSubmit(formdata) }
+             working={ account.working }
+             message={ account.message }
+             failed={ account.failed }
+             user={ this.state.user }
+             succeeded={ account.succeeded } />
   }
 }
 

@@ -38,7 +38,6 @@ class ResetPasswordContainer extends Component {
       hash: params.hash,
       password: formdata.pass1
     }));
-
   }
 
   render() {
@@ -46,7 +45,11 @@ class ResetPasswordContainer extends Component {
     const {resetPassword} = this.props;
     log.debug(resetPassword);
     if (resetPassword.verifying) {
-      return <SimplePage><div>Verifying...</div></SimplePage>
+      return <SimplePage>
+               <div>
+                 Verifying...
+               </div>
+             </SimplePage>
     } else {
 
       let verified = false;
@@ -56,11 +59,12 @@ class ResetPasswordContainer extends Component {
       }
 
 
-      return <SimplePage><ResetPassword
-        onReset={this.onReset}
-        verified={verified}
-        resetError={resetPassword.resetError}
-        reset={resetPassword.reset} /></SimplePage>
+      return <SimplePage>
+               <ResetPassword onReset={ this.onReset }
+                 verified={ verified }
+                 resetError={ resetPassword.resetError }
+                 reset={ resetPassword.reset } />
+             </SimplePage>
 
     }
   }

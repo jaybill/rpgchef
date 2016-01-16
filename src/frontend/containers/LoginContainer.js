@@ -42,10 +42,9 @@ class LoginContainer extends Component {
 
   render() {
     const {dispatch, session} = this.props;
-    return <SimplePage><Login
-      session={session}
-      login={credentials => dispatch(login(credentials))}
-      /></SimplePage>
+    return <SimplePage>
+             <Login session={ session } login={ credentials => dispatch(login(credentials)) } />
+           </SimplePage>
   }
 }
 

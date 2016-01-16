@@ -27,41 +27,38 @@ export default class UserWeapon extends Component {
     let displayMessage;
 
     const {message, succeeded, failed, working} = this.props;
-    
-    if(succeeded){
-        displayMessage = <Alert bsStyle="success">{message}</Alert>
+
+    if (succeeded) {
+      displayMessage = <Alert bsStyle="success">
+                         { message }
+                       </Alert>
     }
 
-    if(failed){
-        displayMessage = <Alert bsStyle="danger">{message}</Alert>
+    if (failed) {
+      displayMessage = <Alert bsStyle="danger">
+                         { message }
+                       </Alert>
     }
-      
+
     return (<div className="UserWeapon">
-        <Grid>
-            <Row>
-            <Col md={6} mdOffset={3}>
-            <h2>UserWeapon</h2>
-
-            {displayMessage}
-
-            <Input type="text" 
-            ref="name" 
-            label="Name"
-            onKeyUp={this.onKeyUp} 
-            placeholder="Enter name" />
-            <Button onClick={this.onSubmit} bsStyle="primary" bsSize="large">Submit</Button>
-
-            </Col>
-            </Row>
-        </Grid>
-        </div>);
+              <Grid>
+                <Row>
+                  <Col md={ 6 } mdOffset={ 3 }>
+                    <h2>UserWeapon</h2>
+                    { displayMessage }
+                    <Input type="text" ref="name" label="Name" onKeyUp={ this.onKeyUp } placeholder="Enter name" />
+                    <Button onClick={ this.onSubmit } bsStyle="primary" bsSize="large">Submit</Button>
+                  </Col>
+                </Row>
+              </Grid>
+            </div>);
   }
 }
 
 UserWeapon.propTypes = {
-    message: PropTypes.string,
-    succeeded: PropTypes.bool,
-    failed: PropTypes.bool,
-    working: PropTypes.bool,
-    onSubmit: PropTypes.func
+  message: PropTypes.string,
+  succeeded: PropTypes.bool,
+  failed: PropTypes.bool,
+  working: PropTypes.bool,
+  onSubmit: PropTypes.func
 }

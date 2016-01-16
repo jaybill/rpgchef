@@ -8,7 +8,6 @@ export default class Cancel extends Component {
   constructor() {
     super();
     this.onSubmit = this.onSubmit.bind(this);
-
   }
 
   onSubmit() {
@@ -24,10 +23,14 @@ export default class Cancel extends Component {
 
     if (succeeded) {
 
-      wtr = <div><Alert bsStyle="success">Your subscription has been cancelled.</Alert>
-               <p><LinkContainer to="/app/subscribe">
-               <Button block bsSize="large" bsStyle="success">Go Back</Button>
-               </LinkContainer></p></div>
+      wtr = <div>
+              <Alert bsStyle="success">Your subscription has been cancelled.</Alert>
+              <p>
+                <LinkContainer to="/app/subscribe">
+                  <Button block bsSize="large" bsStyle="success">Go Back</Button>
+                </LinkContainer>
+              </p>
+            </div>
     }
 
     if (failed) {
@@ -36,39 +39,37 @@ export default class Cancel extends Component {
 
     if (!failed && !succeeded) {
       wtr = (<div>
-               <p>You are about to cancel your subscription.
-               Are you sure you want to do this?</p>
+               <p>You are about to cancel your subscription. Are you sure you want to do this?</p>
                <p><em>Note: This will not delete your account,
-               we&apos;ll just stop charging your credit card.</em>
+                                                      we&apos;ll just stop charging your credit card.</em>
                </p>
                <Row>
-               <Col md={6}>
-               <LinkContainer to="/app/subscribe">
-               <Button block bsSize="large" bsStyle="success">Go Back</Button>
-               </LinkContainer>
-               </Col>
-               <Col md={6}>
-               <Button block onClick={this.onSubmit} bsStyle="danger" bsSize="large">
-               Cancel Subscription</Button>
-               </Col>
+                 <Col md={ 6 }>
+                   <LinkContainer to="/app/subscribe">
+                     <Button block bsSize="large" bsStyle="success">Go Back</Button>
+                   </LinkContainer>
+                 </Col>
+                 <Col md={ 6 }>
+                   <Button block onClick={ this.onSubmit } bsStyle="danger" bsSize="large">
+                     Cancel Subscription</Button>
+                 </Col>
                </Row>
-               </div>
+             </div>
       );
     }
 
     return (<div className="Cancel">
-
-            <Grid>
-            <Row>
-            <Col md={6} mdOffset={3}>
-            <h2>Cancel</h2>
-            <Well>
-            {wtr}
-            </Well>
-            </Col>
-            </Row>
-        </Grid>
-        </div>);
+              <Grid>
+                <Row>
+                  <Col md={ 6 } mdOffset={ 3 }>
+                    <h2>Cancel</h2>
+                    <Well>
+                      { wtr }
+                    </Well>
+                  </Col>
+                </Row>
+              </Grid>
+            </div>);
   }
 }
 

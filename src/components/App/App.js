@@ -17,45 +17,57 @@ class App extends Component {
 
     return (
       <div className="App">
-
         <div className="container">
-
-<Navbar fixedTop>
-    <Navbar.Header>
-        <LinkContainer to="/app/home">
-        <Navbar.Brand>
-        RPG Chef
-        </Navbar.Brand>
-       </LinkContainer>
-      <Navbar.Toggle />
-    </Navbar.Header>
-    <Navbar.Collapse>
-      <Nav>
-        <NavDropdown eventKey={1}  title="Generate" id="basic-nav-dropdown">
-            <LinkContainer to="/app/weapons"><MenuItem  eventKey={1.1}>Weapons</MenuItem></LinkContainer>
-        </NavDropdown>
-      </Nav>
-      <Nav>
-        <NavDropdown eventKey={2}  title="My Stuff" id="basic-nav-dropdown">
-            <LinkContainer to="/app/myweapons"><MenuItem  eventKey={2.1}>Weapons</MenuItem></LinkContainer>
-        </NavDropdown>
-      </Nav>
-
-      <Nav pullRight>
-        <NavDropdown eventKey={9}  title={this.props.user.username} id="account-nav-dropdown">
-            <LinkContainer to="/app/account"><MenuItem eventKey={9.1}>Account</MenuItem></LinkContainer>
-                        <LinkContainer to="/app/subscribe"><MenuItem eventKey={9.2}>Billing</MenuItem></LinkContainer>
-                        <LinkContainer to="/terms"><MenuItem  eventKey={9.3}>Terms of Service</MenuItem></LinkContainer>
-            <LinkContainer to="/privacy"><MenuItem  eventKey={9.4}>Privacy Policy</MenuItem></LinkContainer>
-            <LinkContainer to="/logout"><MenuItem eventKey={9.5}>Log out</MenuItem></LinkContainer>
-        </NavDropdown>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
-
-        <div className="App-Holder">{this.props.children}</div>
+          <Navbar fixedTop>
+            <Navbar.Header>
+              <LinkContainer to="/app/home">
+                <Navbar.Brand>
+                  RPG Chef
+                </Navbar.Brand>
+              </LinkContainer>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+              <Nav>
+                <NavDropdown eventKey={ 1 } title="Generate" id="basic-nav-dropdown">
+                  <LinkContainer to="/app/weapons">
+                    <MenuItem eventKey={ 1.1 }>Weapons</MenuItem>
+                  </LinkContainer>
+                </NavDropdown>
+              </Nav>
+              <Nav>
+                <NavDropdown eventKey={ 2 } title="My Stuff" id="basic-nav-dropdown">
+                  <LinkContainer to="/app/myweapons">
+                    <MenuItem eventKey={ 2.1 }>Weapons</MenuItem>
+                  </LinkContainer>
+                </NavDropdown>
+              </Nav>
+              <Nav pullRight>
+                <NavDropdown eventKey={ 9 } title={ this.props.user.username } id="account-nav-dropdown">
+                  <LinkContainer to="/app/account">
+                    <MenuItem eventKey={ 9.1 }>Account</MenuItem>
+                  </LinkContainer>
+                  <LinkContainer to="/app/subscribe">
+                    <MenuItem eventKey={ 9.2 }>Billing</MenuItem>
+                  </LinkContainer>
+                  <LinkContainer to="/terms">
+                    <MenuItem eventKey={ 9.3 }>Terms of Service</MenuItem>
+                  </LinkContainer>
+                  <LinkContainer to="/privacy">
+                    <MenuItem eventKey={ 9.4 }>Privacy Policy</MenuItem>
+                  </LinkContainer>
+                  <LinkContainer to="/logout">
+                    <MenuItem eventKey={ 9.5 }>Log out</MenuItem>
+                  </LinkContainer>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <div className="App-Holder">
+            { this.props.children }
+          </div>
         </div>
-        </div>
+      </div>
 
       );
   }

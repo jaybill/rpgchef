@@ -31,21 +31,20 @@ class UserWeaponListContainer extends Component {
     let wtr;
 
     if (userweaponlist) {
-      wtr = <UserWeaponList
-      onSubmit={(formdata) => self.onSubmit(formdata)}
-      working={userweaponlist.working}
-      message={userweaponlist.message}
-      failed={userweaponlist.failed}
-      succeeded={userweaponlist.succeeded}
-      weapons={userweaponlist.payload}
-      delFunc={this.delWeapon}
-      />
+      wtr = <UserWeaponList onSubmit={ (formdata) => self.onSubmit(formdata) }
+              working={ userweaponlist.working }
+              message={ userweaponlist.message }
+              failed={ userweaponlist.failed }
+              succeeded={ userweaponlist.succeeded }
+              weapons={ userweaponlist.payload }
+              delFunc={ this.delWeapon } />
     } else {
-      wtr = <div>Loading...</div>
+      wtr = <div>
+              Loading...
+            </div>
     }
 
     return wtr;
-
   }
 }
 

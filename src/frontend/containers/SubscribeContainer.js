@@ -25,11 +25,7 @@ class SubscribeContainer extends Component {
     const self = this;
     const {dispatch, subscribePost, subscribeGet} = this.props;
 
-    return <Subscribe
-      onSubmit={(formdata) => self.onSubmit(formdata)}
-      subscribePost={subscribePost}
-      subscribeGet={subscribeGet}
-      />
+    return <Subscribe onSubmit={ (formdata) => self.onSubmit(formdata) } subscribePost={ subscribePost } subscribeGet={ subscribeGet } />
   }
 }
 

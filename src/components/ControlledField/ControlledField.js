@@ -35,43 +35,22 @@ var commonDef = {
 
 var textareaRender = {
   render() {
-    return (<textarea
-      disabled={this.props.disabled}
-      placeholder={this.props.placeholder}
-      className={this.props.className}
-      value={this.props.value}
-      onChange={this.update}
-      onBlur={this.update}
-      ref="field"
-      rows={this.props.rows}/>);
+    return (<textarea disabled={ this.props.disabled } placeholder={ this.props.placeholder } className={ this.props.className } value={ this.props.value } onChange={ this.update }
+            onBlur={ this.update } ref="field" rows={ this.props.rows } />);
   }
 };
 
 var inputTextRender = {
   render() {
-    return (<input
-      disabled={this.props.disabled}
-      type="text"
-      placeholder={this.props.placeholder}
-      className={this.props.className}
-      value={this.props.value}
-      onChange={this.update}
-      onBlur={this.update}
-      ref="field" />);
+    return (<input disabled={ this.props.disabled } type="text" placeholder={ this.props.placeholder } className={ this.props.className } value={ this.props.value } onChange={ this.update }
+            onBlur={ this.update } ref="field" />);
   }
 };
 
 var inputPasswordRender = {
   render() {
-    return (<input
-      disabled={this.props.disabled}
-      type="password"
-      placeholder={this.props.placeholder}
-      className={this.props.className}
-      value={this.props.value}
-      onChange={this.update}
-      onBlur={this.update}
-      ref="field" />);
+    return (<input disabled={ this.props.disabled } type="password" placeholder={ this.props.placeholder } className={ this.props.className } value={ this.props.value } onChange={ this.update }
+            onBlur={ this.update } ref="field" />);
   }
 };
 

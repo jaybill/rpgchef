@@ -13,9 +13,8 @@ class Logout extends Component {
 
     return (
       <div className="Logout">
-            <Alert bsStyle="success" >You are now logged out.</Alert>
-
-            </div>
+        <Alert bsStyle="success">You are now logged out.</Alert>
+      </div>
       );
   }
 

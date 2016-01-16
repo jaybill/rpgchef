@@ -78,7 +78,6 @@ export default class DnD5e {
     }
 
     return Object.assign({}, weapon, updates);
-
   }
 
   mergedWeapons() {
@@ -112,7 +111,6 @@ export default class DnD5e {
       });
 
       return mw;
-
     }
 
     randomWeapons(effectCount = 1, weaponCount = 1) {
@@ -194,7 +192,6 @@ export default class DnD5e {
 
       }
       return magicWeapons;
-
     }
 
 
@@ -221,7 +218,6 @@ export default class DnD5e {
         }
       }
       return arr;
-
     }
 
     fixCurrency(m) {
@@ -254,7 +250,6 @@ export default class DnD5e {
       }
 
       return out.join(" ");
-
     }
 
 

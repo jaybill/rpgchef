@@ -10,8 +10,6 @@ function asyncKeys(prefix) {
     [prefix + "_SUCCESS"]: null,
     [prefix + "_FAILURE"]: null
   };
-
-
 }
 
 function makeKeys() {
@@ -42,7 +40,6 @@ function makeKeys() {
 
   km = Object.assign(km, extraKeys);
   return km;
-
 }
 
 var km = keyMirror(makeKeys());

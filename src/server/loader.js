@@ -45,5 +45,4 @@ switch (mode) {
 function usage() {
 
   console.log("\nExample usage: \n node loader.js [mode]\n ");
-
 }

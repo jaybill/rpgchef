@@ -17,7 +17,7 @@ var log = require('loglevel');
 var URI = require('urijs');
 var exec = require('child_process').exec;
 var gutil = require('gulp-util');
-var esformatter = require('gulp-esformatter');
+
 
 // Settings
 var RELEASE = !!argv.release; // Minimize and optimize during a build?
@@ -188,7 +188,7 @@ gulp.task('styles', function() {
 
 // Build the app from source code
 gulp.task('build', ['clean'], function(cb) {
-  runSequence(['vendor', 'assets', 'styles', 'bundle'], cb);
+  runSequence(['vendor', 'assets', 'styles', 'format', 'bundle'], cb);
 });
 
 // Build and start watching for modifications

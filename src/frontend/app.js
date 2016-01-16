@@ -43,16 +43,15 @@ syncReduxAndRouter(history, store);
 function run() {
   ReactDOM.render(
     <div>
-    <Provider store={store}>
-      <Router history={history}>
-        {getRoutes()}
-      </Router>
-
+      <Provider store={ store }>
+        <Router history={ history }>
+          { getRoutes() }
+        </Router>
       </Provider>
-          <Provider store={store}>
-          <PathKnower tell={pageView}/>
+      <Provider store={ store }>
+        <PathKnower tell={ pageView } />
       </Provider>
-  </div>,
+    </div>,
     document.getElementById('root')
   );
 }

@@ -100,8 +100,6 @@ export const getStripeToken = (cc) => {
         resolve(response);
       }
     });
-
-
   });
 
 }
@@ -122,5 +120,4 @@ function callServer(url, method, query, data, headers) {
       withCredentials: true
     }
   });
-
 }

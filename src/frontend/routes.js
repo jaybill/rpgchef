@@ -25,26 +25,26 @@ import About from '../components/About';
 export default function getRoutes() {
   return (
     <Route path="/">
-    <Route path="app" component={App}>
-      <Route path="home" component={Home}/>
-      <Route path="account" component={Account}/>
-      <Route path="weapons" component={Weapons}/>
-      <Route path="myweapons" component={UserWeaponList}/>
-      <Route path="subscribe" component={Subscribe}/>
-      <Route path="cancel" component={Cancel}/>
+      <Route path="app" component={ App }>
+        <Route path="home" component={ Home } />
+        <Route path="account" component={ Account } />
+        <Route path="weapons" component={ Weapons } />
+        <Route path="myweapons" component={ UserWeaponList } />
+        <Route path="subscribe" component={ Subscribe } />
+        <Route path="cancel" component={ Cancel } />
+      </Route>
+      // Routes that don't require authentication
+      <Route path="register" component={ Register } />
+      <Route path="login" component={ Login } />
+      <Route path="about" component={ About } />
+      <Route path="terms" component={ TermsOfService } />
+      <Route path="privacy" component={ PrivacyPolicy } />
+      <Route path="logout" component={ Logout } />
+      <Route path="confirm" component={ Confirm } />
+      <Route path="forgotpassword" component={ ForgotPassword } />
+      <Route path="resetpassword" component={ ResetPassword } />
+      <Route path="/*" component={ NotFound } />
+      <IndexRoute component={ Welcome } />
     </Route>
-   // Routes that don't require authentication
-   <Route path="register" component={Register}/>
-   <Route path="login" component={Login}/>
-   <Route path="about" component={About}/>
-   <Route path="terms" component={TermsOfService}/>
-   <Route path="privacy" component={PrivacyPolicy}/>
-   <Route path="logout" component={Logout}/>
-   <Route path="confirm" component={Confirm}/>
-   <Route path="forgotpassword" component={ForgotPassword}/>
-   <Route path="resetpassword" component={ResetPassword}/>
-   <Route path="/*" component={NotFound}/>
-   <IndexRoute component={Welcome}/>
-   </Route>
     );
 }

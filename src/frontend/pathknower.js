@@ -15,12 +15,9 @@ class PathKnower extends Component {
     this.tell(routing.path);
   }
 
-
-
   componentWillReceiveProps(newprops) {
     const {routing} = newprops;
     this.tell(routing.path);
-
   }
 
   tell(path) {

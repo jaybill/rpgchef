@@ -131,7 +131,7 @@ export const newWeapons = () => {
             reject(err);
           }
         });
-      } catch ( err ) {
+      } catch (err) {
         reject(err);
       }
     });

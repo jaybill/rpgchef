@@ -25,11 +25,10 @@ class ConfirmContainer extends Component {
     log.debug(this.props);
     const {confirm} = this.props;
     if (confirm.confirming) {
-      return <SimplePage>
-               <div>
-                 Confirming...
-               </div>
-             </SimplePage>
+      return <div>
+               Confirming...
+             </div>
+
     } else {
 
       let msg = 'Email confirmed.';
@@ -39,9 +38,8 @@ class ConfirmContainer extends Component {
         success = false;
       }
 
-      return <SimplePage>
-               <Confirm success={ success } message={ msg } />
-             </SimplePage>;
+      return <Confirm success={ success } message={ msg } />;
+
     }
   }
 

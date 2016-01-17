@@ -20,7 +20,13 @@ import TermsOfService from '../components/TermsOfService';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import NotFound from '../components/NotFound';
 import About from '../components/About';
+import SimplePage from '../components/SimplePage';
 
+function w(component) {
+  return <SimplePage>
+           { component }
+         </SimplePage>;
+}
 
 export default function getRoutes() {
   return (
@@ -32,18 +38,23 @@ export default function getRoutes() {
         <Route path="myweapons" component={ UserWeaponList } />
         <Route path="subscribe" component={ Subscribe } />
         <Route path="cancel" component={ Cancel } />
+        <Route path="about" component={ About } />
+        <Route path="terms" component={ TermsOfService } />
+        <Route path="privacy" component={ PrivacyPolicy } />
       </Route>
       // Routes that don't require authentication
-      <Route path="register" component={ Register } />
-      <Route path="login" component={ Login } />
-      <Route path="about" component={ About } />
-      <Route path="terms" component={ TermsOfService } />
-      <Route path="privacy" component={ PrivacyPolicy } />
-      <Route path="logout" component={ Logout } />
-      <Route path="confirm" component={ Confirm } />
-      <Route path="forgotpassword" component={ ForgotPassword } />
-      <Route path="resetpassword" component={ ResetPassword } />
-      <Route path="/*" component={ NotFound } />
+      <Route path="" component={ SimplePage }>
+        <Route path="register" component={ Register } />
+        <Route path="login" component={ Login } />
+        <Route path="about" component={ About } />
+        <Route path="terms" component={ TermsOfService } />
+        <Route path="privacy" component={ PrivacyPolicy } />
+        <Route path="logout" component={ Logout } />
+        <Route path="confirm" component={ Confirm } />
+        <Route path="forgotpassword" component={ ForgotPassword } />
+        <Route path="resetpassword" component={ ResetPassword } />
+        <Route path="/*" component={ NotFound } />
+      </Route>
       <IndexRoute component={ Welcome } />
     </Route>
     );

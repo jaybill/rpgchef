@@ -54,8 +54,11 @@ export default class Subscribe extends Component {
     const panels = [];
     let i = 0;
     _.forEach(levels, (level) => {
-      const header = <div><strong>{ level.plan }</strong>
-                       <div className="pull-right"><strong>{ level.cost }</strong></div>
+      const header = <div>
+                       <strong>{ level.plan }</strong>
+                       <div className="pull-right">
+                         <strong>{ level.cost }</strong>
+                       </div>
                      </div>;
       panels.push(<Col key={ i++ } md={ 3 }>
                     <Panel bsStyle={ level.style } header={ header }>
@@ -76,7 +79,9 @@ export default class Subscribe extends Component {
         const {message, succeeded, failed, working} = this.props.subscribePost;
 
         if (succeeded) {
-          displayMessage = <Alert bsStyle="success">Your payment was accepted. Thanks!</Alert>
+          displayMessage = <Alert bsStyle="success">
+                             Your payment was accepted. Thanks!
+                           </Alert>
         }
 
         if (failed) {
@@ -88,24 +93,44 @@ export default class Subscribe extends Component {
 
         const cvcLabel = (<span>CVV <a href="https://www.cvvnumber.com/cvv.html" target="new"><i className="fa fa-question-circle"></i></a></span>);
         const subForm = (<Well>
-                           <Input ref="plan" type="select" label="Subscription Plan" placeholder="select">
-                           <option value="EVOKER">Evoker - $1.99/month</option>
-                           <option value="CONJURER">Conjurer - $4.99/month</option>
-                           <option value="WIZARD">Wizard - $9.99/month</option>
+                           <Input ref="plan"
+                             type="select"
+                             label="Subscription Plan"
+                             placeholder="select">
+                           <option value="EVOKER">
+                             Evoker - $1.99/month
+                           </option>
+                           <option value="CONJURER">
+                             Conjurer - $4.99/month
+                           </option>
+                           <option value="WIZARD">
+                             Wizard - $9.99/month
+                           </option>
                            </Input>
-                           <Input label="Card Number" placeholder="Card Number" type="text" ref="number" />
+                           <Input label="Card Number"
+                             placeholder="Card Number"
+                             type="text"
+                             ref="number" />
                            <Row>
                              <Col md={ 4 }>
-                               <Input type="text" placeholder="MM" label="Exp. Month" ref="exp_month" />
+                               <Input type="text"
+                                 placeholder="MM"
+                                 label="Exp. Month"
+                                 ref="exp_month" />
                              </Col>
                              <Col md={ 4 }>
-                               <Input type="text" placeholder="YYYY" label="Exp. Year" ref="exp_year" />
+                               <Input type="text"
+                                 placeholder="YYYY"
+                                 label="Exp. Year"
+                                 ref="exp_year" />
                              </Col>
                              <Col md={ 4 }>
                                <Input type="text" label={ cvcLabel } ref="cvc" />
                              </Col>
                            </Row>
-                           <Button onClick={ this.onSubmit } bsStyle="primary" bsSize="large">Subscribe</Button>
+                           <Button onClick={ this.onSubmit } bsStyle="primary" bsSize="large">
+                             Subscribe
+                           </Button>
                          </Well>);
 
         if (!succeeded) {
@@ -136,7 +161,9 @@ export default class Subscribe extends Component {
                   </dl>
                   <p>
                     <LinkContainer to="/app/cancel">
-                      <Button bsSize="xs" bsStyle="danger">Cancel Subscription</Button>
+                      <Button bsSize="xs" bsStyle="danger">
+                        Cancel Subscription
+                      </Button>
                     </LinkContainer>
                   </p>
                 </Well>
@@ -144,15 +171,16 @@ export default class Subscribe extends Component {
       }
     }
     return (<div className="Subscribe">
+              <h2>Subscribe</h2>
               <Grid>
-                <Row>
+                <Row className="no-gutter">
                   <Col md={ 12 }>
-                    <h2>Subscribe</h2>
                     <Well>
-                      <p>RPG Chef is a "pay what you want" subscription service. We&apos;re not talking about <em>donations</em> here. We do ask that you pay for the service if
-                        you actively use it. We just think you should decide how much you pay and that payment should be on the honor system. What we <em>don&apos;t</em> have
-                        are "premium accounts" where people who pay us get access to special features and other people don&apos;t. Instead, we&apos;ve created a couple of subscription
-                        plans that are loosely based on how much you use our site:</p>
+                      <p>
+                        RPG Chef is a "pay what you want" subscription service. We&apos;re not talking about <em>donations</em> here. We do ask that you pay for the service
+                        if you actively use it. We just think you should decide how much you pay and that payment should be on the honor system. What we <em>don&apos;t</em>            have are "premium accounts" where people who pay us get access to special features and other people don&apos;t. Instead, we&apos;ve created a couple
+                        of subscription plans that are loosely based on how much you use our site:
+                      </p>
                     </Well>
                     <Row>
                       { panels }

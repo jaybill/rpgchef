@@ -40,26 +40,51 @@ export default class Register extends React.Component {
     if (complete) {
       wh = (<div>
               <h2>Confirm Your Email</h2>
-              <Panel bsStyle="primary">
-                <p>We&apos;ve sent an email to <strong>{ emailSentTo }</strong>.</p>
-                <p>Click the link in the email to activate your account.</p>
-              </Panel>
+              <Grid>
+                <Row className="no-gutter">
+                  <Col md={ 6 }>
+                    <Panel bsStyle="primary">
+                      <p>
+                        We&apos;ve sent an email to <strong>{ emailSentTo }</strong>.
+                      </p>
+                      <p>
+                        Click the link in the email to activate your account.
+                      </p>
+                    </Panel>
+                  </Col>
+                </Row>
+              </Grid>
             </div>);
     } else {
       wh = (<div>
               <h2>Register</h2>
               <Grid>
                 <Row className="no-gutter">
-                  <Col md={ 6 } mdOffset={ 3 }>
+                  <Col md={ 6 }>
                     <Panel bsStyle="primary">
                       { errorDisplay }
-                      <Input type="email" ref="email" label="Email Address" placeholder="Enter email" />
-                      <Input type="password" ref="pass1" label="Password" placeholder="Password" />
-                      <Input type="password" ref="pass2" label="Password (Again)" placeholder="Password (again)" />
-                      <p>By creating an account, you agree to the
-                        <Link to="/terms">Terms</Link> and the
-                        <Link to="/privacy">Privacy Policy</Link>.</p>
-                      <Button onClick={ this._register } bsStyle="primary" bsSize="large">Create Account</Button>
+                      <Input type="email"
+                        ref="email"
+                        label="Email Address"
+                        placeholder="Enter email" />
+                      <Input type="password"
+                        ref="pass1"
+                        label="Password"
+                        placeholder="Password" />
+                      <Input type="password"
+                        ref="pass2"
+                        label="Password (Again)"
+                        placeholder="Password (again)" />
+                      <p>
+                        By creating an account, you agree to the
+                        <Link to="/terms"> Terms
+                        </Link> and the
+                        <Link to="/privacy"> Privacy Policy
+                        </Link>.
+                      </p>
+                      <Button onClick={ this._register } bsStyle="primary" bsSize="large">
+                        Create Account
+                      </Button>
                     </Panel>
                   </Col>
                 </Row>

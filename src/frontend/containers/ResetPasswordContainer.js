@@ -45,11 +45,10 @@ class ResetPasswordContainer extends Component {
     const {resetPassword} = this.props;
     log.debug(resetPassword);
     if (resetPassword.verifying) {
-      return <SimplePage>
-               <div>
-                 Verifying...
-               </div>
-             </SimplePage>
+      return <div>
+               Verifying...
+             </div>
+
     } else {
 
       let verified = false;
@@ -59,13 +58,10 @@ class ResetPasswordContainer extends Component {
       }
 
 
-      return <SimplePage>
-               <ResetPassword onReset={ this.onReset }
-                 verified={ verified }
-                 resetError={ resetPassword.resetError }
-                 reset={ resetPassword.reset } />
-             </SimplePage>
-
+      return <ResetPassword onReset={ this.onReset }
+               verified={ verified }
+               resetError={ resetPassword.resetError }
+               reset={ resetPassword.reset } />
     }
   }
 

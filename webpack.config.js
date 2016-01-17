@@ -196,4 +196,40 @@ var loaderConfig = _.merge({}, config, {
   }
 });
 
-module.exports = [loaderConfig, appConfig, serverConfig];
+//
+// Configuration for the worker bundle (workers.js)
+// -----------------------------------------------------------------------------
+
+var workerConfig = _.merge({}, config, {
+  entry: './src/workers/index.js',
+  output: {
+    filename: 'workers.js',
+    libraryTarget: 'commonjs2'
+  },
+  target: 'node',
+  externals: /^[a-z\-0-9]+$/,
+  node: {
+    console: false,
+    global: false,
+    process: false,
+    Buffer: false,
+    __filename: false,
+    __dirname: false
+  },
+  plugins: config.plugins.concat(
+    ignore,
+    new webpack.DefinePlugin(_.merge(GLOBALS, {
+      '__SERVER__': true
+    }))
+  ),
+  module: {
+    loaders: config.module.loaders.map(function(loader) {
+      // Remove style-loader
+      return _.merge(loader, {
+        loader: loader.loader = loader.loader.replace('style-loader!', '')
+      });
+    })
+  }
+});
+
+module.exports = [workerConfig, loaderConfig, appConfig, serverConfig];

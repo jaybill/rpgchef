@@ -13,12 +13,12 @@ class ForgotPasswordContainer extends Component {
     log.debug(this.props);
     const {dispatch, forgotPassword} = this.props;
 
-    return (<SimplePage>
-              <ForgotPassword onSubmit={ username => dispatch(doForgotPassword(username)) }
-                error={ forgotPassword.error }
-                sending={ forgotPassword.sending }
-                complete={ forgotPassword.complete } />
-            </SimplePage>);
+    return (
+      <ForgotPassword onSubmit={ username => dispatch(doForgotPassword(username)) }
+        error={ forgotPassword.error }
+        sending={ forgotPassword.sending }
+        complete={ forgotPassword.complete } />
+      );
   }
 }
 

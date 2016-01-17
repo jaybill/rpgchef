@@ -1,0 +1,17 @@
+{
+  "quotes": {
+    "type": "single"
+  },
+  "plugins": [
+    "esformatter-jsx"
+  ],
+  "jsx": {
+    "htmlOptions": null,
+    "spaceInJSXExpressionContainers": " ",
+    "alignWithFirstAttribute": false,
+    "firstAttributeOnSameLine": true,
+    "maxAttrsOnTag": 3,
+    "attrsOnSameLineAsTag": false,
+    "formatJSX": true
+  }
+}

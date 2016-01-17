@@ -123,17 +123,6 @@ gulp.task('assets', function() {
     }));
 });
 
-// format
-gulp.task('format', function(cb) {
-  var cmd = " ./node_modules/.bin/esformatter -i src/**/*.js";
-  exec(cmd, function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-});
-
-
 // Bundle
 gulp.task('bundle', function(cb) {
   var started = false;
@@ -188,7 +177,7 @@ gulp.task('styles', function() {
 
 // Build the app from source code
 gulp.task('build', ['clean'], function(cb) {
-  runSequence(['vendor', 'assets', 'styles', 'format', 'bundle'], cb);
+  runSequence(['vendor', 'assets', 'styles', 'bundle'], cb);
 });
 
 // Build and start watching for modifications

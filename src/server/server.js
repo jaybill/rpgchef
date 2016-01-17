@@ -5,7 +5,6 @@ import HapiAuthCookie from 'hapi-auth-cookie';
 import HapiCorsHeaders from 'hapi-cors-headers';
 import Routes from './routes';
 import log from 'loglevel';
-import Db from './db';
 import inert from 'inert';
 
 

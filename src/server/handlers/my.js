@@ -33,7 +33,7 @@ My.handlers = {
             uw.destroy().then(() => {
               reply("OK");
             }).catch(err => {
-              throw err
+              throw err;
             });
           }
         } else {
@@ -44,7 +44,7 @@ My.handlers = {
 
       }).catch(err => {
         log.error(err);
-        reply(Boom.create(500))
+        reply(Boom.create(500));
       });
     }
   },
@@ -59,7 +59,7 @@ My.handlers = {
     },
     validate: {
       params: {
-        id: Joi.number().integer().required().min(0).label("Id"),
+        id: Joi.number().integer().required().min(0).label("Id")
       }
     },
 
@@ -79,7 +79,7 @@ My.handlers = {
 
       }).catch(err => {
         log.error(err);
-        reply(Boom.create(500))
+        reply(Boom.create(500));
       });
     }
   },
@@ -116,7 +116,7 @@ My.handlers = {
         if (weaponCount != 1) {
           throw new Error("weaponId " + weaponId + " does not exist");
         }
-        return
+        return;
       }).then(() => {
         return Db.UserWeapons.findById(nw.id).then((wp) => {
           if (wp && wp.get("userId") == userId) {
@@ -160,6 +160,6 @@ My.handlers = {
     }
   }
 
-}
+};
 
 export default My;

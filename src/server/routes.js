@@ -2,7 +2,7 @@ import Auth from './handlers/auth';
 import Generate from './handlers/generate';
 import My from './handlers/my';
 import Payment from './handlers/payment';
-
+import Workers from './handlers/workers';
 import path from 'path';
 import URIjs from 'urijs';
 
@@ -96,6 +96,11 @@ var routes = [
     method: ['DELETE'],
     path: '/api/payment/subscribe',
     config: Payment.handlers.cancel
+  },
+  {
+    method: ['POST'],
+    path: '/api/workers/print',
+    config: Workers.handlers.print
   },
 
   {

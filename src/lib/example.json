@@ -1,0 +1,34 @@
+{
+    "sections": [
+        {
+            "type": "section",
+            "content": {
+                "title": "The Broken Coast"
+            }
+        },
+        {
+            "type": "text",
+            "content": {
+                "paragraphs": [
+                    "The players arrive by ship, anchoring at a deserted coastal village. The sailors refuse to set foot on dry ground here, saying these lands are thrice cursed. The region is known as the Broken Coast, where long stretches of cliffs and jagged rocks fall away to rough, storm tossed seas.",
+                    "Signs point to Dagger Cove - the largest settlement in the area and home to Lord Baylen. A few miles from their anchorage, the characters come upon a ruined fishing village."
+                ]
+            }
+        },
+        {
+            "type": "subsection",
+            "content": {
+                "title": "Deserted Village"
+            }
+        },
+        {
+            "type": "commentbox",
+            "content": {
+                "title": "Read Aloud",
+                "paragraphs": [
+                    "There is no one left in the village, only the sad song of gulls. There are signs of recent struggle - broken doors, smoldering thatch, dead sheep, shattered spearheads in the sand, but no survivors. Not even a corpse."
+                ]
+            }
+        }
+    ]
+}

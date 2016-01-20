@@ -2,7 +2,7 @@
 
 import './ForgotPassword.less';
 import React, { Component } from 'react';
-import { Grid, Row, Col, Input, Button, Alert } from 'react-bootstrap';
+import { Panel, Grid, Row, Col, Input, Button, Alert } from 'react-bootstrap';
 import log from 'loglevel';
 
 export default class ForgotPassword extends Component {
@@ -28,10 +28,14 @@ export default class ForgotPassword extends Component {
 
     if (complete && !error) {
       formDisplay = <Col md={ 6 }>
-                      <Alert bsStyle="success">
-                        <h4>Reset Instructions Sent</h4>
-                        <p>Check your email to continue.</p>
-                      </Alert>
+                      <Panel bsStyle="primary">
+                        <Alert bsStyle="success">
+                          <h4>Reset Instructions Sent</h4>
+                          <p>
+                            Check your email to continue.
+                          </p>
+                        </Alert>
+                      </Panel>
                     </Col>;
     } else {
       if (error) {
@@ -41,18 +45,27 @@ export default class ForgotPassword extends Component {
       }
 
       formDisplay = <Col md={ 6 }>
-                      <h1>Forgot Password</h1>
-                      { errorDisplay }
-                      <p>Enter your username (usually your email) below and we will send you an email about how to change your password.</p>
-                      <Input ref="username" type='text' placeholder='username (email address)' autoFocus={ true } />
-                      <Button bsStyle='primary' onClick={ this.sendReset }>Send Reset Instructions</Button>
+                      <Panel bsStyle="primary">
+                        { errorDisplay }
+                        <p>
+                          Enter your username (usually your email) below and we will send you an email about how to change your password.
+                        </p>
+                        <Input ref="username"
+                          type='text'
+                          placeholder='username (email address)'
+                          autoFocus={ true } />
+                        <Button bsStyle='primary' onClick={ this.sendReset }>
+                          Send Reset Instructions
+                        </Button>
+                      </Panel>
                     </Col>
     }
 
     return (
       <div className="ForgotPassword">
+        <h2>Forgot Password</h2>
         <Grid>
-          <Row>
+          <Row className="no-gutter">
             { formDisplay }
           </Row>
         </Grid>

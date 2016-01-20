@@ -27,7 +27,9 @@ export default class ResetPassword extends Component {
     const {error, verified, reset, resetError} = this.props;
 
     if (!verified) {
-      return <Alert bsStyle="danger">Verification Failed.</Alert>
+      return <Alert bsStyle="danger">
+               Verification Failed.
+             </Alert>
     }
     var wh;
 
@@ -40,23 +42,38 @@ export default class ResetPassword extends Component {
     if (reset) {
       wh = (<Alert bsStyle="success">
               <h4>Password Reset Successful</h4>
-              <p>You can now
-                <Link to="/login">log in</Link> with your new password.</p>
+              <p>
+                You can now
+                <Link to="/login"> log in
+                </Link> with your new password.
+              </p>
             </Alert>);
     } else {
-      wh = (
-        <Grid>
-          <Row>
-            <Col md={ 6 } mdOffset={ 3 }>
+      wh = (<div>
               <h2>Reset Password</h2>
-              { errorDisplay }
-              <Input type="password" ref="pass1" autoComplete="off" label="Password" placeholder="Password" />
-              <Input type="password" ref="pass2" autoComplete="off" label="Password (Again)" placeholder="Password (again)" />
-              <Button onClick={ this.onReset } bsStyle="primary" bsSize="large">Reset Password</Button>
-            </Col>
-          </Row>
-        </Grid>
-
+              <Grid>
+                <Row class="no-gutter">
+                  <Col md={ 6 }>
+                    <Panel bsStyle="primary">
+                      { errorDisplay }
+                      <Input type="password"
+                        ref="pass1"
+                        autoComplete="off"
+                        label="Password"
+                        placeholder="Password" />
+                      <Input type="password"
+                        ref="pass2"
+                        autoComplete="off"
+                        label="Password (Again)"
+                        placeholder="Password (again)" />
+                      <Button onClick={ this.onReset } bsStyle="primary" bsSize="large">
+                        Reset Password
+                      </Button>
+                    </Panel>
+                  </Col>
+                </Row>
+              </Grid>
+            </div>
 
       );
     }

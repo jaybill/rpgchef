@@ -8,6 +8,7 @@ import './App.less';
 import React, { Component } from 'react';
 
 import log from 'loglevel';
+import BottomNav from '../BottomNav';
 
 class App extends Component {
 
@@ -85,6 +86,7 @@ class App extends Component {
           <div className="App-Holder">
             { this.props.children }
           </div>
+          <BottomNav/>
         </div>
       </div>
 

@@ -96,9 +96,18 @@ gulp.task('clean', del.bind(
 ));
 
 
+// 3rd party libraries
+gulp.task('latex', function() {
+  return gulp.src([
+    '*/latex/**/*'
+  ], {
+    "base": "./src"
+  }).pipe(gulp.dest('build'));
+});
+
 
 // 3rd party libraries
-gulp.task('vendor', function() {
+gulp.task('vendor', ['latex'], function() {
 
   return gulp.src([
     '*/rpgchef-theme/**/*',
@@ -195,7 +204,8 @@ gulp.task('build:watch', function(cb) {
 // Launch the Node.js/Hapi server
 gulp.task('serve', ['build:watch'], function(cb) {
   src.server = [
-    'build/server.js'
+    'build/server.js',
+    'build/worker.js'
   ];
 
   var started = false;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { forgotPassword as doForgotPassword } from '../actions/forgotpassword';
 
 import ForgotPassword from '../../components/ForgotPassword';
-import SimplePage from '../../components/SimplePage';
+
 
 class ForgotPasswordContainer extends Component {
 
@@ -13,12 +13,10 @@ class ForgotPasswordContainer extends Component {
     log.debug(this.props);
     const {dispatch, forgotPassword} = this.props;
 
-    return (
-      <ForgotPassword onSubmit={ username => dispatch(doForgotPassword(username)) }
-        error={ forgotPassword.error }
-        sending={ forgotPassword.sending }
-        complete={ forgotPassword.complete } />
-      );
+    return <ForgotPassword onSubmit={ username => dispatch(doForgotPassword(username)) }
+             error={ forgotPassword.error }
+             sending={ forgotPassword.sending }
+             complete={ forgotPassword.complete } />;
   }
 }
 

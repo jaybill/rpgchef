@@ -7,6 +7,16 @@ import Db from './db';
 import CsvParse from 'csv-parse';
 import { convertToCoppers } from '../lib/util';
 
+export const escape = () => {
+  const t = fs.readFileSync('./build/latex/example.tex', {
+    encoding: 'utf-8'
+  });
+  const allLines = t;
+  const lines = allLines.split("\n");
+  console.log(lines);
+  process.exit();
+}
+
 export const parsePreEffects = () => {
 
   const pef = fs.readFileSync('./fixtures/pre-effects.json', {
@@ -131,7 +141,7 @@ export const newWeapons = () => {
             reject(err);
           }
         });
-      } catch (err) {
+      } catch ( err ) {
         reject(err);
       }
     });

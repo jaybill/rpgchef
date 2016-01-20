@@ -1,6 +1,7 @@
 import Auth from './handlers/auth';
 import Generate from './handlers/generate';
 import My from './handlers/my';
+import Module from './handlers/module';
 import Payment from './handlers/payment';
 import Workers from './handlers/workers';
 import path from 'path';
@@ -10,7 +11,7 @@ var routes = [
   {
     method: 'POST',
     path: '/api/login',
-    config: Auth.handlers.login,
+    config: Auth.handlers.login
   },
   {
     method: 'GET',
@@ -102,6 +103,27 @@ var routes = [
     path: '/api/workers/print',
     config: Workers.handlers.print
   },
+  {
+    method: ['POST'],
+    path: '/api/module',
+    config: Module.handlers.upsertModule
+  },
+  {
+    method: ['DELETE'],
+    path: '/api/module/{id?}',
+    config: Module.handlers.deleteModule
+  },
+  {
+    method: ['GET'],
+    path: '/api/module/{id?}',
+    config: Module.handlers.getModule
+  },
+  {
+    method: ['GET'],
+    path: '/api/modules',
+    config: Module.handlers.getModules
+  },
+
 
   {
     method: 'GET',

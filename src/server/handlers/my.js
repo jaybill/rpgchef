@@ -18,7 +18,7 @@ My.handlers = {
     },
     validate: {
       params: {
-        id: Joi.number().integer().required().min(0).label("Id"),
+        id: Joi.number().integer().required().min(0).label("Id")
       }
     },
 

@@ -14,6 +14,8 @@ import Weapons from './containers/WeaponsContainer';
 import UserWeaponList from './containers/UserWeaponListContainer';
 import Subscribe from './containers/SubscribeContainer';
 import Cancel from './containers/CancelContainer';
+import Module from './containers/ModuleContainer';
+import ModuleList from './containers/ModuleListContainer';
 
 import Welcome from '../components/Welcome';
 import TermsOfService from '../components/TermsOfService';
@@ -21,12 +23,6 @@ import PrivacyPolicy from '../components/PrivacyPolicy';
 import NotFound from '../components/NotFound';
 import About from '../components/About';
 import SimplePage from '../components/SimplePage';
-
-function w(component) {
-  return <SimplePage>
-           { component }
-         </SimplePage>;
-}
 
 export default function getRoutes() {
   return (
@@ -36,6 +32,8 @@ export default function getRoutes() {
         <Route path="account" component={ Account } />
         <Route path="weapons" component={ Weapons } />
         <Route path="myweapons" component={ UserWeaponList } />
+        <Route path="modules" component={ ModuleList } />
+        <Route path="module/:id" component={ Module } />
         <Route path="subscribe" component={ Subscribe } />
         <Route path="cancel" component={ Cancel } />
         <Route path="about" component={ About } />

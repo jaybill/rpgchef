@@ -28,7 +28,7 @@ export default class Weapons extends Component {
     if (failed) {
       displayMessage = <Alert bsStyle="danger">
                          { message }
-                       </Alert>
+                       </Alert>;
     }
 
     let i = 0;
@@ -53,23 +53,48 @@ export default class Weapons extends Component {
               <h2>Weapons</h2>
               <Panel bsStyle="primary">
                 <Grid>
-                  <Row>
+                  <Row className="no-gutter">
                     <Col md={ 3 }>
-                      <Input ref="weaponCount" labelClassName="col-md-4" wrapperClassName="col-md-8" label="Weapons" type="select">
-                      <option value={ 1 }>1</option>
-                      <option value={ 3 }>3</option>
-                      <option value={ 5 }>5</option>
-                      <option value={ 10 }>10</option>
+                      <Input ref="weaponCount"
+                        labelClassName="col-md-4"
+                        wrapperClassName="col-md-8"
+                        label="Weapons"
+                        type="select">
+                      <option value={ 1 }>
+                        1
+                      </option>
+                      <option value={ 3 }>
+                        3
+                      </option>
+                      <option value={ 5 }>
+                        5
+                      </option>
+                      <option value={ 10 }>
+                        10
+                      </option>
                       </Input>
                     </Col>
                     <Col md={ 3 }>
-                      <Input ref="effectCount" labelClassName="col-md-4" wrapperClassName="col-md-8" label="Effects" type="select">
-                      <option value={ 1 }>One</option>
-                      <option value={ 2 }>Two</option>
+                      <Input ref="effectCount"
+                        labelClassName="col-md-4"
+                        wrapperClassName="col-md-8"
+                        label="Effects"
+                        type="select">
+                      <option value={ 1 }>
+                        One
+                      </option>
+                      <option value={ 2 }>
+                        Two
+                      </option>
                       </Input>
                     </Col>
                     <Col md={ 2 }>
-                      <Button disabled={ working } block bsStyle="primary" onClick={ this.loadWeapons }>Generate</Button>
+                      <Button disabled={ working }
+                        block
+                        bsStyle="primary"
+                        onClick={ this.loadWeapons }>
+                        Generate
+                      </Button>
                     </Col>
                   </Row>
                 </Grid>

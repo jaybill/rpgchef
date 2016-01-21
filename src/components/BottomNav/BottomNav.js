@@ -8,13 +8,13 @@ export default class BottomNav extends Component {
 
   render() {
     const legalIcon = <i className="fa fa-legal"></i>;
-    const photoPopover = <Popover title="Image Credit">
+    const photoPopover = <Popover id="image-credit" title="Image Credit">
                            <h5><a href="http://fav.me/d6sq6ee">Fantasy Landscape: Mountains</a></h5>
                            <h5><a href="http://fpesantez.deviantart.com">by Felipe Pesantez</a></h5>
                            <p>
                              <i className="fa fa-creative-commons"></i> Some rights reserved. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nd/3.0/">Creative Commons Attribution-No Derivative Works 3.0 License.</a>
                            </p>
-                         </Popover>
+                         </Popover>;
 
     return <Navbar className="BottomNav" fixedBottom>
              <Nav pullRight>

@@ -1,8 +1,9 @@
 //@import "mixins.less";
+@import "icons.less";
 
 html, body {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 // Global styles
@@ -16,7 +17,7 @@ h2{
 }
 
 .panel,.well,.jumbotron{
-   background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .single-page{
@@ -32,7 +33,18 @@ h2{
     padding-left:0;
 }
 
-    body {
-        
-        background: url(/backgrounds/fantasy_landscape__mountains_by_doppingqnk-d6sq6ee.jpg) no-repeat center center fixed;
-    }
+body {
+    
+    background: url(/backgrounds/fantasy_landscape__mountains_by_doppingqnk-d6sq6ee.jpg) no-repeat center center fixed;
+}
+
+a.list-group-item:hover,
+button.list-group-item:hover,
+a.list-group-item:focus,
+button.list-group-item:focus{
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+a.list-group-item,button.list-group-item{
+   background-color: rgba(0, 0, 0, 0.6);
+}

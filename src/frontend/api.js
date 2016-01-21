@@ -3,7 +3,8 @@ import urijs from 'urijs';
 
 export const login = (credentials) => {
   return callServer('/login', 'POST', null, credentials);
-}
+};
+
 export const confirm = (code) => {
   return callServer('/confirm', 'POST', null, code);
 };
@@ -42,6 +43,22 @@ export const weapons = () => {
   return callServer('/generate/weapons', 'GET');
 };
 
+export const getModule = (id) => {
+  return callServer('/module/' + id, 'GET');
+};
+
+export const postModule = (m) => {
+  return callServer('/module', 'POST', null, m);
+};
+
+export const delModule = (id) => {
+  return callServer('/module/' + id, 'DELETE');
+};
+
+export const getModules = () => {
+  return callServer('/modules');
+};
+
 export const effects = (effectCount, weaponCount) => {
   const query = {};
   if (effectCount) {
@@ -50,7 +67,6 @@ export const effects = (effectCount, weaponCount) => {
   if (weaponCount) {
     query.weaponCount = weaponCount;
   }
-
   return callServer('/generate/effects', 'GET', query);
 };
 

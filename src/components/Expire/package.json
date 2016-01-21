@@ -1,0 +1,6 @@
+{
+  "name": "Expire",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Expire.js"
+}

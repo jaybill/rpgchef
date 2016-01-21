@@ -1,0 +1,6 @@
+{
+  "name": "ModuleList",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ModuleList.js"
+}

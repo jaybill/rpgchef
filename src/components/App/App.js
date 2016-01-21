@@ -12,8 +12,6 @@ import BottomNav from '../BottomNav';
 
 class App extends Component {
 
-
-
   render() {
 
     return (
@@ -46,6 +44,11 @@ class App extends Component {
                     </MenuItem>
                   </LinkContainer>
                 </NavDropdown>
+                <LinkContainer to="/app/modules">
+                  <NavItem eventKey={ 3 }>
+                    Modules
+                  </NavItem>
+                </LinkContainer>
               </Nav>
               <Nav pullRight>
                 <NavDropdown eventKey={ 9 } title={ this.props.user.username } id="account-nav-dropdown">
@@ -57,21 +60,6 @@ class App extends Component {
                   <LinkContainer to="/app/subscribe">
                     <MenuItem eventKey={ 9.2 }>
                       Billing
-                    </MenuItem>
-                  </LinkContainer>
-                  <LinkContainer to="/app/terms">
-                    <MenuItem eventKey={ 9.3 }>
-                      Terms of Service
-                    </MenuItem>
-                  </LinkContainer>
-                  <LinkContainer to="/app/privacy">
-                    <MenuItem eventKey={ 9.4 }>
-                      Privacy Policy
-                    </MenuItem>
-                  </LinkContainer>
-                  <LinkContainer to="/app/about">
-                    <MenuItem eventKey={ 9.44 }>
-                      About
                     </MenuItem>
                   </LinkContainer>
                   <LinkContainer to="/logout">

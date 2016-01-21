@@ -11,9 +11,8 @@ export const userweapon = function(state, action) {
 
   const newState = {};
   newState.post = updateStateAsync(state.post, action, "USERWEAPON_POST");
-  newState.del = updateStateAsync(state.del, action, "USERWEAPON_POST");
-
+  newState.del = updateStateAsync(state.del, action, "USERWEAPON_DEL");
 
   return newState;
 
-}
+};

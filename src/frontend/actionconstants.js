@@ -32,7 +32,12 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("SUBSCRIBE_POST"));
   km = Object.assign(km, asyncKeys("SUBSCRIBE_GET"));
   km = Object.assign(km, asyncKeys("SUBSCRIBE_DEL"));
+  km = Object.assign(km, asyncKeys("MODULE_POST"));
+  km = Object.assign(km, asyncKeys("MODULE_GET"));
+  km = Object.assign(km, asyncKeys("MODULE_DEL"));
+  km = Object.assign(km, asyncKeys("MODULE_LIST"));
 
+  extraKeys["MODULE_RESET"] = null;
   extraKeys["ACCOUNT_UPDATE"] = null;
   extraKeys["SESSION_USERNAME_UPDATE"] = null;
   extraKeys["RANDOM_WEAPONS_DONE"] = null;

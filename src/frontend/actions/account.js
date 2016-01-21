@@ -28,7 +28,7 @@ export const account = function(user) {
       return;
     }).catch(err => {
       log.debug(err.message);
-      dispatch(accountActions.failure(err.message))
+      dispatch(accountActions.failure(err.message));
     });
-  }
+  };
 };

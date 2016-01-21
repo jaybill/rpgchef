@@ -2,7 +2,7 @@ import log from 'loglevel';
 import { asyncState, updateStateAsync } from './util';
 
 export const subscribe = function(state, action) {
-  log.debug(action.type);
+
   if (!state) {
     state = {
       post: Object.assign({}, asyncState),

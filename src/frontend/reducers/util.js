@@ -7,7 +7,7 @@ export const asyncState = {
   succeeded: false,
   payload: null
 
-}
+};
 export const updateStateAsync = (state, action, constant) => {
 
   switch (action.type) {
@@ -33,12 +33,23 @@ export const updateStateAsync = (state, action, constant) => {
       break;
 
     case ActionConstants[constant + "_FAILURE"]:
+
+      let message;
+      let payload;
+
+      if (action.payload.message) {
+        message = action.payload.message;
+        payload = action.payload.payload;
+      } else {
+        message = action.payload;
+      }
+
       return Object.assign({}, state, {
-        message: action.payload,
+        message: message,
         working: false,
         failed: true,
         succeeded: false,
-        payload: null
+        payload: payload
       });
       break;
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import Confirm from '../../components/Confirm';
 import { updatePath } from 'redux-simple-router';
 import { confirm } from '../actions/confirm';
@@ -27,7 +27,7 @@ class ConfirmContainer extends Component {
     if (confirm.confirming) {
       return <div>
                Confirming...
-             </div>
+             </div>;
 
     } else {
 

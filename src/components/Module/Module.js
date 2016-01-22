@@ -12,6 +12,7 @@ export default class Module extends Component {
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onClickHeading = this.onClickHeading.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.finishEditHeading = this.finishEditHeading.bind(this);
   }
 
   onClickHeading() {
@@ -20,11 +21,16 @@ export default class Module extends Component {
     });
   }
 
+  finishEditHeading() {
+    this.setState({
+      editHeading: false
+    });
+    this.onPost();
+  }
+
   handleKeyUp(e) {
     if (e.keyCode === 13) {
-      this.setState({
-        editHeading: false
-      });
+      this.finishEditHeading();
     }
   }
 
@@ -92,14 +98,26 @@ export default class Module extends Component {
     let heading;
 
     if (this.state.editHeading) {
-      heading = <h2><CtrldInputText type="text"
-                      focusMe={ true }
-                      className="form-control"
-                      value={ this.state.name }
-                      name="name"
-                      disabled={ working }
-                      onKeyUp={ this.handleKeyUp }
-                      onFieldChange={ this.onFieldChange } /></h2>;
+      heading = <Grid className="edit-name">
+                  <Row className="no-gutter">
+                    <Col md={ 8 }>
+                      <CtrldInputText type="text"
+                        focusMe={ true }
+                        className="form-control input-edit-name"
+                        value={ this.state.name }
+                        name="name"
+                        disabled={ working }
+                        onKeyUp={ this.handleKeyUp }
+                        onFieldChange={ this.onFieldChange } />
+                    </Col>
+                    <Col md={ 1 }>
+                      <Button onClick={ this.finishEditHeading }>
+                        <i className="fa fa-floppy-o fa-fw"></i>
+                      </Button>
+                    </Col>
+                  </Row>
+                </Grid>
+      ;
     } else {
       heading = <h2 title="Click to edit" onClick={ this.onClickHeading }>{ this.state.name }</h2>;
     }
@@ -112,17 +130,13 @@ export default class Module extends Component {
                     <Col md={ 10 }>
                       <ButtonToolbar>
                         <ButtonGroup>
-                          <Button title="Save" onClick={ this.onPost } bsStyle="primary">
+                          <Button title="Save" onClick={ this.onPost }>
                             <i className="fa fa-floppy-o fa-fw"></i>
                           </Button>
-                        </ButtonGroup>
-                        <ButtonGroup>
-                          <Button title="Delete" bsStyle="danger">
+                          <Button title="Delete">
                             <i className="fa fa-trash-o fa-fw"></i>
                           </Button>
-                        </ButtonGroup>
-                        <ButtonGroup>
-                          <Button title="Print" bsStyle="info">
+                          <Button title="Print">
                             <i className="fa fa-print fa-fw"></i>
                           </Button>
                         </ButtonGroup>
@@ -132,6 +146,9 @@ export default class Module extends Component {
                           </Button>
                           <Button title="Insert Subsection Heading">
                             <i className="fa fa-h-square fa-fw"></i>
+                          </Button>
+                          <Button title="Insert Text Box">
+                            <i className="fa fa-list-alt fa-fw"></i>
                           </Button>
                           <Button title="Insert Monster">
                             <i className="icon icon-goblin"></i>

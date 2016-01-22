@@ -58,13 +58,13 @@ Module.handlers = {
 
     handler: (request, reply) => {
       const userId = request.auth.credentials.id;
-      Db.Modules.findById(request.params.id).then((mm) => {
+      return Db.Modules.findById(request.params.id).then((mm) => {
         if (mm) {
           if (mm.get("userId") != userId) {
             reply(Boom.create(403,
               "Module with id [" + request.params.id + "] does not belong to you"));
           } else {
-            mm.destroy().then(() => {
+            return mm.destroy().then(() => {
               reply("OK");
             }).catch(err => {
               throw err;

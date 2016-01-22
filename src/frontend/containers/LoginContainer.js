@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { login } from '../actions/login';
 import { updatePath } from 'redux-simple-router';
 import Login from '../../components/Login';

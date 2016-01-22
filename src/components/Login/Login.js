@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 export default class Login extends Component {
 
   constructor() {
-    super()
+    super();
     this._login = this._login.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
   }

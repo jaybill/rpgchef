@@ -20,7 +20,7 @@ export const moduleGet = function(id) {
       }
       return;
     }).catch(err => {
-      log.debug(err);
+      log.error(err);
       dispatch(moduleGetActions.failure("moduleGet failed"));
     });
   };
@@ -35,17 +35,18 @@ export const modulePost = function(m) {
     dispatch(modulePostActions.start());
     postModuleCall(m).then((result) => {
       if (result.status == 200) {
-        dispatch(modulePostActions.success(result.body));
-        dispatch(moduleGetActions.success(result.body));
+        return [
+          dispatch(modulePostActions.success(result.body)),
+          dispatch(moduleGetActions.success(result.body)),
+          dispatch(modulesGet())];
       } else {
         log.error(result);
         throw new Error("Bad response");
       }
-      return;
+
     }).catch(err => {
-      log.debug(err);
+      log.error(err);
       if (typeof m.content == "object") {
-        log.debug(typeof m.content);
         m.content = JSON.stringify(m.content);
       }
 
@@ -70,26 +71,25 @@ export const modulesGet = function(id) {
       }
       return;
     }).catch(err => {
-      log.debug(err);
+      log.error(err);
       dispatch(modulesGetActions.failure("modulesGet failed"));
     });
   };
 };
 
 const moduleDelActions = createAsyncActionGroup("MODULE_DEL", {});
-export const moduleDel = function() {
+export const moduleDel = function(id) {
   return dispatch => {
     dispatch(moduleDelActions.start());
-    delModuleCall().then((result) => {
+    return delModuleCall(id).then((result) => {
       if (result.status == 200) {
-        dispatch(moduleDelActions.success(result.body));
+        return dispatch(moduleDelActions.success(result.body));
       } else {
         log.error(result);
         throw new Error("Bad response");
       }
-      return;
     }).catch(err => {
-      log.debug(err);
+      log.error(err);
       dispatch(moduleDelActions.failure("moduleDel failed"));
     });
   };

@@ -12,9 +12,7 @@ export default class ModuleList extends Component {
   }
 
   onPost() {
-    this.props.onPost({
-      name: this.refs.name.getValue()
-    });
+    this.props.onPost();
   }
 
   render() {
@@ -31,7 +29,7 @@ export default class ModuleList extends Component {
     }
 
     if (payload && payload.length > 0) {
-      log.debug("payload", payload);
+
       const mm = [];
       let k = 0;
       for (let m in payload) {
@@ -50,6 +48,11 @@ export default class ModuleList extends Component {
 
     return (<div className="ModuleList">
               <h2>Modules</h2>
+              <p>
+                <Button onClick={ this.onPost } bsStyle="primary">
+                  Add New
+                </Button>
+              </p>
               <Grid>
                 <Row className="no-gutter">
                   <Col md={ 6 }>

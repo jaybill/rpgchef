@@ -24,7 +24,7 @@ My.handlers = {
 
     handler: (request, reply) => {
       const userId = request.auth.credentials.id;
-      Db.UserWeapons.findById(request.params.id).then((uw) => {
+      return Db.UserWeapons.findById(request.params.id).then((uw) => {
         if (uw) {
           if (uw.get("userId") != userId) {
             reply(Boom.create(403,

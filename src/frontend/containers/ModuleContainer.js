@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux';
-import { moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost } from '../actions/module';
+import { moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost } from '../actions/module';
 import Module from '../../components/Module';
 import urijs from 'urijs';
+
+import { updatePath } from 'redux-simple-router';
 
 class ModuleContainer extends Component {
 
   constructor() {
     super();
     this.onPost = this.onPost.bind(this);
+    this.onDelete = this.onDelete.bind(this);
+  }
+
+  componentWillReceiveProps(newProps) {
+    const {dispatch, routing, module} = newProps;
+    if (module.del.succeeded) {
+      dispatch(updatePath('/app/modules'));
+    }
   }
 
   componentWillMount() {
     const {dispatch, routing} = this.props;
     const uri = new urijs(routing.path);
     const id = parseInt(uri.segment(-1));
+    const params = uri.search(true);
+
     this.setState({
-      id: id
+      id: id,
+      isNew: params.new
     });
     dispatch(doModuleGet(id));
   }
@@ -25,6 +38,11 @@ class ModuleContainer extends Component {
   componentWillUnmount() {
     const {dispatch} = this.props;
     dispatch(moduleReset());
+  }
+
+  onDelete(id) {
+    const {dispatch} = this.props;
+    dispatch(doModuleDel(id));
   }
 
   onPost(formdata) {
@@ -58,12 +76,15 @@ class ModuleContainer extends Component {
       content = JSON.stringify(module.get.payload.content);
     }
 
-    return <Module onPost={ (formdata) => self.onPost(formdata) }
+    return <Module isNew={ this.state.isNew }
+             onPost={ (formdata) => self.onPost(formdata) }
+             onDelete={ (id) => self.onDelete(id) }
              id={ this.state.id }
              working={ module.post.working || module.get.working }
              name={ name }
              content={ content }
-             post={ module.post } />;
+             post={ module.post }
+             del={ module.del } />;
   }
 }
 

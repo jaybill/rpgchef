@@ -1,6 +1,6 @@
 import './Module.less';
 import React, { Component, PropTypes } from 'react';
-import { Label, ButtonToolbar, ButtonGroup, Panel, Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
+import { Label, ButtonToolbar, ButtonGroup, Panel, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { CtrldInputText, CtrldTextarea } from '../ControlledField';
 import Expire from '../Expire';
 
@@ -13,6 +13,13 @@ export default class Module extends Component {
     this.onClickHeading = this.onClickHeading.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.finishEditHeading = this.finishEditHeading.bind(this);
+    this.onDelete = this.onDelete.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.isNew) {
+      this.onClickHeading();
+    }
   }
 
   onClickHeading() {
@@ -42,6 +49,16 @@ export default class Module extends Component {
     });
   }
 
+  onDelete() {
+    this.props.onDelete(this.props.id);
+  }
+
+
+  componentWillUnmount() {
+    if (this._timer) {
+      window.clearTimeout(this._timer);
+    }
+  }
   componentWillMount() {
 
     this.setState({
@@ -53,14 +70,18 @@ export default class Module extends Component {
 
   componentWillReceiveProps(newProps) {
     const {message, succeeded, failed, working} = this.props.post;
+    const delSuccceeded = this.props.del.succeeded;
+    const delWorking = this.props.del.working;
 
-    window.setTimeout(function() {
-      this.setState({
-        succeeded: false,
-        failed: false
-      });
-    }.bind(this), 1000);
+    if (!delSuccceeded && !delWorking && (succeeded || failed)) {
+      this._timer = window.setTimeout(function() {
+        this.setState({
+          succeeded: false,
+          failed: false
+        });
 
+      }.bind(this), 1000);
+    }
     this.setState({
       id: newProps.id,
       name: newProps.name,
@@ -77,7 +98,7 @@ export default class Module extends Component {
   }
 
   render() {
-
+    const self = this;
     let displayMessage;
     const {message, succeeded, failed, working} = this.props.post;
 
@@ -122,6 +143,18 @@ export default class Module extends Component {
       heading = <h2 title="Click to edit" onClick={ this.onClickHeading }>{ this.state.name }</h2>;
     }
 
+    const deletePopover = <Popover id="confirm-delete" rootClose={ true } title="Confirm Delete">
+                            <p>
+                              Are you sure you want to delete this module? This cannot be undone.
+                            </p>
+                            <Button onClick={ self.onDelete }
+                              block
+                              bsSize="small"
+                              bsStyle="danger">
+                              Delete Module
+                            </Button>
+                          </Popover>;
+
     return (<div className="Module">
               { heading }
               <Panel bsStyle="primary">
@@ -133,11 +166,13 @@ export default class Module extends Component {
                           <Button title="Save" onClick={ this.onPost }>
                             <i className="fa fa-floppy-o fa-fw"></i>
                           </Button>
-                          <Button title="Delete">
-                            <i className="fa fa-trash-o fa-fw"></i>
-                          </Button>
-                          <Button title="Print">
-                            <i className="fa fa-print fa-fw"></i>
+                          <OverlayTrigger trigger="click" placement="right" overlay={ deletePopover }>
+                            <Button title="Delete">
+                              <i className="fa fa-trash-o fa-fw"></i>
+                            </Button>
+                          </OverlayTrigger>
+                          <Button title="Create PDF">
+                            <i className="fa fa-file-pdf-o fa-fw"></i>
                           </Button>
                         </ButtonGroup>
                         <ButtonGroup>

@@ -56,7 +56,6 @@ export default function NewUsers(DbConn) {
   Users.beforeUpdate(hashPasswordHook);
 
   return Users;
-
 }
 var sendWelcomeEmail = (user, options) => {
   var hash = getHash(user.get('id'), user.get('username'));
@@ -75,15 +74,18 @@ var sendWelcomeEmail = (user, options) => {
     })
   });
 
-}
+};
+
+
+
 var hashPasswordHook = (instance, options) => {
   if (!instance.changed('password')) {
-    return;
+    return null;
+  } else {
+    return Bcrypt.hash(instance.get('password')).then((hash) => {
+      return instance.set('password', hash);
+    }).catch((err) => {
+      log.debug(err);
+    });
   }
-  return Bcrypt.hash(instance.get('password')).then((hash) => {
-    return instance.set('password', hash);
-  }).catch((err) => {
-    log.debug(err);
-  });
-
-}
+};

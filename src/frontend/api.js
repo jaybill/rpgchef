@@ -47,6 +47,15 @@ export const getModule = (id) => {
   return callServer('/module/' + id, 'GET');
 };
 
+export const getModulePdf = (id) => {
+  return callServer('/module/pdf/' + id, 'GET');
+};
+
+export const makeModulePdf = (id) => {
+  return callServer('/module/pdf/' + id, 'POST');
+};
+
+
 export const postModule = (m) => {
   return callServer('/module', 'POST', null, m);
 };

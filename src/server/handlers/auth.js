@@ -61,7 +61,7 @@ Auth.handlers = {
             request.auth.session.set(user);
             reply(updatedUser);
           }).catch(err => {
-            throw (err)
+            throw (err);
           });
 
         }).catch((err) => {
@@ -113,12 +113,12 @@ Auth.handlers = {
         reply("OK");
       }).catch(err => {
         if (err.name == "UserNotFoundError") {
-          reply(Boom.create(404, err.message))
+          reply(Boom.create(404, err.message));
         } else {
           log.debug(err);
-          reply(Boom.create(500, err.message))
+          reply(Boom.create(500, err.message));
         }
-      })
+      });
 
     }
   },
@@ -159,7 +159,7 @@ Auth.handlers = {
           reply(result);
         }).catch(err => reply(Boom.create(500, err.message)));
 
-      }).catch(err => reply(Boom.create(406, err.message)))
+      }).catch(err => reply(Boom.create(406, err.message)));
 
     }
   },
@@ -196,7 +196,7 @@ Auth.handlers = {
         }
         reply("OK");
 
-      }).catch(err => reply(Boom.create(406, err.message)))
+      }).catch(err => reply(Boom.create(406, err.message)));
 
     }
   },
@@ -239,8 +239,8 @@ Auth.handlers = {
           reply("OK");
         }).catch(err => reply(Boom.create(500, err.message)));
       }).catch(err => {
-        reply(Boom.create(406, err.message))
-      })
+        reply(Boom.create(406, err.message));
+      });
 
     }
   },
@@ -349,6 +349,6 @@ Auth.handlers = {
 
     }
   }
-}
+};
 
 export default Auth;

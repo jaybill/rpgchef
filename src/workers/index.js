@@ -1,15 +1,17 @@
-import Db from '../server/db';
 import S3Stream from 's3-upload-stream';
 import AWS from 'aws-sdk';
 import fs from 'fs';
 import Dnd5eLaTeX from '../lib/dnd5elatex';
-
+import _ from 'lodash';
+import uuid from 'node-uuid';
 
 export const print = (j, callback) => {
-  const s3Stream = S3Stream(new AWS.S3());
+  const S3 = new AWS.S3();
+  const s3Stream = S3Stream(S3);
+  const filename = "pdftemp/" + uuid.v1() + ".pdf";
   const upload = s3Stream.upload({
     "Bucket": process.env.AWS_BUCKET,
-    "Key": "test.pdf"
+    "Key": filename
   });
 
   const pdfStream = Dnd5eLaTeX.makePdf(j).pipe(upload);
@@ -19,14 +21,16 @@ export const print = (j, callback) => {
     return;
   });
 
-  let i = 0;
-  upload.on("finish", () => {
+  upload.on("uploaded", (details) => {
 
-    if (i < 1) {
-      i++;
-    } else {
-      callback(null, "PDF printed");
-    }
+    const url = S3.getSignedUrl('getObject', {
+      Expires: 86400,
+      Bucket: details.Bucket,
+      Key: details.Key
+    });
+
+    callback(null, url);
+
   });
 };
 

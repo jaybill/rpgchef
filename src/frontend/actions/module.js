@@ -1,10 +1,11 @@
 import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
 import log from 'loglevel';
-import { postModule as postModuleCall, getModules as getModulesCall, getModule as getModuleCall, delModule as delModuleCall } from '../api';
+import { makeModulePdf as makePdfCall, getModulePdf as getPdfCall, postModule as postModuleCall, getModules as getModulesCall, getModule as getModuleCall, delModule as delModuleCall } from '../api';
 import ActionConstants from '../actionconstants';
 
 export const moduleReset = createAction(ActionConstants.MODULE_RESET);
+
 
 const moduleGetActions = createAsyncActionGroup("MODULE_GET", {});
 
@@ -64,6 +65,7 @@ export const modulesGet = function(id) {
     dispatch(modulesGetActions.start());
     getModulesCall().then((result) => {
       if (result.status == 200) {
+
         dispatch(modulesGetActions.success(result.body));
       } else {
         log.error(result);
@@ -76,21 +78,51 @@ export const modulesGet = function(id) {
     });
   };
 };
-
-const moduleDelActions = createAsyncActionGroup("MODULE_DEL", {});
-export const moduleDel = function(id) {
+export const modulePdfReset = createAction(ActionConstants.MODULE_PDF_RESET);
+const makePdfActions = createAsyncActionGroup("MODULE_MAKEPDF", {});
+export const makePdf = function(id) {
   return dispatch => {
-    dispatch(moduleDelActions.start());
-    return delModuleCall(id).then((result) => {
+    dispatch(makePdfActions.start());
+    return makePdfCall(id).then((result) => {
       if (result.status == 200) {
-        return dispatch(moduleDelActions.success(result.body));
+        return [
+          dispatch(makePdfActions.success(result.body)),
+          dispatch(getPdf(id))
+        ];
       } else {
         log.error(result);
         throw new Error("Bad response");
       }
     }).catch(err => {
       log.error(err);
-      dispatch(moduleDelActions.failure("moduleDel failed"));
+      dispatch(makePdfActions.failure("makePdf failed"));
     });
+  };
+};
+
+const getPdfActions = createAsyncActionGroup("MODULE_GETPDF", {});
+export const getPdf = function(id) {
+  return dispatch => {
+    dispatch(getPdfActions.start());
+    let _timer;
+
+    const pingForPdf = () => {
+      getPdfCall(id).then((result) => {
+        if (result.status == 200) {
+          if (result.body.pdfUrl) {
+            window.clearInterval(_timer);
+            return dispatch(getPdfActions.success(result.body));
+          }
+        } else {
+          log.error(result);
+          throw new Error("Bad response");
+        }
+        return null;
+      }).catch(err => {
+        log.error(err);
+        dispatch(getPdfActions.failure("getPdf failed"));
+      });
+    };
+    _timer = window.setInterval(pingForPdf, 500, dispatch, id);
   };
 };

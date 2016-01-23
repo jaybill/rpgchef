@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import { Label, ButtonToolbar, ButtonGroup, Panel, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { CtrldInputText, CtrldTextarea } from '../ControlledField';
 import Expire from '../Expire';
+import log from 'loglevel';
+import Slugify from 'slugify';
 
 export default class Module extends Component {
 
@@ -14,6 +16,11 @@ export default class Module extends Component {
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.finishEditHeading = this.finishEditHeading.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.makePdf = this.makePdf.bind(this);
+  }
+
+  makePdf() {
+    this.props.makePdf(this.state.id);
   }
 
   componentDidMount() {
@@ -69,9 +76,9 @@ export default class Module extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const {message, succeeded, failed, working} = this.props.post;
-    const delSuccceeded = this.props.del.succeeded;
-    const delWorking = this.props.del.working;
+    const {message, succeeded, failed, working} = newProps.post;
+    const delSuccceeded = newProps.del.succeeded;
+    const delWorking = newProps.del.working;
 
     if (!delSuccceeded && !delWorking && (succeeded || failed)) {
       this._timer = window.setTimeout(function() {
@@ -89,6 +96,13 @@ export default class Module extends Component {
       succeeded: succeeded,
       failed: failed
     });
+
+    if (newProps.pdfUrl && !this._clickTimer) {
+      this._clickTimer = window.setTimeout((self) => {
+        window.clearTimeout(self._clickTimer);
+        self.refs.pdfLink.click();
+      }, 1000, this);
+    }
   }
 
   onFieldChange(name, newValue) {
@@ -100,12 +114,28 @@ export default class Module extends Component {
   render() {
     const self = this;
     let displayMessage;
+    let pdfLink;
+    let pdfClass = "fa fa-file-pdf-o fa-fw";
     const {message, succeeded, failed, working} = this.props.post;
 
     if (this.state.succeeded) {
       displayMessage = <Label bsStyle="success">
                          Module saved.
                        </Label>;
+
+    }
+
+    if (this.props.pdfWorking) {
+      pdfClass = "fa fa-file-pdf-o fa-fw fa-spin";
+    }
+
+    if (this.props.pdfUrl) {
+      log.debug("Got ", this.props.pdfUrl);
+      const fileName = Slugify(this.props.name).toLowerCase() + ".pdf";
+      pdfLink = <a className="text-hide"
+                  ref="pdfLink"
+                  href={ this.props.pdfUrl }
+                  download={ fileName }>PDF</a>;
 
     }
 
@@ -171,8 +201,8 @@ export default class Module extends Component {
                               <i className="fa fa-trash-o fa-fw"></i>
                             </Button>
                           </OverlayTrigger>
-                          <Button title="Create PDF">
-                            <i className="fa fa-file-pdf-o fa-fw"></i>
+                          <Button disabled={ this.props.pdfWorking } onClick={ self.makePdf } title="Create PDF">
+                            <i className={ pdfClass }></i>
                           </Button>
                         </ButtonGroup>
                         <ButtonGroup>
@@ -215,6 +245,7 @@ export default class Module extends Component {
                   </Col>
                 </Row>
               </Grid>
+              { pdfLink }
             </div>);
   }
 }

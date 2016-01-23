@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { connect } from 'react-redux';
-import { moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost } from '../actions/module';
+import { modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost } from '../actions/module';
 import Module from '../../components/Module';
 import urijs from 'urijs';
 
@@ -13,12 +13,31 @@ class ModuleContainer extends Component {
     super();
     this.onPost = this.onPost.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.makePdf = this.makePdf.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     const {dispatch, routing, module} = newProps;
     if (module.del.succeeded) {
       dispatch(updatePath('/app/modules'));
+    }
+
+    if (module.getPdf.succeeded && !this._pdfLinkTimeout) {
+
+      log.debug("Creating PDF link to ", module.getPdf.payload.pdfUrl);
+      this.setState({
+        pdfUrl: module.getPdf.payload.pdfUrl
+      });
+      this._pdfLinkTimeout = window.setTimeout((self, d) => {
+        log.debug("Removing link");
+        self.setState({
+          pdfUrl: null
+        });
+        d(modulePdfReset());
+        if (this._pdfLinkTimeout) {
+          window.clearTimeout(this._pdfLinkTimeout);
+        }
+      }, 3000, this, dispatch);
     }
   }
 
@@ -37,8 +56,18 @@ class ModuleContainer extends Component {
 
   componentWillUnmount() {
     const {dispatch} = this.props;
+    if (this._pdfLinkTimeout) {
+      window.clearTimeout(this._pdfLinkTimeout);
+    }
     dispatch(moduleReset());
   }
+
+  makePdf(id) {
+    const {dispatch} = this.props;
+    dispatch(doMakePdf(id));
+  }
+
+
 
   onDelete(id) {
     const {dispatch} = this.props;
@@ -77,11 +106,14 @@ class ModuleContainer extends Component {
     }
 
     return <Module isNew={ this.state.isNew }
+             makePdf={ (id) => self.makePdf(id) }
              onPost={ (formdata) => self.onPost(formdata) }
              onDelete={ (id) => self.onDelete(id) }
              id={ this.state.id }
              working={ module.post.working || module.get.working }
+             pdfWorking={ module.getPdf.working || module.makePdf.working }
              name={ name }
+             pdfUrl={ this.state.pdfUrl }
              content={ content }
              post={ module.post }
              del={ module.del } />;

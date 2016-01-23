@@ -1,6 +1,7 @@
 import WorkerFarm from 'node-worker-farm';
 import log from 'loglevel';
 import path from 'path';
+//import Db from '../server/db';
 
 class Farm {
 
@@ -9,12 +10,15 @@ class Farm {
     this.print = this.print.bind(this);
   }
 
-  print(j) {
-    this.workers.print(j, (err, outp) => {
+  print(m) {
+    this.workers.print(m.content, (err, url) => {
       if (err) {
         log.error(err);
       }
-      log.debug(outp);
+      log.debug(url);
+      m.update({
+        pdfUrl: url
+      });
     });
   }
 

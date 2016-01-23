@@ -26,9 +26,23 @@ export default function NewModule(DbConn) {
     content: {
       type: Sequelize.JSONB,
       default: {}
-    }
+    },
+    pdfUrl: Sequelize.STRING,
+    pdfCreatedOn: Sequelize.DATE
   });
+  Modules.beforeUpdate(updatePdfCreatedOn);
   return Modules;
 }
 
 
+var updatePdfCreatedOn = (instance, options) => {
+  if (!instance.changed('pdfUrl')) {
+    return null;
+  } else {
+    if (instance.get('pdfUrl') != null) {
+      return instance.set('pdfCreatedOn', Sequelize.fn("now"));
+    } else {
+      return null;
+    }
+  }
+};

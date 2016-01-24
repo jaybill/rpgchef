@@ -5,6 +5,7 @@ import { makeModulePdf as makePdfCall, getModulePdf as getPdfCall, postModule as
 import ActionConstants from '../actionconstants';
 
 export const moduleReset = createAction(ActionConstants.MODULE_RESET);
+export const modulePostReset = createAction(ActionConstants.MODULE_POST_RESET);
 
 
 const moduleGetActions = createAsyncActionGroup("MODULE_GET", {});
@@ -12,7 +13,7 @@ const moduleGetActions = createAsyncActionGroup("MODULE_GET", {});
 export const moduleGet = function(id) {
   return dispatch => {
     dispatch(moduleGetActions.start());
-    getModuleCall(id).then((result) => {
+    return getModuleCall(id).then((result) => {
       if (result.status == 200) {
         dispatch(moduleGetActions.success(result.body));
       } else {
@@ -80,14 +81,40 @@ export const modulesGet = function(id) {
 };
 export const modulePdfReset = createAction(ActionConstants.MODULE_PDF_RESET);
 const makePdfActions = createAsyncActionGroup("MODULE_MAKEPDF", {});
-export const makePdf = function(id) {
+export const makePdf = function(module) {
   return dispatch => {
     dispatch(makePdfActions.start());
-    return makePdfCall(id).then((result) => {
+    dispatch(modulePostActions.start());
+    return postModuleCall(module).then((result) => {
+      if (result.status == 200) {
+        dispatch(modulePostActions.success(result.body)),
+        dispatch(moduleGetActions.success(result.body)),
+        dispatch(modulesGet());
+
+        if (!result.body.content.sections || !result.body.content.sections.length) {
+          throw new Error("Module has no content.");
+        }
+
+      } else {
+        log.error(result.status, result.body);
+        if (typeof module.content == "object") {
+          module.content = JSON.stringify(module.content);
+        }
+
+        dispatch(modulePostActions.failure({
+          message: "Unable to save",
+          payload: module
+        }));
+        throw new Error("Can't save module");
+      }
+
+      return makePdfCall(module.id);
+
+    }).then((result) => {
       if (result.status == 200) {
         return [
           dispatch(makePdfActions.success(result.body)),
-          dispatch(getPdf(id))
+          dispatch(getPdf(module.id))
         ];
       } else {
         log.error(result);
@@ -95,7 +122,7 @@ export const makePdf = function(id) {
       }
     }).catch(err => {
       log.error(err);
-      dispatch(makePdfActions.failure("makePdf failed"));
+      dispatch(makePdfActions.failure(err.message || err));
     });
   };
 };

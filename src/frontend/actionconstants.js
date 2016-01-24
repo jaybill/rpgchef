@@ -40,6 +40,7 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("MODULE_GETPDF"));
 
   extraKeys["MODULE_RESET"] = null;
+  extraKeys["MODULE_POST_RESET"] = null;
   extraKeys["MODULE_PDF_RESET"] = null;
   extraKeys["ACCOUNT_UPDATE"] = null;
   extraKeys["SESSION_USERNAME_UPDATE"] = null;

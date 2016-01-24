@@ -15,10 +15,13 @@ export const module = function(state, action) {
     };
   }
 
-
-
   const newState = {};
-  newState.post = updateStateAsync(state.post, action, "MODULE_POST");
+  if (action.type == ActionConstants.MODULE_POST_RESET) {
+    newState.post = Object.assign({}, asyncState);
+  } else {
+    newState.post = updateStateAsync(state.post, action, "MODULE_POST");
+  }
+
   newState.del = updateStateAsync(state.del, action, "MODULE_DEL");
   newState.get = updateStateAsync(state.get, action, "MODULE_GET");
   newState.list = updateStateAsync(state.list, action, "MODULE_LIST");

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import log from 'loglevel';
 import { connect } from 'react-redux';
-import { modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost } from '../actions/module';
+import { modulePostReset, modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost } from '../actions/module';
 import Module from '../../components/Module';
 import urijs from 'urijs';
 
@@ -14,29 +13,37 @@ class ModuleContainer extends Component {
     this.onPost = this.onPost.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.makePdf = this.makePdf.bind(this);
+    this.resetPost = this.resetPost.bind(this);
+  }
+
+  resetPost() {
+    const {dispatch} = this.props;
+    dispatch(modulePostReset());
   }
 
   componentWillReceiveProps(newProps) {
     const {dispatch, routing, module} = newProps;
     if (module.del.succeeded) {
       dispatch(updatePath('/app/modules'));
+      return;
+    }
+
+    if (module.get.failed) {
+      dispatch(updatePath('/app/modules'));
+      return;
     }
 
     if (module.getPdf.succeeded && !this._pdfLinkTimeout) {
-
-      log.debug("Creating PDF link to ", module.getPdf.payload.pdfUrl);
       this.setState({
         pdfUrl: module.getPdf.payload.pdfUrl
       });
       this._pdfLinkTimeout = window.setTimeout((self, d) => {
-        log.debug("Removing link");
         self.setState({
           pdfUrl: null
         });
         d(modulePdfReset());
-        if (this._pdfLinkTimeout) {
-          window.clearTimeout(this._pdfLinkTimeout);
-        }
+        window.clearTimeout(this._pdfLinkTimeout);
+        this._pdfLinkTimeout = null;
       }, 3000, this, dispatch);
     }
   }
@@ -62,9 +69,9 @@ class ModuleContainer extends Component {
     dispatch(moduleReset());
   }
 
-  makePdf(id) {
+  makePdf(formdata) {
     const {dispatch} = this.props;
-    dispatch(doMakePdf(id));
+    dispatch(doMakePdf(formdata));
   }
 
 
@@ -105,7 +112,10 @@ class ModuleContainer extends Component {
       content = JSON.stringify(module.get.payload.content);
     }
 
+
+
     return <Module isNew={ this.state.isNew }
+             canMakePdf={ !!module.get.payload && !!module.get.payload.content && !!module.get.payload.content.sections && !!module.get.payload.content.sections.length }
              makePdf={ (id) => self.makePdf(id) }
              onPost={ (formdata) => self.onPost(formdata) }
              onDelete={ (id) => self.onDelete(id) }
@@ -116,6 +126,7 @@ class ModuleContainer extends Component {
              pdfUrl={ this.state.pdfUrl }
              content={ content }
              post={ module.post }
+             resetPost={ this.resetPost }
              del={ module.del } />;
   }
 }

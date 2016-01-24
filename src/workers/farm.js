@@ -11,7 +11,7 @@ class Farm {
   }
 
   print(m) {
-    this.workers.print(m.content, (err, url) => {
+    this.workers.print(m, (err, url) => {
       if (err) {
         log.error(err);
       }

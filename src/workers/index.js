@@ -7,6 +7,10 @@ import uuid from 'node-uuid';
 import Slug from 'slug';
 
 export const print = (m, callback) => {
+  AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  });
   const S3 = new AWS.S3();
   const s3Stream = S3Stream(S3);
 

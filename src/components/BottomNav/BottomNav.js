@@ -17,33 +17,38 @@ export default class BottomNav extends Component {
                          </Popover>;
 
     return <Navbar className="BottomNav" fixedBottom>
-             <Nav pullRight>
-               <NavItem>
-                 <OverlayTrigger rootClose={ true }
-                   trigger="click"
-                   placement="top"
-                   overlay={ photoPopover }>
-                   <i className="fa fa-camera"></i>
-                 </OverlayTrigger>
-               </NavItem>
-               <LinkContainer to="/app/about">
-                 <NavItem eventKey={ 2 }>
-                   <i className="fa fa-info"></i>
+             <Navbar.Header>
+               <Navbar.Toggle />
+             </Navbar.Header>
+             <Navbar.Collapse>
+               <Nav pullRight>
+                 <NavItem>
+                   <OverlayTrigger rootClose={ true }
+                     trigger="click"
+                     placement="top"
+                     overlay={ photoPopover }>
+                     <i className="fa fa-camera"></i>
+                   </OverlayTrigger>
                  </NavItem>
-               </LinkContainer>
-               <NavDropdown eventKey={ 3 } title={ legalIcon } id="legal">
-                 <LinkContainer to="/app/terms">
-                   <MenuItem eventKey={ 3.1 }>
-                     Terms of Service
-                   </MenuItem>
+                 <LinkContainer to="/app/about">
+                   <NavItem eventKey={ 2 }>
+                     <i className="fa fa-info"></i>
+                   </NavItem>
                  </LinkContainer>
-                 <LinkContainer to="/app/privacy">
-                   <MenuItem eventKey={ 3.2 }>
-                     Privacy Policy
-                   </MenuItem>
-                 </LinkContainer>
-               </NavDropdown>
-             </Nav>
-           </Navbar>
+                 <NavDropdown eventKey={ 3 } title={ legalIcon } id="legal">
+                   <LinkContainer to="/app/terms">
+                     <MenuItem eventKey={ 3.1 }>
+                       Terms of Service
+                     </MenuItem>
+                   </LinkContainer>
+                   <LinkContainer to="/app/privacy">
+                     <MenuItem eventKey={ 3.2 }>
+                       Privacy Policy
+                     </MenuItem>
+                   </LinkContainer>
+                 </NavDropdown>
+               </Nav>
+             </Navbar.Collapse>
+           </Navbar>;
   }
 }

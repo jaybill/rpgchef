@@ -48,6 +48,8 @@ class ModuleContainer extends Component {
     }
   }
 
+
+
   componentWillMount() {
     const {dispatch, routing} = this.props;
     const uri = new urijs(routing.path);
@@ -74,27 +76,14 @@ class ModuleContainer extends Component {
     dispatch(doMakePdf(formdata));
   }
 
-
-
   onDelete(id) {
     const {dispatch} = this.props;
     dispatch(doModuleDel(id));
   }
 
   onPost(formdata) {
-
     const {dispatch, module} = this.props;
-
-    try {
-      formdata.content = JSON.parse(formdata.content);
-      // Dispatch action if everything is okay.
-      dispatch(doModulePost(formdata));
-    } catch ( err ) {
-      dispatch(modulePostFailure({
-        message: "Invalid JSON",
-        payload: formdata
-      }));
-    }
+    dispatch(doModulePost(formdata));
   }
 
   render() {
@@ -103,16 +92,10 @@ class ModuleContainer extends Component {
     let name;
     let content;
 
-
-    if (module.post.failed && module.post.payload) {
-      name = module.post.payload.name;
-      content = module.post.payload.content;
-    } else if (module.get.succeeded) {
+    if (module.get.succeeded) {
       name = module.get.payload.name;
-      content = JSON.stringify(module.get.payload.content);
+      content = module.get.payload.content;
     }
-
-
 
     return <Module isNew={ this.state.isNew }
              canMakePdf={ !!module.get.payload && !!module.get.payload.content && !!module.get.payload.content.sections && !!module.get.payload.content.sections.length }

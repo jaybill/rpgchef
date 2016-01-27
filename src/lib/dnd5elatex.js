@@ -48,7 +48,7 @@ class Dnd5eLaTeX {
           break;
 
         case "text":
-          lt += s.content.paragraphs.join("\n\n");
+          lt += s.content.text;
           break;
 
         case "subsection":
@@ -57,7 +57,7 @@ class Dnd5eLaTeX {
 
         case "commentbox":
           lt += this.createCommentBox(s.content.title,
-            s.content.paragraphs.join("\n\n"));
+            s.content.text);
           break;
       }
     });

@@ -3,7 +3,9 @@ import React, { Component, PropTypes } from 'react';
 import { Label, ButtonToolbar, ButtonGroup, Panel, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { CtrldInputText, CtrldTextarea } from '../ControlledField';
 import Expire from '../Expire';
-
+import ContentEditor from "../ContentEditor";
+import log from 'loglevel';
+import _ from 'lodash';
 
 export default class Module extends Component {
 
@@ -16,6 +18,8 @@ export default class Module extends Component {
     this.finishEditHeading = this.finishEditHeading.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.makePdf = this.makePdf.bind(this);
+    this.removeSection = this.removeSection.bind(this);
+    this.moveSection = this.moveSection.bind(this);
   }
 
   makePdf() {
@@ -108,10 +112,33 @@ export default class Module extends Component {
     }
   }
 
+  moveSection(k, a) {
+    const newContent = Object.assign({}, this.state.content);
+    [newContent.sections[k], newContent.sections[k + a]] = [newContent.sections[k + a], newContent.sections[k]];
+    this.setState({
+      content: newContent
+    });
+  }
+
+  removeSection(k) {
+    const newContent = Object.assign({}, this.state.content);
+    newContent.sections.splice(k, 1);
+    this.setState({
+      content: newContent
+    });
+  }
+
   onFieldChange(name, newValue) {
-    const newState = {};
-    newState[name] = newValue;
-    this.setState(newState);
+
+    if (Array.isArray(name)) {
+      const newStateObj = Object.assign({}, this.state);
+      _.set(newStateObj, name, newValue);
+      this.setState(newStateObj);
+    } else {
+      const newState = {};
+      newState[name] = newValue;
+      this.setState(newState);
+    }
   }
 
   render() {
@@ -148,6 +175,15 @@ export default class Module extends Component {
                        </Label>;
 
     }
+
+    let editor;
+    if (this.state.content) {
+      editor = <ContentEditor removeSection={ self.removeSection }
+                 moveSection={ self.moveSection }
+                 content={ this.state.content }
+                 onFieldChange={ this.onFieldChange } />;
+    }
+
 
     let heading;
 
@@ -199,7 +235,10 @@ export default class Module extends Component {
                           <Button title="Save" onClick={ this.onPost }>
                             <i className="fa fa-floppy-o fa-fw"></i>
                           </Button>
-                          <OverlayTrigger trigger="click" placement="right" overlay={ deletePopover }>
+                          <OverlayTrigger rootClose={ true }
+                            trigger="click"
+                            placement="right"
+                            overlay={ deletePopover }>
                             <Button title="Delete">
                               <i className="fa fa-trash-o fa-fw"></i>
                             </Button>
@@ -230,24 +269,7 @@ export default class Module extends Component {
                   </Row>
                 </Grid>
               </Panel>
-              <Grid>
-                <Row className="no-gutter">
-                  <Col md={ 6 }>
-                    <Panel bsStyle="primary">
-                      <div className="form-group">
-                        <label>
-                          Content
-                        </label>
-                        <CtrldTextarea className="form-control"
-                          value={ this.state.content }
-                          name="content"
-                          disabled={ working }
-                          onFieldChange={ this.onFieldChange } />
-                      </div>
-                    </Panel>
-                  </Col>
-                </Row>
-              </Grid>
+              { editor }
               { pdfLink }
             </div>);
   }

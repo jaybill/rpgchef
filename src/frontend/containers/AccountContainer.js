@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { account as doAccount, failure } from '../actions/account';
 import Account from '../../components/Account';
 

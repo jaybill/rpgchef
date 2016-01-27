@@ -8,7 +8,7 @@ import _ from 'lodash';
 var commonDef = {
   propTypes: {
     onFieldChange: React.PropTypes.func.isRequired,
-    name: React.PropTypes.string.isRequired
+    name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array]).isRequired
   },
   getInitalState() {
     return {
@@ -29,7 +29,6 @@ var commonDef = {
     if (this.state && this.state.start && field == document.activeElement) {
       field.setSelectionRange(this.state.start, this.state.end);
     }
-
   },
   update(e) {
     this.setState({

@@ -55,7 +55,7 @@ var textareaRender = {
 var inputTextRender = {
   render() {
     return (<input disabled={ this.props.disabled }
-              type="text"
+              type={ this.props.type || "text" }
               placeholder={ this.props.placeholder }
               className={ this.props.className }
               value={ this.props.value }

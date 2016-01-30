@@ -79,6 +79,25 @@ export const modulesGet = function(id) {
     });
   };
 };
+
+const moduleDelActions = createAsyncActionGroup("MODULE_DEL", {});
+export const moduleDel = function(id) {
+  return dispatch => {
+    dispatch(moduleDelActions.start());
+    return delModuleCall(id).then((result) => {
+      if (result.status == 200) {
+        return dispatch(moduleDelActions.success(result.body));
+      } else {
+        log.error(result);
+        throw new Error("Bad response");
+      }
+    }).catch(err => {
+      log.error(err);
+      dispatch(moduleDelActions.failure("moduleDel failed"));
+    });
+  };
+};
+
 export const modulePdfReset = createAction(ActionConstants.MODULE_PDF_RESET);
 const makePdfActions = createAsyncActionGroup("MODULE_MAKEPDF", {});
 export const makePdf = function(module) {

@@ -98,7 +98,7 @@ class ModuleContainer extends Component {
     }
 
     return <Module isNew={ this.state.isNew }
-             canMakePdf={ !!module.get.payload && !!module.get.payload.content && !!module.get.payload.content.sections && !!module.get.payload.content.sections.length }
+             canMakePdf={ !!module.get.payload && !!module.get.payload.content && !!module.get.payload.content.length }
              makePdf={ (id) => self.makePdf(id) }
              onPost={ (formdata) => self.onPost(formdata) }
              onDelete={ (id) => self.onDelete(id) }

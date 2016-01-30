@@ -1,6 +1,7 @@
 import './Module.less';
 import React, { Component, PropTypes } from 'react';
-import { Label, ButtonToolbar, ButtonGroup, Panel, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
+import { AutoAffix } from 'react-overlays';
+import { NavItem, Navbar, Nav, Label, ButtonToolbar, ButtonGroup, Panel, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { CtrldInputText, CtrldTextarea } from '../ControlledField';
 import Expire from '../Expire';
 import ContentEditor from "../ContentEditor";
@@ -20,6 +21,7 @@ export default class Module extends Component {
     this.makePdf = this.makePdf.bind(this);
     this.removeSection = this.removeSection.bind(this);
     this.moveSection = this.moveSection.bind(this);
+    this.addSection = this.addSection.bind(this);
   }
 
   makePdf() {
@@ -113,20 +115,69 @@ export default class Module extends Component {
   }
 
   moveSection(k, a) {
-    const newContent = Object.assign({}, this.state.content);
-    [newContent.sections[k], newContent.sections[k + a]] = [newContent.sections[k + a], newContent.sections[k]];
+    const newContent = Object.assign([], this.state.content);
+    [newContent[k], newContent[k + a]] = [newContent[k + a], newContent[k]];
     this.setState({
-      content: newContent
+      content: newContent,
+      scrollToLast: false
     });
   }
 
   removeSection(k) {
-    const newContent = Object.assign({}, this.state.content);
-    newContent.sections.splice(k, 1);
+    const newContent = Object.assign([], this.state.content);
+    newContent.splice(k, 1);
     this.setState({
-      content: newContent
+      content: newContent,
+      scrollToLast: false
     });
   }
+
+  addSection(type) {
+    const newSection = {};
+    switch (type) {
+
+      case "section":
+        newSection.type = "section";
+        newSection.content = {
+          title: ""
+        };
+        break;
+      case "subsection":
+        newSection.type = "subsection";
+        newSection.content = {
+          title: ""
+        };
+        break;
+      case "monster":
+        newSection.type = "monster";
+        newSection.content = {
+          name: ""
+        };
+        break;
+
+      case "commentbox":
+        newSection.type = "commentbox";
+        newSection.content = {
+          title: "",
+          text: ""
+        };
+        break;
+      default:
+        newSection.type = "text";
+        newSection.content = {
+          text: ""
+        };
+        break;
+    }
+
+    const newContent = Object.assign([], this.state.content);
+    newContent.push(newSection);
+    this.setState({
+      content: newContent,
+      scrollToLast: true
+    });
+  }
+
 
   onFieldChange(name, newValue) {
 
@@ -179,6 +230,7 @@ export default class Module extends Component {
     let editor;
     if (this.state.content) {
       editor = <ContentEditor removeSection={ self.removeSection }
+                 scrollToLast={ this.state.scrollToLast }
                  moveSection={ self.moveSection }
                  content={ this.state.content }
                  onFieldChange={ this.onFieldChange } />;
@@ -225,50 +277,51 @@ export default class Module extends Component {
                           </Popover>;
 
     return (<div className="Module">
+              <Navbar fixedTop>
+                <Navbar.Header>
+                  <Navbar.Brand>
+                    Module Editor
+                  </Navbar.Brand>
+                  <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                  <Nav>
+                    <NavItem title="Save" onClick={ this.onPost }>
+                      <i className="fa fa-floppy-o fa-fw"></i>
+                    </NavItem>
+                    <OverlayTrigger rootClose={ true }
+                      trigger="click"
+                      placement="right"
+                      overlay={ deletePopover }>
+                      <NavItem title="Delete">
+                        <i className="fa fa-trash-o fa-fw"></i>
+                      </NavItem>
+                    </OverlayTrigger>
+                    <NavItem disabled={ this.props.pdfWorking || !this.props.canMakePdf } onClick={ self.makePdf } title="Create PDF">
+                      <i className={ pdfClass }></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "section") } title="Insert Section Heading">
+                      <i className="fa fa-header fa-fw"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "subsection") } title="Insert Subsection Heading">
+                      <i className="fa fa-h-square fa-fw"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection } title="Insert Text">
+                      <i className="fa fa-paragraph fa-fw"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "commentbox") } title="Insert Text Box">
+                      <i className="fa fa-list-alt fa-fw"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "monster") } title="Insert Monster">
+                      <i className="icon icon-goblin"></i>
+                    </NavItem>
+                  </Nav>
+                  <Nav pullRight>
+                    { displayMessage }
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
               { heading }
-              <Panel bsStyle="primary">
-                <Grid>
-                  <Row className="no-gutter">
-                    <Col md={ 10 }>
-                      <ButtonToolbar>
-                        <ButtonGroup>
-                          <Button title="Save" onClick={ this.onPost }>
-                            <i className="fa fa-floppy-o fa-fw"></i>
-                          </Button>
-                          <OverlayTrigger rootClose={ true }
-                            trigger="click"
-                            placement="right"
-                            overlay={ deletePopover }>
-                            <Button title="Delete">
-                              <i className="fa fa-trash-o fa-fw"></i>
-                            </Button>
-                          </OverlayTrigger>
-                          <Button disabled={ this.props.pdfWorking || !this.props.canMakePdf } onClick={ self.makePdf } title="Create PDF">
-                            <i className={ pdfClass }></i>
-                          </Button>
-                        </ButtonGroup>
-                        <ButtonGroup>
-                          <Button title="Insert Section Heading">
-                            <i className="fa fa-header fa-fw"></i>
-                          </Button>
-                          <Button title="Insert Subsection Heading">
-                            <i className="fa fa-h-square fa-fw"></i>
-                          </Button>
-                          <Button title="Insert Text Box">
-                            <i className="fa fa-list-alt fa-fw"></i>
-                          </Button>
-                          <Button title="Insert Monster">
-                            <i className="icon icon-goblin"></i>
-                          </Button>
-                        </ButtonGroup>
-                      </ButtonToolbar>
-                    </Col>
-                    <Col md={ 2 }>
-                      { displayMessage }
-                    </Col>
-                  </Row>
-                </Grid>
-              </Panel>
               { editor }
               { pdfLink }
             </div>);

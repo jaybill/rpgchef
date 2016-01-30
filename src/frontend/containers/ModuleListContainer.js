@@ -36,7 +36,7 @@ class ModuleListContainer extends Component {
 
     dispatch(doModulePost({
       name: "Untitled Adventure",
-      content: {}
+      content: []
     }));
   }
 

@@ -10,6 +10,38 @@ export default class DnD5e {
     this.mergedWeapons = this.mergedWeapons.bind(this);
   }
 
+  calcModifier(s) {
+    let o;
+    if (!isNaN(parseFloat(s)) && isFinite(s)) {
+      o = Math.floor((s - 10) / 2);
+      if (o > -1) {
+        o = "+" + o;
+      }
+      o = "(" + o + ")";
+    }
+    return o;
+  }
+
+  getSizes() {
+    return [
+      "Tiny", "Small", "Medium", "Large", "Gargantuan"
+    ];
+  }
+
+  getAlignments() {
+    return ['Unaligined',
+      'Lawful good',
+      'Neutral good',
+      'Chaotic good',
+      'Lawful neutral',
+      'Neutral',
+      'Chaotic neutral',
+      'Lawful evil',
+      'Neutral evil',
+      'Chaotic evil'
+    ];
+  }
+
   getBaseProperties(weapon) {
     const updates = {
       properties: _.capitalize(weapon.name) + ". ",

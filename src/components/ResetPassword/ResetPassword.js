@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { Input, Panel, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
 import { Link } from 'react-router';
 import log from 'loglevel';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import _ from 'lodash';
 
 
@@ -27,16 +27,16 @@ export default class ResetPassword extends Component {
     const {error, verified, reset, resetError} = this.props;
 
     if (!verified) {
-      return <Alert bsStyle="danger">
-               Verification Failed.
-             </Alert>
+      return (<Alert bsStyle="danger">
+                Verification Failed.
+              </Alert>);
     }
     var wh;
 
     if (resetError) {
-      errorDisplay = <Alert bsStyle="danger">
-                       { resetError }
-                     </Alert>
+      errorDisplay = (<Alert bsStyle="danger">
+                        { resetError }
+                      </Alert>);
     }
 
     if (reset) {

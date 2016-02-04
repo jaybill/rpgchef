@@ -22,6 +22,11 @@ export default class Module extends Component {
     this.removeSection = this.removeSection.bind(this);
     this.moveSection = this.moveSection.bind(this);
     this.addSection = this.addSection.bind(this);
+
+    this.lazyUpdate = _.throttle((newstate) => {
+      this.setState(newstate);
+    }, 100);
+    this.lazyUpdate = this.lazyUpdate.bind(this);
   }
 
   makePdf() {
@@ -33,20 +38,24 @@ export default class Module extends Component {
   }
 
   componentDidMount() {
-    if (this.props.isNew) {
+    if (this.props.name && !this.props.content.length) {
       this.onClickHeading();
     }
   }
 
   onClickHeading() {
     this.setState({
-      editHeading: true
+      editHeading: true,
+      skipUpdate: false,
+      scrollToLast: false
     });
   }
 
   finishEditHeading() {
     this.setState({
-      editHeading: false
+      editHeading: false,
+      skipUpdate: false,
+      scrollToLast: false
     });
     this.onPost();
   }
@@ -58,17 +67,20 @@ export default class Module extends Component {
   }
 
   onPost() {
+
     this.props.onPost({
       id: this.state.id,
       name: this.state.name,
       content: this.state.content
+    });
+    this.setState({
+      scrollToLast: false
     });
   }
 
   onDelete() {
     this.props.onDelete(this.props.id);
   }
-
 
   componentWillUnmount() {
     if (this._timer) {
@@ -81,7 +93,8 @@ export default class Module extends Component {
     this.setState({
       id: this.props.id,
       name: this.props.name,
-      content: this.props.content
+      content: this.props.content,
+      skipUpdate: false
     });
   }
 
@@ -100,7 +113,8 @@ export default class Module extends Component {
       name: newProps.name,
       content: newProps.content,
       succeeded: succeeded,
-      failed: failed
+      failed: failed,
+      skipUpdate: false
     });
 
     if (newProps.pdfUrl && !this._clickTimer) {
@@ -114,25 +128,39 @@ export default class Module extends Component {
     }
   }
 
+  showOrder(a) {
+    const aa = [];
+
+    _.forEach(a, (aaa, i) => {
+      aa.push(aaa.content.title, i);
+    });
+    return aa;
+  }
+
   moveSection(k, a) {
     const newContent = Object.assign([], this.state.content);
     [newContent[k], newContent[k + a]] = [newContent[k + a], newContent[k]];
     this.setState({
       content: newContent,
-      scrollToLast: false
+      scrollToLast: false,
+      skipUpdate: false
     });
   }
 
   removeSection(k) {
+
     const newContent = Object.assign([], this.state.content);
     newContent.splice(k, 1);
     this.setState({
       content: newContent,
-      scrollToLast: false
+      scrollToLast: false,
+      skipUpdate: false
     });
   }
 
+
   addSection(type) {
+    const self = this;
     const newSection = {};
     switch (type) {
 
@@ -151,7 +179,10 @@ export default class Module extends Component {
       case "monster":
         newSection.type = "monster";
         newSection.content = {
-          name: ""
+          name: "",
+          traits: [],
+          actions: [],
+          legendaryActions: []
         };
         break;
 
@@ -170,29 +201,33 @@ export default class Module extends Component {
         break;
     }
 
-    const newContent = Object.assign([], this.state.content);
-    newContent.push(newSection);
+    const newContent = Object.assign([], self.state.content);
+    newContent[newContent.length] = newSection;
     this.setState({
       content: newContent,
-      scrollToLast: true
+      scrollToLast: true,
+      skipUpdate: false
     });
   }
 
+  shouldComponentUpdate(newProps, newState) {
+    return !!!newState.skipUpdate;
+  }
 
-  onFieldChange(name, newValue) {
-
+  onFieldChange(name, newValue, skipUpdate = true) {
+    let newState = {};
     if (Array.isArray(name)) {
-      const newStateObj = Object.assign({}, this.state);
-      _.set(newStateObj, name, newValue);
-      this.setState(newStateObj);
+      newState = Object.assign({}, this.state);
+      _.set(newState, name, newValue);
     } else {
-      const newState = {};
       newState[name] = newValue;
-      this.setState(newState);
     }
+    newState.skipUpdate = skipUpdate;
+    this.lazyUpdate(newState);
   }
 
   render() {
+
     const self = this;
     let displayMessage;
     let pdfLink;
@@ -229,6 +264,7 @@ export default class Module extends Component {
 
     let editor;
     if (this.state.content) {
+
       editor = <ContentEditor removeSection={ self.removeSection }
                  scrollToLast={ this.state.scrollToLast }
                  moveSection={ self.moveSection }

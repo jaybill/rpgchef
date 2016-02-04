@@ -24,7 +24,7 @@ export default class DnD5e {
 
   getSizes() {
     return [
-      "Tiny", "Small", "Medium", "Large", "Gargantuan"
+      "Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"
     ];
   }
 

@@ -110,7 +110,7 @@ export const makePdf = function(module) {
         dispatch(moduleGetActions.success(result.body)),
         dispatch(modulesGet());
 
-        if (!result.body.content.sections || !result.body.content.sections.length) {
+        if (!result.body.content || !result.body.content.length) {
           throw new Error("Module has no content.");
         }
 

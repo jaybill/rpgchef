@@ -160,7 +160,7 @@ export default class ContentEditor extends Component {
   }
 
   handleStatChange(name, value) {
-
+    value = parseInt(value);
     let nnn;
     const self = this;
     if (Array.isArray(name)) {
@@ -262,7 +262,9 @@ export default class ContentEditor extends Component {
   }
 
   makeUpdateRefresh(name, value) {
-
+    if (!isNaN(parseInt(value))) {
+      value = parseInt(value);
+    }
     this.props.onFieldChange(name, value, false);
   }
 
@@ -528,8 +530,8 @@ export default class ContentEditor extends Component {
                          <CtrldInputText type="text"
                            placeholder="i.e. 'acid, lightning'"
                            className="form-control"
-                           value={ c.content.damageResistance }
-                           name={ ["content", k, "content", "damageResistance"] }
+                           value={ c.content.damageResistances }
+                           name={ ["content", k, "content", "damageResistances"] }
                            onFieldChange={ this.props.onFieldChange } />
                        </div>
                      </div>

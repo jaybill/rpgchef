@@ -28,6 +28,17 @@ export default class DnD5e {
     ];
   }
 
+  getCoreStats() {
+    return [
+      "STR",
+      "DEX",
+      "CON",
+      "INT",
+      "WIS",
+      "CHA"
+    ];
+  }
+
   getAlignments() {
     return ['Unaligined',
       'Lawful good',

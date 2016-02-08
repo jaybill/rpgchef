@@ -179,10 +179,36 @@ export default class Module extends Component {
       case "monster":
         newSection.type = "monster";
         newSection.content = {
-          name: "",
-          traits: [],
-          actions: [],
-          legendaryActions: []
+          "type": "monster",
+          "content": {
+            "xp": null,
+            "CHA": 10,
+            "CON": 10,
+            "DEX": 10,
+            "INT": 10,
+            "STR": 10,
+            "WIS": 10,
+            "name": null,
+            "size": "Tiny",
+            "speed": null,
+            "senses": null,
+            "skills": null,
+            "traits": [],
+            "actions": [],
+            "alignment": "Unaligined",
+            "challenge": null,
+            "hitpoints": null,
+            "languages": null,
+            "armorclass": null,
+            "raceOrType": null,
+            "savingThrows": null,
+            "legendaryPoints": 0,
+            "damageImmunities": null,
+            "damageResistances": null,
+            "legendaryActions": [],
+            "conditionImmunities": null,
+            "damageVulnerabilities": null
+          }
         };
         break;
 

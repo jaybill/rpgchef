@@ -4,6 +4,7 @@ import { Popover, OverlayTrigger, ButtonGroup, ButtonToolbar, Panel, Input, Butt
 import _ from 'lodash';
 import log from 'loglevel';
 import CtrldInputText from '../ControlledField';
+import ConfirmDelete from '../ConfirmDelete';
 import { getPosition } from '../../frontend/domutils';
 
 import DnD5e from '../../lib/dnd5e';
@@ -50,28 +51,9 @@ export default class ContentEditor extends Component {
   }
   makeToolBar(k) {
 
-    const deletePopover = <Popover id="confirm-delete" rootClose={ true } title="Confirm Delete">
-                            <p>
-                              Are you sure?
-                            </p>
-                            <Button onClick={ this.props.removeSection.bind(this, k) }
-                              block
-                              bsSize="small"
-                              bsStyle="danger">
-                              Delete
-                            </Button>
-                          </Popover>;
 
     return <ButtonToolbar>
              <ButtonGroup className="pull-right">
-               <OverlayTrigger rootClose={ true }
-                 trigger="click"
-                 placement="left"
-                 overlay={ deletePopover }>
-                 <Button bsSize="xs">
-                   <i className="fa fa-trash-o fa-fw"></i>
-                 </Button>
-               </OverlayTrigger>
                <Button onClick={ this.props.moveSection.bind(this, k, -1) } disabled={ k == 0 } bsSize="xs">
                  <i className="fa fa-arrow-up fa-fw"></i>
                </Button>
@@ -79,6 +61,7 @@ export default class ContentEditor extends Component {
                  <i className="fa fa-arrow-down fa-fw"></i>
                </Button>
              </ButtonGroup>
+             <ConfirmDelete className="pull-right" onConfirm={ this.props.removeSection.bind(this, k) } bsSize="xs" />
            </ButtonToolbar>;
   }
 
@@ -206,7 +189,7 @@ export default class ContentEditor extends Component {
 
       traits.push(<div className="monster-trait" key={ i }>
                     <Row>
-                      <Col md={ 9 }>
+                      <Col md={ 8 }>
                         <div className="form-group ">
                           <div className="input-group">
                             <span title="Size" className="input-group-addon">Name</span>
@@ -218,21 +201,21 @@ export default class ContentEditor extends Component {
                           </div>
                         </div>
                       </Col>
-                      <Col md={ 3 }>
-                        <ButtonGroup className="pull-right">
-                          <Button onClick={ self.removeTrait.bind(this, c, k, i, type) } bsSize="xs">
-                            <i className="fa fa-trash-o fa-fw"></i>
-                          </Button>
-                          <Button disabled={ i == 0 } onClick={ self.moveTrait.bind(this, c, k, i, -1, type) } bsSize="xs">
-                            <i className="fa fa-arrow-up fa-fw"></i>
-                          </Button>
-                          <Button disabled={ i == c.content[type].length - 1 }
-                            onClick={ self.moveTrait.bind(this, c, k, i, 1, type) }
-                            bsSize="xs"
-                            bsSize="xs">
-                            <i className="fa fa-arrow-down fa-fw"></i>
-                          </Button>
-                        </ButtonGroup>
+                      <Col md={ 4 }>
+                        <ButtonToolbar>
+                          <ButtonGroup className="pull-right">
+                            <Button disabled={ i == 0 } onClick={ self.moveTrait.bind(this, c, k, i, -1, type) } bsSize="xs">
+                              <i className="fa fa-arrow-up fa-fw"></i>
+                            </Button>
+                            <Button disabled={ i == c.content[type].length - 1 }
+                              onClick={ self.moveTrait.bind(this, c, k, i, 1, type) }
+                              bsSize="xs"
+                              bsSize="xs">
+                              <i className="fa fa-arrow-down fa-fw"></i>
+                            </Button>
+                          </ButtonGroup>
+                          <ConfirmDelete className="pull-right" onConfirm={ self.removeTrait.bind(this, c, k, i, type) } bsSize="xs" />
+                        </ButtonToolbar>
                       </Col>
                     </Row>
                     <CtrldInputText type="textarea"

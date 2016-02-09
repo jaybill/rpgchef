@@ -1,0 +1,6 @@
+{
+  "name": "TableEditor",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TableEditor.js"
+}

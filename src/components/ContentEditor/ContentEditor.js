@@ -5,6 +5,7 @@ import _ from 'lodash';
 import log from 'loglevel';
 import CtrldInputText from '../ControlledField';
 import ConfirmDelete from '../ConfirmDelete';
+import TableEditor from '../TableEditor';
 import { getPosition } from '../../frontend/domutils';
 
 import DnD5e from '../../lib/dnd5e';
@@ -17,6 +18,7 @@ export default class ContentEditor extends Component {
     this.makeText = this.makeText.bind(this);
     this.makeToolBar = this.makeToolBar.bind(this);
     this.makeCommentbox = this.makeCommentbox.bind(this);
+    this.makeTable = this.makeTable.bind(this);
     this.getKeyName = this.getKeyName.bind(this);
     this.state = {
       sections: []
@@ -51,7 +53,6 @@ export default class ContentEditor extends Component {
   }
   makeToolBar(k) {
 
-
     return <ButtonToolbar>
              <ButtonGroup className="pull-right">
                <Button onClick={ this.props.moveSection.bind(this, k, -1) } disabled={ k == 0 } bsSize="xs">
@@ -63,6 +64,18 @@ export default class ContentEditor extends Component {
              </ButtonGroup>
              <ConfirmDelete className="pull-right" onConfirm={ this.props.removeSection.bind(this, k) } bsSize="xs" />
            </ButtonToolbar>;
+  }
+
+
+  makeTable(h, k, ref) {
+
+    return (<section key={ k }
+              ref={ ref }
+              className={ ref }
+              id={ k }>
+              { this.makeToolBar(k) }
+              <TableEditor name={ ["content", k, "content", "data"] } onFieldChange={ this.props.onFieldChange } data={ h.content.data } />
+            </section>);
   }
 
   makeSection(h, k, sub, ref) {
@@ -599,6 +612,9 @@ export default class ContentEditor extends Component {
 
         const ref = 'section-' + key;
         switch (s.type) {
+          case "table":
+            sections.push(self.makeTable(s, key, ref));
+            break;
           case "section":
             sections.push(self.makeSection(s, key, false, ref));
             break;

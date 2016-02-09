@@ -49,7 +49,11 @@ const templates = {
     "choosing from the options below. Only one legendary action option " +
     "can be used at a time and only at the end of another creature's turn. " +
     "The <%= name %> regains spent legendary actions at the start of its turn.\n" +
-    "\\newline\n\\newline\n"
+    "\\newline\n\\newline\n",
+  table: '\\begin{dndtable}\n' +
+    '<%= rows %>\n' +
+    '\\end{dndtable}\n',
+  tableHeading: '\\textbf{<%= h %>}'
 };
 
 class Dnd5eLaTeX {
@@ -82,6 +86,10 @@ class Dnd5eLaTeX {
           lt += this.createSection(s.content.title);
           break;
 
+        case "table":
+          lt += this.createTable(s.content.data);
+          break;
+
         case "text":
           lt += s.content.text;
           break;
@@ -110,6 +118,26 @@ class Dnd5eLaTeX {
     });
   };
 
+  createTable(data) {
+
+    const rows = [];
+    const headingRows = [];
+    _.forEach(data[0], (r) => {
+      headingRows.push(this.compiled.tableHeading({
+        h: r
+      }));
+    });
+
+    rows.push(headingRows.join("  & "));
+
+    for (let i = 1; i < data.length; i++) {
+      rows.push(data[i].join("  & "));
+    }
+
+    return this.compiled.table({
+      rows: rows.join(' \\\\\n')
+    });
+  };
 
   createDocument(content) {
     return this.compiled.document({

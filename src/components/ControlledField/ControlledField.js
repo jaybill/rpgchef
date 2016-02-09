@@ -43,7 +43,7 @@ export default class CtrldInputText extends Component {
     this.props.onFieldChange(this.props.name, e.target.value);
   }
   render() {
-
+    const self = this;
     let wtr;
     switch (this.props.type) {
       case "textarea":
@@ -52,7 +52,12 @@ export default class CtrldInputText extends Component {
                  className={ this.props.className }
                  value={ this.state.value }
                  onChange={ this.update }
-                 onBlur={ this.update }
+                 onBlur={ (e) => {
+                            self.update(e);
+                            if (self.props.onBlur) {
+                              self.props.onBlur();
+                            }
+                          } }
                  ref="field"
                  rows={ this.props.rows } />);
         break;
@@ -62,7 +67,12 @@ export default class CtrldInputText extends Component {
                  className={ this.props.className }
                  value={ this.state.value }
                  onChange={ this.update }
-                 onBlur={ this.update }
+                 onBlur={ (e) => {
+                            self.update(e);
+                            if (self.props.onBlur) {
+                              self.props.onBlur();
+                            }
+                          } }
                  ref="field">
                  { this.props.children }
                </select>);
@@ -74,7 +84,12 @@ export default class CtrldInputText extends Component {
                  className={ this.props.className }
                  value={ this.state.value }
                  onChange={ this.update }
-                 onBlur={ this.update }
+                 onBlur={ (e) => {
+                            self.update(e);
+                            if (self.props.onBlur) {
+                              self.props.onBlur();
+                            }
+                          } }
                  onKeyUp={ this.props.onKeyUp }
                  ref="field" />);
         break;

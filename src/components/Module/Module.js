@@ -176,6 +176,12 @@ export default class Module extends Component {
           title: ""
         };
         break;
+      case "table":
+        newSection.type = "table";
+        newSection.content = {
+          data: []
+        };
+        break;
       case "monster":
         newSection.type = "monster";
         newSection.content = {
@@ -373,6 +379,9 @@ export default class Module extends Component {
                     </NavItem>
                     <NavItem onClick={ self.addSection.bind(this, "commentbox") } title="Insert Text Box">
                       <i className="fa fa-list-alt fa-fw"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "table") } title="Insert Table">
+                      <i className="fa fa-table fa-fw"></i>
                     </NavItem>
                     <NavItem onClick={ self.addSection.bind(this, "monster") } title="Insert Monster">
                       <i className="icon icon-goblin"></i>

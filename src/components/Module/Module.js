@@ -163,7 +163,12 @@ export default class Module extends Component {
     const self = this;
     const newSection = {};
     switch (type) {
-
+      case "pagebreak":
+        newSection.type = "pagebreak";
+        break;
+      case "columnbreak":
+        newSection.type = "columnbreak";
+        break;
       case "section":
         newSection.type = "section";
         newSection.content = {
@@ -382,6 +387,12 @@ export default class Module extends Component {
                     </NavItem>
                     <NavItem onClick={ self.addSection.bind(this, "table") } title="Insert Table">
                       <i className="fa fa-table fa-fw"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "pagebreak") } title="Insert Page Break">
+                      <i className="icon icon-page-break"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "columnbreak") } title="Insert Column Break">
+                      <i className="icon icon-column-break"></i>
                     </NavItem>
                     <NavItem onClick={ self.addSection.bind(this, "monster") } title="Insert Monster">
                       <i className="icon icon-goblin"></i>

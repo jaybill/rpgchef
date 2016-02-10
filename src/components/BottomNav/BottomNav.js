@@ -14,6 +14,12 @@ export default class BottomNav extends Component {
                            <p>
                              <i className="fa fa-creative-commons"></i> Some rights reserved. This work is licensed under a <a href="http://creativecommons.org/licenses/by-nd/3.0/">Creative Commons Attribution-No Derivative Works 3.0 License.</a>
                            </p>
+                           <h5>Icon Credits: Noun Project</h5>
+                           <p>
+                             Page Break by Garrett Knoll
+                             <br/> Layout by The Impekables
+                             <br/>right by Muneer A.Safiah
+                           </p>
                          </Popover>;
 
     return <Navbar className="BottomNav" fixedBottom>

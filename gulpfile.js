@@ -205,7 +205,7 @@ gulp.task('build:watch', function(cb) {
 gulp.task('serve', ['build:watch'], function(cb) {
   src.server = [
     'build/server.js',
-    'build/worker.js'
+    'build/workers.js'
   ];
 
   var started = false;

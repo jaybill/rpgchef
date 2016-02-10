@@ -53,7 +53,10 @@ const templates = {
   table: '\\begin{dndtable}\n' +
     '<%= rows %>\n' +
     '\\end{dndtable}\n',
-  tableHeading: '\\textbf{<%= h %>}'
+  tableHeading: '\\textbf{<%= h %>}',
+  columnBreak: '\n\\vfill\n',
+  pageBreak: '\n\\clearpage\n',
+  text: '<%= text %>'
 };
 
 class Dnd5eLaTeX {
@@ -65,12 +68,45 @@ class Dnd5eLaTeX {
     this.createDocument = this.createDocument.bind(this);
     this.createCommentBox = this.createCommentBox.bind(this);
     this.createMonster = this.createMonster.bind(this);
+    this.createColumnBreak = this.createColumnBreak.bind(this);
+    this.createPageBreak = this.createPageBreak.bind(this);
     this.makePdf = this.makePdf.bind(this);
+    this.createText = this.createText.bind(this);
     this.dd = new DnD5e();
     this.compiled = {};
     _.forEach(_.keys(templates), (k) => {
       this.compiled[k] = _.template(templates[k]);
     });
+  }
+
+  escape(t) {
+    // THE ORDER OF REPLACEMENT MATTERS
+    /*
+     Because some of the characters in the replacements need to be escaped in the content, 
+     it's super important to replace the brackets first with something else entirely, then 
+     escape the slashes (the replacement uses brackets) and then convert @OPEN and @CLOSE 
+     back into brackets.
+
+     Also: I am _sure_ there is a better way to do this, I'm just not sure what that is.
+     */
+    let o;
+    if (t) {
+      o = _.chain(t)
+        .replace(/{/g, '@OPEN')
+        .replace(/}/g, '@CLOSE')
+        .replace(/\\/g, '\\textbackslash{}')
+        .replace(/@OPEN/g, '\\{')
+        .replace(/@CLOSE/g, '\\}')
+        .replace(/~/g, '\\textasciitilde{}')
+        .replace(/\^/g, '\\textasciicircum{}')
+        .replace(/#/g, '\\#')
+        .replace(/\$/g, '\\$')
+        .replace(/%/g, '\\%')
+        .replace(/&/g, '\\&')
+        .replace(/_/g, '\\_')
+        .value();
+    }
+    return o;
   }
 
   makePdf(j) {
@@ -91,7 +127,7 @@ class Dnd5eLaTeX {
           break;
 
         case "text":
-          lt += s.content.text;
+          lt += this.createText(s.content.text);
           break;
 
         case "subsection":
@@ -106,15 +142,36 @@ class Dnd5eLaTeX {
           lt += this.createCommentBox(s.content.title,
             s.content.text);
           break;
+
+        case "columnbreak":
+          lt += this.createColumnBreak();
+          break;
+        case "pagebreak":
+          lt += this.createPageBreak();
+          break;
       }
     });
 
     return this.createDocument(lt);
   }
 
+  createText(t) {
+    return this.compiled.text({
+      text: this.escape(t)
+    });
+  }
+
+  createColumnBreak() {
+    return this.compiled.columnBreak({});
+  }
+
+  createPageBreak() {
+    return this.compiled.pageBreak({});
+  }
+
   createSubsection(title) {
     return this.compiled.subsection({
-      title: title
+      title: this.escape(title)
     });
   };
 
@@ -124,13 +181,14 @@ class Dnd5eLaTeX {
     const headingRows = [];
     _.forEach(data[0], (r) => {
       headingRows.push(this.compiled.tableHeading({
-        h: r
+        h: this.escape(r)
       }));
     });
 
     rows.push(headingRows.join("  & "));
 
     for (let i = 1; i < data.length; i++) {
+      data[i].map(this.escape);
       rows.push(data[i].join("  & "));
     }
 
@@ -147,21 +205,21 @@ class Dnd5eLaTeX {
 
   createSection(title) {
     return this.compiled.section({
-      title: title
+      title: this.escape(title)
     });
   }
 
   createMonster(c) {
     const self = this;
     const clean = {
-      "xp": c.xp || 0,
-      "name": c.name || "Unnamed Horror",
-      "size": c.size || "Tiny",
-      "speed": c.speed || "--",
-      "alignment": c.alignment || "Unaligined",
-      "hitpoints": c.hitpoints || null,
-      "armorclass": c.armorclass || "--",
-      "raceOrType": c.raceOrType || "humanoid"
+      "xp": this.escape(c.xp) || 0,
+      "name": this.escape(c.name) || "Unnamed Horror",
+      "size": this.escape(c.size) || "Tiny",
+      "speed": this.escape(c.speed) || "--",
+      "alignment": this.escape(c.alignment) || "Unaligined",
+      "hitpoints": this.escape(c.hitpoints) || null,
+      "armorclass": this.escape(c.armorclass) || "--",
+      "raceOrType": this.escape(c.raceOrType) || "humanoid"
     };
 
     const ds = [
@@ -181,7 +239,7 @@ class Dnd5eLaTeX {
       if (c[ddd] || c[ddd] == "languages" || c[ddd] == "senses" || c[ddd] == "challenge") {
         detaillines.push(this.compiled.monsterDetail({
           key: ddd.toLowerCase(),
-          value: c[ddd] || "--"
+          value: this.escape(c[ddd]) || "--"
         }));
       }
     });
@@ -221,8 +279,8 @@ class Dnd5eLaTeX {
 
       c.traits.forEach((t, i) => {
         clean.traitsAndActions += this.compiled.monsterAction({
-          name: t.name || "Trait",
-          content: t.content
+          name: this.escape(t.name) || "Trait",
+          content: this.escape(t.content)
         });
       });
 
@@ -234,8 +292,8 @@ class Dnd5eLaTeX {
       });
       c.actions.forEach((a, i) => {
         clean.traitsAndActions += this.compiled.monsterAction({
-          name: a.name || "Action",
-          content: a.content
+          name: this.escape(a.name) || "Action",
+          content: this.escape(a.content)
         });
       });
     }
@@ -247,13 +305,13 @@ class Dnd5eLaTeX {
       }
       clean.traitsAndActions += this.compiled.legendaryActions({
         name: clean.name,
-        points: c.legendaryPoints,
+        points: this.escape(c.legendaryPoints),
         s: s
       });
       c.legendaryActions.forEach((l, i) => {
         clean.traitsAndActions += this.compiled.monsterAction({
-          name: l.name || "Legendary Action",
-          content: l.content
+          name: this.escape(l.name) || "Legendary Action",
+          content: this.escape(l.content)
         });
       });
     }
@@ -263,8 +321,8 @@ class Dnd5eLaTeX {
 
   createCommentBox(title, content) {
     return this.compiled.commentBox({
-      title: title,
-      content: content
+      title: this.escape(title),
+      content: this.escape(content)
     });
   }
 

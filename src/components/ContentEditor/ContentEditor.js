@@ -19,6 +19,8 @@ export default class ContentEditor extends Component {
     this.makeToolBar = this.makeToolBar.bind(this);
     this.makeCommentbox = this.makeCommentbox.bind(this);
     this.makeTable = this.makeTable.bind(this);
+    this.makePageBreak = this.makePageBreak.bind(this);
+    this.makeColumnBreak = this.makeColumnBreak.bind(this);
     this.getKeyName = this.getKeyName.bind(this);
     this.state = {
       sections: []
@@ -77,6 +79,39 @@ export default class ContentEditor extends Component {
               <TableEditor name={ ["content", k, "content", "data"] } onFieldChange={ this.props.onFieldChange } data={ h.content.data } />
             </section>);
   }
+
+  makePageBreak(k, ref) {
+
+    return (<section key={ k }
+              ref={ ref }
+              className={ ref }
+              id={ k }>
+              { this.makeToolBar(k) }
+              <Panel>
+                <p>
+                  Page Break
+                </p>
+                <hr/>
+              </Panel>
+            </section>);
+  }
+
+  makeColumnBreak(k, ref) {
+
+    return (<section key={ k }
+              ref={ ref }
+              className={ ref }
+              id={ k }>
+              { this.makeToolBar(k) }
+              <Panel>
+                <p>
+                  Column Break
+                </p>
+                <hr/>
+              </Panel>
+            </section>);
+  }
+
 
   makeSection(h, k, sub, ref) {
 
@@ -612,6 +647,13 @@ export default class ContentEditor extends Component {
 
         const ref = 'section-' + key;
         switch (s.type) {
+          case "pagebreak":
+            sections.push(self.makePageBreak(key, ref));
+            break;
+          case "columnbreak":
+            sections.push(self.makeColumnBreak(key, ref));
+            break;
+
           case "table":
             sections.push(self.makeTable(s, key, ref));
             break;

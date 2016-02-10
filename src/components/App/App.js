@@ -28,22 +28,6 @@ class App extends Component {
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav>
-                <NavDropdown eventKey={ 1 } title="Generate" id="basic-nav-dropdown">
-                  <LinkContainer to="/app/weapons">
-                    <MenuItem eventKey={ 1.1 }>
-                      Weapons
-                    </MenuItem>
-                  </LinkContainer>
-                </NavDropdown>
-              </Nav>
-              <Nav>
-                <NavDropdown eventKey={ 2 } title="My Stuff" id="basic-nav-dropdown">
-                  <LinkContainer to="/app/myweapons">
-                    <MenuItem eventKey={ 2.1 }>
-                      Weapons
-                    </MenuItem>
-                  </LinkContainer>
-                </NavDropdown>
                 <LinkContainer to="/app/modules">
                   <NavItem eventKey={ 3 }>
                     Modules

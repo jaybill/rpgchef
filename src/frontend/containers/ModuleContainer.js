@@ -108,6 +108,7 @@ class ModuleContainer extends Component {
              name={ name }
              pdfUrl={ this.state.pdfUrl }
              content={ content }
+             getPdf={ module.getPdf }
              post={ module.post }
              resetPost={ this.resetPost }
              del={ module.del } />;

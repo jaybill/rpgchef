@@ -6,7 +6,9 @@ import path from 'path';
 class Farm {
 
   constructor() {
-    this.workers = WorkerFarm(path.join(__dirname, 'workers'), ['print']);
+    this.workers = WorkerFarm({
+      maxRetries: 0
+    }, path.join(__dirname, 'workers'), ['print']);
     this.print = this.print.bind(this);
   }
 

@@ -151,23 +151,30 @@ export const getPdf = function(id) {
   return dispatch => {
     dispatch(getPdfActions.start());
     let _timer;
-
+    let tries = 0;
     const pingForPdf = () => {
-      getPdfCall(id).then((result) => {
-        if (result.status == 200) {
-          if (result.body.pdfUrl) {
-            window.clearInterval(_timer);
-            return dispatch(getPdfActions.success(result.body));
+      if (tries < 20) {
+        tries++;
+        getPdfCall(id).then((result) => {
+          if (result.status == 200) {
+            if (result.body.pdfUrl) {
+              window.clearInterval(_timer);
+              return dispatch(getPdfActions.success(result.body));
+            }
+          } else {
+            log.error(result);
+            throw new Error("Bad response");
           }
-        } else {
-          log.error(result);
-          throw new Error("Bad response");
-        }
-        return null;
-      }).catch(err => {
-        log.error(err);
-        dispatch(getPdfActions.failure("getPdf failed"));
-      });
+          return null;
+        }).catch(err => {
+          log.error(err);
+          window.clearInterval(_timer);
+          dispatch(getPdfActions.failure("PDF failed."));
+        });
+      } else {
+        window.clearInterval(_timer);
+        dispatch(getPdfActions.failure("PDF timeout."));
+      }
     };
     _timer = window.setInterval(pingForPdf, 500, dispatch, id);
   };

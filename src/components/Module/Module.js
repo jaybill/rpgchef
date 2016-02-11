@@ -320,6 +320,12 @@ export default class Module extends Component {
 
     }
 
+    if (this.props.getPdf.failed) {
+      displayMessage = <Label bsStyle="danger">
+                         { this.props.getPdf.message }
+                       </Label>;
+    }
+
     let editor;
     if (this.state.content) {
 

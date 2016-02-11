@@ -45,7 +45,7 @@ export default class TableEditor extends Component {
   }
 
   edit(r, c) {
-    log.debug("editing ", r, c);
+
     this.setState({
       editCol: c,
       editRow: r
@@ -133,7 +133,7 @@ export default class TableEditor extends Component {
 
     const rows = [];
     const bodyrows = [];
-    log.debug("state", this.state.editRow, this.state.editCol);
+
 
     _.forEach(this.state.data, (r, i) => {
       let cells = [];

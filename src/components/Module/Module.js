@@ -21,8 +21,9 @@ export default class Module extends Component {
     this.makePdf = this.makePdf.bind(this);
     this.removeSection = this.removeSection.bind(this);
     this.moveSection = this.moveSection.bind(this);
+    this.moveToTop = this.moveToTop.bind(this);
+    this.moveToBottom = this.moveToBottom.bind(this);
     this.addSection = this.addSection.bind(this);
-
     this.lazyUpdate = _.throttle((newstate) => {
       this.setState(newstate);
     }, 100);
@@ -140,6 +141,26 @@ export default class Module extends Component {
   moveSection(k, a) {
     const newContent = Object.assign([], this.state.content);
     [newContent[k], newContent[k + a]] = [newContent[k + a], newContent[k]];
+    this.setState({
+      content: newContent,
+      scrollToLast: false,
+      skipUpdate: false
+    });
+  }
+
+  moveToTop(k) {
+    const newContent = Object.assign([], this.state.content);
+    [newContent[k], newContent[0]] = [newContent[0], newContent[k]];
+    this.setState({
+      content: newContent,
+      scrollToLast: false,
+      skipUpdate: false
+    });
+  }
+  moveToBottom(k) {
+    const newContent = Object.assign([], this.state.content);
+    const end = newContent.length - 1;
+    [newContent[k], newContent[end]] = [newContent[end], newContent[k]];
     this.setState({
       content: newContent,
       scrollToLast: false,
@@ -305,6 +326,8 @@ export default class Module extends Component {
       editor = <ContentEditor removeSection={ self.removeSection }
                  scrollToLast={ this.state.scrollToLast }
                  moveSection={ self.moveSection }
+                 moveToTop={ self.moveToTop }
+                 moveToBottom={ self.moveToBottom }
                  content={ this.state.content }
                  onFieldChange={ this.onFieldChange } />;
     }

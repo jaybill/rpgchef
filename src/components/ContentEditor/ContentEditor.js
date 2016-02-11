@@ -57,10 +57,28 @@ export default class ContentEditor extends Component {
 
     return <ButtonToolbar>
              <ButtonGroup className="pull-right">
-               <Button onClick={ this.props.moveSection.bind(this, k, -1) } disabled={ k == 0 } bsSize="xs">
+               <Button title="Move to top"
+                 onClick={ this.props.moveToTop.bind(this, k) }
+                 disabled={ k == 0 }
+                 bsSize="xs">
+                 <i className="icon icon-top"></i>
+               </Button>
+               <Button title="Move to bottom"
+                 onClick={ this.props.moveToBottom.bind(this, k) }
+                 disabled={ k == this.props.content.length - 1 }
+                 bsSize="xs">
+                 <i className="icon icon-bottom"></i>
+               </Button>
+               <Button title="Move up"
+                 onClick={ this.props.moveSection.bind(this, k, -1) }
+                 disabled={ k == 0 }
+                 bsSize="xs">
                  <i className="fa fa-arrow-up fa-fw"></i>
                </Button>
-               <Button onClick={ this.props.moveSection.bind(this, k, 1) } disabled={ k == this.props.content.length - 1 } bsSize="xs">
+               <Button title="Move down"
+                 onClick={ this.props.moveSection.bind(this, k, 1) }
+                 disabled={ k == this.props.content.length - 1 }
+                 bsSize="xs">
                  <i className="fa fa-arrow-down fa-fw"></i>
                </Button>
              </ButtonGroup>

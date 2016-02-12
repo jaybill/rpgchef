@@ -3,7 +3,6 @@ import Latex from 'latex';
 import DnD5e from './dnd5e';
 
 const templates = {
-
   document: '\\documentclass[10pt]{article}\n' +
     '\\usepackage{dnd}\n' +
     '% Start document\n' +
@@ -13,12 +12,11 @@ const templates = {
     '<%= content %>\n' +
     '\\end{multicols}\n' +
     '\\end{document}\n',
-
   section: '\\section*{<%= title %>}\n',
   subsection: '\\subsection*{<%= title %>}',
-  commentBox: '    \\begin{commentbox}{<%= title %>}\n' +
-    '    <%=content %>\n' +
-    '    \\end{commentbox}\n',
+  commentBox: '\\begin{commentbox}{<%= title %>}\n' +
+    '<%=content %>\n' +
+    '\\end{commentbox}\n',
   monster: '\\begin{monster}{<%= name  %>}{<%= size %> <%= raceOrType %>, <%= alignment %>}' +
     '\\basics[%\n' +
     'armorclass = <%= armorclass %>,\n' +

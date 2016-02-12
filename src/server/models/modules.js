@@ -28,7 +28,9 @@ export default function NewModule(DbConn) {
       default: {}
     },
     pdfUrl: Sequelize.STRING,
-    pdfCreatedOn: Sequelize.DATE
+    pdfCreatedOn: Sequelize.DATE,
+    author: Sequelize.STRING,
+    subtitle: Sequelize.STRING
   });
   Modules.beforeUpdate(updatePdfCreatedOn);
   return Modules;

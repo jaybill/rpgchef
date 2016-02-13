@@ -94,10 +94,10 @@ Module.handlers = {
       payload: {
         id: Joi.number().integer().min(0).label("Id"),
         name: Joi.string().min(1).max(500).label('Name'),
-        subtitle: Joi.string().min(1).max(500).label('Subtitle'),
-        author: Joi.string().min(1).max(500).label('Author'),
+        subtitle: [Joi.string().max(500).optional(), Joi.allow(null)],
+        author: [Joi.string().optional().max(500), Joi.allow(null)],
         content: Joi.array().required().label('Content'),
-        version: Joi.number().integer().min(0).label("Version")
+        version: Joi.number().optional().integer().min(0).allow(null).label("Version")
       }
     },
     handler: (request, reply) => {

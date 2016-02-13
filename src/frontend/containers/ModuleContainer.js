@@ -89,12 +89,10 @@ class ModuleContainer extends Component {
   render() {
     const self = this;
     const {dispatch, module} = this.props;
-    let name;
-    let content;
+    let moduleContent;
 
     if (module.get.succeeded) {
-      name = module.get.payload.name;
-      content = module.get.payload.content;
+      moduleContent = module.get.payload;
     }
 
     return <Module isNew={ this.state.isNew }
@@ -105,9 +103,8 @@ class ModuleContainer extends Component {
              id={ this.state.id }
              working={ module.post.working || module.get.working }
              pdfWorking={ module.getPdf.working || module.makePdf.working }
-             name={ name }
              pdfUrl={ this.state.pdfUrl }
-             content={ content }
+             module={ moduleContent }
              getPdf={ module.getPdf }
              post={ module.post }
              resetPost={ this.resetPost }

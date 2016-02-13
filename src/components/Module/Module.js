@@ -24,6 +24,7 @@ export default class Module extends Component {
     this.moveToTop = this.moveToTop.bind(this);
     this.moveToBottom = this.moveToBottom.bind(this);
     this.addSection = this.addSection.bind(this);
+    this.makeEditable = this.makeEditable.bind(this);
     this.lazyUpdate = _.throttle((newstate) => {
       this.setState(newstate);
     }, 100);
@@ -44,9 +45,9 @@ export default class Module extends Component {
     }
   }
 
-  onClickHeading() {
+  onClickHeading(which) {
     this.setState({
-      editHeading: true,
+      editHeading: which,
       skipUpdate: false,
       scrollToLast: false
     });
@@ -54,7 +55,7 @@ export default class Module extends Component {
 
   finishEditHeading() {
     this.setState({
-      editHeading: false,
+      editHeading: null,
       skipUpdate: false,
       scrollToLast: false
     });
@@ -72,7 +73,8 @@ export default class Module extends Component {
     this.props.onPost({
       id: this.state.id,
       name: this.state.name,
-      content: this.state.content
+      content: this.state.content,
+      subtitle: this.state.subtitle
     });
     this.setState({
       scrollToLast: false
@@ -89,16 +91,6 @@ export default class Module extends Component {
     }
   }
 
-  componentWillMount() {
-
-    this.setState({
-      id: this.props.id,
-      name: this.props.name,
-      content: this.props.content,
-      skipUpdate: false
-    });
-  }
-
   componentWillReceiveProps(newProps) {
     const {message, succeeded, failed, working} = newProps.post;
     const delSuccceeded = newProps.del.succeeded;
@@ -109,10 +101,12 @@ export default class Module extends Component {
         this.props.resetPost();
       }.bind(this), 1000);
     }
+    const module = newProps.module || {};
     this.setState({
       id: newProps.id,
-      name: newProps.name,
-      content: newProps.content,
+      name: module.name,
+      subtitle: module.subtitle,
+      content: module.content,
       succeeded: succeeded,
       failed: failed,
       skipUpdate: false
@@ -284,8 +278,42 @@ export default class Module extends Component {
     this.lazyUpdate(newState);
   }
 
+  makeEditable(name, clickOn) {
+    let eee;
+
+    if (this.state.editHeading == name) {
+      eee = <Grid className="edit-name">
+              <Row className="no-gutter">
+                <Col md={ 8 }>
+                  <CtrldInputText type="text"
+                    focusMe={ true }
+                    className="form-control input-edit-name"
+                    value={ this.state[name] }
+                    name={ name }
+                    onKeyUp={ this.handleKeyUp }
+                    onFieldChange={ this.onFieldChange } />
+                </Col>
+                <Col md={ 1 }>
+                  <Button onClick={ this.finishEditHeading }>
+                    <i className="fa fa-floppy-o fa-fw"></i>
+                  </Button>
+                </Col>
+              </Row>
+            </Grid>
+      ;
+    } else {
+      eee = (<div title="Click to edit" onClick={ this.onClickHeading.bind(this, name) }>
+               { clickOn }
+             </div>);
+    }
+    return eee;
+  }
+
   render() {
 
+    if (!this.props.module) {
+      return <div></div>;
+    }
     const self = this;
     let displayMessage;
     let pdfLink;
@@ -338,34 +366,15 @@ export default class Module extends Component {
                  onFieldChange={ this.onFieldChange } />;
     }
 
+    const eh = <h2>{ this.state.name }</h2>;
 
-    let heading;
-
-    if (this.state.editHeading) {
-      heading = <Grid className="edit-name">
-                  <Row className="no-gutter">
-                    <Col md={ 8 }>
-                      <CtrldInputText type="text"
-                        focusMe={ true }
-                        className="form-control input-edit-name"
-                        value={ this.state.name }
-                        name="name"
-                        disabled={ working }
-                        onKeyUp={ this.handleKeyUp }
-                        onFieldChange={ this.onFieldChange } />
-                    </Col>
-                    <Col md={ 1 }>
-                      <Button onClick={ this.finishEditHeading }>
-                        <i className="fa fa-floppy-o fa-fw"></i>
-                      </Button>
-                    </Col>
-                  </Row>
-                </Grid>
-      ;
-    } else {
-      heading = <h2 title="Click to edit" onClick={ this.onClickHeading }>{ this.state.name }</h2>;
+    const heading = this.makeEditable("name", eh);
+    let stw = this.state.subtitle;
+    if (!stw) {
+      stw = <em>(click to add subtitle)</em>;
     }
-
+    const est = <h3 className="subtitle">{ stw }</h3>;
+    const subtitleHeading = this.makeEditable("subtitle", est);
     const deletePopover = <Popover id="confirm-delete" rootClose={ true } title="Confirm Delete">
                             <p>
                               Are you sure you want to delete this module? This cannot be undone.
@@ -433,6 +442,7 @@ export default class Module extends Component {
                 </Navbar.Collapse>
               </Navbar>
               { heading }
+              { subtitleHeading }
               { editor }
               { pdfLink }
             </div>);

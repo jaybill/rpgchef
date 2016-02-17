@@ -38,10 +38,12 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("MODULE_LIST"));
   km = Object.assign(km, asyncKeys("MODULE_MAKEPDF"));
   km = Object.assign(km, asyncKeys("MODULE_GETPDF"));
+  km = Object.assign(km, asyncKeys("UPLOAD_IMAGE"));
 
   extraKeys["MODULE_RESET"] = null;
   extraKeys["MODULE_POST_RESET"] = null;
   extraKeys["MODULE_PDF_RESET"] = null;
+  extraKeys["UPLOAD_IMAGE_RESET"] = null;
   extraKeys["ACCOUNT_UPDATE"] = null;
   extraKeys["SESSION_USERNAME_UPDATE"] = null;
   extraKeys["RANDOM_WEAPONS_DONE"] = null;

@@ -65,6 +65,8 @@ if (errors.length) {
   process.exit(1);
 }
 
+
+
 var logLevel = log.levels.DEBUG;
 if (process.env.LOG_LEVEL) {
   logLevel = parseInt(process.env.LOG_LEVEL);
@@ -84,6 +86,8 @@ if (subdomain) {
 }
 
 $.util.log("Domain " + domain);
+
+
 
 // The default task
 gulp.task('default', ['sync']);

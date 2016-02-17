@@ -9,7 +9,6 @@ const Module = {};
 
 Module.handlers = {
 
-
   getModule: {
     auth: 'session',
     plugins: {

@@ -3,6 +3,8 @@ import Generate from './handlers/generate';
 import My from './handlers/my';
 import Module from './handlers/module';
 import Payment from './handlers/payment';
+import File from './handlers/file';
+
 import path from 'path';
 import URIjs from 'urijs';
 
@@ -127,8 +129,16 @@ var routes = [
     path: '/api/module/pdf/{id?}',
     config: Module.handlers.makePdf
   },
-
-
+  {
+    method: ['POST'],
+    path: '/api/upload',
+    config: File.handlers.upload
+  },
+  {
+    method: ['DELETE'],
+    path: '/api/upload',
+    config: File.handlers.remove
+  },
   {
     method: 'GET',
     path: '/{file*}',

@@ -14,7 +14,7 @@ import { pageView } from './analytics';
 import PathKnower from './pathknower';
 import './ga';
 
-if (Stripe) {
+if (typeof Stripe != "undefined") {
   Stripe.setPublishableKey(process.env.STRIPE_PK);
 }
 

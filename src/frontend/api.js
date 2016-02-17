@@ -107,6 +107,15 @@ export const subscribeDel = () => {
   return callServer('/payment/subscribe', 'DELETE');
 };
 
+export const uploadFile = (file, moduleId, replaces) => {
+  return callServer('/upload', 'POST', null, {
+    file: file,
+    moduleId: moduleId,
+    replaces: replaces
+  }, {
+    "Content-Type": "multipart/form-data"
+  });
+};
 
 export const getStripeToken = (cc) => {
 
@@ -127,7 +136,8 @@ export const getStripeToken = (cc) => {
     });
   });
 
-}
+};
+
 function callServer(url, method, query, data, headers) {
 
   const uri = new urijs(process.env.API_URL + url);

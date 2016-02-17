@@ -1,11 +1,12 @@
 import './ContentEditor.less';
 import React, { Component, PropTypes } from 'react';
-import { Popover, OverlayTrigger, ButtonGroup, ButtonToolbar, Panel, Input, Button, Grid, Row, Col } from 'react-bootstrap';
+import { Well, Popover, OverlayTrigger, ButtonGroup, ButtonToolbar, Panel, Input, Button, Grid, Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
 import log from 'loglevel';
 import CtrldInputText from '../ControlledField';
 import ConfirmDelete from '../ConfirmDelete';
 import TableEditor from '../TableEditor';
+import DropZone from 'react-dropzone';
 import { getPosition } from '../../frontend/domutils';
 
 import DnD5e from '../../lib/dnd5e';
@@ -20,6 +21,7 @@ export default class ContentEditor extends Component {
     this.makeCommentbox = this.makeCommentbox.bind(this);
     this.makeTable = this.makeTable.bind(this);
     this.makePageBreak = this.makePageBreak.bind(this);
+    this.makeImage = this.makeImage.bind(this);
     this.makeColumnBreak = this.makeColumnBreak.bind(this);
     this.getKeyName = this.getKeyName.bind(this);
     this.state = {
@@ -36,6 +38,18 @@ export default class ContentEditor extends Component {
     this.removeTrait = this.removeTrait.bind(this);
     this.moveTrait = this.moveTrait.bind(this);
     this.makeUpdateRefresh = this.makeUpdateRefresh.bind(this);
+    this.onDrop = this.onDrop.bind(this);
+  }
+
+  // Lifecycle Methods
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.uploadImage.succeeded) {
+      const ni = newProps.uploadImage.payload;
+      const name = ["content", ni.k, "content", "filename"];
+      this.props.onFieldChange(name, ni.filename, false, true);
+      this.props.uploadReset();
+    }
   }
 
   componentDidUpdate() {
@@ -50,9 +64,46 @@ export default class ContentEditor extends Component {
       const o = getPosition(node);
       document.documentElement.scrollTop = o.y;
       document.body.scrollTop = o.y - 150;
-
     }
   }
+
+  // Utility Methods
+
+  onDrop(k, files) {
+    this.props.onUploadImage(k, files[0]);
+  }
+
+  getKeyName(nameArray) {
+    return nameArray.join("___");
+  }
+
+  handleSelect(name, e) {
+    let nnn;
+    if (Array.isArray(name)) {
+      nnn = this.getKeyName(name);
+    }
+    const ns = {};
+    ns[nnn] = e.target.value;
+    this.setState(ns);
+    this.props.onFieldChange(name, e.target.value);
+  }
+
+  handleStatChange(name, value) {
+    value = parseInt(value);
+    let nnn;
+    const self = this;
+    if (Array.isArray(name)) {
+      name.push("modifier");
+      nnn = self.getKeyName(name);
+    }
+    const ns = {};
+    ns[nnn] = this.dd.calcModifier(value);
+
+    this.setState(ns);
+    name.pop();
+    this.props.onFieldChange(name, value);
+  }
+
   makeToolBar(k) {
 
     return <ButtonToolbar>
@@ -86,6 +137,39 @@ export default class ContentEditor extends Component {
            </ButtonToolbar>;
   }
 
+  // Section Type Methods
+
+  makeImage(h, k, ref) {
+
+    return (<section key={ k }
+              ref={ ref }
+              className={ ref }
+              id={ k }>
+              { this.makeToolBar(k) }
+              <Panel>
+                <h4>Image</h4>
+                <Row>
+                  <Col md={ 3 }>
+                    <DropZone onDrop={ this.onDrop.bind(this, k) } multiple={ false } className="drop-target">
+                      <Well bsSize="large">
+                        <div>
+                          <p>
+                            Drop Image File Here
+                          </p>
+                          <p>
+                            (or click to choose a file)
+                          </p>
+                        </div>
+                      </Well>
+                    </DropZone>
+                  </Col>
+                  <Col md={ 9 }>
+                    { h.content.filename || "no file" }
+                  </Col>
+                </Row>
+              </Panel>
+            </section>);
+  }
 
   makeTable(h, k, ref) {
 
@@ -155,14 +239,6 @@ export default class ContentEditor extends Component {
              </div>
            </section>;
   }
-  showOrder(a) {
-    const aa = [];
-
-    _.forEach(a, (aaa, i) => {
-      aa.push(aaa.content.title, i);
-    });
-    return aa;
-  }
 
   makeCommentbox(c, k, ref) {
     return <section key={ k } ref={ ref } className={ ref }>
@@ -191,37 +267,6 @@ export default class ContentEditor extends Component {
                </div>
              </Panel>
            </section>;
-  }
-
-  getKeyName(nameArray) {
-    return nameArray.join("___");
-  }
-
-  handleSelect(name, e) {
-    let nnn;
-    if (Array.isArray(name)) {
-      nnn = this.getKeyName(name);
-    }
-    const ns = {};
-    ns[nnn] = e.target.value;
-    this.setState(ns);
-    this.props.onFieldChange(name, e.target.value);
-  }
-
-  handleStatChange(name, value) {
-    value = parseInt(value);
-    let nnn;
-    const self = this;
-    if (Array.isArray(name)) {
-      name.push("modifier");
-      nnn = self.getKeyName(name);
-    }
-    const ns = {};
-    ns[nnn] = this.dd.calcModifier(value);
-
-    this.setState(ns);
-    name.pop();
-    this.props.onFieldChange(name, value);
   }
 
   addTrait(c, k, type = "traits") {
@@ -674,6 +719,9 @@ export default class ContentEditor extends Component {
 
           case "table":
             sections.push(self.makeTable(s, key, ref));
+            break;
+          case "image":
+            sections.push(self.makeImage(s, key, ref));
             break;
           case "section":
             sections.push(self.makeSection(s, key, false, ref));

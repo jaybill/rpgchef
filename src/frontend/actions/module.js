@@ -1,7 +1,7 @@
 import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
 import log from 'loglevel';
-import { makeModulePdf as makePdfCall, getModulePdf as getPdfCall, postModule as postModuleCall, getModules as getModulesCall, getModule as getModuleCall, delModule as delModuleCall } from '../api';
+import { makeModulePdf as makePdfCall, getModulePdf as getPdfCall, postModule as postModuleCall, getModules as getModulesCall, getModule as getModuleCall, delModule as delModuleCall, uploadFile as uploadCall } from '../api';
 import ActionConstants from '../actionconstants';
 
 export const moduleReset = createAction(ActionConstants.MODULE_RESET);
@@ -94,6 +94,27 @@ export const moduleDel = function(id) {
     }).catch(err => {
       log.error(err);
       dispatch(moduleDelActions.failure("moduleDel failed"));
+    });
+  };
+};
+export const uploadReset = createAction(ActionConstants.UPLOAD_IMAGE_RESET);
+const uploadActions = createAsyncActionGroup("UPLOAD_IMAGE", {});
+export const upload = function(k, file, moduleId, replaces) {
+  return dispatch => {
+    dispatch(uploadActions.start());
+    return uploadCall(file, moduleId, replaces).then((result) => {
+      if (result.status == 200) {
+        return dispatch(uploadActions.success({
+          k: k,
+          filename: result.body.filename
+        }));
+      } else {
+        log.error(result);
+        throw new Error("Bad response");
+      }
+    }).catch(err => {
+      log.error(err);
+      dispatch(uploadActions.failure("upload failed"));
     });
   };
 };

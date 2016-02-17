@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { modulePostReset, modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost } from '../actions/module';
+import { modulePostReset, modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost, upload as doUpload, uploadReset as doUploadReset } from '../actions/module';
 import Module from '../../components/Module';
 import urijs from 'urijs';
-
+import log from 'loglevel';
 import { updatePath } from 'redux-simple-router';
 
 class ModuleContainer extends Component {
@@ -14,6 +14,13 @@ class ModuleContainer extends Component {
     this.onDelete = this.onDelete.bind(this);
     this.makePdf = this.makePdf.bind(this);
     this.resetPost = this.resetPost.bind(this);
+    this.onUploadImage = this.onUploadImage.bind(this);
+    this.uploadReset = this.uploadReset.bind(this);
+  }
+
+  uploadReset() {
+    const {dispatch} = this.props;
+    dispatch(doUploadReset());
   }
 
   resetPost() {
@@ -86,6 +93,18 @@ class ModuleContainer extends Component {
     dispatch(doModulePost(formdata));
   }
 
+  onUploadImage(k, file) {
+    const {dispatch} = this.props;
+    const module = this.props.module.get.payload;
+    const content = module.content;
+    let replaces = null;
+    if (content && content[k] && content[k].content && content[k].content.filename) {
+      replaces = content[k].content.filename;
+      log.debug("replacing", replaces);
+    }
+    dispatch(doUpload(k, file, module.id, replaces));
+  }
+
   render() {
     const self = this;
     const {dispatch, module} = this.props;
@@ -107,7 +126,10 @@ class ModuleContainer extends Component {
              module={ moduleContent }
              getPdf={ module.getPdf }
              post={ module.post }
+             onUploadImage={ (k, file) => this.onUploadImage(k, file) }
+             uploadImage={ module.uploadImage }
              resetPost={ this.resetPost }
+             uploadReset={ this.uploadReset }
              del={ module.del } />;
   }
 }

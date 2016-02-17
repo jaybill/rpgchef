@@ -25,8 +25,8 @@ export default class Module extends Component {
     this.moveToBottom = this.moveToBottom.bind(this);
     this.addSection = this.addSection.bind(this);
     this.makeEditable = this.makeEditable.bind(this);
-    this.lazyUpdate = _.throttle((newstate) => {
-      this.setState(newstate);
+    this.lazyUpdate = _.throttle((newstate, callback) => {
+      this.setState(newstate, callback);
     }, 100);
     this.lazyUpdate = this.lazyUpdate.bind(this);
   }
@@ -69,7 +69,6 @@ export default class Module extends Component {
   }
 
   onPost() {
-
     this.props.onPost({
       id: this.state.id,
       name: this.state.name,
@@ -164,6 +163,7 @@ export default class Module extends Component {
 
   removeSection(k) {
 
+
     const newContent = Object.assign([], this.state.content);
     newContent.splice(k, 1);
     this.setState({
@@ -189,6 +189,10 @@ export default class Module extends Component {
         newSection.content = {
           title: ""
         };
+        break;
+      case "image":
+        newSection.type = "image";
+        newSection.content = {};
         break;
       case "subsection":
         newSection.type = "subsection";
@@ -259,6 +263,8 @@ export default class Module extends Component {
       content: newContent,
       scrollToLast: true,
       skipUpdate: false
+    }, () => {
+      this.onPost();
     });
   }
 
@@ -266,7 +272,7 @@ export default class Module extends Component {
     return !!!newState.skipUpdate;
   }
 
-  onFieldChange(name, newValue, skipUpdate = true) {
+  onFieldChange(name, newValue, skipUpdate = true, forceSave = false) {
     let newState = {};
     if (Array.isArray(name)) {
       newState = Object.assign({}, this.state);
@@ -274,8 +280,16 @@ export default class Module extends Component {
     } else {
       newState[name] = newValue;
     }
-    newState.skipUpdate = skipUpdate;
-    this.lazyUpdate(newState);
+    if (!forceSave) {
+      newState.skipUpdate = skipUpdate;
+      this.lazyUpdate(newState);
+    } else {
+      newState.skipUpdate = false;
+      this.lazyUpdate(newState, () => {
+        log.debug("Forcing save!");
+        this.onPost();
+      });
+    }
   }
 
   makeEditable(name, clickOn) {
@@ -363,6 +377,11 @@ export default class Module extends Component {
                  moveToTop={ self.moveToTop }
                  moveToBottom={ self.moveToBottom }
                  content={ this.state.content }
+                 onUploadImage={ (k, file) => {
+                                   this.props.onUploadImage(k, file);
+                                 } }
+                 uploadImage={ this.props.uploadImage }
+                 uploadReset={ this.props.uploadReset }
                  onFieldChange={ this.onFieldChange } />;
     }
 
@@ -434,6 +453,9 @@ export default class Module extends Component {
                     </NavItem>
                     <NavItem onClick={ self.addSection.bind(this, "monster") } title="Insert Monster">
                       <i className="icon icon-goblin"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "image") } title="Insert Image">
+                      <i className="fa fa-picture-o fa-fw"></i>
                     </NavItem>
                   </Nav>
                   <Nav pullRight>

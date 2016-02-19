@@ -39,6 +39,7 @@ export default class ConfirmDelete extends Component {
     if (this.state.open) {
       wtr.push(
         <Button key={ 1 }
+          disabled={ this.props.disabled }
           title="Really delete?"
           onClick={ self.onConfirm }
           bsStyle="danger"
@@ -48,6 +49,7 @@ export default class ConfirmDelete extends Component {
       );
       wtr.push(
         <Button key={ 2 }
+          disabled={ this.props.disabled }
           title="Cancel"
           bsStyle="success"
           onClick={ self.onClose }
@@ -56,7 +58,10 @@ export default class ConfirmDelete extends Component {
         </Button>
       );
     } else {
-      wtr.push(<Button key={ 1 } onClick={ self.onOpen } bsSize={ self.props.bsSize }>
+      wtr.push(<Button key={ 1 }
+                 onClick={ self.onOpen }
+                 disabled={ this.props.disabled }
+                 bsSize={ self.props.bsSize }>
                  <i className="fa fa-trash-o fa-fw"></i>
                </Button>);
     }

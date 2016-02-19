@@ -117,6 +117,13 @@ export const uploadFile = (file, moduleId, replaces) => {
   });
 };
 
+export const deleteFile = (file, moduleId) => {
+  return callServer('/upload', 'DELETE', null, {
+    filename: file,
+    moduleId: moduleId
+  });
+};
+
 export const getStripeToken = (cc) => {
 
   return new Promise((resolve, reject) => {

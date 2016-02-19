@@ -163,13 +163,26 @@ export default class Module extends Component {
 
   removeSection(k) {
 
-
     const newContent = Object.assign([], this.state.content);
+    let filename;
+    if (newContent[k].type == "image"
+      && newContent[k].content
+      && newContent[k].content.filename) {
+      filename = newContent[k].content.filename;
+    }
+
     newContent.splice(k, 1);
+    log.debug(newContent);
     this.setState({
       content: newContent,
       scrollToLast: false,
       skipUpdate: false
+    }, () => {
+      if (filename) {
+        log.debug("Attempting to delete " + filename);
+        this.props.onDeleteImage(filename);
+        this.onPost();
+      }
     });
   }
 

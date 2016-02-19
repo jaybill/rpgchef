@@ -25,7 +25,8 @@ export default class ContentEditor extends Component {
     this.makeColumnBreak = this.makeColumnBreak.bind(this);
     this.getKeyName = this.getKeyName.bind(this);
     this.state = {
-      sections: []
+      sections: [],
+      uploadingImage: null
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleStatChange = this.handleStatChange.bind(this);
@@ -49,6 +50,9 @@ export default class ContentEditor extends Component {
       const name = ["content", ni.k, "content", "filename"];
       this.props.onFieldChange(name, ni.filename, false, true);
       this.props.uploadReset();
+      this.setState({
+        uploadingImage: null
+      });
     }
   }
 
@@ -71,6 +75,9 @@ export default class ContentEditor extends Component {
 
   onDrop(k, files) {
     this.props.onUploadImage(k, files[0]);
+    this.setState({
+      uploadingImage: k
+    });
   }
 
   getKeyName(nameArray) {
@@ -104,36 +111,39 @@ export default class ContentEditor extends Component {
     this.props.onFieldChange(name, value);
   }
 
-  makeToolBar(k) {
+  makeToolBar(k, disabled) {
 
     return <ButtonToolbar>
              <ButtonGroup className="pull-right">
                <Button title="Move to top"
                  onClick={ this.props.moveToTop.bind(this, k) }
-                 disabled={ k == 0 }
+                 disabled={ k == 0 || disabled }
                  bsSize="xs">
                  <i className="icon icon-top"></i>
                </Button>
                <Button title="Move to bottom"
                  onClick={ this.props.moveToBottom.bind(this, k) }
-                 disabled={ k == this.props.content.length - 1 }
+                 disabled={ k == this.props.content.length - 1 || disabled }
                  bsSize="xs">
                  <i className="icon icon-bottom"></i>
                </Button>
                <Button title="Move up"
                  onClick={ this.props.moveSection.bind(this, k, -1) }
-                 disabled={ k == 0 }
+                 disabled={ k == 0 || disabled }
                  bsSize="xs">
                  <i className="fa fa-arrow-up fa-fw"></i>
                </Button>
                <Button title="Move down"
                  onClick={ this.props.moveSection.bind(this, k, 1) }
-                 disabled={ k == this.props.content.length - 1 }
+                 disabled={ k == this.props.content.length - 1 || disabled }
                  bsSize="xs">
                  <i className="fa fa-arrow-down fa-fw"></i>
                </Button>
              </ButtonGroup>
-             <ConfirmDelete className="pull-right" onConfirm={ this.props.removeSection.bind(this, k) } bsSize="xs" />
+             <ConfirmDelete disabled={ disabled }
+               className="pull-right"
+               onConfirm={ this.props.removeSection.bind(this, k) }
+               bsSize="xs" />
            </ButtonToolbar>;
   }
 
@@ -141,25 +151,39 @@ export default class ContentEditor extends Component {
 
   makeImage(h, k, ref) {
 
+    let dropContent;
+
+    if (this.state.uploadingImage == k) {
+      dropContent = <div>
+                      <p>
+                        Loading...
+                      </p>
+                    </div>;
+    } else {
+      dropContent = (
+        <div>
+          <p>
+            Drop Image File Here
+          </p>
+          <p>
+            (or click to choose a file)
+          </p>
+        </div>);
+    }
+
+
     return (<section key={ k }
               ref={ ref }
               className={ ref }
               id={ k }>
-              { this.makeToolBar(k) }
+              { this.makeToolBar(k, this.state.uploadingImage == k) }
               <Panel>
                 <h4>Image</h4>
                 <Row>
                   <Col md={ 3 }>
                     <DropZone onDrop={ this.onDrop.bind(this, k) } multiple={ false } className="drop-target">
                       <Well bsSize="large">
-                        <div>
-                          <p>
-                            Drop Image File Here
-                          </p>
-                          <p>
-                            (or click to choose a file)
-                          </p>
-                        </div>
+                        { dropContent }
                       </Well>
                     </DropZone>
                   </Col>

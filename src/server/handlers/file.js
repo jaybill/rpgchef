@@ -6,9 +6,13 @@ import Db, { conn } from '../db';
 import S3Stream from 's3-upload-stream';
 import AWS from 'aws-sdk';
 import uuid from 'node-uuid';
-import bluebird from 'bluebird';
-
+import aws from '../aws';
 const File = {};
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+});
 
 function getPathFromKey(userId, moduleId, key) {
   return "uploads/user_" + userId + "/module_" + moduleId + "/" + key;
@@ -49,54 +53,42 @@ File.handlers = {
           throw Boom.create(404, "No module with id [" + request.payload.moduleId + "]");
         }
       }).then(() => {
-        AWS.config.update({
-          accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-        });
-        const S3 = bluebird.promisifyAll(new AWS.S3());
-        let kk;
+
         if (request.payload.filename) {
-          kk = getPathFromKey(userId, request.payload.moduleId, request.payload.filename);
-          S3.deleteObject({
-            'Bucket': process.env.AWS_BUCKET,
-            'Key': kk
-          }, (err, data) => {
-            if (err) {
-              log.error(err, err.stack);
-              throw Boom.create(500, "Could not delete " + kk);
-            } else {
-              reply("OK");
-            }
+          const kk = getPathFromKey(userId, request.payload.moduleId, request.payload.filename);
+          return aws("S3", "deleteObject", {
+            Bucket: process.env.AWS_BUCKET,
+            Key: kk
           });
         } else {
-          kk = getModulePath(userId, request.payload.moduleId);
-          const listObjects = bluebird.promisify(S3.listObjects);
-
-          listObjects({
-            'Bucket': process.env.AWS_BUCKET,
-            'Prefix': kk
-          }).then((err, data) => {
-
-            log.debug("err", err);
-            log.debug("data", data);
-
-            reply("OK");
+          const dd = getModulePath(userId, request.payload.moduleId);
+          return aws("S3", "listObjects", {
+            Bucket: process.env.AWS_BUCKET,
+            Prefix: dd
+          }).then((toDelete) => {
+            log.debug(toDelete.Contents);
+            const dd = [];
+            _.forEach(toDelete.Contents, (d) => {
+              dd.push({
+                Key: d.Key
+              });
+            });
+            return aws("S3", "deleteObjects", {
+              Bucket: process.env.AWS_BUCKET,
+              Delete: {
+                Objects: dd
+              }
+            });
           });
-
-
         }
-
-
-
-
+      }).then((data) => {
+        reply("OK");
       }).catch((err) => {
         log.error(err);
-        reply(err);
+        reply(Boom.create(500, err));
       });
-
     }
   },
-
   upload: {
     payload: {
       output: 'stream',
@@ -129,11 +121,6 @@ File.handlers = {
         if (!file.hapi.filename) {
           return reply(Boom.badData('must be a file'));
         }
-
-        AWS.config.update({
-          accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-        });
 
         const S3 = new AWS.S3();
         const s3Stream = S3Stream(S3);

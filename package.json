@@ -8,6 +8,7 @@
   },
   "author": "Jaybill McCarthy",
   "dependencies": {
+    "aws-s3-promisified": "^1.0.8",
     "aws-sdk": "^2.2.30",
     "babel-plugin-runtime": "^1.0.7",
     "babel-plugin-transform-runtime": "^6.3.13",

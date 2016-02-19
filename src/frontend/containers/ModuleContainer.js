@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { modulePostReset, modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost, upload as doUpload, uploadReset as doUploadReset } from '../actions/module';
+import { modulePostReset, modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost, upload as doUpload, uploadReset as doUploadReset, deleteImage as doDeleteImage } from '../actions/module';
 import Module from '../../components/Module';
 import urijs from 'urijs';
 import log from 'loglevel';
@@ -16,6 +16,13 @@ class ModuleContainer extends Component {
     this.resetPost = this.resetPost.bind(this);
     this.onUploadImage = this.onUploadImage.bind(this);
     this.uploadReset = this.uploadReset.bind(this);
+    this.onDeleteImage = this.onDeleteImage.bind(this);
+  }
+
+  onDeleteImage(filename) {
+    const {dispatch} = this.props;
+    const module = this.props.module.get.payload;
+    dispatch(doDeleteImage(filename, module.id));
   }
 
   uploadReset() {
@@ -54,8 +61,6 @@ class ModuleContainer extends Component {
       }, 3000, this, dispatch);
     }
   }
-
-
 
   componentWillMount() {
     const {dispatch, routing} = this.props;
@@ -130,7 +135,8 @@ class ModuleContainer extends Component {
              uploadImage={ module.uploadImage }
              resetPost={ this.resetPost }
              uploadReset={ this.uploadReset }
-             del={ module.del } />;
+             del={ module.del }
+             onDeleteImage={ this.onDeleteImage } />;
   }
 }
 

@@ -12,7 +12,8 @@ export const module = function(state, action) {
       list: Object.assign({}, asyncState),
       makePdf: Object.assign({}, asyncState),
       getPdf: Object.assign({}, asyncState),
-      uploadImage: Object.assign({}, asyncState)
+      uploadImage: Object.assign({}, asyncState),
+      deleteImage: Object.assign({}, asyncState)
     };
   }
 
@@ -28,6 +29,13 @@ export const module = function(state, action) {
   } else {
     newState.uploadImage = updateStateAsync(state.uploadImage, action, "UPLOAD_IMAGE");
   }
+
+  if (action.type == ActionConstants.DELETE_IMAGE_RESET) {
+    newState.deleteImage = Object.assign({}, asyncState);
+  } else {
+    newState.deleteImage = updateStateAsync(state.deleteImage, action, "DELETE_IMAGE");
+  }
+
 
   newState.del = updateStateAsync(state.del, action, "MODULE_DEL");
   newState.get = updateStateAsync(state.get, action, "MODULE_GET");

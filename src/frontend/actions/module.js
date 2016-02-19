@@ -1,12 +1,11 @@
 import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
 import log from 'loglevel';
-import { makeModulePdf as makePdfCall, getModulePdf as getPdfCall, postModule as postModuleCall, getModules as getModulesCall, getModule as getModuleCall, delModule as delModuleCall, uploadFile as uploadCall } from '../api';
+import { makeModulePdf as makePdfCall, getModulePdf as getPdfCall, postModule as postModuleCall, getModules as getModulesCall, getModule as getModuleCall, delModule as delModuleCall, uploadFile as uploadCall, deleteFile as deleteImageCall } from '../api';
 import ActionConstants from '../actionconstants';
 
 export const moduleReset = createAction(ActionConstants.MODULE_RESET);
 export const modulePostReset = createAction(ActionConstants.MODULE_POST_RESET);
-
 
 const moduleGetActions = createAsyncActionGroup("MODULE_GET", {});
 
@@ -118,6 +117,27 @@ export const upload = function(k, file, moduleId, replaces) {
     });
   };
 };
+
+export const deleteImageReset = createAction(ActionConstants.DELETE_IMAGE_RESET);
+const deleteImageActions = createAsyncActionGroup("DELETE_IMAGE", {});
+export const deleteImage = function(file, moduleId) {
+  return dispatch => {
+    dispatch(deleteImageActions.start());
+    return deleteImageCall(file, moduleId).then((result) => {
+      if (result.status == 200) {
+        return dispatch(deleteImageActions.success(result.body));
+      } else {
+        log.error(result);
+        throw new Error("Bad response");
+      }
+    }).catch(err => {
+      log.error(err);
+      dispatch(deleteImageActions.failure("delete image failed"));
+    });
+  };
+};
+
+
 
 export const modulePdfReset = createAction(ActionConstants.MODULE_PDF_RESET);
 const makePdfActions = createAsyncActionGroup("MODULE_MAKEPDF", {});

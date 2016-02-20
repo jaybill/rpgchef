@@ -40,6 +40,15 @@ export default class ContentEditor extends Component {
     this.moveTrait = this.moveTrait.bind(this);
     this.makeUpdateRefresh = this.makeUpdateRefresh.bind(this);
     this.onDrop = this.onDrop.bind(this);
+    this.sectionHolder = this.sectionHolder.bind(this);
+  }
+
+  sectionHolder(k, e) {
+    return (<div className="holder" onMouseOut={ () => {
+                                       this.props.onFieldChange(null, null, false, true);
+                                     } } key={ k + "-holder" }>
+              { e }
+            </div>);
   }
 
   // Lifecycle Methods
@@ -148,16 +157,13 @@ export default class ContentEditor extends Component {
   }
 
   // Section Type Methods
-
   makeImage(h, k, ref) {
 
     let dropContent;
 
     if (this.state.uploadingImage == k) {
       dropContent = <div>
-                      <p>
-                        Loading...
-                      </p>
+                      <i className="fa fa-cog fa-spin fa-5x"></i>
                     </div>;
     } else {
       dropContent = (
@@ -731,39 +737,39 @@ export default class ContentEditor extends Component {
     if (content) {
 
       _.forEach(content, (s, key) => {
-
+        let sec;
         const ref = 'section-' + key;
         switch (s.type) {
           case "pagebreak":
-            sections.push(self.makePageBreak(key, ref));
+            sec = self.makePageBreak(key, ref);
             break;
           case "columnbreak":
-            sections.push(self.makeColumnBreak(key, ref));
+            sec = self.makeColumnBreak(key, ref);
             break;
 
           case "table":
-            sections.push(self.makeTable(s, key, ref));
+            sec = self.makeTable(s, key, ref);
             break;
           case "image":
-            sections.push(self.makeImage(s, key, ref));
+            sec = self.makeImage(s, key, ref);
             break;
           case "section":
-            sections.push(self.makeSection(s, key, false, ref));
+            sec = self.makeSection(s, key, false, ref);
             break;
           case "subsection":
-            sections.push(self.makeSection(s, key, true, ref));
+            sec = self.makeSection(s, key, true, ref);
             break;
           case "text":
-            sections.push(self.makeText(s, key, ref));
+            sec = self.makeText(s, key, ref);
             break;
           case "commentbox":
-            sections.push(self.makeCommentbox(s, key, ref));
+            sec = self.makeCommentbox(s, key, ref);
             break;
           case "monster":
-            sections.push(self.makeMonster(s, key, ref));
+            sec = self.makeMonster(s, key, ref);
             break;
         }
-
+        sections.push(sec);
       });
     }
 

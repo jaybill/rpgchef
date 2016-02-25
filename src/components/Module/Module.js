@@ -286,6 +286,7 @@ export default class Module extends Component {
   }
 
   onFieldChange(name, newValue, skipUpdate = true, forceSave = false) {
+
     let newState = {};
     if (Array.isArray(name)) {
       newState = Object.assign({}, this.state);

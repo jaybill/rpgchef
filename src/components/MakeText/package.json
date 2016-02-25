@@ -1,0 +1,6 @@
+{
+  "name": "MakeText",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./MakeText.js"
+}

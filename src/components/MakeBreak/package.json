@@ -1,0 +1,6 @@
+{
+  "name": "MakeBreak",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./MakeBreak.js"
+}

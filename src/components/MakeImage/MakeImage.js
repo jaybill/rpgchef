@@ -1,16 +1,36 @@
 import './MakeImage.less';
 import React, { Component, PropTypes } from 'react';
-import { Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Well, Row, Col, Panel, Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import DropZone from 'react-dropzone';
+import log from 'loglevel';
 
 export default class MakeImage extends Component {
 
   constructor() {
     super();
+    this.state = {
+      uploadingImage: null
+    };
+
+    this.onDrop = this.onDrop.bind(this);
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.uploadImage.succeeded) {
+      const ni = newProps.uploadImage.payload;
+      const name = ["content", ni.k, "content", "filename"];
+      this.props.onFieldChange(name, ni.filename, false, true);
+      this.props.uploadReset();
+      this.setState({
+        uploadingImage: null
+      });
+    }
   }
 
   // Utility Methods
 
   onDrop(k, files) {
+    log.debug(this.props);
     this.props.onUploadImage(k, files[0]);
     this.setState({
       uploadingImage: k

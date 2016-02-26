@@ -141,7 +141,6 @@ class ModuleContainer extends Component {
 }
 
 function select(state) {
-
   return {
     module: state.app.module,
     routing: state.routing

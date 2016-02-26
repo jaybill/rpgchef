@@ -1,12 +1,18 @@
 import './Module.less';
 import React, { Component, PropTypes } from 'react';
-import { AutoAffix } from 'react-overlays';
-import { NavItem, Navbar, Nav, Label, ButtonToolbar, ButtonGroup, Panel, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
+import { NavItem, Navbar, Nav, Label, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { CtrldInputText, CtrldTextarea } from '../ControlledField';
-import Expire from '../Expire';
-import ContentEditor from "../ContentEditor";
 import log from 'loglevel';
 import _ from 'lodash';
+import MakeMonster from '../MakeMonster';
+import MakeText from '../MakeText';
+import MakeSection from '../MakeSection';
+import MakeCommentBox from '../MakeCommentBox';
+import MakeBreak from '../MakeBreak';
+import MakeTable from '../MakeTable';
+import MakeImage from '../MakeImage';
+import { getPosition } from '../../frontend/domutils';
+import SectionToolbar from '../SectionToolbar';
 
 export default class Module extends Component {
 
@@ -38,6 +44,22 @@ export default class Module extends Component {
       content: this.state.content
     });
   }
+
+  componentDidUpdate() {
+    if (this.props.scrollToLast) {
+      const sections = _.filter(_.keys(this.refs), (r) => {
+        return _.startsWith(r, 'section-');
+      });
+
+      const node = this.refs[sections[sections.length - 1]];
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      const o = getPosition(node);
+      document.documentElement.scrollTop = o.y;
+      document.body.scrollTop = o.y - 150;
+    }
+  }
+
 
   componentDidMount() {
     if (this.props.name && !this.props.content.length) {
@@ -95,6 +117,7 @@ export default class Module extends Component {
     const delSuccceeded = newProps.del.succeeded;
     const delWorking = newProps.del.working;
 
+
     if (!delSuccceeded && !delWorking && (succeeded || failed)) {
       this._timer = window.setTimeout(function() {
         this.props.resetPost();
@@ -122,15 +145,6 @@ export default class Module extends Component {
     }
   }
 
-  showOrder(a) {
-    const aa = [];
-
-    _.forEach(a, (aaa, i) => {
-      aa.push(aaa.content.title, i);
-    });
-    return aa;
-  }
-
   moveSection(k, a) {
     const newContent = Object.assign([], this.state.content);
     [newContent[k], newContent[k + a]] = [newContent[k + a], newContent[k]];
@@ -138,7 +152,7 @@ export default class Module extends Component {
       content: newContent,
       scrollToLast: false,
       skipUpdate: false
-    });
+    }, this.onPost);
   }
 
   moveToTop(k) {
@@ -148,7 +162,7 @@ export default class Module extends Component {
       content: newContent,
       scrollToLast: false,
       skipUpdate: false
-    });
+    }, this.onPost);
   }
   moveToBottom(k) {
     const newContent = Object.assign([], this.state.content);
@@ -158,7 +172,7 @@ export default class Module extends Component {
       content: newContent,
       scrollToLast: false,
       skipUpdate: false
-    });
+    }, this.onPost);
   }
 
   removeSection(k) {
@@ -181,8 +195,8 @@ export default class Module extends Component {
       if (filename) {
         log.debug("Attempting to delete " + filename);
         this.props.onDeleteImage(filename);
-        this.onPost();
       }
+      this.onPost();
     });
   }
 
@@ -346,6 +360,7 @@ export default class Module extends Component {
     let displayMessage;
     let pdfLink;
     let pdfClass = "fa fa-file-pdf-o fa-fw";
+    let editor;
     const {message, succeeded, failed, working} = this.props.post;
 
     if (this.state.succeeded) {
@@ -382,22 +397,6 @@ export default class Module extends Component {
                        </Label>;
     }
 
-    let editor;
-    if (this.state.content) {
-
-      editor = <ContentEditor removeSection={ self.removeSection }
-                 scrollToLast={ this.state.scrollToLast }
-                 moveSection={ self.moveSection }
-                 moveToTop={ self.moveToTop }
-                 moveToBottom={ self.moveToBottom }
-                 content={ this.state.content }
-                 onUploadImage={ (k, file) => {
-                                   this.props.onUploadImage(k, file);
-                                 } }
-                 uploadImage={ this.props.uploadImage }
-                 uploadReset={ this.props.uploadReset }
-                 onFieldChange={ this.onFieldChange } />;
-    }
 
     const eh = <h2>{ this.state.name }</h2>;
 
@@ -419,6 +418,127 @@ export default class Module extends Component {
                               Delete Module
                             </Button>
                           </Popover>;
+
+
+
+    const {content} = this.props;
+    const sections = [];
+
+    /*
+          editor = <ContentEditor removeSection={ self.removeSection }
+                     scrollToLast={ this.state.scrollToLast }
+                     moveSection={ self.moveSection }
+                     moveToTop={ self.moveToTop }
+                     moveToBottom={ self.moveToBottom }
+                     content={ this.state.content }
+                     onUploadImage={ (k, file) => {
+                                       self.props.onUploadImage(k, file);
+                                     } }
+                     uploadImage={ this.props.uploadImage }
+                     uploadReset={ this.props.uploadReset }
+                     onFieldChange={ this.onFieldChange } />;
+        }
+    */
+
+    if (this.state.content) {
+
+      _.forEach(this.state.content, (s, key) => {
+        let sec;
+        const st = (
+        <SectionToolbar keyName={ key }
+          last={ this.state.content.length - 1 }
+          moveToTop={ this.moveToTop }
+          moveToBottom={ this.moveToBottom }
+          moveSection={ this.moveSection }
+          removeSection={ this.removeSection } />);
+
+        const ref = 'section-' + key;
+        switch (s.type) {
+          case "pagebreak":
+            sec = <MakeBreak toolbar={ st }
+                    breakType="page"
+                    refName={ ref }
+                    key={ key }
+                    k={ key }
+                    onFieldChange={ self.onFieldChange } />;
+            break;
+          case "columnbreak":
+            sec = <MakeBreak toolbar={ st }
+                    refName={ ref }
+                    key={ key }
+                    k={ key }
+                    onFieldChange={ self.onFieldChange } />;
+            break;
+          case "table":
+            sec = <MakeTable toolbar={ st }
+                    content={ s }
+                    refName={ ref }
+                    key={ key }
+                    k={ key }
+                    onFieldChange={ self.onFieldChange } />;
+            break;
+          case "image":
+            sec = <MakeImage toolbar={ st }
+                    onUploadImage={ self.props.onUploadImage }
+                    uploadImage={ this.props.uploadImage }
+                    uploadReset={ this.props.uploadReset }
+                    content={ s }
+                    refName={ ref }
+                    key={ key }
+                    k={ key }
+                    onFieldChange={ self.onFieldChange } />;
+            break;
+          case "section":
+            sec = <MakeSection toolbar={ st }
+                    content={ s }
+                    sub={ false }
+                    refName={ ref }
+                    key={ key }
+                    k={ key }
+                    onFieldChange={ self.onFieldChange } />;
+            break;
+          case "subsection":
+            sec = <MakeSection toolbar={ st }
+                    content={ s }
+                    sub={ true }
+                    refName={ ref }
+                    key={ key }
+                    k={ key }
+                    onFieldChange={ self.onFieldChange } />;
+            break;
+          case "text":
+            sec = <MakeText toolbar={ st }
+                    key={ key }
+                    k={ key }
+                    refName={ ref }
+                    content={ s }
+                    onFieldChange={ self.onFieldChange } />;
+            break;
+          case "commentbox":
+            sec = <MakeCommentBox toolbar={ st }
+                    content={ s }
+                    sub={ false }
+                    refName={ ref }
+                    key={ key }
+                    k={ key }
+                    onFieldChange={ self.onFieldChange } />;
+            break;
+          case "monster":
+            sec = <MakeMonster content={ s }
+                    toolbar={ st }
+                    key={ key }
+                    k={ key }
+                    refName={ ref }
+                    onFieldChange={ self.onFieldChange } />;
+            break;
+        }
+        sections.push(sec);
+      });
+      editor = (<div className="ContentEditor">
+                  { sections }
+                </div>);
+    }
+
 
     return (<div className="Module">
               <Navbar fixedTop>

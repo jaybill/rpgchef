@@ -140,6 +140,11 @@ var routes = [
     config: File.handlers.remove
   },
   {
+    method: ['GET'],
+    path: '/api/upload/display/{fileparts*2}',
+    config: File.handlers.display
+  },
+  {
     method: 'GET',
     path: '/{file*}',
     handler: {

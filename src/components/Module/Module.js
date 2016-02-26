@@ -486,6 +486,7 @@ export default class Module extends Component {
                     refName={ ref }
                     key={ key }
                     k={ key }
+                    moduleId={ this.state.id }
                     onFieldChange={ self.onFieldChange } />;
             break;
           case "section":

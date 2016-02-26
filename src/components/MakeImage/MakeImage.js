@@ -75,6 +75,13 @@ export default class MakeImage extends Component {
       tb = this.props.toolbar;
     }
 
+    let imagefile = <span>No file</span>;
+    if (h.content.filename) {
+      imagefile = <img src={ process.env.SERVER_URL +
+           "/api/upload/display/" + this.props.moduleId +
+           "/" + h.content.filename } />;
+    }
+
     return (<section key={ k }
               ref={ ref }
               className={ ref }
@@ -91,7 +98,7 @@ export default class MakeImage extends Component {
                     </DropZone>
                   </Col>
                   <Col md={ 9 }>
-                    { h.content.filename || "no file" }
+                    { imagefile }
                   </Col>
                 </Row>
               </Panel>

@@ -33,6 +33,45 @@ function getFileKey(userId, moduleId) {
 
 File.handlers = {
 
+  display: {
+    auth: 'session',
+    plugins: {
+      'hapi-auth-cookie': {
+        redirectTo: false
+      }
+    },
+    validate: {
+      params: {
+        fileparts: Joi.string().required().max(500)
+      }
+    },
+    handler: function(request, reply) {
+      const fileparts = request.params.fileparts.split('/');
+      const moduleId = fileparts[0];
+      const key = fileparts[1];
+      const userId = request.auth.credentials.id;
+      Db.Modules.findById(moduleId).then((mm) => {
+        if (!mm) {
+          throw Boom.create(404, "No module with id [" + moduleId + "]");
+        }
+        if (mm.userId != userId) {
+          throw Boom.create(403, "Not your module");
+        }
+      }).then(() => {
+        const filename = getPathFromKey(userId, moduleId, key);
+        const S3 = new AWS.S3();
+        const url = S3.getSignedUrl('getObject', {
+          Bucket: process.env.AWS_BUCKET,
+          Key: filename
+        });
+        reply('x').redirect(url);
+      }).catch((err) => {
+        log.error(err);
+        reply(err);
+      });
+
+    }
+  },
   remove: {
     auth: 'session',
     plugins: {
@@ -51,6 +90,9 @@ File.handlers = {
       Db.Modules.findById(request.payload.moduleId).then((mm) => {
         if (!mm) {
           throw Boom.create(404, "No module with id [" + request.payload.moduleId + "]");
+        }
+        if (mm.userId != userId) {
+          throw Boom.create(403, "Not your module");
         }
       }).then(() => {
 

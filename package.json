@@ -25,6 +25,7 @@
     "es6-promise": "^3.0.2",
     "express": "^4.13.3",
     "font-awesome": "^4.4.0",
+    "gm": "^1.21.1",
     "hapi": "^11.1.0",
     "hapi-auth-basic": "^4.0.0",
     "hapi-auth-cookie": "^3.1.0",

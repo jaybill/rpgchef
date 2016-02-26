@@ -7,6 +7,8 @@ import S3Stream from 's3-upload-stream';
 import AWS from 'aws-sdk';
 import uuid from 'node-uuid';
 import aws from '../aws';
+import gm from 'gm';
+import Stream from 'stream';
 const File = {};
 
 AWS.config.update({
@@ -95,34 +97,32 @@ File.handlers = {
           throw Boom.create(403, "Not your module");
         }
       }).then(() => {
-
+        let prefix;
         if (request.payload.filename) {
-          const kk = getPathFromKey(userId, request.payload.moduleId, request.payload.filename);
-          return aws("S3", "deleteObject", {
-            Bucket: process.env.AWS_BUCKET,
-            Key: kk
-          });
+          prefix = getPathFromKey(userId, request.payload.moduleId, request.payload.filename);
         } else {
-          const dd = getModulePath(userId, request.payload.moduleId);
-          return aws("S3", "listObjects", {
-            Bucket: process.env.AWS_BUCKET,
-            Prefix: dd
-          }).then((toDelete) => {
-            log.debug(toDelete.Contents);
-            const dd = [];
-            _.forEach(toDelete.Contents, (d) => {
-              dd.push({
-                Key: d.Key
-              });
-            });
-            return aws("S3", "deleteObjects", {
-              Bucket: process.env.AWS_BUCKET,
-              Delete: {
-                Objects: dd
-              }
+          prefix = getModulePath(userId, request.payload.moduleId);
+        }
+
+        return aws("S3", "listObjects", {
+          Bucket: process.env.AWS_BUCKET,
+          Prefix: prefix
+        }).then((toDelete) => {
+
+          const dd = [];
+          _.forEach(toDelete.Contents, (d) => {
+            dd.push({
+              Key: d.Key
             });
           });
-        }
+          return aws("S3", "deleteObjects", {
+            Bucket: process.env.AWS_BUCKET,
+            Delete: {
+              Objects: dd
+            }
+          });
+        });
+
       }).then((data) => {
         reply("OK");
       }).catch((err) => {
@@ -154,6 +154,13 @@ File.handlers = {
       const userId = request.auth.credentials.id;
       var self = this;
       var file = request.payload.file;
+      const S3 = new AWS.S3();
+
+      const originalStream = Stream.PassThrough();
+      const thumbStream = Stream.PassThrough();
+
+      file.pipe(originalStream);
+      file.pipe(thumbStream);
 
       Db.Modules.findById(request.payload.moduleId).then((mm) => {
         if (!mm) {
@@ -163,8 +170,6 @@ File.handlers = {
         if (!file.hapi.filename) {
           return reply(Boom.badData('must be a file'));
         }
-
-        const S3 = new AWS.S3();
         const s3Stream = S3Stream(S3);
         var fileKey = getFileKey(userId, request.payload.moduleId);
         var upload = s3Stream.upload({
@@ -178,9 +183,26 @@ File.handlers = {
           return reply(Boom.wrap(err, 500, 'put'));
         });
         upload.on('uploaded', function(data) {
-          return reply({
-            filename: fileKey.key
+          // make low-res version
+          const s3StreamThumb = S3Stream(S3);
+
+          var thumbKey = fileKey.path + "_thumb";
+          var uploadThumb = s3StreamThumb.upload({
+            'Bucket': process.env.AWS_BUCKET,
+            'Key': thumbKey,
+            'ContentType': file.hapi.headers['content-type']
           });
+
+          uploadThumb.on('error', function(err) {
+            log.error("Error uploading thumbnail");
+            return reply(Boom.wrap(err, 500, 'put'));
+          });
+          uploadThumb.on('uploaded', function(data) {
+            return reply({
+              filename: fileKey.key
+            });
+          });
+          gm(thumbStream).resize('200', '200').stream().pipe(uploadThumb);
         });
 
         if (request.payload.replaces) {
@@ -191,10 +213,10 @@ File.handlers = {
             if (err) {
               log.error(err, err.stack);
             }
-            file.pipe(upload);
+            originalStream.pipe(upload);
           });
         } else {
-          file.pipe(upload);
+          originalStream.pipe(upload);
         }
 
       }).catch((err) => {

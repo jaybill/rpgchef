@@ -1,6 +1,6 @@
 import './MakeImage.less';
 import React, { Component, PropTypes } from 'react';
-import { Well, Row, Col, Panel, Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Image, Modal, Well, Row, Col, Panel, Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import DropZone from 'react-dropzone';
 import log from 'loglevel';
 
@@ -9,11 +9,28 @@ export default class MakeImage extends Component {
   constructor() {
     super();
     this.state = {
-      uploadingImage: null
+      uploadingImage: null,
+      modalOpen: false
     };
 
     this.onDrop = this.onDrop.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
+
+  openModal() {
+    log.debug("opening!");
+    this.setState({
+      modalOpen: true
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      modalOpen: false
+    });
+  }
+
 
   componentWillReceiveProps(newProps) {
     if (newProps.uploadImage.succeeded) {
@@ -45,11 +62,13 @@ export default class MakeImage extends Component {
 
     let dropContent;
     let imagestyle;
+    let imageUrl;
     if (h.content.filename) {
+      imageUrl = process.env.SERVER_URL +
+        "/api/upload/display/" + this.props.moduleId +
+        "/" + h.content.filename + '_thumb';
       imagestyle = {
-        backgroundImage: 'url( ' + process.env.SERVER_URL +
-          "/api/upload/display/" + this.props.moduleId +
-          "/" + h.content.filename + '_thumb)'
+        backgroundImage: 'url( ' + imageUrl + ')'
       };
     }
 
@@ -83,19 +102,28 @@ export default class MakeImage extends Component {
       } else {
         dropContent = (
           <div className="drop-target">
-            <Button className="image-zoom" bsSize="xs">
+            <Button onClick={ this.openModal } className="image-zoom" bsSize="xs">
               <i className="fa fa-search fa-fw"></i>
             </Button>
-            <Well onClick={ console.log("clicked") }
-              className="holding"
-              bsSize="large"
-              style={ imagestyle }>
+            <Well className="holding" bsSize="large" style={ imagestyle }>
               <DropZone onDrop={ this.onDrop.bind(this, k) } multiple={ false } className="drop-button">
                 <Button title="upload new image" bsSize="xs">
                   <i className="fa fa-upload fa-fw"></i>
                 </Button>
               </DropZone>
             </Well>
+            <Modal show={ this.state.modalOpen } onHide={ this.closeModal }>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  Image Preview
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="image-preview">
+                  <Image src={ imageUrl } responsive/>
+                </div>
+              </Modal.Body>
+            </Modal>
           </div>);
       }
     }

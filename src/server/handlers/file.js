@@ -202,7 +202,7 @@ File.handlers = {
               filename: fileKey.key
             });
           });
-          gm(thumbStream).resize('200', '200').stream().pipe(uploadThumb);
+          gm(thumbStream).resize('600', '450').stream().pipe(uploadThumb);
         });
         if (request.payload.replaces) {
           const kkkk = getPathFromKey(

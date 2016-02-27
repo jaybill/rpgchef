@@ -55,19 +55,49 @@ export default class MakeImage extends Component {
 
 
     if (this.state.uploadingImage == k) {
-      dropContent = <div>
-                      <i className="fa fa-cog fa-spin fa-5x"></i>
+      dropContent = <div className="drop-target">
+                      <Well bsSize="large">
+                        <div>
+                          <p>
+                            <i className="fa fa-cog fa-spin fa-5x"></i>
+                          </p>
+                        </div>
+                      </Well>
                     </div>;
     } else {
-      dropContent = (
-        <div>
-          <p>
-            Drop Image File Here
-          </p>
-          <p>
-            (or click to choose a file)
-          </p>
-        </div>);
+      if (!h.content.filename) {
+        dropContent = (
+          <DropZone onDrop={ this.onDrop.bind(this, k) } multiple={ false } className="drop-target">
+            <Well bsSize="large">
+              <div>
+                <p>
+                  Drop Image File Here
+                </p>
+                <p>
+                  (or click to choose a file)
+                </p>
+              </div>
+            </Well>
+          </DropZone>
+        );
+      } else {
+        dropContent = (
+          <div className="drop-target">
+            <Button className="image-zoom" bsSize="xs">
+              <i className="fa fa-search fa-fw"></i>
+            </Button>
+            <Well onClick={ console.log("clicked") }
+              className="holding"
+              bsSize="large"
+              style={ imagestyle }>
+              <DropZone onDrop={ this.onDrop.bind(this, k) } multiple={ false } className="drop-button">
+                <Button title="upload new image" bsSize="xs">
+                  <i className="fa fa-upload fa-fw"></i>
+                </Button>
+              </DropZone>
+            </Well>
+          </div>);
+      }
     }
 
     let tb;
@@ -94,11 +124,7 @@ export default class MakeImage extends Component {
                 <h4>Image</h4>
                 <Row>
                   <Col md={ 3 }>
-                    <DropZone onDrop={ this.onDrop.bind(this, k) } multiple={ false } className="drop-target">
-                      <Well bsSize="large" style={ imagestyle }>
-                        { dropContent }
-                      </Well>
-                    </DropZone>
+                    { dropContent }
                   </Col>
                   <Col md={ 9 }>
                   </Col>

@@ -36,8 +36,15 @@
         }
 
         .drop-target{
+            .image-zoom{
+                position:absolute;
+                bottom: 50px;
+                left: 50px;
+                cursor: zoom-in;
+            }
             .well{
                 background-size:cover;
+                background-position: center;
                 cursor: pointer;
                 color:rgba(255,255,255,0.5);
                 border: 6px dashed rgba(255,255,255,0.5);
@@ -48,6 +55,12 @@
                 p{
                     text-align: center;
                 }
+            }
+            .well.holding{
+                                border: 6px solid rgba(255,255,255,0.5);
+                cursor: default;
+                justify-content: flex-end;
+                align-items: flex-end;
             }
         }
     }

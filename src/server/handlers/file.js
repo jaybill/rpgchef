@@ -204,7 +204,6 @@ File.handlers = {
           });
           gm(thumbStream).resize('200', '200').stream().pipe(uploadThumb);
         });
-
         if (request.payload.replaces) {
           const kkkk = getPathFromKey(
             userId,

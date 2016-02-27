@@ -102,10 +102,9 @@ class ModuleContainer extends Component {
     const {dispatch} = this.props;
     const module = this.props.module.get.payload;
     const content = module.content;
-    let replaces = null;
+    let replaces;
     if (content && content[k] && content[k].content && content[k].content.filename) {
       replaces = content[k].content.filename;
-      log.debug("replacing", replaces);
     }
     dispatch(doUpload(k, file, module.id, replaces));
   }

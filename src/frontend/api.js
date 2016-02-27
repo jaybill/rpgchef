@@ -108,11 +108,16 @@ export const subscribeDel = () => {
 };
 
 export const uploadFile = (file, moduleId, replaces) => {
-  return callServer('/upload', 'POST', null, {
+
+  const dd = {
     file: file,
-    moduleId: moduleId,
-    replaces: replaces
-  }, {
+    moduleId: moduleId
+  };
+  if (replaces) {
+    dd.replaces = replaces;
+  }
+
+  return callServer('/upload', 'POST', null, dd, {
     "Content-Type": "multipart/form-data"
   });
 };

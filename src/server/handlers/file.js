@@ -206,15 +206,39 @@ File.handlers = {
         });
 
         if (request.payload.replaces) {
-          S3.deleteObject({
-            'Bucket': process.env.AWS_BUCKET,
-            'Key': getPathFromKey(userId, request.payload.moduleId, request.payload.replaces)
-          }, (err, data) => {
-            if (err) {
-              log.error(err, err.stack);
+          const kkkk = getPathFromKey(
+            userId,
+            request.payload.moduleId,
+            request.payload.replaces);
+
+          aws("S3", "listObjects", {
+            Bucket: process.env.AWS_BUCKET,
+            Prefix: kkkk
+          }).then((toDelete) => {
+
+            const dd = [];
+            _.forEach(toDelete.Contents, (d) => {
+              dd.push({
+                Key: d.Key
+              });
+            });
+            if (dd.length) {
+              return aws("S3", "deleteObjects", {
+                Bucket: process.env.AWS_BUCKET,
+                Delete: {
+                  Objects: dd
+                }
+              });
             }
+            return;
+
+          }).then(() => {
             originalStream.pipe(upload);
+          }).catch((err) => {
+            log.error(err);
+            reply(Boom.wrap(err, 500));
           });
+
         } else {
           originalStream.pipe(upload);
         }

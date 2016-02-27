@@ -44,6 +44,15 @@ export default class MakeImage extends Component {
     const ref = this.props.refName;
 
     let dropContent;
+    let imagestyle;
+    if (h.content.filename) {
+      imagestyle = {
+        backgroundImage: 'url( ' + process.env.SERVER_URL +
+          "/api/upload/display/" + this.props.moduleId +
+          "/" + h.content.filename + '_thumb)'
+      };
+    }
+
 
     if (this.state.uploadingImage == k) {
       dropContent = <div>
@@ -75,12 +84,6 @@ export default class MakeImage extends Component {
       tb = this.props.toolbar;
     }
 
-    let imagefile = <span>No file</span>;
-    if (h.content.filename) {
-      imagefile = <img src={ process.env.SERVER_URL +
-           "/api/upload/display/" + this.props.moduleId +
-           "/" + h.content.filename } />;
-    }
 
     return (<section key={ k }
               ref={ ref }
@@ -92,13 +95,12 @@ export default class MakeImage extends Component {
                 <Row>
                   <Col md={ 3 }>
                     <DropZone onDrop={ this.onDrop.bind(this, k) } multiple={ false } className="drop-target">
-                      <Well bsSize="large">
+                      <Well bsSize="large" style={ imagestyle }>
                         { dropContent }
                       </Well>
                     </DropZone>
                   </Col>
                   <Col md={ 9 }>
-                    { imagefile }
                   </Col>
                 </Row>
               </Panel>

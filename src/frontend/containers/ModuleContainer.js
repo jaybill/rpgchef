@@ -5,7 +5,10 @@ import Module from '../../components/Module';
 import urijs from 'urijs';
 import log from 'loglevel';
 import { updatePath } from 'redux-simple-router';
+import { Lifecycle } from 'react-router';
+import reactMixin from 'react-mixin';
 
+@reactMixin.decorate(Lifecycle)
 class ModuleContainer extends Component {
 
   constructor() {
@@ -17,6 +20,17 @@ class ModuleContainer extends Component {
     this.onUploadImage = this.onUploadImage.bind(this);
     this.uploadReset = this.uploadReset.bind(this);
     this.onDeleteImage = this.onDeleteImage.bind(this);
+    this.routerWillLeave = this.routerWillLeave.bind(this);
+    this.changed = this.changed.bind(this);
+    this.state = {
+      saved: true
+    };
+  }
+
+  changed() {
+    this.setState({
+      saved: false
+    });
   }
 
   onDeleteImage(filename) {
@@ -37,12 +51,7 @@ class ModuleContainer extends Component {
 
   componentWillReceiveProps(newProps) {
     const {dispatch, routing, module} = newProps;
-    if (module.del.succeeded) {
-      dispatch(updatePath('/app/modules'));
-      return;
-    }
-
-    if (module.get.failed) {
+    if (module.del.succeeded || module.get.failed) {
       dispatch(updatePath('/app/modules'));
       return;
     }
@@ -96,6 +105,9 @@ class ModuleContainer extends Component {
   onPost(formdata) {
     const {dispatch, module} = this.props;
     dispatch(doModulePost(formdata));
+    this.setState({
+      saved: true
+    });
   }
 
   onUploadImage(k, file) {
@@ -135,9 +147,19 @@ class ModuleContainer extends Component {
              resetPost={ this.resetPost }
              uploadReset={ this.uploadReset }
              del={ module.del }
+             changed={ this.changed }
              onDeleteImage={ this.onDeleteImage } />;
   }
+
+  routerWillLeave(nextLocation) {
+    if (!this.state.saved) {
+      return 'Your work is not saved! Are you sure you want to leave?';
+    }
+  };
 }
+
+
+
 
 function select(state) {
   return {

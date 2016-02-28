@@ -35,6 +35,7 @@ export default class Module extends Component {
       this.setState(newstate, callback);
     }, 100);
     this.lazyUpdate = this.lazyUpdate.bind(this);
+    this.save = this.save.bind(this);
   }
 
   makePdf() {
@@ -59,7 +60,6 @@ export default class Module extends Component {
       document.body.scrollTop = o.y - 150;
     }
   }
-
 
   componentDidMount() {
     if (this.props.name && !this.props.content.length) {
@@ -90,13 +90,17 @@ export default class Module extends Component {
     }
   }
 
-  onPost() {
+  save() {
     this.props.onPost({
       id: this.state.id,
       name: this.state.name,
       content: this.state.content,
       subtitle: this.state.subtitle
     });
+  }
+
+  onPost() {
+    this.save();
     this.setState({
       scrollToLast: false
     });
@@ -318,6 +322,7 @@ export default class Module extends Component {
         this.onPost();
       });
     }
+    this.props.changed();
   }
 
   makeEditable(name, clickOn) {
@@ -353,7 +358,7 @@ export default class Module extends Component {
 
   render() {
 
-    if (!this.props.module) {
+    if (!this.props.module || !this.state) {
       return <div></div>;
     }
     const self = this;
@@ -363,7 +368,7 @@ export default class Module extends Component {
     let editor;
     const {message, succeeded, failed, working} = this.props.post;
 
-    if (this.state.succeeded) {
+    if (this.state && this.state.succeeded) {
       displayMessage = <Label bsStyle="success">
                          Module saved.
                        </Label>;
@@ -384,7 +389,7 @@ export default class Module extends Component {
 
     }
 
-    if (this.state.failed) {
+    if (this.state && this.state.failed) {
       displayMessage = <Label bsStyle="danger">
                          { message }
                        </Label>;

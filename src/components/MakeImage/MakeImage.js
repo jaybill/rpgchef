@@ -1,6 +1,6 @@
 import './MakeImage.less';
 import React, { Component, PropTypes } from 'react';
-import { Image, Modal, Well, Row, Col, Panel, Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Alert, Image, Modal, Well, Row, Col, Panel, Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import DropZone from 'react-dropzone';
 import log from 'loglevel';
 
@@ -10,7 +10,8 @@ export default class MakeImage extends Component {
     super();
     this.state = {
       uploadingImage: null,
-      modalOpen: false
+      modalOpen: false,
+      failed: null
     };
 
     this.onDrop = this.onDrop.bind(this);
@@ -42,6 +43,13 @@ export default class MakeImage extends Component {
         uploadingImage: null
       });
     }
+    if (newProps.uploadImage.failed) {
+      this.props.uploadReset();
+      this.setState({
+        uploadingImage: null,
+        failed: newProps.uploadImage.message
+      });
+    }
   }
 
   // Utility Methods
@@ -50,6 +58,7 @@ export default class MakeImage extends Component {
     log.debug(this.props);
     this.props.onUploadImage(k, files[0]);
     this.setState({
+      failed: null,
       uploadingImage: k
     });
   }
@@ -141,7 +150,15 @@ export default class MakeImage extends Component {
     } else {
       tb = this.props.toolbar;
     }
-
+    let message;
+    if (this.state.failed) {
+      message = <Alert bsStyle="danger">
+                  <h4>Error</h4>
+                  <p>
+                    { this.state.failed }
+                  </p>
+                </Alert>;
+    }
 
     return (<section key={ k }
               ref={ ref }
@@ -155,6 +172,7 @@ export default class MakeImage extends Component {
                     { dropContent }
                   </Col>
                   <Col md={ 9 }>
+                    { message }
                   </Col>
                 </Row>
               </Panel>

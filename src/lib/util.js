@@ -1,3 +1,21 @@
+import uuid from 'node-uuid';
+
+export const getPathFromKey = (userId, moduleId, key) => {
+  return "uploads/user_" + userId + "/module_" + moduleId + "/" + key;
+};
+
+export const getModulePath = (userId, moduleId) => {
+  return "uploads/user_" + userId + "/module_" + moduleId;
+};
+
+export const getFileKey = (userId, moduleId) => {
+  const key = uuid.v1();
+
+  return {
+    path: "uploads/user_" + userId + "/module_" + moduleId + "/" + key,
+    key: key
+  };
+};
 
 
 export function convertToCoppers(str) {

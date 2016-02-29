@@ -304,7 +304,6 @@ export default class Module extends Component {
   }
 
   onFieldChange(name, newValue, skipUpdate = true, forceSave = false) {
-
     let newState = {};
     if (Array.isArray(name)) {
       newState = Object.assign({}, this.state);
@@ -338,7 +337,11 @@ export default class Module extends Component {
                     value={ this.state[name] }
                     name={ name }
                     onKeyUp={ this.handleKeyUp }
-                    onFieldChange={ this.onFieldChange } />
+                    onFieldChange={ (name, value) => {
+                                      const nnn = {};
+                                      nnn[name] = value;
+                                      this.setState(nnn);
+                                    } } />
                 </Col>
                 <Col md={ 1 }>
                   <Button onClick={ this.finishEditHeading }>
@@ -428,22 +431,6 @@ export default class Module extends Component {
 
     const {content} = this.props;
     const sections = [];
-
-    /*
-          editor = <ContentEditor removeSection={ self.removeSection }
-                     scrollToLast={ this.state.scrollToLast }
-                     moveSection={ self.moveSection }
-                     moveToTop={ self.moveToTop }
-                     moveToBottom={ self.moveToBottom }
-                     content={ this.state.content }
-                     onUploadImage={ (k, file) => {
-                                       self.props.onUploadImage(k, file);
-                                     } }
-                     uploadImage={ this.props.uploadImage }
-                     uploadReset={ this.props.uploadReset }
-                     onFieldChange={ this.onFieldChange } />;
-        }
-    */
 
     if (this.state.content) {
 

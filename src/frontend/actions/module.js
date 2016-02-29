@@ -107,13 +107,15 @@ export const upload = function(k, file, moduleId, replaces) {
           k: k,
           filename: result.body.filename
         }));
+      } else if (result.status == 422) {
+        throw new Error(result.body.message);
       } else {
         log.error(result);
         throw new Error("Bad response");
       }
     }).catch(err => {
       log.error(err);
-      dispatch(uploadActions.failure("upload failed"));
+      dispatch(uploadActions.failure(err.message));
     });
   };
 };

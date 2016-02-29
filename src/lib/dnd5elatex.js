@@ -1,10 +1,11 @@
 import _ from 'lodash';
-import Latex from 'latex';
 import DnD5e from './dnd5e';
+import path from 'path';
 
 const templates = {
   document: '\\documentclass[10pt]{article}\n' +
     '\\usepackage{dnd}\n' +
+    '\\usepackage{graphicx}\n' +
     '% Start document\n' +
     '\\begin{document}\n' +
     '\\begin{multicols}{2}\n' +
@@ -12,6 +13,7 @@ const templates = {
     '<%= content %>\n' +
     '\\end{multicols}\n' +
     '\\end{document}\n',
+  image: '\n\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n',
   section: '\\section*{<%= title %>}\n',
   subsection: '\\subsection*{<%= title %>}',
   commentBox: '\\begin{commentbox}{<%= title %>}\n' +
@@ -48,7 +50,7 @@ const templates = {
     "can be used at a time and only at the end of another creature's turn. " +
     "The <%= name %> regains spent legendary actions at the start of its turn.\n" +
     "\\newline\n\\newline\n",
-  table: '\\begin{dndtable}\n' +
+  table: '\\begin{dndtable}[<%= cols %>]\n' +
     '<%= rows %>\n' +
     '\\end{dndtable}\n',
   tableHeading: '\\textbf{<%= h %>}',
@@ -60,7 +62,7 @@ const templates = {
 class Dnd5eLaTeX {
 
   constructor() {
-    this.getLatexForJSON = this.getLatexForJSON.bind(this);
+    this.getLatexForModule = this.getLatexForModule.bind(this);
     this.createSection = this.createSection.bind(this);
     this.createSubsection = this.createSubsection.bind(this);
     this.createDocument = this.createDocument.bind(this);
@@ -68,7 +70,7 @@ class Dnd5eLaTeX {
     this.createMonster = this.createMonster.bind(this);
     this.createColumnBreak = this.createColumnBreak.bind(this);
     this.createPageBreak = this.createPageBreak.bind(this);
-    this.makePdf = this.makePdf.bind(this);
+    this.createImage = this.createImage.bind(this);
     this.createText = this.createText.bind(this);
     this.dd = new DnD5e();
     this.compiled = {};
@@ -107,12 +109,11 @@ class Dnd5eLaTeX {
     return o;
   }
 
-  makePdf(j) {
-    return Latex(this.getLatexForJSON(j));
-  }
 
-  getLatexForJSON(j) {
+  getLatexForModule(m, imagePath) {
     let lt = "";
+    const j = m.content;
+
     _.forEach(j, (s) => {
 
       switch (s.type) {
@@ -147,6 +148,11 @@ class Dnd5eLaTeX {
         case "pagebreak":
           lt += this.createPageBreak();
           break;
+
+        case "image":
+          lt += this.createImage(s.content.filename, imagePath);
+          break;
+
       }
     });
 
@@ -167,6 +173,12 @@ class Dnd5eLaTeX {
     return this.compiled.pageBreak({});
   }
 
+  createImage(filename, imagePath) {
+    return this.compiled.image({
+      path: path.join(imagePath, filename)
+    });
+  }
+
   createSubsection(title) {
     return this.compiled.subsection({
       title: this.escape(title)
@@ -174,25 +186,29 @@ class Dnd5eLaTeX {
   };
 
   createTable(data) {
+    if (data[0] && data[0].length) {
+      const rows = [];
+      const headingRows = [];
+      _.forEach(data[0], (r) => {
+        headingRows.push(this.compiled.tableHeading({
+          h: this.escape(r)
+        }));
+      });
 
-    const rows = [];
-    const headingRows = [];
-    _.forEach(data[0], (r) => {
-      headingRows.push(this.compiled.tableHeading({
-        h: this.escape(r)
-      }));
-    });
+      rows.push(headingRows.join("\t&\t"));
 
-    rows.push(headingRows.join("  & "));
+      for (let i = 1; i < data.length; i++) {
+        data[i].map(this.escape);
+        rows.push(data[i].join("\t&\t"));
+      }
 
-    for (let i = 1; i < data.length; i++) {
-      data[i].map(this.escape);
-      rows.push(data[i].join("  & "));
+      return this.compiled.table({
+        cols: data[0].length,
+        rows: rows.join(' \\\\\n')
+      });
+    } else {
+      return "";
     }
-
-    return this.compiled.table({
-      rows: rows.join(' \\\\\n')
-    });
   };
 
   createDocument(content) {

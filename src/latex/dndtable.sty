@@ -1,8 +1,8 @@
 % Table Environment
-\newenvironment{dndtable}{
+\newenvironment{dndtable}[1][2]{
     \noindent
     \fontfamily{lmss}\selectfont %Select font
     \rowcolors{1}{bgtan}{commentgreen} % Alternate colors
-    \tabularx{\linewidth}{XX}
+    \tabularx{\linewidth}{*{#1}X}
     }
    {\endtabularx}

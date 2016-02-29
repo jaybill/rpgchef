@@ -5,33 +5,17 @@ import _ from 'lodash';
 import Db, { conn } from '../db';
 import S3Stream from 's3-upload-stream';
 import AWS from 'aws-sdk';
-import uuid from 'node-uuid';
-import aws from '../aws';
+import aws from '../../lib/aws';
+import { getPathFromKey, getModulePath, getFileKey } from '../../lib/util';
 import gm from 'gm';
 import Stream from 'stream';
+import mimeTypes from 'mime-types';
 const File = {};
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
-
-function getPathFromKey(userId, moduleId, key) {
-  return "uploads/user_" + userId + "/module_" + moduleId + "/" + key;
-}
-
-function getModulePath(userId, moduleId) {
-  return "uploads/user_" + userId + "/module_" + moduleId;
-}
-
-function getFileKey(userId, moduleId) {
-  const key = uuid.v1();
-
-  return {
-    path: "uploads/user_" + userId + "/module_" + moduleId + "/" + key,
-    key: key
-  };
-}
 
 File.handlers = {
 
@@ -168,13 +152,23 @@ File.handlers = {
         }
       }).then(() => {
         if (!file.hapi.filename) {
-          return reply(Boom.badData('must be a file'));
+          return reply(Boom.badData('No file uploaded.'));
         }
+
+        const allowable = ['image/jpeg', 'image/png'];
+        log.debug(file.hapi.headers['content-type']);
+
+        if (_.indexOf(allowable, file.hapi.headers['content-type']) == -1) {
+          return reply(Boom.badData('File must be a JPG or a PNG and have the correct extension.'));
+        }
+
+        const ext = mimeTypes.extension(file.hapi.headers['content-type']);
+
         const s3Stream = S3Stream(S3);
         var fileKey = getFileKey(userId, request.payload.moduleId);
         var upload = s3Stream.upload({
           'Bucket': process.env.AWS_BUCKET,
-          'Key': fileKey.path,
+          'Key': fileKey.path + "." + ext,
           'ContentType': file.hapi.headers['content-type']
         });
 
@@ -186,7 +180,7 @@ File.handlers = {
           // make low-res version
           const s3StreamThumb = S3Stream(S3);
 
-          var thumbKey = fileKey.path + "_thumb";
+          var thumbKey = fileKey.path + "." + ext + "_thumb";
           var uploadThumb = s3StreamThumb.upload({
             'Bucket': process.env.AWS_BUCKET,
             'Key': thumbKey,
@@ -199,7 +193,7 @@ File.handlers = {
           });
           uploadThumb.on('uploaded', function(data) {
             return reply({
-              filename: fileKey.key
+              filename: fileKey.key + "." + ext
             });
           });
           gm(thumbStream).resize('600', '450').stream().pipe(uploadThumb);

@@ -6,7 +6,8 @@ import popsicle from 'popsicle';
 
 export const getHash = (userid, username) => {
   return md5(userid + username + process.env.SALT);
-}
+};
+
 export const sendPasswordResetEmail = (user) => {
   var hash = getHash(user.get('id'), user.get('username'));
   var url = new Uri(process.env.SERVER_URL + "/resetpassword");
@@ -24,9 +25,10 @@ export const sendPasswordResetEmail = (user) => {
     })
   });
 
-}
+};
+
 export default {
   getHash,
   sendPasswordResetEmail
-}
+};
 

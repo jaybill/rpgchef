@@ -47,17 +47,12 @@ export default class Module extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.scrollToLast) {
-      const sections = _.filter(_.keys(this.refs), (r) => {
-        return _.startsWith(r, 'section-');
+    if (this.refs.last && this.state.scrollToLast) {
+      const last = _.keys(this.refs.last.refs)[0];
+      this.refs.last.refs[last].scrollIntoView();
+      this.setState({
+        scrollToLast: false
       });
-
-      const node = this.refs[sections[sections.length - 1]];
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      const o = getPosition(node);
-      document.documentElement.scrollTop = o.y;
-      document.body.scrollTop = o.y - 150;
     }
   }
 
@@ -121,12 +116,12 @@ export default class Module extends Component {
     const delSuccceeded = newProps.del.succeeded;
     const delWorking = newProps.del.working;
 
-
     if (!delSuccceeded && !delWorking && (succeeded || failed)) {
       this._timer = window.setTimeout(function() {
         this.props.resetPost();
       }.bind(this), 1000);
     }
+
     const module = newProps.module || {};
     this.setState({
       id: newProps.id,
@@ -161,7 +156,9 @@ export default class Module extends Component {
 
   moveToTop(k) {
     const newContent = Object.assign([], this.state.content);
-    [newContent[k], newContent[0]] = [newContent[0], newContent[k]];
+    const removed = newContent.splice(k, 1);
+    newContent.unshift(removed[0]);
+
     this.setState({
       content: newContent,
       scrollToLast: false,
@@ -170,8 +167,9 @@ export default class Module extends Component {
   }
   moveToBottom(k) {
     const newContent = Object.assign([], this.state.content);
-    const end = newContent.length - 1;
-    [newContent[k], newContent[end]] = [newContent[end], newContent[k]];
+    const removed = newContent.splice(k, 1);
+    newContent.push(removed[0]);
+
     this.setState({
       content: newContent,
       scrollToLast: false,
@@ -435,6 +433,11 @@ export default class Module extends Component {
     if (this.state.content) {
 
       _.forEach(this.state.content, (s, key) => {
+        let last;
+        if (key == this.state.content.length - 1) {
+          last = "last";
+        }
+
         let sec;
         const st = (
         <SectionToolbar keyName={ key }
@@ -450,6 +453,7 @@ export default class Module extends Component {
             sec = <MakeBreak toolbar={ st }
                     breakType="page"
                     refName={ ref }
+                    ref={ last }
                     key={ key }
                     k={ key }
                     onFieldChange={ self.onFieldChange } />;
@@ -457,6 +461,7 @@ export default class Module extends Component {
           case "columnbreak":
             sec = <MakeBreak toolbar={ st }
                     refName={ ref }
+                    ref={ last }
                     key={ key }
                     k={ key }
                     onFieldChange={ self.onFieldChange } />;
@@ -465,6 +470,7 @@ export default class Module extends Component {
             sec = <MakeTable toolbar={ st }
                     content={ s }
                     refName={ ref }
+                    ref={ last }
                     key={ key }
                     k={ key }
                     onFieldChange={ self.onFieldChange } />;
@@ -476,6 +482,7 @@ export default class Module extends Component {
                     uploadReset={ this.props.uploadReset }
                     content={ s }
                     refName={ ref }
+                    ref={ last }
                     key={ key }
                     k={ key }
                     moduleId={ this.state.id }
@@ -486,6 +493,7 @@ export default class Module extends Component {
                     content={ s }
                     sub={ false }
                     refName={ ref }
+                    ref={ last }
                     key={ key }
                     k={ key }
                     onFieldChange={ self.onFieldChange } />;
@@ -495,6 +503,7 @@ export default class Module extends Component {
                     content={ s }
                     sub={ true }
                     refName={ ref }
+                    ref={ last }
                     key={ key }
                     k={ key }
                     onFieldChange={ self.onFieldChange } />;
@@ -502,6 +511,7 @@ export default class Module extends Component {
           case "text":
             sec = <MakeText toolbar={ st }
                     key={ key }
+                    ref={ last }
                     k={ key }
                     refName={ ref }
                     content={ s }
@@ -512,6 +522,7 @@ export default class Module extends Component {
                     content={ s }
                     sub={ false }
                     refName={ ref }
+                    ref={ last }
                     key={ key }
                     k={ key }
                     onFieldChange={ self.onFieldChange } />;
@@ -520,6 +531,7 @@ export default class Module extends Component {
             sec = <MakeMonster content={ s }
                     toolbar={ st }
                     key={ key }
+                    ref={ last }
                     k={ key }
                     refName={ ref }
                     onFieldChange={ self.onFieldChange } />;

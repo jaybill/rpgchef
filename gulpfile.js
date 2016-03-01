@@ -21,6 +21,8 @@ var gutil = require('gulp-util');
 
 // Settings
 var RELEASE = !!argv.release; // Minimize and optimize during a build?
+var DEPLOY = false;
+
 var AUTOPREFIXER_BROWSERS = [ // https://github.com/ai/autoprefixer
   'ie >= 10',
   'ie_mob >= 10',
@@ -36,7 +38,7 @@ var AUTOPREFIXER_BROWSERS = [ // https://github.com/ai/autoprefixer
 var src = {};
 var watch = false;
 var browserSync;
-
+var outputDir = 'build';
 var dotenv = require('dotenv');
 dotenv.load();
 
@@ -65,8 +67,6 @@ if (errors.length) {
   process.exit(1);
 }
 
-
-
 var logLevel = log.levels.DEBUG;
 if (process.env.LOG_LEVEL) {
   logLevel = parseInt(process.env.LOG_LEVEL);
@@ -87,18 +87,25 @@ if (subdomain) {
 
 $.util.log("Domain " + domain);
 
-
-
 // The default task
 gulp.task('default', ['sync']);
 
+gulp.task('deploy', function(cb) {
+  watch = false;
+  RELEASE = true;
+  DEPLOY = true;
+  dotenv.load('./deploy.env');
+  process.env.DEPLOY = DEPLOY;
+  outputDir = "deploy/build";
+  runSequence(['build', 'deploydeps'], cb);
+});
+
 // Clean output directory
 gulp.task('clean', del.bind(
-  null, ['.tmp', 'build/*', '!build/.git'], {
+  null, ['.tmp', 'deploy/*', 'build/*', '!build/.git'], {
     dot: true
   }
 ));
-
 
 // 3rd party libraries
 gulp.task('latex', function() {
@@ -106,7 +113,23 @@ gulp.task('latex', function() {
     '*/latex/**/*'
   ], {
     "base": "./src"
-  }).pipe(gulp.dest('build'));
+  }).pipe(gulp.dest(outputDir));
+});
+
+// 3rd party libraries
+gulp.task('deploydeps', function(cb) {
+  return gulp.src([
+    'appspec.yaml'
+  ], {
+    "base": "./"
+  }).pipe(gulp.dest(outputDir));
+
+  var cmd = "ln -s node_modules_prod deploy/node_modules";
+  exec(cmd, function(err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
 });
 
 
@@ -118,8 +141,7 @@ gulp.task('vendor', ['latex'], function() {
     '*/font-awesome/**/*'
   ], {
     "base": "./node_modules"
-  }).pipe(gulp.dest('build/public/vendor/'));
-
+  }).pipe(gulp.dest(path.join(outputDir, 'public', 'vendor')));
 
 });
 
@@ -129,8 +151,8 @@ gulp.task('assets', function() {
     'src/public/**/*',
   ];
   return gulp.src(src.assets)
-    .pipe($.changed('build/public/'))
-    .pipe(gulp.dest('build/public/'))
+    .pipe($.changed(path.join(outputDir, 'public')))
+    .pipe(gulp.dest(path.join(outputDir, 'public')))
     .pipe($.size({
       title: 'assets'
     }));
@@ -182,7 +204,7 @@ gulp.task('styles', function() {
     }))
     .pipe($.csscomb())
     .pipe($.if(RELEASE, $.minifyCss()))
-    .pipe(gulp.dest('build/public/css'))
+    .pipe(gulp.dest(path.join(outputDir, 'public', 'css')))
     .pipe($.size({
       title: 'styles'
     }));
@@ -207,6 +229,11 @@ gulp.task('build:watch', function(cb) {
 
 // Launch the Node.js/Hapi server
 gulp.task('serve', ['build:watch'], function(cb) {
+
+  if (DEPLOY) {
+    cb();
+    return;
+  }
   src.server = [
     'build/server.js',
     'build/workers.js'
@@ -251,6 +278,13 @@ gulp.task('serve', ['build:watch'], function(cb) {
 
 // Launch BrowserSync development server
 gulp.task('sync', ['serve'], function(cb) {
+
+  if (DEPLOY) {
+    cb();
+    return;
+  }
+
+
   $.util.log("Starting browsersync");
   browserSync = require('browser-sync');
   browserSync({
@@ -277,36 +311,12 @@ gulp.task('sync', ['serve'], function(cb) {
   });
 });
 
-gulp.task('testmanifest', function(cb) {
-  var concatFilenamesOptions = {
-    root: "./",
-    prepend: "import '../",
-    append: "';"
-  };
-
-  var stream = gulp.src('./src/**/*.test.js')
-    .pipe(concatFilenames('manifest.js', concatFilenamesOptions))
-    .pipe(insert.prepend("import './helpers/polyfill.js';\n"))
-    .pipe(gulp.dest('./test/'));
-  cb();
-});
-
-gulp.task('test', ['testmanifest', 'bundle'], function() {
-
-  return gulp.src('test/test.js')
-    .pipe(jasmine({
-      integration: true
-    }));
-
-});
-
 var dbURL;
 if (gutil.env.db == "prod") {
   dbURL = process.env.POSTGRES_PROD;
 } else {
   dbURL = process.env.POSTGRES;
 }
-
 
 gulp.task('migrate', function(cb) {
   var cmd = "./node_modules/.bin/sequelize db:migrate --url " + dbURL;
@@ -317,7 +327,7 @@ gulp.task('migrate', function(cb) {
   });
 });
 
-gulp.task('migrate:undo', function(cb) {
+gulp.task('unmigrate', function(cb) {
   var cmd = "./node_modules/.bin/sequelize db:migrate:undo --url " + dbURL;
   exec(cmd, function(err, stdout, stderr) {
     console.log(stdout);
@@ -326,7 +336,7 @@ gulp.task('migrate:undo', function(cb) {
   });
 });
 
-gulp.task('migration:create', function(cb) {
+gulp.task('migration', function(cb) {
 
   if (gutil.env.name) {
     var name = gutil.env.name;
@@ -343,7 +353,7 @@ gulp.task('migration:create', function(cb) {
 
 });
 
-gulp.task('loadfixture', function(cb) {
+gulp.task('fixture', function(cb) {
 
   if (gutil.env.name) {
     var name = gutil.env.name;
@@ -360,20 +370,4 @@ gulp.task('loadfixture', function(cb) {
   }
 
 });
-
-
-
-// build temporary loader
-gulp.task('loader', ['bundle'], function(cb) {
-
-  var cmd = "node build/loader.js";
-  exec(cmd, function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-
-});
-
-
 

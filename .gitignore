@@ -1,4 +1,7 @@
 node_modules
+node_modules_prod
+deploy
 build
 .env
+deploy.env
 *~

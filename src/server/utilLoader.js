@@ -6,6 +6,7 @@ import popsicle from 'popsicle';
 import Db from './db';
 import CsvParse from 'csv-parse';
 import { convertToCoppers } from '../lib/util';
+import DnD5e from '../lib/dnd5e';
 
 export const escape = () => {
   const t = fs.readFileSync('./build/latex/example.tex', {
@@ -16,6 +17,102 @@ export const escape = () => {
   console.log(lines);
   process.exit();
 }
+
+export const monster = () => {
+
+  const dd = new DnD5e();
+
+  const prem = fs.readFileSync('./fixtures/pre-monsters.json', {
+    encoding: 'utf-8'
+  });
+  const preMonsters = JSON.parse(prem);
+  const monsters = [];
+
+  _.forEach(preMonsters, (pm) => {
+    const nm = _.omit(pm, [
+      "HP",
+      "AC",
+      "type",
+      "traits",
+      "actions",
+      "legendaryActions",
+      "abilities",
+      "lairActions",
+      "regionalEffects",
+      "regionalEffectsFade"
+    ]);
+    nm.xp = dd.getXPbyCR(nm.challenge);
+    nm.hitpoints = pm.HP;
+    nm.armorclass = pm.AC;
+    nm.alignment = _.capitalize(nm.alignment);
+    nm.raceOrType = pm.type;
+
+    _.forEach(_.chunk(pm.abilities.split(" "), 2), (pp) => {
+      nm[pp[0]] = pp[1];
+    });
+    const NewTraits = [];
+    let spelltraits = _.remove(pm.traits, (s) => {
+      return _.startsWith(s, '•') || _.startsWith(s, 'Spellcasting') || _.startsWith(s, 'Innate Spellcasting');
+    });
+
+    if (spelltraits.length) {
+
+      spelltraits = spelltraits.map((s) => {
+        var re = /^•/;
+        var subst = '*';
+        return s.replace(re, subst);
+      });
+
+      const spIndex = _.findIndex(spelltraits, (s) => {
+        return _.startsWith(s, 'Spellcasting');
+      });
+
+      if (spIndex > 0) {
+        const ics = spelltraits.slice(0, spIndex);
+        ics.splice(1, 0, " ");
+        let cs = spelltraits.slice(spIndex);
+        cs.splice(1, 0, " ");
+        pm.traits.unshift(cs.join("\n"));
+        pm.traits.unshift(ics.join("\n"));
+      } else {
+        let cs = spelltraits;
+        cs.splice(1, 0, " ");
+        pm.traits.unshift(cs.join("\n"));
+      }
+
+    }
+
+    _.forEach(pm.traits, (tt) => {
+      NewTraits.push({
+        name: _.trim(tt.slice(0, tt.indexOf("."))),
+        content: _.trim(tt.substr(tt.indexOf(".") + 1))
+      });
+    });
+    nm.traits = JSON.stringify(NewTraits);
+
+    const NewActions = [];
+    _.forEach(pm.actions, (tt) => {
+      NewActions.push({
+        name: _.trim(tt.slice(0, tt.indexOf("."))),
+        content: _.trim(tt.substr(tt.indexOf(".") + 1))
+      });
+    });
+    nm.actions = JSON.stringify(NewActions);
+
+    const NewLeActions = [];
+    _.forEach(pm.legendaryActions, (tt) => {
+      NewLeActions.push({
+        name: _.trim(tt.slice(0, tt.indexOf("."))),
+        content: _.trim(tt.substr(tt.indexOf(".") + 1))
+      });
+    });
+    nm.legendaryActions = JSON.stringify(NewLeActions);
+    monsters.push(nm);
+  });
+
+  console.log(JSON.stringify(monsters));
+  process.exit();
+};
 
 export const parsePreEffects = () => {
 

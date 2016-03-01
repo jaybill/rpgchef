@@ -1,6 +1,6 @@
 import './Module.less';
 import React, { Component, PropTypes } from 'react';
-import { NavItem, Navbar, Nav, Label, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
+import { NavDropdown, MenuItem, NavItem, Navbar, Nav, Label, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { CtrldInputText, CtrldTextarea } from '../ControlledField';
 import log from 'loglevel';
 import _ from 'lodash';
@@ -544,6 +544,7 @@ export default class Module extends Component {
                 </div>);
     }
 
+    const monsterTitle = <i className="icon icon-goblin"></i>;
 
     return (<div className="Module">
               <Navbar fixedTop>
@@ -590,9 +591,14 @@ export default class Module extends Component {
                     <NavItem onClick={ self.addSection.bind(this, "columnbreak") } title="Insert Column Break">
                       <i className="icon icon-column-break"></i>
                     </NavItem>
-                    <NavItem onClick={ self.addSection.bind(this, "monster") } title="Insert Monster">
-                      <i className="icon icon-goblin"></i>
-                    </NavItem>
+                    <NavDropdown eventKey={ 4 } title={ monsterTitle } id="nav-dropdown">
+                      <MenuItem onClick={ self.addSection.bind(this, "monster") } eventKey="4.1">
+                        New Monster
+                      </MenuItem>
+                      <MenuItem eventKey="4.2">
+                        5e Monster
+                      </MenuItem>
+                    </NavDropdown>
                     <NavItem onClick={ self.addSection.bind(this, "image") } title="Insert Image">
                       <i className="fa fa-picture-o fa-fw"></i>
                     </NavItem>

@@ -124,7 +124,6 @@ gulp.task('bump', function(cb) {
     $.util.log("Current version is " + v);
     $.util.log("New version is " + v2);
     version = v2.toString();
-    console.log(version);
     process.env.RPGCHEF_VERSION = version;
     return execAsync("git tag v" + v2);
   }).then(function(o) {
@@ -194,7 +193,7 @@ gulp.task('deployrevision', function(cb) {
     exec(deploycmd, function(err, stdout, stderr) {
       if (stdout) {
         var di = JSON.parse(stdout);
-        $.util.log("Submitted deployment " + di.deploymentId);
+        $.util.log("Submitted version " + version + " for deployment " + di.deploymentId);
       }
       cb();
     });

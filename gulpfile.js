@@ -123,7 +123,9 @@ gulp.task('bump', function(cb) {
 
     $.util.log("Current version is " + v);
     $.util.log("New version is " + v2);
-    version = v2.version;
+    version = v2.toString();
+    console.log(version);
+    process.env.RPGCHEF_VERSION = version;
     return execAsync("git tag v" + v2);
   }).then(function(o) {
     return execAsync("git push --tags");

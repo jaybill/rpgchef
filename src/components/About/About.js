@@ -1,11 +1,12 @@
 import './About.less';
 import React, { Component, PropTypes } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Label, Panel } from 'react-bootstrap';
 import SimplePage from '../SimplePage'
 
 export default class About extends Component {
 
   render() {
+
 
     return (
 
@@ -23,6 +24,9 @@ export default class About extends Component {
             consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus.
           </p>
         </Panel>
+        <Label bsStyle="info">
+          { "Version: " + (process.env.RPGCHEF_VERSION || "Local") }
+        </Label>
       </div>
       );
   }

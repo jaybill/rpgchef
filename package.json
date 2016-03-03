@@ -162,6 +162,7 @@
     "rewire": "^2.3.4",
     "rewire-webpack": "^1.0.0",
     "run-sequence": "^1.1.4",
+    "semver": "^5.1.0",
     "sequelize-fixtures": "^0.4.8",
     "style-loader": "^0.13.0",
     "transform-loader": "^0.2.3",

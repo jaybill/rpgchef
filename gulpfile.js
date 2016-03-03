@@ -19,8 +19,7 @@ var exec = require('child_process').exec;
 var spawnSync = require('child_process').spawnSync;
 var gutil = require('gulp-util');
 var symlink = require('gulp-sym');
-var rimraf = require('gulp-rimraf');
-var merge = require('merge-stream');
+var semver = require('semver');
 
 // Settings
 var RELEASE = !!argv.release; // Minimize and optimize during a build?
@@ -39,13 +38,14 @@ var AUTOPREFIXER_BROWSERS = [ // https://github.com/ai/autoprefixer
   'bb >= 10'
 ];
 
+var version;
 var src = {};
 var watch = false;
 var browserSync;
 var outputDir = 'build';
 require('dotenv').config({
   path: (PROD ? "deploy.env" : ".env")
-});;
+});
 
 // Check for required environment variables
 var required = [
@@ -92,9 +92,50 @@ if (subdomain) {
 
 $.util.log("Domain " + domain);
 
+function execAsync(cmd, options) {
+
+  return new Promise(function(resolve, reject) {
+    exec(cmd, options, function(err, stdout, stderr) {
+      if (err) {
+        reject(stderr);
+        return;
+      }
+      resolve(stdout);
+    });
+  });
+}
+
 // The default task
 gulp.task('default', ['sync']);
 
+gulp.task('bump', function(cb) {
+  execAsync("git tag -l").then(function(result) {
+    var tags = [];
+    result.split("\n").forEach(function(pt) {
+      var c = semver.clean(pt);
+      if (c) {
+        tags.push(c);
+      }
+    });
+    tags.sort(semver.rcompare);
+    var v = semver(tags[0]);
+    var v2 = semver.inc(v, "patch");
+
+    $.util.log("Current version is " + v);
+    $.util.log("New version is " + v2);
+    version = v2.version;
+    return execAsync("git tag v" + v2);
+  }).then(function(o) {
+    return execAsync("git push --tags");
+  }).then(function(o) {
+    cb();
+  }).catch(function(err) {
+    $.util.log(err);
+    process.exit(1);
+  });
+});
+
+// deployment
 gulp.task('deploy', function(cb) {
   if (!PROD) {
     $.util.log("No target specified. Did you mean 'gulp deploy --prod'?");
@@ -107,6 +148,7 @@ gulp.task('deploy', function(cb) {
   outputDir = "./deploy/build/";
   runSequence(
     'ensuremaster',
+    'bump',
     'build',
     'deploydeps',
     'deployrevision'
@@ -133,7 +175,7 @@ gulp.task('deployrevision', function(cb) {
 
   var cmd = "aws deploy push " +
     "--application-name rpgchef " +
-    "--description \"This is a revision for the application rpgchef\" " +
+    "--description \"Version " + version + " of rpgchef.\" " +
     "--s3-location s3://aws-code-deploy-rpgchef/rpgchef.zip " +
     "--source deploy";
   exec(cmd, function(err, stdout, stderr) {
@@ -287,8 +329,6 @@ gulp.task('build:watch', function(cb) {
     cb();
   });
 });
-
-
 
 // Launch the Node.js/Hapi server
 gulp.task('serve', ['build:watch'], function(cb) {

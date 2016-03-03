@@ -1,3 +1,5 @@
+os: linux
+version: 0.0
 files: 
   - 
     destination: /var/www/rpgchef_next/build
@@ -5,5 +7,7 @@ files:
   - 
     destination: /var/www/rpgchef_next/node_modules
     source: node_modules
-os: linux
-version: 0.0
+AfterInstall:
+    -
+      location: scripts/updatelive.sh
+      runas: root

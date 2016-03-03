@@ -16,9 +16,12 @@ var insert = require('gulp-insert');
 var log = require('loglevel');
 var URI = require('urijs');
 var exec = require('child_process').exec;
+var spawnSync = require('child_process').spawnSync;
 var gutil = require('gulp-util');
 var symlink = require('gulp-sym');
 var rimraf = require('gulp-rimraf');
+var merge = require('merge-stream');
+
 // Settings
 var RELEASE = !!argv.release; // Minimize and optimize during a build?
 var PROD = !!argv.prod;
@@ -93,23 +96,66 @@ $.util.log("Domain " + domain);
 gulp.task('default', ['sync']);
 
 gulp.task('deploy', function(cb) {
+  if (!PROD) {
+    $.util.log("No target specified. Did you mean 'gulp deploy --prod'?");
+    process.exit(1);
+  }
   watch = false;
   RELEASE = true;
   DEPLOY = true;
   process.env.DEPLOY = DEPLOY;
   outputDir = "./deploy/build/";
-  runSequence(['clean', 'build', 'appspec', 'prodnode'], cb);
+  runSequence(
+    //    'ensuremaster',
+    'build',
+    'deploydeps',
+    'deployrevision'
+    , cb);
+});
+
+gulp.task('ensuremaster', function(cb) {
+  var cmd = "git rev-parse --abbrev-ref HEAD";
+  exec(cmd, function(err, stdout, stderr) {
+    if (err) {
+      $.util.log(stderr);
+      process.exit(1);
+    }
+    if (stdout.trim() != "master") {
+      $.util.log("Deployment of branch '" + stdout.trim() + "' not allowed. You must deploy from the 'master' branch.");
+      process.exit(1);
+    } else {
+      cb();
+    }
+  });
+});
+
+gulp.task('deployrevision', function(cb) {
+
+  var cmd = "aws deploy push " +
+    "--application-name rpgchef " +
+    "--description \"This is a revision for the application rpgchef\" " +
+    "--s3-location s3://aws-code-deploy-rpgchef/rpgchef.zip " +
+    "--source deploy";
+  exec(cmd, function(err, stdout, stderr) {
+    if (err) {
+      console.log(stderr);
+      return cb(err);
+    }
+    var deploycmd = stdout
+      .substr(stdout.indexOf("\n"))
+      .replace(/<deployment-group-name>/, "rpgchef")
+      .replace(/<deployment-config-name>/, "CodeDeployDefault.OneAtATime")
+      .replace(/<description>/, "rpgchef");
+    console.log(deploycmd);
+    exec(deploycmd, function(err, stdout, stderr) {});
+  });
+
 });
 
 // Clean output directory
 gulp.task('clean', function() {
-  gulp.src(['.tmp', './deploy', './build']) // much faster 
-    .pipe(rimraf({
-      read: false,
-      force: true
-    }));
-}
-);
+  return del.sync(['./deploy/**', './build/**']);
+});
 
 // 3rd party libraries
 gulp.task('latex', function() {
@@ -120,22 +166,30 @@ gulp.task('latex', function() {
   }).pipe(gulp.dest(outputDir));
 });
 
-gulp.task('prodnode', function(cb) {
-  gulp.src(['tempnode/node_modules/**/*'])
+gulp.task('prodnode', function() {
+  return gulp.src(['tempnode/node_modules/**/*'])
     .pipe(gulp.dest('deploy/node_modules'));
-  cb();
 });
 
-// Copy appspec
-gulp.task('appspec', function(cb) {
-  gulp.src([
+gulp.task('scripts', function() {
+  gulp.src(['scripts/**/*', '!scripts/**/~*'])
+    .pipe(gulp.dest('deploy/scripts')).on('end', function() {
+    exec('chmod +x ./deploy/scripts/*', function(err, stdout, stderr) {
+      $.util.log(stdout);
+      $.util.log(stderr);
+    });
+  });
+});
+
+gulp.task('appspec', function() {
+  return gulp.src([
     'appspec.yml'
   ], {
     "base": "./"
   }).pipe(gulp.dest('deploy'));
-  cb();
 });
 
+gulp.task('deploydeps', ['scripts', 'appspec', 'prodnode']);
 
 // 3rd party libraries
 gulp.task('vendor', ['latex'], function() {

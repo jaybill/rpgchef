@@ -106,7 +106,7 @@ gulp.task('deploy', function(cb) {
   process.env.DEPLOY = DEPLOY;
   outputDir = "./deploy/build/";
   runSequence(
-    //    'ensuremaster',
+    'ensuremaster',
     'build',
     'deploydeps',
     'deployrevision'
@@ -149,12 +149,12 @@ gulp.task('deployrevision', function(cb) {
 
     exec(deploycmd, function(err, stdout, stderr) {
       if (stdout) {
-        console.log(stdout);
+        var di = JSON.parse(stdout);
+        $.util.log("Submitted deployment " + di.deploymentId);
       }
       cb();
     });
   });
-
 });
 
 // Clean output directory

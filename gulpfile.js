@@ -17,10 +17,11 @@ var log = require('loglevel');
 var URI = require('urijs');
 var exec = require('child_process').exec;
 var gutil = require('gulp-util');
-
-
+var symlink = require('gulp-sym');
+var rimraf = require('gulp-rimraf');
 // Settings
 var RELEASE = !!argv.release; // Minimize and optimize during a build?
+var PROD = !!argv.prod;
 var DEPLOY = false;
 
 var AUTOPREFIXER_BROWSERS = [ // https://github.com/ai/autoprefixer
@@ -39,8 +40,9 @@ var src = {};
 var watch = false;
 var browserSync;
 var outputDir = 'build';
-var dotenv = require('dotenv');
-dotenv.load();
+require('dotenv').config({
+  path: (PROD ? "deploy.env" : ".env")
+});;
 
 // Check for required environment variables
 var required = [
@@ -94,42 +96,44 @@ gulp.task('deploy', function(cb) {
   watch = false;
   RELEASE = true;
   DEPLOY = true;
-  dotenv.load('./deploy.env');
   process.env.DEPLOY = DEPLOY;
-  outputDir = "deploy/build";
-  runSequence(['build', 'deploydeps'], cb);
+  outputDir = "./deploy/build/";
+  runSequence(['clean', 'build', 'appspec', 'prodnode'], cb);
 });
 
 // Clean output directory
-gulp.task('clean', del.bind(
-  null, ['.tmp', 'deploy/*', 'build/*', '!build/.git'], {
-    dot: true
-  }
-));
+gulp.task('clean', function() {
+  gulp.src(['.tmp', './deploy', './build']) // much faster 
+    .pipe(rimraf({
+      read: false,
+      force: true
+    }));
+}
+);
 
 // 3rd party libraries
 gulp.task('latex', function() {
   return gulp.src([
-    '*/latex/**/*'
+    './src/latex/**/*'
   ], {
     "base": "./src"
   }).pipe(gulp.dest(outputDir));
 });
 
-// 3rd party libraries
-gulp.task('deploydeps', function(cb) {
-  return gulp.src([
-    'appspec.yaml'
+gulp.task('prodnode', function(cb) {
+  gulp.src(['tempnode/node_modules/**/*'])
+    .pipe(gulp.dest('deploy/node_modules'));
+  cb();
+});
+
+// Copy appspec
+gulp.task('appspec', function(cb) {
+  gulp.src([
+    'appspec.yml'
   ], {
     "base": "./"
-  }).pipe(gulp.dest(outputDir));
-
-  var cmd = "ln -s node_modules_prod deploy/node_modules";
-  exec(cmd, function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
+  }).pipe(gulp.dest('deploy'));
+  cb();
 });
 
 
@@ -140,7 +144,7 @@ gulp.task('vendor', ['latex'], function() {
     '*/rpgchef-theme/**/*',
     '*/font-awesome/**/*'
   ], {
-    "base": "./node_modules"
+    "base": "./node_modules/"
   }).pipe(gulp.dest(path.join(outputDir, 'public', 'vendor')));
 
 });

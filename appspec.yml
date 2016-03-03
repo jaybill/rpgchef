@@ -1,0 +1,9 @@
+files: 
+  - 
+    destination: /var/www/rpgchef_next/build
+    source: build
+  - 
+    destination: /var/www/rpgchef_next/node_modules
+    source: node_modules
+os: linux
+version: 0.0

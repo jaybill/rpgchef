@@ -146,8 +146,13 @@ gulp.task('deployrevision', function(cb) {
       .replace(/<deployment-group-name>/, "rpgchef")
       .replace(/<deployment-config-name>/, "CodeDeployDefault.OneAtATime")
       .replace(/<description>/, "rpgchef");
-    console.log(deploycmd);
-    exec(deploycmd, function(err, stdout, stderr) {});
+
+    exec(deploycmd, function(err, stdout, stderr) {
+      if (stdout) {
+        console.log(stdout);
+      }
+      cb();
+    });
   });
 
 });
@@ -175,8 +180,8 @@ gulp.task('scripts', function() {
   gulp.src(['scripts/**/*', '!scripts/**/~*'])
     .pipe(gulp.dest('deploy/scripts')).on('end', function() {
     exec('chmod +x ./deploy/scripts/*', function(err, stdout, stderr) {
-      $.util.log(stdout);
-      $.util.log(stderr);
+      if (stdout) $.util.log(stdout);
+      if (stderr) $.util.log(stderr);
     });
   });
 });

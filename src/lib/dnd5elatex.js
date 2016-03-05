@@ -41,9 +41,9 @@ const templates = {
     ']\n',
   monsterDetail: '<%= key %> = {<%= value %>},\n',
   monsterSection: '\\monstersection{<%= title %>}\n',
-  monsterAction: '\\begin{monsteraction}[<%= name %>]\n' +
+  monsterAction: '\\noindent\\begin{monsteraction}[<%= name %>]\n' +
     '<%= content %>' +
-    '\\end{monsteraction}\n',
+    '\\end{monsteraction}\n\n',
   legendaryActions: '\\monstersection{Legendary Actions}\n' +
     "The <%= name%> can take <%= points  %> legendary action<%= s%>, " +
     "choosing from the options below. Only one legendary action option " +

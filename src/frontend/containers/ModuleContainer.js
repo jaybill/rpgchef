@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { modulePostReset, modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost, upload as doUpload, uploadReset as doUploadReset, deleteImage as doDeleteImage } from '../actions/module';
+import { monsterReset } from '../actions/monsters';
 import Module from '../../components/Module';
 import urijs from 'urijs';
-import log from 'loglevel';
 import { updatePath } from 'redux-simple-router';
 import { Lifecycle } from 'react-router';
 import reactMixin from 'react-mixin';
@@ -22,9 +22,14 @@ class ModuleContainer extends Component {
     this.onDeleteImage = this.onDeleteImage.bind(this);
     this.routerWillLeave = this.routerWillLeave.bind(this);
     this.changed = this.changed.bind(this);
+    this.monsterReset = this.monsterReset.bind(this);
     this.state = {
       saved: true
     };
+  }
+
+  monsterReset() {
+    this.props.dispatch(monsterReset());
   }
 
   changed() {
@@ -148,6 +153,7 @@ class ModuleContainer extends Component {
              uploadReset={ this.uploadReset }
              del={ module.del }
              changed={ this.changed }
+             monsterReset={ this.monsterReset }
              onDeleteImage={ this.onDeleteImage } />;
   }
 

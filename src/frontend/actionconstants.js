@@ -40,7 +40,10 @@ function makeKeys() {
   km = Object.assign(km, asyncKeys("MODULE_GETPDF"));
   km = Object.assign(km, asyncKeys("UPLOAD_IMAGE"));
   km = Object.assign(km, asyncKeys("DELETE_IMAGE"));
+  km = Object.assign(km, asyncKeys("MONSTERS"));
+  km = Object.assign(km, asyncKeys("MONSTER"));
 
+  extraKeys["MONSTER_RESET"] = null;
   extraKeys["MODULE_RESET"] = null;
   extraKeys["MODULE_POST_RESET"] = null;
   extraKeys["MODULE_PDF_RESET"] = null;

@@ -45,7 +45,7 @@ var config = {
 
   cache: DEBUG,
   debug: DEBUG,
-  devtool: DEBUG ? '#eval-cheap-module-source-map' : false,
+  devtool: DEBUG ? 'source-map' : false,
 
   stats: {
     colors: true,

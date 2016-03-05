@@ -4,6 +4,7 @@ import My from './handlers/my';
 import Module from './handlers/module';
 import Payment from './handlers/payment';
 import File from './handlers/file';
+import Monster from './handlers/monster';
 
 import path from 'path';
 import URIjs from 'urijs';
@@ -68,6 +69,21 @@ var routes = [
     method: 'GET',
     path: '/api/my/weapons',
     config: My.handlers.weapons
+  },
+  {
+    method: 'GET',
+    path: '/api/monsters',
+    config: Monster.handlers.monsters
+  },
+  {
+    method: 'GET',
+    path: '/api/monsters/named',
+    config: Monster.handlers.monsterByName
+  },
+  {
+    method: 'GET',
+    path: '/api/monster/{id?}',
+    config: Monster.handlers.monster
   },
   {
     method: ['POST'],

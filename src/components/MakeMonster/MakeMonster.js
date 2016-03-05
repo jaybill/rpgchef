@@ -5,7 +5,7 @@ import CtrldInputText from '../ControlledField';
 import DnD5e from '../../lib/dnd5e';
 import _ from 'lodash';
 import ConfirmDelete from '../ConfirmDelete';
-
+import log from 'loglevel';
 export default class MakeMonster extends Component {
 
   constructor() {
@@ -148,332 +148,354 @@ export default class MakeMonster extends Component {
   }
 
   render() {
-
+    let wtr;
     const c = this.props.content;
     const k = this.props.k;
     const ref = this.props.refName;
     const self = this;
-    const aaa = this.dd.getAlignments();
-    const alignments = [];
 
-    let i = 0;
-    _.forEach(aaa, (a) => {
-      alignments.push(<option value={ a } key={ i++ }>
-                        { a }
-                      </option>);
-    });
+    if (this.props.open) {
+      const aaa = this.dd.getAlignments();
+      const alignments = [];
 
-    const sss = this.dd.getSizes();
-    const sizes = [];
-    let j = 0;
+      let i = 0;
+      _.forEach(aaa, (a) => {
+        alignments.push(<option value={ a } key={ i++ }>
+                          { a }
+                        </option>);
+      });
 
-    _.forEach(sss, (s) => {
-      sizes.push(<option value={ s } key={ i++ }>
-                   { s }
-                 </option>);
-    });
+      const sss = this.dd.getSizes();
+      const sizes = [];
+      let j = 0;
 
-    const statblocks = [];
-    let jj = 0;
-    _.forEach(this.dd.getCoreStats(), cs => {
+      _.forEach(sss, (s) => {
+        sizes.push(<option value={ s } key={ i++ }>
+                     { s }
+                   </option>);
+      });
 
-      statblocks.push(
-        <Col key={ jj++ } md={ 2 }>
-          <div className="form-group">
-            <div className="input-group">
-              <span className="input-group-addon input-sm">{ cs }</span>
-              <CtrldInputText type="number"
-                className="form-control input-sm"
-                value={ c.content[cs] }
-                name={ ["content", k, "content", cs] }
-                onFieldChange={ self.handleStatChange } />
-              <span className="input-group-addon input-sm">{ this.dd.calcModifier(c.content[cs]) }</span>
-            </div>
-          </div>
-        </Col>);
-    });
+      const statblocks = [];
+      let jj = 0;
+      _.forEach(this.dd.getCoreStats(), cs => {
 
-    const traits = this.makeTraitList(c, k, "traits");
-    const actions = this.makeTraitList(c, k, "actions");
-
-    let legendaryActions;
-
-    if (c.content.legendaryPoints > 0) {
-      const llist = this.makeTraitList(c, k, "legendaryActions", "Legendary Actions");
-      legendaryActions = (<Row>
-                            <Col md={ 6 }>
-                              { llist }
-                            </Col>
-                          </Row>);
-    }
-
-    return (
-      <section key={ k } ref={ ref } className={ ref }>
-        { this.props.toolbar }
-        <Panel>
-          <div className="form">
+        statblocks.push(
+          <Col key={ jj++ } md={ 2 }>
             <div className="form-group">
               <div className="input-group">
-                <span title="Monster" className="input-group-addon"><i className="icon icon-goblin"></i></span>
-                <CtrldInputText type="text"
-                  placeholder="i.e.'Goblin'"
-                  className="form-control"
-                  value={ c.content.name }
-                  name={ ["content", k, "content", "name"] }
-                  onFieldChange={ this.props.onFieldChange } />
+                <span className="input-group-addon input-sm">{ cs }</span>
+                <CtrldInputText type="number"
+                  className="form-control input-sm"
+                  value={ c.content[cs] }
+                  name={ ["content", k, "content", cs] }
+                  onFieldChange={ self.handleStatChange } />
+                <span className="input-group-addon input-sm">{ this.dd.calcModifier(c.content[cs]) }</span>
               </div>
             </div>
-            <Row>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Challenge</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e.'1/4'"
-                      className="form-control"
-                      value={ c.content.challenge }
-                      name={ ["content", k, "content", "challenge"] }
-                      onFieldChange={ this.props.onFieldChange } />
-                  </div>
+          </Col>);
+      });
+
+      const traits = this.makeTraitList(c, k, "traits");
+      const actions = this.makeTraitList(c, k, "actions");
+
+      let legendaryActions;
+
+      if (c.content.legendaryPoints > 0) {
+        const llist = this.makeTraitList(c, k, "legendaryActions", "Legendary Actions");
+        legendaryActions = (<Row>
+                              <Col md={ 6 }>
+                                { llist }
+                              </Col>
+                            </Row>);
+      }
+
+      wtr = (
+        <section key={ k } ref={ ref } className={ ref }>
+          { this.props.toolbar }
+          <Panel>
+            <div className="form">
+              <div className="form-group">
+                <div className="input-group">
+                  <span title="Monster" className="input-group-addon"><i className="icon icon-goblin"></i></span>
+                  <CtrldInputText type="text"
+                    placeholder="i.e.'Goblin'"
+                    className="form-control"
+                    value={ c.content.name }
+                    name={ ["content", k, "content", "name"] }
+                    onFieldChange={ this.props.onFieldChange } />
                 </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">XP</span>
-                    <CtrldInputText type="number"
-                      placeholder="i.e.'100'"
-                      className="form-control"
-                      value={ c.content.xp }
-                      name={ ["content", k, "content", "xp"] }
-                      onFieldChange={ this.props.onFieldChange } />
+              </div>
+              <Row>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Challenge</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e.'1/4'"
+                        className="form-control"
+                        value={ c.content.challenge }
+                        name={ ["content", k, "content", "challenge"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Legendary Actions</span>
-                    <CtrldInputText type="number"
-                      placeholder="i.e.'3'"
-                      className="form-control"
-                      value={ c.content.legendaryPoints }
-                      name={ ["content", k, "content", "legendaryPoints"] }
-                      onFieldChange={ this.makeUpdateRefresh } />
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">XP</span>
+                      <CtrldInputText type="number"
+                        placeholder="i.e.'100'"
+                        className="form-control"
+                        value={ c.content.xp }
+                        name={ ["content", k, "content", "xp"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={ 4 }>
-                <Input value={ c.content.size }
-                  onChange={ this.handleSelect.bind(this, ["content", k, "content", "size"]) }
-                  addonBefore="Size"
-                  type="select">
-                { sizes }
-                </Input>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Race/Type</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e.'Humanoid'"
-                      className="form-control"
-                      value={ c.content.raceOrType }
-                      name={ ["content", k, "content", "raceOrType"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Legendary Actions</span>
+                      <CtrldInputText type="number"
+                        placeholder="i.e.'3'"
+                        className="form-control"
+                        value={ c.content.legendaryPoints }
+                        name={ ["content", k, "content", "legendaryPoints"] }
+                        onFieldChange={ this.makeUpdateRefresh } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <Input value={ c.content.alignment }
-                  onChange={ this.handleSelect.bind(this, ["content", k, "content", "alignment"]) }
-                  addonBefore="Alignment"
-                  type="select">
-                { alignments }
-                </Input>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Armor Class</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e.'12'"
-                      className="form-control"
-                      value={ c.content.armorclass }
-                      name={ ["content", k, "content", "armorclass"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={ 4 }>
+                  <Input value={ c.content.size }
+                    onChange={ this.handleSelect.bind(this, ["content", k, "content", "size"]) }
+                    addonBefore="Size"
+                    type="select">
+                  { sizes }
+                  </Input>
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Race/Type</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e.'Humanoid'"
+                        className="form-control"
+                        value={ c.content.raceOrType }
+                        name={ ["content", k, "content", "raceOrType"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Hit Points</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e.'16 (3d8+3)'"
-                      className="form-control"
-                      value={ c.content.hitpoints }
-                      name={ ["content", k, "content", "hitpoints"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+                <Col md={ 4 }>
+                  <Input value={ c.content.alignment }
+                    onChange={ this.handleSelect.bind(this, ["content", k, "content", "alignment"]) }
+                    addonBefore="Alignment"
+                    type="select">
+                  { alignments }
+                  </Input>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Armor Class</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e.'12'"
+                        className="form-control"
+                        value={ c.content.armorclass }
+                        name={ ["content", k, "content", "armorclass"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Speed</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e.'50 ft'"
-                      className="form-control"
-                      value={ c.content.speed }
-                      name={ ["content", k, "content", "speed"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Hit Points</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e.'16 (3d8+3)'"
+                        className="form-control"
+                        value={ c.content.hitpoints }
+                        name={ ["content", k, "content", "hitpoints"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              { statblocks }
-            </Row>
-            <Row>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Damage Immunities</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e. 'fire, frost'"
-                      className="form-control"
-                      value={ c.content.damageImmunities }
-                      name={ ["content", k, "content", "damageImmunities"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Speed</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e.'50 ft'"
+                        className="form-control"
+                        value={ c.content.speed }
+                        name={ ["content", k, "content", "speed"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Condition Immunities</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e. 'poisoned'"
-                      className="form-control"
-                      value={ c.content.conditionImmunities }
-                      name={ ["content", k, "content", "conditionImmunities"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+              </Row>
+              <Row>
+                { statblocks }
+              </Row>
+              <Row>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Damage Immunities</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e. 'fire, frost'"
+                        className="form-control"
+                        value={ c.content.damageImmunities }
+                        name={ ["content", k, "content", "damageImmunities"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Saving Throws</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e. 'Con +6, Int +8'"
-                      className="form-control"
-                      value={ c.content.savingThrows }
-                      name={ ["content", k, "content", "savingThrows"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Condition Immunities</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e. 'poisoned'"
+                        className="form-control"
+                        value={ c.content.conditionImmunities }
+                        name={ ["content", k, "content", "conditionImmunities"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Damage Vulnerabilities</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e. 'fire, frost'"
-                      className="form-control"
-                      value={ c.content.damageVulnerabilities }
-                      name={ ["content", k, "content", "damageVulnerabilities"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Saving Throws</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e. 'Con +6, Int +8'"
+                        className="form-control"
+                        value={ c.content.savingThrows }
+                        name={ ["content", k, "content", "savingThrows"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Damage Immunities</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e. 'acid, lightning'"
-                      className="form-control"
-                      value={ c.content.damageImmunities }
-                      name={ ["content", k, "content", "damageImmunities"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Damage Vulnerabilities</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e. 'fire, frost'"
+                        className="form-control"
+                        value={ c.content.damageVulnerabilities }
+                        name={ ["content", k, "content", "damageVulnerabilities"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Damage Resistance</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e. 'acid, lightning'"
-                      className="form-control"
-                      value={ c.content.damageResistances }
-                      name={ ["content", k, "content", "damageResistances"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Damage Immunities</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e. 'acid, lightning'"
+                        className="form-control"
+                        value={ c.content.damageImmunities }
+                        name={ ["content", k, "content", "damageImmunities"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Senses</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e.'darkvision 120 ft'"
-                      className="form-control"
-                      value={ c.content.senses }
-                      name={ ["content", k, "content", "senses"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Damage Resistance</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e. 'acid, lightning'"
+                        className="form-control"
+                        value={ c.content.damageResistances }
+                        name={ ["content", k, "content", "damageResistances"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Languages</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e. 'common, goblin, infernal'"
-                      className="form-control"
-                      value={ c.content.languages }
-                      name={ ["content", k, "content", "languages"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Senses</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e.'darkvision 120 ft'"
+                        className="form-control"
+                        value={ c.content.senses }
+                        name={ ["content", k, "content", "senses"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-              <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Skills</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e.'History +1, Perception +4'"
-                      className="form-control"
-                      value={ c.content.skills }
-                      name={ ["content", k, "content", "skills"] }
-                      onFieldChange={ this.props.onFieldChange } />
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Languages</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e. 'common, goblin, infernal'"
+                        className="form-control"
+                        value={ c.content.languages }
+                        name={ ["content", k, "content", "languages"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>
-            <hr/>
-            <Row>
-              <Col md={ 6 }>
-                { traits }
-              </Col>
-              <Col md={ 6 }>
-                { actions }
-              </Col>
-            </Row>
-            { legendaryActions }
-          </div>
-        </Panel>
-      </section>);
+                </Col>
+                <Col md={ 4 }>
+                  <div className="form-group ">
+                    <div className="input-group">
+                      <span title="Size" className="input-group-addon">Skills</span>
+                      <CtrldInputText type="text"
+                        placeholder="i.e.'History +1, Perception +4'"
+                        className="form-control"
+                        value={ c.content.skills }
+                        name={ ["content", k, "content", "skills"] }
+                        onFieldChange={ this.props.onFieldChange } />
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+              <hr/>
+              <Row>
+                <Col md={ 6 }>
+                  { traits }
+                </Col>
+                <Col md={ 6 }>
+                  { actions }
+                </Col>
+              </Row>
+              { legendaryActions }
+            </div>
+          </Panel>
+        </section>);
+    } else {
+      wtr = (<section key={ k } ref={ ref } className={ ref }>
+               <Panel onClick={ this.props.onOpenSection }>
+                 <div className="form">
+                   <div className="form-group">
+                     <div className="input-group">
+                       <span title="Monster" className="input-group-addon"><i className="icon icon-goblin"></i></span>
+                       <CtrldInputText type="text"
+                         placeholder="i.e.'Goblin'"
+                         className="form-control"
+                         value={ c.content.name }
+                         name={ ["content", k, "content", "name"] }
+                         onFieldChange={ this.props.onFieldChange } />
+                     </div>
+                   </div>
+                 </div>
+               </Panel>
+             </section>);
+    }
+    return wtr;
   }
 }

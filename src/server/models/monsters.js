@@ -3,7 +3,7 @@ import log from 'loglevel';
 import Sequelize from 'sequelize';
 
 export default function NewMonster(DbConn) {
-  const Monsters = DbConn.define('weapons',
+  const Monsters = DbConn.define('monsters',
     {
       id: {
         type: Sequelize.BIGINT,

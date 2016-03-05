@@ -479,7 +479,9 @@ export default class MakeMonster extends Component {
         </section>);
     } else {
       wtr = (<section key={ k } ref={ ref } className={ ref }>
-               <Panel onClick={ this.props.onOpenSection }>
+               <Panel ref="focuser" onClick={ () => {
+                                                this.props.onOpenSection();
+                                              } }>
                  <div className="form">
                    <div className="form-group">
                      <div className="input-group">

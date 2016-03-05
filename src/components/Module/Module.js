@@ -1,5 +1,6 @@
 import './Module.less';
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { NavDropdown, MenuItem, NavItem, Navbar, Nav, Label, Input, Button, Grid, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { CtrldInputText, CtrldTextarea } from '../ControlledField';
 import log from 'loglevel';
@@ -86,8 +87,7 @@ export default class Module extends Component {
 
   componentDidUpdate() {
     if (this.refs.last && this.state.scrollToLast) {
-      const last = _.keys(this.refs.last.refs)[0];
-      this.refs.last.refs[last].scrollIntoView();
+      ReactDOM.findDOMNode(this.refs.last).scrollIntoView();
       this.setState({
         scrollToLast: false
       });
@@ -227,7 +227,7 @@ export default class Module extends Component {
     }
 
     newContent.splice(k, 1);
-    log.debug(newContent);
+
     this.setState({
       content: newContent,
       scrollToLast: false,
@@ -486,97 +486,50 @@ export default class Module extends Component {
           moveToBottom={ this.moveToBottom }
           moveSection={ this.moveSection }
           removeSection={ this.removeSection } />);
+        const commonProps = {
+          refName: ref,
+          ref: last,
+          key: key,
+          k: key,
+          onFieldChange: self.onFieldChange,
+          toolbar: st,
+          content: s,
+          open: this.state.openSection == key,
+          onOpenSection: this.openSection.bind(this, key)
+        };
 
         const ref = 'section-' + key;
         switch (s.type) {
           case "pagebreak":
-            sec = <MakeBreak toolbar={ st }
-                    breakType="page"
-                    refName={ ref }
-                    ref={ last }
-                    key={ key }
-                    k={ key }
-                    onFieldChange={ self.onFieldChange } />;
+            sec = <MakeBreak {...commonProps} breakType="page" />;
             break;
           case "columnbreak":
-            sec = <MakeBreak toolbar={ st }
-                    refName={ ref }
-                    ref={ last }
-                    key={ key }
-                    k={ key }
-                    onFieldChange={ self.onFieldChange } />;
+            sec = <MakeBreak {...commonProps} />;
             break;
           case "table":
-            sec = <MakeTable toolbar={ st }
-                    content={ s }
-                    refName={ ref }
-                    ref={ last }
-                    key={ key }
-                    k={ key }
-                    onFieldChange={ self.onFieldChange } />;
+            sec = <MakeTable {...commonProps} />;
             break;
           case "image":
-            sec = <MakeImage toolbar={ st }
+            sec = <MakeImage {...commonProps}
                     onUploadImage={ self.props.onUploadImage }
                     uploadImage={ this.props.uploadImage }
                     uploadReset={ this.props.uploadReset }
-                    content={ s }
-                    refName={ ref }
-                    ref={ last }
-                    key={ key }
-                    k={ key }
-                    moduleId={ this.state.id }
-                    onFieldChange={ self.onFieldChange } />;
+                    moduleId={ this.state.id } />;
             break;
           case "section":
-            sec = <MakeSection toolbar={ st }
-                    content={ s }
-                    sub={ false }
-                    refName={ ref }
-                    ref={ last }
-                    key={ key }
-                    k={ key }
-                    onFieldChange={ self.onFieldChange } />;
+            sec = <MakeSection {...commonProps} sub={ false } />;
             break;
           case "subsection":
-            sec = <MakeSection toolbar={ st }
-                    content={ s }
-                    sub={ true }
-                    refName={ ref }
-                    ref={ last }
-                    key={ key }
-                    k={ key }
-                    onFieldChange={ self.onFieldChange } />;
+            sec = <MakeSection {...commonProps} sub={ true } />;
             break;
           case "text":
-            sec = <MakeText toolbar={ st }
-                    key={ key }
-                    ref={ last }
-                    k={ key }
-                    refName={ ref }
-                    content={ s }
-                    onFieldChange={ self.onFieldChange } />;
+            sec = <MakeText {...commonProps} />;
             break;
           case "commentbox":
-            sec = <MakeCommentBox toolbar={ st }
-                    content={ s }
-                    sub={ false }
-                    refName={ ref }
-                    ref={ last }
-                    key={ key }
-                    k={ key }
-                    onFieldChange={ self.onFieldChange } />;
+            sec = <MakeCommentBox {...commonProps} />;
             break;
           case "monster":
-            sec = <MakeMonster content={ s }
-                    open={ this.state.openSection == key }
-                    onOpenSection={ this.openSection.bind(this, key) }
-                    toolbar={ st }
-                    key={ key }
-                    ref={ last }
-                    k={ key }
-                    refName={ ref }
-                    onFieldChange={ self.onFieldChange } />;
+            sec = <MakeMonster {...commonProps} />;
             break;
         }
         sections.push(sec);

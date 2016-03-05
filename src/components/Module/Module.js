@@ -13,7 +13,7 @@ import MakeTable from '../MakeTable';
 import MakeImage from '../MakeImage';
 import { getPosition } from '../../frontend/domutils';
 import SectionToolbar from '../SectionToolbar';
-
+import MonstersContainer from '../../frontend/containers/MonstersContainer';
 export default class Module extends Component {
 
   constructor() {
@@ -36,6 +36,44 @@ export default class Module extends Component {
     }, 100);
     this.lazyUpdate = this.lazyUpdate.bind(this);
     this.save = this.save.bind(this);
+    this.openMonsterModal = this.openMonsterModal.bind(this);
+    this.closeMonsterModal = this.closeMonsterModal.bind(this);
+    this.onGetMonster = this.onGetMonster.bind(this);
+    this.openSection = this.openSection.bind(this);
+  }
+
+  openSection(k) {
+    this.setState({
+      openSection: k
+    });
+  }
+
+  openMonsterModal() {
+    this.setState({
+      monsterModalOpen: true
+    });
+  }
+
+  closeMonsterModal() {
+    const self = this;
+    this.setState({
+      monsterModalOpen: false
+    }, this.props.monsterReset);
+  }
+
+  onGetMonster(newMonster) {
+    const newContent = Object.assign([], this.state.content);
+    newContent[newContent.length] = {
+      "type": "monster",
+      content: newMonster
+    };
+    this.setState({
+      content: newContent,
+      scrollToLast: true,
+      skipUpdate: false
+    }, () => {
+      this.onPost();
+    });
   }
 
   makePdf() {
@@ -86,6 +124,7 @@ export default class Module extends Component {
   }
 
   save() {
+
     this.props.onPost({
       id: this.state.id,
       name: this.state.name,
@@ -205,7 +244,7 @@ export default class Module extends Component {
 
   addSection(type) {
     const self = this;
-    const newSection = {};
+    let newSection = {};
     switch (type) {
       case "pagebreak":
         newSection.type = "pagebreak";
@@ -285,13 +324,14 @@ export default class Module extends Component {
         };
         break;
     }
-
+    log.debug(JSON.stringify(newSection));
     const newContent = Object.assign([], self.state.content);
     newContent[newContent.length] = newSection;
     this.setState({
       content: newContent,
       scrollToLast: true,
-      skipUpdate: false
+      skipUpdate: false,
+      openSection: newContent.length
     }, () => {
       this.onPost();
     });
@@ -529,6 +569,8 @@ export default class Module extends Component {
             break;
           case "monster":
             sec = <MakeMonster content={ s }
+                    open={ this.state.openSection == key }
+                    onOpenSection={ this.openSection.bind(this, key) }
                     toolbar={ st }
                     key={ key }
                     ref={ last }
@@ -595,7 +637,7 @@ export default class Module extends Component {
                       <MenuItem onClick={ self.addSection.bind(this, "monster") } eventKey="4.1">
                         New Monster
                       </MenuItem>
-                      <MenuItem eventKey="4.2">
+                      <MenuItem onClick={ this.openMonsterModal } eventKey="4.2">
                         5e Monster
                       </MenuItem>
                     </NavDropdown>
@@ -608,6 +650,7 @@ export default class Module extends Component {
                   </Nav>
                 </Navbar.Collapse>
               </Navbar>
+              <MonstersContainer onGetMonster={ this.onGetMonster } show={ this.state.monsterModalOpen } onHide={ this.closeMonsterModal } />
               { heading }
               { subtitleHeading }
               { editor }

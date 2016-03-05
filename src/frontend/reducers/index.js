@@ -11,6 +11,7 @@ import { userweaponlist } from './userweaponlist';
 import { pathknower } from './pathknower';
 import { subscribe } from './subscribe';
 import { module } from './module';
+import { monsters } from './monsters';
 
 const app = combineReducers({
   register,
@@ -24,7 +25,8 @@ const app = combineReducers({
   userweaponlist,
   pathknower,
   subscribe,
-  module
+  module,
+  monsters
 });
 
 export default {

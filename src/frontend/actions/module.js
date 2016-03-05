@@ -51,7 +51,7 @@ export const modulePost = function(m) {
         m.content = JSON.stringify(m.content);
       }
 
-      dispatch(modulePostActions.failure({
+      return dispatch(modulePostActions.failure({
         message: "Unable to save",
         payload: m
       }));

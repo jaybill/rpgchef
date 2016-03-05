@@ -107,6 +107,18 @@ export const subscribeDel = () => {
   return callServer('/payment/subscribe', 'DELETE');
 };
 
+export const monstersByName = (startswith, limit) => {
+  return callServer('/monsters/named', 'GET', {
+    q: startswith,
+    limit: limit
+  });
+};
+
+export const monster = (id) => {
+  return callServer('/monster/' + id, 'GET');
+};
+
+
 export const uploadFile = (file, moduleId, replaces) => {
 
   const dd = {

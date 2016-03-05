@@ -146,6 +146,7 @@ gulp.task('deploy', function(cb) {
   RELEASE = true;
   DEPLOY = true;
   process.env.DEPLOY = DEPLOY;
+  process.env.NODE_ENV = "production";
   outputDir = "./deploy/build/";
   runSequence(
     'ensuremaster',

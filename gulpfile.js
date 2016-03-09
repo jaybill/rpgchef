@@ -208,11 +208,8 @@ gulp.task('clean', function() {
 
 // 3rd party libraries
 gulp.task('latex', function() {
-  return gulp.src([
-    './src/latex/**/*'
-  ], {
-    "base": "./src"
-  }).pipe(gulp.dest(outputDir));
+    return gulp.src(['../dnd-5e-latex-template/**/*.sty'])
+               .pipe(gulp.dest(path.join(outputDir,'latex')));
 });
 
 gulp.task('prodnode', function() {

@@ -7,7 +7,7 @@ import urijs from 'urijs';
 import { updatePath } from 'redux-simple-router';
 import { Lifecycle } from 'react-router';
 import reactMixin from 'react-mixin';
-
+import log from 'loglevel';
 @reactMixin.decorate(Lifecycle)
 class ModuleContainer extends Component {
 
@@ -62,17 +62,25 @@ class ModuleContainer extends Component {
     }
 
     if (module.getPdf.succeeded && !this._pdfLinkTimeout) {
-      this.setState({
-        pdfUrl: module.getPdf.payload.pdfUrl
-      });
-      this._pdfLinkTimeout = window.setTimeout((self, d) => {
-        self.setState({
-          pdfUrl: null
+      if (this.state.previewPdf) {
+        this.setState({
+          previewUrl: module.getPdf.payload.pdfUrl,
+          previewPdf: false
         });
-        d(modulePdfReset());
-        window.clearTimeout(this._pdfLinkTimeout);
-        this._pdfLinkTimeout = null;
-      }, 3000, this, dispatch);
+      } else {
+        this.setState({
+          pdfUrl: module.getPdf.payload.pdfUrl
+        });
+
+        this._pdfLinkTimeout = window.setTimeout((self, d) => {
+          self.setState({
+            pdfUrl: null
+          });
+          d(modulePdfReset());
+          window.clearTimeout(this._pdfLinkTimeout);
+          this._pdfLinkTimeout = null;
+        }, 3000, this, dispatch);
+      }
     }
   }
 
@@ -97,9 +105,16 @@ class ModuleContainer extends Component {
     dispatch(moduleReset());
   }
 
-  makePdf(formdata) {
+  makePdf(module, isPreview) {
     const {dispatch} = this.props;
-    dispatch(doMakePdf(formdata));
+    if (isPreview) {
+      this.setState({
+        previewPdf: true
+      }, () => {
+        dispatch(doMakePdf(module));
+      });
+
+    }
   }
 
   onDelete(id) {
@@ -137,13 +152,14 @@ class ModuleContainer extends Component {
 
     return <Module isNew={ this.state.isNew }
              canMakePdf={ !!module.get.payload && !!module.get.payload.content && !!module.get.payload.content.length }
-             makePdf={ (id) => self.makePdf(id) }
-             onPost={ (formdata) => self.onPost(formdata) }
-             onDelete={ (id) => self.onDelete(id) }
+             makePdf={ self.makePdf }
+             onPost={ self.onPost }
+             onDelete={ self.onDelete }
              id={ this.state.id }
              working={ module.post.working || module.get.working }
              pdfWorking={ module.getPdf.working || module.makePdf.working }
              pdfUrl={ this.state.pdfUrl }
+             previewUrl={ this.state.previewUrl }
              module={ moduleContent }
              getPdf={ module.getPdf }
              post={ module.post }
@@ -154,7 +170,15 @@ class ModuleContainer extends Component {
              del={ module.del }
              changed={ this.changed }
              monsterReset={ this.monsterReset }
-             onDeleteImage={ this.onDeleteImage } />;
+             onDeleteImage={ this.onDeleteImage }
+             resetPreview={ () => {
+                              this.setState({
+                                previewUrl: null
+                              }, () => {
+                                this.props.dispatch(modulePdfReset());
+                              });
+                            
+                            } } />;
   }
 
   routerWillLeave(nextLocation) {

@@ -15,6 +15,8 @@ import MakeImage from '../MakeImage';
 import { getPosition } from '../../frontend/domutils';
 import SectionToolbar from '../SectionToolbar';
 import MonstersContainer from '../../frontend/containers/MonstersContainer';
+import PdfPreview from '../PdfPreview';
+
 export default class Module extends Component {
 
   constructor() {
@@ -41,12 +43,32 @@ export default class Module extends Component {
     this.closeMonsterModal = this.closeMonsterModal.bind(this);
     this.onGetMonster = this.onGetMonster.bind(this);
     this.openSection = this.openSection.bind(this);
+    this.openPreviewModal = this.openPreviewModal.bind(this);
+    this.closePreviewModal = this.closePreviewModal.bind(this);
+    this.getSaveable = this.getSaveable.bind(this);
+    this.state = {
+      previewModalOpen: false
+    };
   }
 
   openSection(k) {
     this.setState({
       openSection: k
     });
+  }
+
+  openPreviewModal() {
+    this.props.makePdf(this.getSaveable(), true);
+    this.setState({
+      previewModalOpen: true
+    });
+  }
+
+  closePreviewModal() {
+    this.setState({
+      previewModalOpen: false
+    });
+    this.props.resetPreview();
   }
 
   openMonsterModal() {
@@ -78,12 +100,9 @@ export default class Module extends Component {
     });
   }
 
+
   makePdf() {
-    this.props.makePdf({
-      id: this.state.id,
-      name: this.state.name,
-      content: this.state.content
-    });
+    this.props.makePdf(this.getSaveable());
   }
 
   componentDidUpdate() {
@@ -124,14 +143,17 @@ export default class Module extends Component {
     }
   }
 
-  save() {
-
-    this.props.onPost({
+  getSaveable() {
+    return {
       id: this.state.id,
       name: this.state.name,
       content: this.state.content,
       subtitle: this.state.subtitle
-    });
+    };
+  }
+
+  save() {
+    this.props.onPost(this.getSaveable());
   }
 
   onPost() {
@@ -567,6 +589,9 @@ export default class Module extends Component {
                     <NavItem disabled={ this.props.pdfWorking || !this.props.canMakePdf } onClick={ self.makePdf } title="Create PDF">
                       <i className={ pdfClass }></i>
                     </NavItem>
+                    <NavItem onClick={ self.openPreviewModal } title="Preview PDF">
+                      <i className="fa fa-binoculars"></i>
+                    </NavItem>
                     <NavItem onClick={ self.addSection.bind(this, "section") } title="Insert Section Heading">
                       <i className="fa fa-header fa-fw"></i>
                     </NavItem>
@@ -603,6 +628,7 @@ export default class Module extends Component {
                   </Nav>
                 </Navbar.Collapse>
               </Navbar>
+              <PdfPreview pdfUrl={ this.props.previewUrl } modalOpen={ this.state.previewModalOpen } onHide={ this.closePreviewModal } />
               <MonstersContainer onGetMonster={ this.onGetMonster } show={ this.state.monsterModalOpen } onHide={ this.closeMonsterModal } />
               { heading }
               { subtitleHeading }

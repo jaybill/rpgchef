@@ -16,7 +16,6 @@ import tmp from 'tmp';
 
 export const print = (m, callback) => {
 
-
   let upload;
   let filename;
   const tmpdir = tmp.dirSync({

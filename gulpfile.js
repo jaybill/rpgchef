@@ -208,8 +208,8 @@ gulp.task('clean', function() {
 
 // 3rd party libraries
 gulp.task('latex', function() {
-    return gulp.src(['../dnd-5e-latex-template/**/*.sty'])
-               .pipe(gulp.dest(path.join(outputDir,'latex')));
+  return gulp.src(['../dnd-5e-latex-template/**/*.sty'])
+    .pipe(gulp.dest(path.join(outputDir, 'latex')));
 });
 
 gulp.task('prodnode', function() {
@@ -242,7 +242,8 @@ gulp.task('vendor', ['latex'], function() {
 
   return gulp.src([
     '*/rpgchef-theme/**/*',
-    '*/font-awesome/**/*'
+    '*/font-awesome/**/*',
+    '*/pdfjs-dist/**/*'
   ], {
     "base": "./node_modules/"
   }).pipe(gulp.dest(path.join(outputDir, 'public', 'vendor')));

@@ -75,7 +75,11 @@ export default class PdfPreview extends Component {
             </div>;
     }
     return (
-      <Modal className="modal-narrow" show={ this.props.modalOpen } onHide={ this.props.onHide }>
+      <Modal onHide={ () => {
+                  this.setState({
+                    pdfUrl: null
+                  }, this.props.onHide);
+                } } className="modal-narrow" show={ this.props.modalOpen }>
         <Modal.Header closeButton>
           <Modal.Title>
             PDF Preview

@@ -123,7 +123,8 @@ gulp.task('bump', function(cb) {
 
     $.util.log("Current version is " + v);
     $.util.log("New version is " + v2);
-    version = v2.version;
+    version = v2.toString();
+    process.env.RPGCHEF_VERSION = version;
     return execAsync("git tag v" + v2);
   }).then(function(o) {
     return execAsync("git push --tags");
@@ -193,7 +194,7 @@ gulp.task('deployrevision', function(cb) {
     exec(deploycmd, function(err, stdout, stderr) {
       if (stdout) {
         var di = JSON.parse(stdout);
-        $.util.log("Submitted deployment " + di.deploymentId);
+        $.util.log("Submitted version " + version + " for deployment " + di.deploymentId);
       }
       cb();
     });
@@ -207,11 +208,8 @@ gulp.task('clean', function() {
 
 // 3rd party libraries
 gulp.task('latex', function() {
-  return gulp.src([
-    './src/latex/**/*'
-  ], {
-    "base": "./src"
-  }).pipe(gulp.dest(outputDir));
+    return gulp.src(['../dnd-5e-latex-template/**/*.sty'])
+               .pipe(gulp.dest(path.join(outputDir,'latex')));
 });
 
 gulp.task('prodnode', function() {

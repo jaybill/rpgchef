@@ -32,6 +32,19 @@ const templates = {
     '\\hline\n' +
     '<%= traitsAndActions %>' +
     '\\end{monster}\n',
+  largeMonster: '\\begin{largemonster}{<%= name  %>}{<%= size %> <%= raceOrType %>, <%= alignment %>}' +
+    '\\basics[%\n' +
+    'armorclass = <%= armorclass %>,\n' +
+    'hitpoints  = <%= hitpoints %>,\n' +
+    'speed      = <%= speed %>\n' +
+    ']\n' +
+    '\\hline\n' +
+    '<%= stats %>' +
+    '\\hline\n' +
+    '<%= details %>' +
+    '\\hline\n' +
+    '<%= traitsAndActions %>' +
+    '\\end{monster}\n',
   monsterStats: '\\stats[\n' +
     '<%= statlines %>' +
     ']\n',
@@ -329,7 +342,14 @@ class Dnd5eLaTeX {
         });
       });
     }
-    return this.compiled.monster(clean);
+    let dds;
+    if (c.displaySize == "large") {
+      dds = "largeMonster";
+    } else {
+      dds = "monster";
+    }
+
+    return this.compiled[dds](clean);
   }
 
 

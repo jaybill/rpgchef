@@ -64,6 +64,7 @@ export default class Module extends Component {
 
   onGetMonster(newMonster) {
     const newContent = Object.assign([], this.state.content);
+    newMonster.displaySize = "normal";
     newContent[newContent.length] = {
       "type": "monster",
       content: newMonster
@@ -305,7 +306,8 @@ export default class Module extends Component {
             "damageResistances": null,
             "legendaryActions": [],
             "conditionImmunities": null,
-            "damageVulnerabilities": null
+            "damageVulnerabilities": null,
+            "displaySize": "normal"
           }
         };
         break;
@@ -369,22 +371,22 @@ export default class Module extends Component {
       eee = <Grid className="edit-name">
               <Row className="no-gutter">
                 <Col md={ 8 }>
-                  <CtrldInputText type="text"
-                    focusMe={ true }
-                    className="form-control input-edit-name"
-                    value={ this.state[name] }
-                    name={ name }
-                    onKeyUp={ this.handleKeyUp }
-                    onFieldChange={ (name, value) => {
-                                      const nnn = {};
-                                      nnn[name] = value;
-                                      this.setState(nnn);
-                                    } } />
+                <CtrldInputText type="text"
+                  focusMe={ true }
+                  className="form-control input-edit-name"
+                  value={ this.state[name] }
+                  name={ name }
+                  onKeyUp={ this.handleKeyUp }
+                  onFieldChange={ (name, value) => {
+                                    const nnn = {};
+                                    nnn[name] = value;
+                                    this.setState(nnn);
+                                  } } />
                 </Col>
                 <Col md={ 1 }>
-                  <Button onClick={ this.finishEditHeading }>
-                    <i className="fa fa-floppy-o fa-fw"></i>
-                  </Button>
+                <Button onClick={ this.finishEditHeading }>
+                  <i className="fa fa-floppy-o fa-fw"></i>
+                </Button>
                 </Col>
               </Row>
             </Grid>
@@ -587,11 +589,9 @@ export default class Module extends Component {
                       <i className="icon icon-column-break"></i>
                     </NavItem>
                     <NavDropdown eventKey={ 4 } title={ monsterTitle } id="nav-dropdown">
-                      <MenuItem onClick={ self.addSection.bind(this, "monster") } eventKey="4.1">
-                        New Monster
+                      <MenuItem onClick={ self.addSection.bind(this, "monster") } eventKey="4.1"> New Monster
                       </MenuItem>
-                      <MenuItem onClick={ this.openMonsterModal } eventKey="4.2">
-                        5e Monster
+                      <MenuItem onClick={ this.openMonsterModal } eventKey="4.2"> 5e Monster
                       </MenuItem>
                     </NavDropdown>
                     <NavItem onClick={ self.addSection.bind(this, "image") } title="Insert Image">

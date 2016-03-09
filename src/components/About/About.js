@@ -1,15 +1,16 @@
 import './About.less';
 import React, { Component, PropTypes } from 'react';
-import { Panel } from 'react-bootstrap';
-import SimplePage from '../SimplePage';
+import { Label, Panel } from 'react-bootstrap';
+import SimplePage from '../SimplePage'
 
-export default class About extends
-Component {
-    
+export default class About extends Component {
+
   render() {
 
+
     return (
-    <div className="About">
+
+      <div className="About">
         <h2>About RPG Chef</h2>
         <Panel bsStyle="primary">
           <p>
@@ -23,6 +24,9 @@ Component {
             consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus.
           </p>
         </Panel>
+        <Label bsStyle="info">
+          { "Version: " + (process.env.RPGCHEF_VERSION || "Local") }
+        </Label>
       </div>
       );
   }

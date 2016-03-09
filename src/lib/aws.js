@@ -3,7 +3,6 @@ import AWS from 'aws-sdk';
 const aws = (gr, operation, params) => {
   return new Promise((resolve, reject) => {
     var a = new AWS[gr]();
-
     a[operation](params, function(error, data) {
       if (error) {
         reject(error);
@@ -13,6 +12,5 @@ const aws = (gr, operation, params) => {
     });
   });
 };
-
 
 export default aws;

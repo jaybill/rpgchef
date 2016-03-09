@@ -1,15 +1,15 @@
 import './About.less';
 import React, { Component, PropTypes } from 'react';
 import { Panel } from 'react-bootstrap';
-import SimplePage from '../SimplePage'
+import SimplePage from '../SimplePage';
 
-export default class About extends Component {
-
+export default class About extends
+Component {
+    
   render() {
 
     return (
-
-      <div className="About">
+    <div className="About">
         <h2>About RPG Chef</h2>
         <Panel bsStyle="primary">
           <p>

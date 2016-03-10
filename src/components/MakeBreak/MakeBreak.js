@@ -1,6 +1,6 @@
 import './MakeBreak.less';
 import React, { Component, PropTypes } from 'react';
-import { Panel, Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
+import { Label } from 'react-bootstrap';
 
 export default class MakeBreak extends Component {
 
@@ -24,12 +24,13 @@ export default class MakeBreak extends Component {
               className={ ref }
               id={ k }>
               { this.props.toolbar }
-              <Panel>
-                <p>
-                  { breakType }
-                </p>
-                <hr/>
-              </Panel>
+              <div className="content-break">
+                <span/>
+                <Label bsStyle="default">
+                  { breakType + " Break" }
+                </Label>
+                <span/>
+              </div>
             </section>);
   }
 }

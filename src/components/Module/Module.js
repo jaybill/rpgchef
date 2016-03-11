@@ -104,6 +104,7 @@ export default class Module extends Component {
 
 
   makePdf() {
+
     this.props.makePdf(this.getSaveable());
   }
 

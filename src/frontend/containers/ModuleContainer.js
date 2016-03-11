@@ -8,6 +8,8 @@ import { updatePath } from 'redux-simple-router';
 import { Lifecycle } from 'react-router';
 import reactMixin from 'react-mixin';
 import log from 'loglevel';
+
+
 @reactMixin.decorate(Lifecycle)
 class ModuleContainer extends Component {
 
@@ -113,7 +115,8 @@ class ModuleContainer extends Component {
       }, () => {
         dispatch(doMakePdf(module));
       });
-
+    } else {
+      dispatch(doMakePdf(module));
     }
   }
 

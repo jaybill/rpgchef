@@ -1,7 +1,6 @@
 import './PdfPreview.less';
 import React, { Component, PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import log from 'loglevel';
 import PDF from 'react-pdf';
 import Loading from '../Loading';
 
@@ -27,7 +26,7 @@ export default class PdfPreview extends Component {
   }
 
   onDocumentComplete(pages) {
-    log.debug("loaded " + pages + " pages");
+
     this.setState({
       pages: pages,
       currentPage: 1
@@ -35,16 +34,16 @@ export default class PdfPreview extends Component {
   }
 
   prevPage() {
-    log.debug("going to prev page. currentPage", this.state.currentPage);
+
     this.setState({
       currentPage: this.state.currentPage > 1 ? this.state.currentPage - 1 : 1
     });
   }
   nextPage() {
-    log.debug("going to prev next. currentPage", this.state.currentPage);
+
     if (this.state.currentPage < this.state.pages)
       this.setState({
-        currentPage: this.state.pages < this.state.pages ? this.state.currentPage + 1 : this.state.pages
+        currentPage: this.state.currentPage < this.state.pages ? this.state.currentPage + 1 : this.state.pages
       });
   }
 
@@ -60,7 +59,7 @@ export default class PdfPreview extends Component {
         file: this.state.pdfUrl
       };
       if (this.state.pages != 0) {
-        log.debug("enabling pages!");
+
         pdfProps.page = this.state.currentPage;
       }
 

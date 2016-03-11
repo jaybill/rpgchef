@@ -16,6 +16,7 @@ import { getPosition } from '../../frontend/domutils';
 import SectionToolbar from '../SectionToolbar';
 import MonstersContainer from '../../frontend/containers/MonstersContainer';
 import PdfPreview from '../PdfPreview';
+import ScrollToElement from 'scroll-to-element';
 
 export default class Module extends Component {
 
@@ -53,7 +54,8 @@ export default class Module extends Component {
 
   openSection(k) {
     this.setState({
-      openSection: k
+      openSection: k,
+      scrollToOpen: true
     });
   }
 
@@ -106,11 +108,47 @@ export default class Module extends Component {
   }
 
   componentDidUpdate() {
-    if (this.refs.last && this.state.scrollToLast) {
-      ReactDOM.findDOMNode(this.refs.last).scrollIntoView();
+
+    const keys = _.chain(this.refs)
+      .keys()
+      .filter((ff) => {
+        return _.startsWith(ff, "section-");
+      }).value();
+
+    keys.sort((a, b) => {
+      const aNum = parseInt(a.substr(a.indexOf("-") + 1));
+      const bNum = parseInt(b.substr(b.indexOf("-") + 1));
+      if (aNum < bNum) {
+        return -1;
+      }
+      if (aNum > bNum) {
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+    const scrollToOptions = {
+      offset: -150
+    };
+    if (this.state.scrollToLast) {
+      const lastNode = ReactDOM.findDOMNode(this.refs[keys[keys.length - 1]]);
+
+      ScrollToElement(lastNode, scrollToOptions);
+
       this.setState({
         scrollToLast: false
       });
+
+    }
+
+    if (this.state.scrollToOpen) {
+      this.setState({
+        scrollToOpen: false
+      });
+      const s = "section-" + this.state.openSection;
+      const openNode = ReactDOM.findDOMNode(this.refs[s]);
+      ScrollToElement(openNode, scrollToOptions);
+
     }
   }
 
@@ -210,6 +248,7 @@ export default class Module extends Component {
     const newContent = Object.assign([], this.state.content);
     [newContent[k], newContent[k + a]] = [newContent[k + a], newContent[k]];
     this.setState({
+      openSection: null,
       content: newContent,
       scrollToLast: false,
       skipUpdate: false
@@ -222,6 +261,7 @@ export default class Module extends Component {
     newContent.unshift(removed[0]);
 
     this.setState({
+      openSection: null,
       content: newContent,
       scrollToLast: false,
       skipUpdate: false
@@ -233,6 +273,7 @@ export default class Module extends Component {
     newContent.push(removed[0]);
 
     this.setState({
+      openSection: null,
       content: newContent,
       scrollToLast: false,
       skipUpdate: false
@@ -257,7 +298,6 @@ export default class Module extends Component {
       skipUpdate: false
     }, () => {
       if (filename) {
-        log.debug("Attempting to delete " + filename);
         this.props.onDeleteImage(filename);
       }
       this.onPost();
@@ -348,7 +388,7 @@ export default class Module extends Component {
         };
         break;
     }
-    log.debug(JSON.stringify(newSection));
+
     const newContent = Object.assign([], self.state.content);
     newContent[newContent.length] = newSection;
     this.setState({
@@ -379,7 +419,6 @@ export default class Module extends Component {
     } else {
       newState.skipUpdate = false;
       this.lazyUpdate(newState, () => {
-        log.debug("Forcing save!");
         this.onPost();
       });
     }
@@ -497,11 +536,6 @@ export default class Module extends Component {
     if (this.state.content) {
 
       _.forEach(this.state.content, (s, key) => {
-        let last;
-        if (key == this.state.content.length - 1) {
-          last = "last";
-        }
-
         let sec;
         const st = (
         <SectionToolbar keyName={ key }
@@ -512,7 +546,7 @@ export default class Module extends Component {
           removeSection={ this.removeSection } />);
         const commonProps = {
           refName: ref,
-          ref: last,
+          ref: "section-" + key,
           key: key,
           k: key,
           onFieldChange: self.onFieldChange,
@@ -558,6 +592,8 @@ export default class Module extends Component {
         }
         sections.push(sec);
       });
+
+
       editor = (<div className="ContentEditor">
                   { sections }
                 </div>);

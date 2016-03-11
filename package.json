@@ -79,6 +79,7 @@
     "rpgchef-theme": "file:theme",
     "s3": "^4.4.0",
     "s3-upload-stream": "^1.0.7",
+    "scroll-to-element": "^2.0.0",
     "sequelize": "^3.17.1",
     "sequelize-cli": "^2.2.1",
     "slug": "^0.9.1",

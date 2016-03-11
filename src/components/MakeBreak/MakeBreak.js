@@ -9,7 +9,7 @@ export default class MakeBreak extends Component {
   }
 
   render() {
-    log.debug(this.props);
+
     const k = this.props.k;
     const ref = this.props.refName;
     let breakType;

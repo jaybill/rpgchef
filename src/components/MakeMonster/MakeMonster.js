@@ -493,11 +493,9 @@ export default class MakeMonster extends Component {
           </Panel>
         </section>);
     } else {
-      wtr = (<section onClick={ this.props.onOpenSection }
-               key={ k }
-               ref={ ref }
-               className={ ref }>
-               <Panel>
+      wtr = (<section key={ k } ref={ ref } className={ ref }>
+               { this.props.toolbar }
+               <Panel onClick={ this.props.onOpenSection }>
                  <h4><i className="icon icon-goblin"/> { c.content.name || "Monster" }</h4>
                </Panel>
              </section>);

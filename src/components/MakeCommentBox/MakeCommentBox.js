@@ -13,7 +13,10 @@ export default class MakeCommentBox extends Component {
     const k = this.props.k;
     const ref = this.props.refName;
     const c = this.props.content;
-    return <section key={ k } ref={ ref } className={ ref }>
+    return <section key={ k }
+             onClick={ this.props.onOpenSection }
+             ref={ ref }
+             className={ ref }>
              { this.props.toolbar }
              <Panel>
                <div className="form">

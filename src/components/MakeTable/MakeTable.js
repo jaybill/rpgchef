@@ -13,6 +13,7 @@ export default class MakeTable extends Component {
     const h = this.props.content;
 
     return (<section key={ k }
+              onClick={ this.props.onOpenSection }
               ref={ ref }
               className={ ref }
               id={ k }>

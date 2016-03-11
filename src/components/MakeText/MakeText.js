@@ -12,7 +12,10 @@ export default class MakeText extends Component {
     const t = this.props.content;
     const ref = this.props.refName;
     const k = this.props.k;
-    return <section key={ k } ref={ ref } className={ ref }>
+    return <section key={ k }
+             onClick={ this.props.onOpenSection }
+             ref={ ref }
+             className={ ref }>
              { this.props.toolbar }
              <CtrldInputText type="textarea"
                className="form-control"

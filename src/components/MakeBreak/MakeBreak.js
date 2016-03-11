@@ -1,7 +1,7 @@
 import './MakeBreak.less';
 import React, { Component, PropTypes } from 'react';
 import { Label } from 'react-bootstrap';
-
+import log from 'loglevel';
 export default class MakeBreak extends Component {
 
   constructor() {
@@ -9,7 +9,7 @@ export default class MakeBreak extends Component {
   }
 
   render() {
-
+    log.debug(this.props);
     const k = this.props.k;
     const ref = this.props.refName;
     let breakType;
@@ -19,7 +19,8 @@ export default class MakeBreak extends Component {
       breakType = "Column";
     }
 
-    return (<section key={ k }
+    return (<section onClick={ this.props.onOpenSection }
+              key={ k }
               ref={ ref }
               className={ ref }
               id={ k }>

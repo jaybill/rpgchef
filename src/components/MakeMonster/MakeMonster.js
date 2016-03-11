@@ -493,23 +493,12 @@ export default class MakeMonster extends Component {
           </Panel>
         </section>);
     } else {
-      wtr = (<section key={ k } ref={ ref } className={ ref }>
-               <Panel ref="focuser" onClick={ () => {
-                                                this.props.onOpenSection();
-                                              } }>
-                 <div className="form">
-                   <div className="form-group">
-                     <div className="input-group">
-                       <span title="Monster" className="input-group-addon"><i className="icon icon-goblin"></i></span>
-                       <CtrldInputText type="text"
-                         placeholder="i.e.'Goblin'"
-                         className="form-control"
-                         value={ c.content.name }
-                         name={ ["content", k, "content", "name"] }
-                         onFieldChange={ this.props.onFieldChange } />
-                     </div>
-                   </div>
-                 </div>
+      wtr = (<section onClick={ this.props.onOpenSection }
+               key={ k }
+               ref={ ref }
+               className={ ref }>
+               <Panel>
+                 <h4><i className="icon icon-goblin"/> { c.content.name || "Monster" }</h4>
                </Panel>
              </section>);
     }

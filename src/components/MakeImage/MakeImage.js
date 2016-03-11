@@ -160,22 +160,48 @@ export default class MakeImage extends Component {
                 </Alert>;
     }
 
-    return (<section key={ k }
-              ref={ ref }
-              className={ ref }
-              id={ k }>
-              { tb }
-              <Panel>
-                <h4>Image</h4>
-                <Row>
-                  <Col md={ 3 }>
-                    { dropContent }
-                  </Col>
-                  <Col md={ 9 }>
-                    { message }
-                  </Col>
-                </Row>
-              </Panel>
-            </section>);
+    let wtr;
+    if (this.props.open) {
+      wtr = (
+        <section key={ k }
+          ref={ ref }
+          className={ ref }
+          id={ k }>
+          { tb }
+          <Panel>
+            <h4>Image</h4>
+            <Row>
+              <Col md={ 3 }>
+              { dropContent }
+              </Col>
+              <Col md={ 9 }>
+              { message }
+              </Col>
+            </Row>
+          </Panel>
+        </section>);
+    } else {
+      wtr = (
+        <section key={ k }
+          onClick={ this.props.onOpenSection }
+          ref={ ref }
+          className={ ref }
+          id={ k }>
+          { tb }
+          <Panel>
+            <h4>Image</h4>
+            <Row>
+              <Col md={ 3 }>
+              { dropContent }
+              </Col>
+              <Col md={ 9 }>
+              { message }
+              </Col>
+            </Row>
+          </Panel>
+        </section>);
+
+    }
+    return wtr;
   }
 }

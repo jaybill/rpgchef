@@ -22,6 +22,7 @@ export default class MakeSection extends Component {
     }
 
     return <section key={ k }
+             onClick={ this.props.onOpenSection }
              ref={ ref }
              className={ ref }
              id={ k }>

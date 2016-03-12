@@ -1,0 +1,6 @@
+{
+  "name": "MetadataModal",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./MetadataModal.js"
+}

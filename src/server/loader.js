@@ -1,14 +1,14 @@
 import Minimist from 'minimist';
 import log from 'loglevel';
 import _ from 'lodash';
-import { monster, escape, synonyms, parsePreEffects, exportEffects, newWeapons } from './utilLoader';
+import { latex, monster, escape, synonyms, parsePreEffects, exportEffects, newWeapons } from './utilLoader';
 
 
 var argv = Minimist(process.argv.slice(2));
 
 const mode = argv._[0];
 
-const availableModes = ["preeffects", "synonyms", "export", "weapons", "escape", "monster"];
+const availableModes = ["preeffects", "synonyms", "export", "weapons", "escape", "monster", "latex"];
 
 switch (mode) {
 
@@ -40,6 +40,11 @@ switch (mode) {
   case "monster":
     monster();
     break;
+
+  case "latex":
+    latex();
+    break;
+
 
   default:
     console.error("\nNo such mode. Available modes are:\n" + availableModes.join(", ") + "\n");

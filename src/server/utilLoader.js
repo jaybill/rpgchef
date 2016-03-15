@@ -7,6 +7,18 @@ import Db from './db';
 import CsvParse from 'csv-parse';
 import { convertToCoppers } from '../lib/util';
 import DnD5e from '../lib/dnd5e';
+import Dnd5eLaTeX from '../lib/dnd5elatex';
+
+export const latex = () => {
+  Db.Modules.findById(1).then((mm) => {
+    const latexContent = Dnd5eLaTeX.getLatexForModule(mm, "/tmp");
+    console.log(latexContent);
+  }).catch((err) => {
+    console.error("", err);
+  }).finally(() => {
+    process.exit();
+  });
+};
 
 export const escape = () => {
   const t = fs.readFileSync('./build/latex/example.tex', {

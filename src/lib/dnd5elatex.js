@@ -32,7 +32,7 @@ const templates = {
     '\\hline\n' +
     '<%= traitsAndActions %>' +
     '\\end{monster}\n',
-  largeMonster: '\\begin{largemonster}{<%= name  %>}{<%= size %> <%= raceOrType %>, <%= alignment %>}' +
+  largeMonster: '\\end{multicols}\\clearpage\\begin{largemonster}{<%= name  %>}{<%= size %> <%= raceOrType %>, <%= alignment %>}' +
     '\\basics[%\n' +
     'armorclass = <%= armorclass %>,\n' +
     'hitpoints  = <%= hitpoints %>,\n' +
@@ -44,7 +44,7 @@ const templates = {
     '<%= details %>' +
     '\\hline\n' +
     '<%= traitsAndActions %>' +
-    '\\end{monster}\n',
+    '\\end{largemonster}\\clearpage\\begin{multicols}{2}\n',
   monsterStats: '\\stats[\n' +
     '<%= statlines %>' +
     ']\n',
@@ -67,7 +67,7 @@ const templates = {
     '<%= rows %>\n' +
     '\\end{dndtable}\n',
   tableHeading: '\\textbf{<%= h %>}',
-  columnBreak: '\n\\vfill\n',
+  columnBreak: '\n\\vfill\\columnbreak\n',
   pageBreak: '\n\\clearpage\n',
   text: '<%= text %>'
 };

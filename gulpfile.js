@@ -326,6 +326,7 @@ gulp.task('build:watch', function(cb) {
   runSequence('build', function() {
     gulp.watch(src.assets, ['assets']);
     gulp.watch(src.styles, ['styles']);
+    gulp.watch('../dnd-5e-latex-template/**/*.sty', ['latex']);
     cb();
   });
 });

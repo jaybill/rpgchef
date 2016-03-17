@@ -21,7 +21,7 @@ class App extends Component {
             <Navbar.Header>
               <LinkContainer to="/app/home">
                 <Navbar.Brand>
-                  <div>
+                  <div className="brand-logo">
                     <img src="/assets/logo.svg" />
                   </div>
                 </Navbar.Brand>

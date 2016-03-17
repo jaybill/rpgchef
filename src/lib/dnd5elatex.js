@@ -1,6 +1,14 @@
 import _ from 'lodash';
 import DnD5e from './dnd5e';
+import MdLatex from './mdlatex';
 import path from 'path';
+
+const mdl = new MdLatex();
+
+const markdown = (md) => {
+  return mdl.render(md);
+};
+
 
 const templates = {
   document: '\\documentclass[10pt]{article}\n' +
@@ -86,13 +94,14 @@ class Dnd5eLaTeX {
     this.createImage = this.createImage.bind(this);
     this.createText = this.createText.bind(this);
     this.dd = new DnD5e();
+
     this.compiled = {};
     _.forEach(_.keys(templates), (k) => {
       this.compiled[k] = _.template(templates[k]);
     });
   }
 
-  escape(t) {
+  escape(t, parseMarkdown) {
     // THE ORDER OF REPLACEMENT MATTERS
     /*
      Because some of the characters in the replacements need to be escaped in the content, 
@@ -110,8 +119,11 @@ class Dnd5eLaTeX {
         .replace(/\\/g, '\\textbackslash{}')
         .replace(/@OPEN/g, '\\{')
         .replace(/@CLOSE/g, '\\}')
-        .replace(/~/g, '\\textasciitilde{}')
         .replace(/\^/g, '\\textasciicircum{}')
+        .thru((tt) => {
+          return parseMarkdown ? markdown(tt) : tt;
+        })
+        .replace(/~/g, '\\textasciitilde{}')
         .replace(/#/g, '\\#')
         .replace(/\$/g, '\\$')
         .replace(/%/g, '\\%')
@@ -174,7 +186,7 @@ class Dnd5eLaTeX {
 
   createText(t) {
     return this.compiled.text({
-      text: this.escape(t)
+      text: this.escape(t, true)
     });
   }
 
@@ -307,7 +319,7 @@ class Dnd5eLaTeX {
       c.traits.forEach((t, i) => {
         clean.traitsAndActions += this.compiled.monsterAction({
           name: this.escape(t.name) || "Trait",
-          content: this.escape(t.content)
+          content: this.escape(t.content, true)
         });
       });
 
@@ -320,7 +332,7 @@ class Dnd5eLaTeX {
       c.actions.forEach((a, i) => {
         clean.traitsAndActions += this.compiled.monsterAction({
           name: this.escape(a.name) || "Action",
-          content: this.escape(a.content)
+          content: this.escape(a.content, true)
         });
       });
     }
@@ -338,7 +350,7 @@ class Dnd5eLaTeX {
       c.legendaryActions.forEach((l, i) => {
         clean.traitsAndActions += this.compiled.monsterAction({
           name: this.escape(l.name) || "Legendary Action",
-          content: this.escape(l.content)
+          content: this.escape(l.content, true)
         });
       });
     }

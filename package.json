@@ -41,6 +41,7 @@
     "lodash": "^3.10.1",
     "loglevel": "^1.4.0",
     "mailgun-js": "^0.7.4",
+    "marked": "^0.3.5",
     "md5": "^2.0.0",
     "mime-types": "^2.1.10",
     "moment": "^2.10.6",
@@ -88,6 +89,7 @@
     "stripe": "^4.1.0",
     "superagent": "^1.4.0",
     "tmp": "0.0.28",
+    "unescape": "^0.1.1",
     "urijs": "^1.16.1",
     "webworker-threads": "^0.6.2"
   },

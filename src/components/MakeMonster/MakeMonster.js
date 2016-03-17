@@ -216,7 +216,7 @@ export default class MakeMonster extends Component {
             <div className="form">
               <div className="form-group">
                 <div className="input-group">
-                  <span title="Monster" className="input-group-addon"><i className="icon icon-goblin"></i></span>
+                  <span title="Monster" className="input-group-addon"><i onClick={ this.props.onCloseSection } className="icon icon-goblin"></i></span>
                   <CtrldInputText type="text"
                     placeholder="i.e.'Goblin'"
                     className="form-control"

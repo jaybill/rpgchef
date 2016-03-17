@@ -69,7 +69,7 @@ const templates = {
   tableHeading: '\\textbf{<%= h %>}',
   columnBreak: '\n\\vfill\\columnbreak\n',
   pageBreak: '\n\\clearpage\n',
-  text: '<%= text %>'
+  text: '<%= text %>\n\n'
 };
 
 class Dnd5eLaTeX {

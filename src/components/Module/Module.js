@@ -55,7 +55,7 @@ export default class Module extends Component {
   openSection(k) {
     this.setState({
       openSection: k,
-      scrollToOpen: true
+      scrollToOpen: !!k
     });
   }
 
@@ -197,9 +197,6 @@ export default class Module extends Component {
 
   onPost() {
     this.save();
-    this.setState({
-      scrollToLast: false
-    });
   }
 
   onDelete() {
@@ -249,36 +246,34 @@ export default class Module extends Component {
     const newContent = Object.assign([], this.state.content);
     [newContent[k], newContent[k + a]] = [newContent[k + a], newContent[k]];
     this.setState({
-      openSection: null,
       content: newContent,
-      scrollToLast: false,
       skipUpdate: false
-    }, this.onPost);
+    }, () => {
+      this.onPost(); this.openSection(null);
+    });
   }
 
   moveToTop(k) {
     const newContent = Object.assign([], this.state.content);
     const removed = newContent.splice(k, 1);
     newContent.unshift(removed[0]);
-
     this.setState({
-      openSection: null,
       content: newContent,
-      scrollToLast: false,
       skipUpdate: false
-    }, this.onPost);
+    }, () => {
+      this.onPost(); this.openSection(null);
+    });
   }
   moveToBottom(k) {
     const newContent = Object.assign([], this.state.content);
     const removed = newContent.splice(k, 1);
     newContent.push(removed[0]);
-
     this.setState({
-      openSection: null,
       content: newContent,
-      scrollToLast: false,
       skipUpdate: false
-    }, this.onPost);
+    }, () => {
+      this.onPost(); this.openSection(null);
+    });
   }
 
   removeSection(k) {
@@ -302,6 +297,7 @@ export default class Module extends Component {
         this.props.onDeleteImage(filename);
       }
       this.onPost();
+      this.openSection(null);
     });
   }
 
@@ -554,7 +550,8 @@ export default class Module extends Component {
           toolbar: st,
           content: s,
           open: this.state.openSection == key,
-          onOpenSection: this.openSection.bind(this, key)
+          onOpenSection: this.openSection.bind(this, key),
+          onCloseSection: this.openSection.bind(this, null)
         };
 
         const ref = 'section-' + key;

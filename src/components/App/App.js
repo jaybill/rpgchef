@@ -21,7 +21,9 @@ class App extends Component {
             <Navbar.Header>
               <LinkContainer to="/app/home">
                 <Navbar.Brand>
-                  RPG Chef
+                  <div>
+                    <img src="/assets/logo.svg" />
+                  </div>
                 </Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle />
@@ -37,18 +39,15 @@ class App extends Component {
               <Nav pullRight>
                 <NavDropdown eventKey={ 9 } title={ this.props.user.username } id="account-nav-dropdown">
                   <LinkContainer to="/app/account">
-                    <MenuItem eventKey={ 9.1 }>
-                      Account
+                    <MenuItem eventKey={ 9.1 }> Account
                     </MenuItem>
                   </LinkContainer>
                   <LinkContainer to="/app/subscribe">
-                    <MenuItem eventKey={ 9.2 }>
-                      Billing
+                    <MenuItem eventKey={ 9.2 }> Billing
                     </MenuItem>
                   </LinkContainer>
                   <LinkContainer to="/logout">
-                    <MenuItem eventKey={ 9.5 }>
-                      Log out
+                    <MenuItem eventKey={ 9.5 }> Log out
                     </MenuItem>
                   </LinkContainer>
                 </NavDropdown>

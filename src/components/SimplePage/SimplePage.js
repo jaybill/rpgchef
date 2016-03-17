@@ -13,7 +13,9 @@ export default class SimplePage extends Component {
             <Navbar.Header>
               <LinkContainer to="/">
                 <Navbar.Brand>
-                  RPG Chef
+                  <div>
+                    <img src="/assets/logo.svg" />
+                  </div>
                 </Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle />
@@ -21,18 +23,24 @@ export default class SimplePage extends Component {
             <Navbar.Collapse>
               <Nav pullRight>
                 <LinkContainer to="/about">
-                  <NavItem eventKey={ 2 }>About</NavItem>
+                  <NavItem eventKey={ 2 }>
+                    About
+                  </NavItem>
                 </LinkContainer>
                 <NavDropdown eventKey={ 3 } title="Legal" id="legal">
                   <LinkContainer to="/terms">
-                    <MenuItem eventKey={ 3.1 }>Terms of Service</MenuItem>
+                    <MenuItem eventKey={ 3.1 }> Terms of Service
+                    </MenuItem>
                   </LinkContainer>
                   <LinkContainer to="/privacy">
-                    <MenuItem eventKey={ 3.2 }>Privacy Policy</MenuItem>
+                    <MenuItem eventKey={ 3.2 }> Privacy Policy
+                    </MenuItem>
                   </LinkContainer>
                 </NavDropdown>
                 <LinkContainer to="/login">
-                  <NavItem eventKey={ 2 }>Log in</NavItem>
+                  <NavItem eventKey={ 2 }>
+                    Log in
+                  </NavItem>
                 </LinkContainer>
               </Nav>
             </Navbar.Collapse>

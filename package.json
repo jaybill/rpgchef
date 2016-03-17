@@ -170,6 +170,7 @@
     "semver": "^5.1.0",
     "sequelize-fixtures": "^0.4.8",
     "style-loader": "^0.13.0",
+    "svgo": "^0.6.2",
     "transform-loader": "^0.2.3",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.3",

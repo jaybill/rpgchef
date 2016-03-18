@@ -4,6 +4,7 @@ import Joi from 'joi';
 import _ from 'lodash';
 import Db, { conn } from '../db';
 import Farm from '../../workers/farm';
+import { stringToBoolean } from '../../lib/util';
 
 const Module = {};
 
@@ -95,7 +96,7 @@ Module.handlers = {
         name: Joi.string().min(1).max(500).label('Name'),
         subtitle: [Joi.string().max(500).optional(), Joi.allow(null)],
         author: [Joi.string().optional().max(500), Joi.allow(null)],
-        hasCover: Joi.number().optional().integer().min(0).allow(null),
+        hasCover: [Joi.boolean().optional(), Joi.allow(null)],
         content: Joi.array().required().label('Content'),
         version: [Joi.string().optional().max(10), Joi.allow(null)]
       }

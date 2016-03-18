@@ -206,7 +206,8 @@ export default class Module extends Component {
       content: this.state.content,
       subtitle: this.state.subtitle,
       author: this.state.author,
-      hasCover: this.state.hasCover
+      hasCover: this.state.hasCover,
+      version: this.state.version
     };
   }
 
@@ -246,6 +247,7 @@ export default class Module extends Component {
       subtitle: module.subtitle,
       author: module.author,
       hasCover: module.hasCover,
+      version: module.version,
       content: module.content,
       succeeded: succeeded,
       failed: failed,
@@ -424,6 +426,7 @@ export default class Module extends Component {
   }
 
   onFieldChange(name, newValue, skipUpdate = true, forceSave = false) {
+    log.debug(name, newValue);
     let newState = {};
     if (Array.isArray(name)) {
       newState = Object.assign({}, this.state);
@@ -624,7 +627,8 @@ export default class Module extends Component {
       name: this.state.name,
       subtitle: this.state.subtitle,
       author: this.state.author,
-      hasCover: this.state.hasCover
+      hasCover: this.state.hasCover,
+      version: this.state.version
     };
 
     return (<div className="Module">
@@ -695,8 +699,10 @@ export default class Module extends Component {
               </Navbar>
               <PdfPreview pdfUrl={ this.props.previewUrl } modalOpen={ this.state.previewModalOpen } onHide={ this.closePreviewModal } />
               <MonstersContainer onGetMonster={ this.onGetMonster } show={ this.state.monsterModalOpen } onHide={ this.closeMonsterModal } />
-              <MetadataModal onFieldChange={ this.onFieldChange }
-                fields={ meta }
+              <MetadataModal setState={ (ns) => {
+                                          this.setState(ns);
+                                        } }
+                meta={ meta }
                 show={ this.state.metaModalOpen }
                 onHide={ this.closeMetaModal } />
               { heading }

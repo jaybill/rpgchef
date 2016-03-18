@@ -70,38 +70,38 @@ export default class Account extends Component {
               <Grid>
                 <Row className="no-gutter">
                   <Col md={ 6 }>
-                    <Panel bsStyle="primary">
-                      { displayMessage }
-                      <div className="form-group">
-                        <label>
-                          Username
-                        </label>
-                        <CtrldInputText type="email"
-                          className="form-control"
-                          value={ this.state.username }
-                          name="username"
-                          disabled={ this.working }
-                          onFieldChange={ this.onFieldChange } />
-                      </div>
-                      <Input type="password"
+                  <Panel bsStyle="primary">
+                    { displayMessage }
+                    <div className="form-group">
+                      <label>
+                        Username
+                      </label>
+                      <CtrldInputText type="email"
+                        className="form-control"
+                        value={ this.state.username }
+                        name="username"
                         disabled={ this.working }
-                        ref="pass1"
-                        autoComplete="off"
-                        label="Password "
-                        placeholder="(Leave blank for no change.)" />
-                      <Input type="password"
-                        disabled={ this.working }
-                        ref="pass2"
-                        autoComplete="off"
-                        label="Password (Again)"
-                        placeholder="Password (again)" />
-                      <Button disabled={ working }
-                        onClick={ this.onSubmit }
-                        bsStyle="primary"
-                        bsSize="large">
-                        Submit
-                      </Button>
-                    </Panel>
+                        onFieldChange={ this.onFieldChange } />
+                    </div>
+                    <Input type="password"
+                      disabled={ this.working }
+                      ref="pass1"
+                      autoComplete="off"
+                      label="Password "
+                      placeholder="(Leave blank for no change.)" />
+                    <Input type="password"
+                      disabled={ this.working }
+                      ref="pass2"
+                      autoComplete="off"
+                      label="Password (Again)"
+                      placeholder="Password (again)" />
+                    <Button disabled={ working }
+                      onClick={ this.onSubmit }
+                      bsStyle="primary"
+                      bsSize="large">
+                      Submit
+                    </Button>
+                  </Panel>
                   </Col>
                 </Row>
               </Grid>

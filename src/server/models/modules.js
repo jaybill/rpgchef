@@ -4,7 +4,6 @@ import Sequelize from 'sequelize';
 
 export default function NewModule(DbConn) {
   const Modules = DbConn.define('modules', {
-
     id: {
       type: Sequelize.BIGINT,
       primaryKey: true,
@@ -30,12 +29,13 @@ export default function NewModule(DbConn) {
     pdfUrl: Sequelize.STRING,
     pdfCreatedOn: Sequelize.DATE,
     author: Sequelize.STRING,
-    subtitle: Sequelize.STRING
+    subtitle: Sequelize.STRING,
+    hasCover: Sequelize.BOOLEAN,
+    version: Sequelize.STRING
   });
   Modules.beforeUpdate(updatePdfCreatedOn);
   return Modules;
 }
-
 
 var updatePdfCreatedOn = (instance, options) => {
   if (!instance.changed('pdfUrl')) {

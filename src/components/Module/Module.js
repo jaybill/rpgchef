@@ -17,6 +17,7 @@ import SectionToolbar from '../SectionToolbar';
 import MonstersContainer from '../../frontend/containers/MonstersContainer';
 import PdfPreview from '../PdfPreview';
 import ScrollToElement from 'scroll-to-element';
+import MetadataModal from '../MetadataModal';
 
 export default class Module extends Component {
 
@@ -46,6 +47,9 @@ export default class Module extends Component {
     this.openSection = this.openSection.bind(this);
     this.openPreviewModal = this.openPreviewModal.bind(this);
     this.closePreviewModal = this.closePreviewModal.bind(this);
+    this.openMetaModal = this.openMetaModal.bind(this);
+    this.closeMetaModal = this.closeMetaModal.bind(this);
+
     this.getSaveable = this.getSaveable.bind(this);
     this.state = {
       previewModalOpen: false
@@ -71,6 +75,19 @@ export default class Module extends Component {
       previewModalOpen: false
     });
     this.props.resetPreview();
+  }
+
+
+  openMetaModal() {
+    this.setState({
+      metaModalOpen: true
+    });
+  }
+
+  closeMetaModal() {
+    this.setState({
+      metaModalOpen: false
+    });
   }
 
   openMonsterModal() {
@@ -187,7 +204,9 @@ export default class Module extends Component {
       id: this.state.id,
       name: this.state.name,
       content: this.state.content,
-      subtitle: this.state.subtitle
+      subtitle: this.state.subtitle,
+      author: this.state.author,
+      hasCover: this.state.hasCover
     };
   }
 
@@ -225,6 +244,8 @@ export default class Module extends Component {
       id: newProps.id,
       name: module.name,
       subtitle: module.subtitle,
+      author: module.author,
+      hasCover: module.hasCover,
       content: module.content,
       succeeded: succeeded,
       failed: failed,
@@ -599,6 +620,13 @@ export default class Module extends Component {
 
     const monsterTitle = <i className="icon icon-goblin"></i>;
 
+    const meta = {
+      name: this.state.name,
+      subtitle: this.state.subtitle,
+      author: this.state.author,
+      hasCover: this.state.hasCover
+    };
+
     return (<div className="Module">
               <Navbar fixedTop>
                 <Navbar.Header>
@@ -656,6 +684,9 @@ export default class Module extends Component {
                     <NavItem onClick={ self.addSection.bind(this, "image") } title="Insert Image">
                       <i className="fa fa-picture-o fa-fw"></i>
                     </NavItem>
+                    <NavItem onClick={ this.openMetaModal } title="Edit Metadata">
+                      <i className="fa fa-book fa-fw"></i>
+                    </NavItem>
                   </Nav>
                   <Nav pullRight>
                     { displayMessage }
@@ -664,6 +695,10 @@ export default class Module extends Component {
               </Navbar>
               <PdfPreview pdfUrl={ this.props.previewUrl } modalOpen={ this.state.previewModalOpen } onHide={ this.closePreviewModal } />
               <MonstersContainer onGetMonster={ this.onGetMonster } show={ this.state.monsterModalOpen } onHide={ this.closeMonsterModal } />
+              <MetadataModal onFieldChange={ this.onFieldChange }
+                fields={ meta }
+                show={ this.state.metaModalOpen }
+                onHide={ this.closeMetaModal } />
               { heading }
               { subtitleHeading }
               { editor }

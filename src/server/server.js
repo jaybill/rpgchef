@@ -17,7 +17,7 @@ log.setLevel(logLevel);
 
 var server = new Hapi.Server();
 server.connection({
-  port: process.env.SERVER_PORT,
+  port: process.env.SERVER_PORT
 });
 
 server.register([HapiAuthCookie, inert], function(err) {

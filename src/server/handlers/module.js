@@ -95,17 +95,19 @@ Module.handlers = {
         name: Joi.string().min(1).max(500).label('Name'),
         subtitle: [Joi.string().max(500).optional(), Joi.allow(null)],
         author: [Joi.string().optional().max(500), Joi.allow(null)],
+        hasCover: Joi.number().optional().integer().min(0).allow(null),
         content: Joi.array().required().label('Content'),
-        version: Joi.number().optional().integer().min(0).allow(null).label("Version")
+        version: [Joi.string().optional().max(10), Joi.allow(null)]
       }
     },
     handler: (request, reply) => {
       const userId = request.auth.credentials.id;
       const {id, name, content} = request.payload;
-
       const nm = Object.assign({}, request.payload, {
         userId: userId
       });
+
+      nm.hasCover = nm.hasCover ? true : false;
 
       Db.Modules.findById(nm.id).then((mm) => {
         if (mm && mm.get("userId") == userId) {

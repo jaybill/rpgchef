@@ -14,7 +14,6 @@ module.exports = {
       );
     });
   },
-
   down: function(queryInterface, Sequelize) {
     return queryInterface.removeColumn('modules', 'pdfUrl').then(() => {
       return queryInterface.removeColumn('modules', 'pdfCreatedOn');

@@ -105,7 +105,7 @@ export default class MetadataModal extends Component {
             Yes
           </option>
           </Input>
-          <Button onClick={ this.onSave } bsStyle="primary" bsSize="large">
+          <Button onClick={ this.onSave } bsStyle="primary" block>
             Save
           </Button>
         </Modal.Body>

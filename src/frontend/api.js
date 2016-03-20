@@ -57,6 +57,7 @@ export const makeModulePdf = (id) => {
 
 
 export const postModule = (m) => {
+  m.name = m.name || "Untitled";
   return callServer('/module', 'POST', null, m);
 };
 

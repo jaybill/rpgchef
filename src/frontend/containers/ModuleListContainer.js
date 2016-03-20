@@ -35,7 +35,7 @@ class ModuleListContainer extends Component {
     const {dispatch} = this.props;
 
     dispatch(doModulePost({
-      name: "Untitled Adventure",
+      name: "",
       content: []
     }));
   }

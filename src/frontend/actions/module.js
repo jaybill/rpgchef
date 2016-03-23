@@ -105,6 +105,7 @@ export const upload = function(k, file, moduleId, replaces) {
       if (result.status == 200) {
         return dispatch(uploadActions.success({
           k: k,
+          moduleId: moduleId,
           filename: result.body.filename
         }));
       } else if (result.status == 422) {
@@ -115,26 +116,39 @@ export const upload = function(k, file, moduleId, replaces) {
       }
     }).catch(err => {
       log.error(err);
-      dispatch(uploadActions.failure(err.message));
+      dispatch(uploadActions.failure({
+        k: k,
+        moduleId: moduleId,
+        message: err.message
+      }));
     });
   };
 };
 
 export const deleteImageReset = createAction(ActionConstants.DELETE_IMAGE_RESET);
 const deleteImageActions = createAsyncActionGroup("DELETE_IMAGE", {});
-export const deleteImage = function(file, moduleId) {
+export const deleteImage = function(file, moduleId, k) {
   return dispatch => {
     dispatch(deleteImageActions.start());
     return deleteImageCall(file, moduleId).then((result) => {
-      if (result.status == 200) {
-        return dispatch(deleteImageActions.success(result.body));
+      if (result.status == 200 && result.body == "OK") {
+        return dispatch(deleteImageActions.success(
+          {
+            filename: file,
+            moduleId: moduleId,
+            k: k
+          }));
       } else {
         log.error(result);
         throw new Error("Bad response");
       }
     }).catch(err => {
       log.error(err);
-      dispatch(deleteImageActions.failure("delete image failed"));
+      dispatch(deleteImageActions.failure({
+        k: k,
+        moduleId: moduleId,
+        message: "delete image failed"
+      }));
     });
   };
 };

@@ -50,10 +50,19 @@ export default class Module extends Component {
     this.openMetaModal = this.openMetaModal.bind(this);
     this.closeMetaModal = this.closeMetaModal.bind(this);
 
+    this.resetMetaDone = this.resetMetaDone.bind(this);
+
     this.getSaveable = this.getSaveable.bind(this);
     this.state = {
       previewModalOpen: false
     };
+  }
+
+
+  resetMetaDone() {
+    this.setState({
+      metaReset: false
+    });
   }
 
   openSection(k) {
@@ -80,13 +89,30 @@ export default class Module extends Component {
 
   openMetaModal() {
     this.setState({
-      metaModalOpen: true
+      metaModalOpen: true,
+      metaReset: true
     });
   }
 
-  closeMetaModal() {
+  closeMetaModal(save) {
     this.setState({
       metaModalOpen: false
+    }, () => {
+      if (save) {
+
+        if (!this.state.hasCover) {
+          if (this.state.coverUrl) {
+            this.props.onDeleteImage(this.state.coverUrl);
+          }
+          const w = this.getSaveable();
+          w.coverUrl = null;
+          w.hasCover = false;
+          this.save(w);
+
+        } else {
+          this.onPost();
+        }
+      }
     });
   }
 
@@ -121,7 +147,6 @@ export default class Module extends Component {
 
 
   makePdf() {
-
     this.props.makePdf(this.getSaveable());
   }
 
@@ -200,19 +225,21 @@ export default class Module extends Component {
   }
 
   getSaveable() {
-    return {
+    const willSave = {
       id: this.state.id,
       name: this.state.name,
       content: this.state.content,
       subtitle: this.state.subtitle,
       author: this.state.author,
       hasCover: this.state.hasCover,
+      coverUrl: this.state.coverUrl,
       version: this.state.version
     };
+    return willSave;
   }
 
-  save() {
-    this.props.onPost(this.getSaveable());
+  save(w) {
+    this.props.onPost(w || this.getSaveable());
   }
 
   onPost() {
@@ -233,6 +260,17 @@ export default class Module extends Component {
     const {message, succeeded, failed, working} = newProps.post;
     const delSuccceeded = newProps.del.succeeded;
     const delWorking = newProps.del.working;
+    const deleteImage = newProps.deleteImage;
+
+    if (deleteImage.succeeded && deleteImage.payload.k == "cover") {
+
+      this.setState({
+        hasCover: false,
+        coverUrl: null,
+        resetMeta: true
+      }, this.props.onDeleteImageReset);
+
+    }
 
     if (!delSuccceeded && !delWorking && (succeeded || failed)) {
       this._timer = window.setTimeout(function() {
@@ -248,6 +286,7 @@ export default class Module extends Component {
       author: module.author,
       hasCover: module.hasCover,
       version: module.version,
+      coverUrl: module.coverUrl,
       content: module.content,
       succeeded: succeeded,
       failed: failed,
@@ -426,20 +465,21 @@ export default class Module extends Component {
   }
 
   onFieldChange(name, newValue, skipUpdate = true, forceSave = false) {
-    log.debug(name, newValue);
-    let newState = {};
+
+    const newState = Object.assign({}, this.state);
     if (Array.isArray(name)) {
-      newState = Object.assign({}, this.state);
       _.set(newState, name, newValue);
     } else {
       newState[name] = newValue;
     }
+
     if (!forceSave) {
       newState.skipUpdate = skipUpdate;
       this.lazyUpdate(newState);
     } else {
       newState.skipUpdate = false;
-      this.lazyUpdate(newState, () => {
+
+      this.setState(newState, () => {
         this.onPost();
       });
     }
@@ -624,11 +664,10 @@ export default class Module extends Component {
     const monsterTitle = <i className="icon icon-goblin"></i>;
 
     const meta = {
-      name: this.state.name,
-      subtitle: this.state.subtitle,
       author: this.state.author,
       hasCover: this.state.hasCover,
-      version: this.state.version
+      version: this.state.version,
+      coverUrl: this.state.coverUrl
     };
 
     return (<div className="Module">
@@ -699,12 +738,22 @@ export default class Module extends Component {
               </Navbar>
               <PdfPreview pdfUrl={ this.props.previewUrl } modalOpen={ this.state.previewModalOpen } onHide={ this.closePreviewModal } />
               <MonstersContainer onGetMonster={ this.onGetMonster } show={ this.state.monsterModalOpen } onHide={ this.closeMonsterModal } />
-              <MetadataModal setState={ (ns) => {
-                                          this.setState(ns);
-                                        } }
+              <MetadataModal onFieldChange={ this.onFieldChange }
+                setState={ (ns) => {
+                           
+                             this.setState(ns);
+                           } }
                 meta={ meta }
+                onMetaResetDone={ this.resetMetaDone }
+                metaReset={ this.state.metaReset }
                 show={ this.state.metaModalOpen }
-                onHide={ this.closeMetaModal } />
+                onHide={ this.closeMetaModal }
+                onUploadImage={ self.props.onUploadImage }
+                deleteImage={ this.props.deleteImage }
+                deleteImageReset={ this.props.deleteImageReset }
+                uploadImage={ this.props.uploadImage }
+                uploadReset={ this.props.uploadReset }
+                moduleId={ this.state.id } />
               { heading }
               { subtitleHeading }
               { editor }

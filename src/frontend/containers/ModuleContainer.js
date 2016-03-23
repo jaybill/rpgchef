@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { modulePostReset, modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost, upload as doUpload, uploadReset as doUploadReset, deleteImage as doDeleteImage } from '../actions/module';
+import { modulePostReset, modulePdfReset, getPdf as doGetPdf, makePdf as doMakePdf, moduleDel as doModuleDel, moduleReset, modulePostFailure, moduleGet as doModuleGet, modulePost as doModulePost, upload as doUpload, uploadReset as doUploadReset, deleteImage as doDeleteImage, deleteImageReset as doResetDelete } from '../actions/module';
 import { monsterReset } from '../actions/monsters';
 import Module from '../../components/Module';
 import urijs from 'urijs';
@@ -22,12 +22,17 @@ class ModuleContainer extends Component {
     this.onUploadImage = this.onUploadImage.bind(this);
     this.uploadReset = this.uploadReset.bind(this);
     this.onDeleteImage = this.onDeleteImage.bind(this);
+    this.deleteImageReset = this.deleteImageReset.bind(this);
     this.routerWillLeave = this.routerWillLeave.bind(this);
     this.changed = this.changed.bind(this);
     this.monsterReset = this.monsterReset.bind(this);
     this.state = {
       saved: true
     };
+  }
+
+  deleteImageReset() {
+    this.props.dispatch(doResetDelete());
   }
 
   monsterReset() {
@@ -62,6 +67,8 @@ class ModuleContainer extends Component {
       dispatch(updatePath('/app/modules'));
       return;
     }
+
+
 
     if (module.getPdf.succeeded && !this._pdfLinkTimeout) {
       if (this.state.previewPdf) {
@@ -126,6 +133,7 @@ class ModuleContainer extends Component {
   }
 
   onPost(formdata) {
+    log.debug("in container", formdata);
     const {dispatch, module} = this.props;
     dispatch(doModulePost(formdata));
     this.setState({
@@ -140,6 +148,9 @@ class ModuleContainer extends Component {
     let replaces;
     if (content && content[k] && content[k].content && content[k].content.filename) {
       replaces = content[k].content.filename;
+    }
+    if (k == "cover" && module.coverUrl) {
+      replaces = module.coverUrl;
     }
     dispatch(doUpload(k, file, module.id, replaces));
   }
@@ -168,12 +179,14 @@ class ModuleContainer extends Component {
              post={ module.post }
              onUploadImage={ (k, file) => this.onUploadImage(k, file) }
              uploadImage={ module.uploadImage }
+             deleteImage={ module.deleteImage }
              resetPost={ this.resetPost }
              uploadReset={ this.uploadReset }
              del={ module.del }
              changed={ this.changed }
              monsterReset={ this.monsterReset }
              onDeleteImage={ this.onDeleteImage }
+             onDeleteImageReset={ this.deleteImageReset }
              resetPreview={ () => {
                               this.setState({
                                 previewUrl: null

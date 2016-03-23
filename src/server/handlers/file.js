@@ -92,21 +92,23 @@ File.handlers = {
           Bucket: process.env.AWS_BUCKET,
           Prefix: prefix
         }).then((toDelete) => {
-
-          const dd = [];
-          _.forEach(toDelete.Contents, (d) => {
-            dd.push({
-              Key: d.Key
+          if (toDelete.Contents && toDelete.Contents.length) {
+            const dd = [];
+            _.forEach(toDelete.Contents, (d) => {
+              dd.push({
+                Key: d.Key
+              });
             });
-          });
-          return aws("S3", "deleteObjects", {
-            Bucket: process.env.AWS_BUCKET,
-            Delete: {
-              Objects: dd
-            }
-          });
+            return aws("S3", "deleteObjects", {
+              Bucket: process.env.AWS_BUCKET,
+              Delete: {
+                Objects: dd
+              }
+            });
+          } else {
+            return;
+          }
         });
-
       }).then((data) => {
         reply("OK");
       }).catch((err) => {
@@ -156,7 +158,7 @@ File.handlers = {
         }
 
         const allowable = ['image/jpeg', 'image/png'];
-        log.debug(file.hapi.headers['content-type']);
+
 
         if (_.indexOf(allowable, file.hapi.headers['content-type']) == -1) {
           return reply(Boom.badData('File must be a JPG or a PNG and have the correct extension.'));

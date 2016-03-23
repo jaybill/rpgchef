@@ -1,9 +1,11 @@
 import './MetadataModal.less';
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
-import { Modal, Input, Button, Grid, Row, Col, Alert } from 'react-bootstrap';
+import { Well, Modal, Input, Button, Row, Col } from 'react-bootstrap';
 import { CtrldInputText } from '../ControlledField';
-
+import DropZone from 'react-dropzone';
+import log from 'loglevel';
+import { stringToBoolean } from '../../lib/util';
 export default class MetadataModal extends Component {
 
   constructor() {
@@ -12,22 +14,52 @@ export default class MetadataModal extends Component {
     this.onHide = this.onHide.bind(this);
     this.onSave = this.onSave.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.onDrop = this.onDrop.bind(this);
     this.state = {};
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.uploadImage.succeeded && newProps.uploadImage.payload.filename) {
+      const ni = newProps.uploadImage.payload;
+      if (ni.k == "cover") {
+        this.setState({
+          coverUrl: ni.filename,
+          uploadingImage: null
+        });
+        this.props.uploadReset();
+      }
+    }
+
+    if (newProps.uploadImage.failed && newProps.uploadImage.payload.k == "cover") {
+      this.props.uploadReset();
+      this.setState({
+        uploadingImage: null,
+        failed: newProps.uploadImage.message
+      });
+    }
+
+    if (newProps.metaReset) {
+      this.setState(this.props.meta, this.props.onMetaResetDone);
+    }
+  }
+
   onSave() {
-    this.props.setState(this.state);
-    this.props.onHide();
+    this.props.setState(_.omit(this.state, ["uploadingImage", "failed"]));
+    this.props.onHide(true);
   }
 
   onHide() {
-    this.setState(this.props.meta);
     this.props.onHide();
   }
 
   handleSelect(name, e) {
     const ns = {};
-    ns[name] = e.target.value;
+    let val = e.target.value;
+    if (val == "false" || val == "true") {
+      val = stringToBoolean(val);
+    }
+    ns[name] = val;
+    log.debug(ns);
     this.setState(ns);
   }
 
@@ -39,39 +71,88 @@ export default class MetadataModal extends Component {
 
   componentWillMount() {
     this.setState(this.props.meta);
+    if (!this.props.meta.hasCover) {
+      this.setState({
+        coverUrl: null
+      });
+    }
+  }
+
+  onDrop(files) {
+
+    this.props.onUploadImage("cover", files[0]);
+    this.setState({
+      failed: null,
+      uploadingImage: "cover"
+    });
   }
 
   render() {
+    let imageUrl;
+    let dropContent;
+    let imagestyle;
+
+    if (this.state.hasCover) {
+
+      if (this.state.coverUrl) {
+        imageUrl = process.env.SERVER_URL +
+          "/api/upload/display/" + this.props.moduleId +
+          "/" + this.state.coverUrl + '_thumb';
+        imagestyle = {
+          backgroundImage: 'url( ' + imageUrl + ')'
+        };
+      }
+
+
+      if (this.state.uploadingImage == "cover") {
+        dropContent = <div className="cover-target">
+                        <Well bsSize="large">
+                          <div>
+                            <p>
+                              <i className="fa fa-cog fa-spin fa-5x"></i>
+                            </p>
+                          </div>
+                        </Well>
+                      </div>;
+      } else {
+        if (!this.state.coverUrl || !this.state.hasCover) {
+          dropContent = ( (
+            <DropZone onDrop={ this.onDrop } multiple={ false } className="cover-target">
+              <Well bsSize="large">
+                <div>
+                  <p>
+                    Drop Image File Here
+                  </p>
+                  <p>
+                    (or click to choose a file)
+                  </p>
+                </div>
+              </Well>
+            </DropZone>)
+          );
+        } else {
+          dropContent = (
+            <div className="cover-target">
+              <Well className="holding" bsSize="large" style={ imagestyle }>
+                <DropZone onDrop={ this.onDrop } multiple={ false } className="drop-button">
+                  <Button title="upload new image" bsSize="xs">
+                    <i className="fa fa-upload fa-fw"></i>
+                  </Button>
+                </DropZone>
+              </Well>
+            </div>);
+        }
+      }
+    }
+
     return (
-      <Modal className="Metadata" show={ this.props.show } onHide={ this.onHide }>
-        <Modal.Header closeButton>
+      <Modal className="MetadataModal" show={ this.props.show } onHide={ this.onHide }>
+        <Modal.Header closeButton={ this.state.uploadingImage != "cover" }>
           <Modal.Title>
             Module Metadata
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="form-group">
-            <label>
-              Title
-            </label>
-            <CtrldInputText type="text"
-              className="form-control"
-              value={ this.state.name }
-              name="name"
-              placeholder="i.e. Storming The Castle"
-              onFieldChange={ this.onFieldChange } />
-          </div>
-          <div className="form-group">
-            <label>
-              Subtitle
-            </label>
-            <CtrldInputText type="text"
-              className="form-control"
-              value={ this.state.subtitle }
-              name="subtitle"
-              placeholder="i.e. An adventure for 3-4 players Levels 3-5"
-              onFieldChange={ this.onFieldChange } />
-          </div>
           <div className="form-group">
             <label>
               Author
@@ -105,7 +186,11 @@ export default class MetadataModal extends Component {
             Yes
           </option>
           </Input>
-          <Button onClick={ this.onSave } bsStyle="primary" block>
+          { dropContent }
+          <Button disabled={ this.state.uploadingImage == "cover" }
+            onClick={ this.onSave }
+            bsStyle="primary"
+            block>
             Save
           </Button>
         </Modal.Body>

@@ -20,7 +20,6 @@ export default class MakeImage extends Component {
   }
 
   openModal() {
-    log.debug("opening!");
     this.setState({
       modalOpen: true
     });
@@ -31,7 +30,6 @@ export default class MakeImage extends Component {
       modalOpen: false
     });
   }
-
 
   componentWillReceiveProps(newProps) {
     if (newProps.uploadImage.succeeded) {

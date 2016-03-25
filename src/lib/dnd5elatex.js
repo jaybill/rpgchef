@@ -9,18 +9,24 @@ const markdown = (md) => {
   return mdl.render(md);
 };
 
-
 const templates = {
   document: '\\documentclass[10pt]{article}\n' +
     '\\usepackage{dnd}\n' +
     '\\usepackage{graphicx}\n' +
     '% Start document\n' +
     '\\begin{document}\n' +
+    '<%= cover %>' +
     '\\begin{multicols}{2}\n' +
     '\\fontfamily{ppl}\\selectfont % Set text font\n' +
     '<%= content %>\n' +
     '\\end{multicols}\n' +
     '\\end{document}\n',
+  cover: '\\title{<%= title %>}\n' +
+    '\\subtitle{<%= subtitle %>}\n' +
+    '\\author{<%= author %>}\n' +
+    '\\vv{<%= version %>}\n' +
+    '\\coverimage{<%= coverImage %>}\n' +
+    '\\makecover\n',
   image: '\n\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n',
   section: '\\section*{<%= title %>}\n',
   subsection: '\\subsection*{<%= title %>}',
@@ -180,8 +186,17 @@ class Dnd5eLaTeX {
 
       }
     });
-
-    return this.createDocument(lt);
+    let cover;
+    if (m.hasCover && m.coverUrl) {
+      cover = this.compiled.cover({
+        title: m.name,
+        subtitle: m.subtitle,
+        author: "by " + (m.author || "Anonymous"),
+        version: m.version ? "Version " + m.version : null,
+        coverImage: path.join(imagePath, m.coverUrl)
+      });
+    }
+    return this.createDocument(lt, cover);
   }
 
   createText(t) {
@@ -236,9 +251,10 @@ class Dnd5eLaTeX {
     }
   };
 
-  createDocument(content) {
+  createDocument(content, cover) {
     return this.compiled.document({
-      content: content
+      content: content,
+      cover: cover
     });
   }
 

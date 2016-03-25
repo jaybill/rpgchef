@@ -210,7 +210,7 @@ export const getPdf = function(id) {
     let _timer;
     let tries = 0;
     const pingForPdf = () => {
-      if (tries < 20) {
+      if (tries < 120) {
         tries++;
         getPdfCall(id).then((result) => {
           if (result.status == 200) {

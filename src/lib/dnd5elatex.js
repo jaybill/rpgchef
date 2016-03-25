@@ -26,7 +26,8 @@ const templates = {
     '\\author{<%= author %>}\n' +
     '\\vv{<%= version %>}\n' +
     '\\coverimage{<%= coverImage %>}\n' +
-    '\\makecover\n',
+    '\\makecover\n' +
+    '\\addtocounter{page}{1}',
   image: '\n\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n',
   section: '\\section*{<%= title %>}\n',
   subsection: '\\subsection*{<%= title %>}',

@@ -35,6 +35,11 @@ class App extends Component {
                     Modules
                   </NavItem>
                 </LinkContainer>
+                <LinkContainer to="/app/subscribe">
+                  <NavItem eventKey={ 3 }>
+                    Subscribe
+                  </NavItem>
+                </LinkContainer>
               </Nav>
               <Nav pullRight>
                 <NavDropdown eventKey={ 9 } title={ this.props.user.username } id="account-nav-dropdown">

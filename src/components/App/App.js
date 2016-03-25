@@ -19,13 +19,13 @@ class App extends Component {
         <div className="container">
           <Navbar fixedTop>
             <Navbar.Header>
-              <LinkContainer to="/app/home">
-                <Navbar.Brand>
-                  <div className="brand-logo">
+              <Navbar.Brand>
+                <div className="brand-logo">
+                  <LinkContainer to="/app/home">
                     <img src="/assets/logo.svg" />
-                  </div>
-                </Navbar.Brand>
-              </LinkContainer>
+                  </LinkContainer>
+                </div>
+              </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>

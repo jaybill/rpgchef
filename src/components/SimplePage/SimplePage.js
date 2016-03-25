@@ -11,13 +11,13 @@ export default class SimplePage extends Component {
         <div className="container">
           <Navbar fixedTop>
             <Navbar.Header>
-              <LinkContainer to="/">
-                <Navbar.Brand>
-                  <div className="brand-logo">
+              <Navbar.Brand>
+                <div className="brand-logo">
+                  <LinkContainer to="/">
                     <img src="/assets/logo.svg" />
-                  </div>
-                </Navbar.Brand>
-              </LinkContainer>
+                  </LinkContainer>
+                </div>
+              </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>

@@ -13,11 +13,28 @@ export default class MakeImage extends Component {
       modalOpen: false,
       failed: null
     };
-
+    this.handleSelect = this.handleSelect.bind(this);
     this.onDrop = this.onDrop.bind(this);
+    this.getKeyName = this.getKeyName.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
+
+  handleSelect(name, e) {
+    let nnn;
+    if (Array.isArray(name)) {
+      nnn = this.getKeyName(name);
+    }
+    const ns = {};
+    ns[nnn] = e.target.value;
+    this.setState(ns);
+    this.props.onFieldChange(name, e.target.value);
+  }
+
+  getKeyName(nameArray) {
+    return nameArray.join("___");
+  }
+
 
   openModal() {
     this.setState({
@@ -167,37 +184,35 @@ export default class MakeImage extends Component {
           id={ k }>
           { tb }
           <Panel>
-            <h4>Image</h4>
+            <h4><i onClick={ this.props.onCloseSection } className="fa fa-picture-o"/> Image</h4>
             <Row>
               <Col md={ 3 }>
               { dropContent }
               </Col>
               <Col md={ 9 }>
               { message }
+              <Input value={ h.content.displaySize }
+                onChange={ this.handleSelect.bind(this, ["content", k, "content", "displaySize"]) }
+                addonBefore="Display Format"
+                type="select">
+              <option value="normal">
+                Normal (1 column)
+              </option>
+              <option value="large">
+                Large (2 column)
+              </option>
+              </Input>
               </Col>
             </Row>
           </Panel>
         </section>);
     } else {
-      wtr = (
-        <section key={ k }
-          onClick={ this.props.onOpenSection }
-          ref={ ref }
-          className={ ref }
-          id={ k }>
-          { tb }
-          <Panel>
-            <h4>Image</h4>
-            <Row>
-              <Col md={ 3 }>
-              { dropContent }
-              </Col>
-              <Col md={ 9 }>
-              { message }
-              </Col>
-            </Row>
-          </Panel>
-        </section>);
+      wtr = <section key={ k } ref={ ref } className={ ref }>
+              { this.props.toolbar }
+              <Panel onClick={ this.props.onOpenSection }>
+                <h4><i className="fa fa-picture-o"/> Image</h4>
+              </Panel>
+            </section>;
 
     }
     return wtr;

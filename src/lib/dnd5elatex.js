@@ -29,6 +29,8 @@ const templates = {
     '\\makecover\n' +
     '\\addtocounter{page}{1}',
   image: '\n\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n',
+  largeImage: '\n\\end{multicols}' +
+    '\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\\begin{multicols}{2}\n',
   section: '\\section*{<%= title %>}\n',
   subsection: '\\subsection*{<%= title %>}',
   commentBox: '\\begin{commentbox}{<%= title %>}\n' +
@@ -47,7 +49,7 @@ const templates = {
     '\\hline\n' +
     '<%= traitsAndActions %>' +
     '\\end{monster}\n',
-  largeMonster: '\\end{multicols}\\clearpage\\begin{largemonster}{<%= name  %>}{<%= size %> <%= raceOrType %>, <%= alignment %>}' +
+  largeMonster: '\\end{multicols}\\begin{largemonster}{<%= name  %>}{<%= size %> <%= raceOrType %>, <%= alignment %>}' +
     '\\basics[%\n' +
     'armorclass = <%= armorclass %>,\n' +
     'hitpoints  = <%= hitpoints %>,\n' +
@@ -59,7 +61,7 @@ const templates = {
     '<%= details %>' +
     '\\hline\n' +
     '<%= traitsAndActions %>' +
-    '\\end{largemonster}\\clearpage\\begin{multicols}{2}\n',
+    '\\end{largemonster}\\begin{multicols}{2}\n',
   monsterStats: '\\stats[\n' +
     '<%= statlines %>' +
     ']\n',
@@ -182,7 +184,7 @@ class Dnd5eLaTeX {
           break;
 
         case "image":
-          lt += this.createImage(s.content.filename, imagePath);
+          lt += this.createImage(s.content.filename, s.content.displaySize, imagePath);
           break;
 
       }
@@ -214,8 +216,20 @@ class Dnd5eLaTeX {
     return this.compiled.pageBreak({});
   }
 
-  createImage(filename, imagePath) {
-    return this.compiled.image({
+  createImage(filename, displaySize, imagePath) {
+    let t;
+
+    switch (displaySize) {
+      case "large":
+        t = "largeImage";
+        break;
+      default:
+        t = "image";
+        break;
+    }
+
+
+    return this.compiled[t]({
       path: path.join(imagePath, filename)
     });
   }

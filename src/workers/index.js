@@ -16,7 +16,7 @@ import tmp from 'tmp';
 
 
 export const print = (m, callback) => {
-  const log = new Log('debug', fs.createWriteStream('worker.log'));
+  const log = new Log('debug', fs.createWriteStream('/tmp/worker.log'));
 
   let upload;
   let filename;

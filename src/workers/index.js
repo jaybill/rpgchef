@@ -126,6 +126,7 @@ export const print = (m, callback) => {
       .pipe(upload);
   }).catch((err) => {
     throw err;
+    callback(err, null);
     return;
   });
 };

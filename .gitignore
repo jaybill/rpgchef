@@ -6,3 +6,4 @@ build
 deploy.env
 *~
 tempnode
+worker.log

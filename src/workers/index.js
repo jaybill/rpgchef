@@ -10,11 +10,13 @@ import _ from 'lodash';
 import uuid from 'node-uuid';
 import Slug from 'slug';
 import SpawnStream from 'spawn-stream';
-import log from 'loglevel';
+import Log from 'log';
 import path from 'path';
 import tmp from 'tmp';
 
+
 export const print = (m, callback) => {
+  const log = new Log('debug', fs.createWriteStream('worker.log'));
 
   let upload;
   let filename;
@@ -22,6 +24,8 @@ export const print = (m, callback) => {
     unsafeCleanup: true,
     prefix: "rpgchefPdf_"
   });
+
+  log.debug("Creating GS stream");
 
   const gsStream = SpawnStream('gs', [
     '-sDEVICE=pdfwrite',
@@ -41,6 +45,7 @@ export const print = (m, callback) => {
     '-sOutputFile=-',
     '-_']);
 
+  log.debug("Creating exiftool stream");
   const exiftoolStream = SpawnStream('exiftool',
     [
       '-',
@@ -51,47 +56,53 @@ export const print = (m, callback) => {
       '-Producer=RpgChef.com'
     ]);
 
-
+  log.debug("Setting up aws");
   AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
   });
 
   const S3 = new AWS.S3();
+  log.debug("Creating s3 stream");
   const s3Stream = S3Stream(S3);
+  log.debug("Creating s3 client");
   const s3client = S3Client.createClient({
     s3client: S3
   });
 
   filename = "pdftemp/" + uuid.v1() + "/" + Slug(m.name) + ".pdf";
+  log.debug("creating %s", filename);
+  log.debug("Creating upload stream");
   upload = s3Stream.upload({
     "Bucket": process.env.AWS_BUCKET,
     "Key": filename
   });
   upload.on("error", (err) => {
-    const e = new Error({
-      ee: err
-    });
+    log.error(err);
     callback(err, null);
     return;
   });
   upload.on("uploaded", (details) => {
+    log.debug("Uploaded %s", details.key);
     const url = S3.getSignedUrl('getObject', {
       Expires: 86400,
       Bucket: details.Bucket,
       Key: details.Key
     });
+    log.debug("Removing temp dir");
     tmpdir.removeCallback();
     callback(null, url);
   });
 
 
   exiftoolStream.on("error", (err) => {
+    log.error(err);
     callback(err, null);
     return;
   });
 
   gsStream.on("error", (err) => {
+    log.error(err);
     callback(err, null);
     return;
   });
@@ -102,11 +113,14 @@ export const print = (m, callback) => {
         s3Params: s3Params,
         localDir: tmpdir
       });
+
       downloader.on("error", (err) => {
+        log.error(err);
         reject(err);
       });
 
       downloader.on("end", () => {
+        log.debug("Finished download");
         resolve(true);
       });
     });
@@ -120,14 +134,14 @@ export const print = (m, callback) => {
     Bucket: process.env.AWS_BUCKET,
     Prefix: getModulePath(m.userId, m.id)
   }, tmpdir.name).then(() => {
+    log.debug("Generating LaTeX and pouring into pipe");
     Latex(latexContent)
       .pipe(gsStream)
       .pipe(exiftoolStream)
       .pipe(upload);
   }).catch((err) => {
-    throw err;
+    log.error(err);
     callback(err, null);
     return;
   });
 };
-

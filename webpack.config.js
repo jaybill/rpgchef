@@ -12,6 +12,7 @@ var DEPLOY = !!process.env.DEPLOY;
 var buildDir = './build/';
 if (DEPLOY) {
   console.log("DEPLOY MODE");
+  console.log("AWS BUCKET " + process.env.AWS_BUCKET);
   DEBUG = false;
   buildDir = './deploy/build/';
 }

@@ -43,8 +43,10 @@ var src = {};
 var watch = false;
 var browserSync;
 var outputDir = 'build';
+var configPath = PROD ? "deploy.env" : ".env";
+$.util.log("Config is " + configPath);
 require('dotenv').config({
-  path: (PROD ? "deploy.env" : ".env")
+  path: (configPath)
 });
 
 // Check for required environment variables

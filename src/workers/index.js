@@ -25,6 +25,8 @@ export const print = (m, callback) => {
     prefix: "rpgchefPdf_"
   });
 
+  log.debug("Creating temp dir %s", tmpdir.name);
+
   log.debug("Creating GS stream");
 
   const gsStream = SpawnStream('gs', [
@@ -56,7 +58,7 @@ export const print = (m, callback) => {
       '-Producer=RpgChef.com'
     ]);
 
-  log.debug("Setting up aws");
+  log.debug("Setting up aws - using bucket %s", process.env.AWS_BUCKET);
   AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
@@ -83,7 +85,7 @@ export const print = (m, callback) => {
     return;
   });
   upload.on("uploaded", (details) => {
-    log.debug("Uploaded %s", details.key);
+    log.debug("Uploaded %s", details.Key);
     const url = S3.getSignedUrl('getObject', {
       Expires: 86400,
       Bucket: details.Bucket,

@@ -209,9 +209,16 @@ gulp.task('clean', function() {
 });
 
 // 3rd party libraries
-gulp.task('latex', function() {
-  return gulp.src(['../dnd-5e-latex-template/**/*.sty'])
-    .pipe(gulp.dest(path.join(outputDir, 'latex')));
+gulp.task('latex', ['dndlatex', 'customlatex']);
+
+gulp.task('dndlatex', function() {
+  return gulp.src(['../dnd-5e-latex-template/**/*.*'])
+    .pipe(gulp.dest(path.join(outputDir, 'latex', 'dnd')));
+});
+
+gulp.task('customlatex', function() {
+  return gulp.src(['./src/latex/**/*.*'])
+    .pipe(gulp.dest(path.join(outputDir, 'latex', 'rpgchef')));
 });
 
 gulp.task('prodnode', function() {
@@ -272,7 +279,6 @@ gulp.task('bundle', function(cb) {
   var bundler = webpack(config);
 
   function bundle(err, stats) {
-
     if (err) {
       throw new $.util.PluginError('webpack', err);
     }
@@ -328,7 +334,8 @@ gulp.task('build:watch', function(cb) {
   runSequence('build', function() {
     gulp.watch(src.assets, ['assets']);
     gulp.watch(src.styles, ['styles']);
-    gulp.watch('../dnd-5e-latex-template/**/*.sty', ['latex']);
+    gulp.watch('../dnd-5e-latex-template/**/*.*', ['latex']);
+    gulp.watch('./src/latex/**/*.*', ['latex']);
     cb();
   });
 });

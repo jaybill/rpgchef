@@ -1,0 +1,15 @@
+%Remove Numbering from section (If you want Numbering on the sections comment the following three lines and change the "0em" separation-definitions in the lower part to 1em)
+\renewcommand\thesection{}
+\renewcommand\thesubsection{}
+\renewcommand\thesubsubsection{}
+
+
+% Adjust section and subsection colors and font (change 0em to 1em if you commented the removal of section numbering)
+\titleformat{\section}
+{\color{titlered}\raggedright\normalfont\scshape\Huge}{\thesection}{0em}{}
+
+\titleformat{\subsection}
+{\color{titlered}\raggedright\normalfont\scshape\Large}{\thesubsection}{0em}{}[{\titleline{\color{undergold}\titlerule[1pt]}}]
+
+\titleformat{\subsubsection}
+{\color{titlered}\raggedright\normalfont\scshape\large}{\thesubsubsection}{0em}{}[]

@@ -390,6 +390,12 @@ export default class Module extends Component {
           title: ""
         };
         break;
+      case "subsubsection":
+        newSection.type = "subsubsection";
+        newSection.content = {
+          title: ""
+        };
+        break;
       case "table":
         newSection.type = "table";
         newSection.content = {
@@ -637,10 +643,13 @@ export default class Module extends Component {
                     moduleId={ this.state.id } />;
             break;
           case "section":
-            sec = <MakeSection {...commonProps} sub={ false } />;
+            sec = <MakeSection {...commonProps} />;
             break;
           case "subsection":
-            sec = <MakeSection {...commonProps} sub={ true } />;
+            sec = <MakeSection {...commonProps} sub={ 2 } />;
+            break;
+          case "subsubsection":
+            sec = <MakeSection {...commonProps} sub={ 3 } />;
             break;
           case "text":
             sec = <MakeText {...commonProps} />;
@@ -662,6 +671,7 @@ export default class Module extends Component {
     }
 
     const monsterTitle = <i className="icon icon-goblin"></i>;
+    const sectionTitle = <i className="fa fa-header fa-fw"></i>;
 
     const meta = {
       author: this.state.author,
@@ -697,12 +707,14 @@ export default class Module extends Component {
                     <NavItem onClick={ self.openPreviewModal } title="Preview PDF">
                       <i className="fa fa-binoculars"></i>
                     </NavItem>
-                    <NavItem onClick={ self.addSection.bind(this, "section") } title="Insert Section Heading">
-                      <i className="fa fa-header fa-fw"></i>
-                    </NavItem>
-                    <NavItem onClick={ self.addSection.bind(this, "subsection") } title="Insert Subsection Heading">
-                      <i className="fa fa-h-square fa-fw"></i>
-                    </NavItem>
+                    <NavDropdown eventKey={ 2 } title={ sectionTitle } id="nav-dropdown">
+                      <MenuItem onClick={ self.addSection.bind(this, "section") } title="Insert Section Heading"> H1
+                      </MenuItem>
+                      <MenuItem onClick={ self.addSection.bind(this, "subsection") } title="Insert Subsection Heading"> H2
+                      </MenuItem>
+                      <MenuItem onClick={ self.addSection.bind(this, "subsubsection") } title="Insert Subsubsection Heading"> H3
+                      </MenuItem>
+                    </NavDropdown>
                     <NavItem onClick={ self.addSection } title="Insert Text">
                       <i className="fa fa-paragraph fa-fw"></i>
                     </NavItem>

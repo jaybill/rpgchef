@@ -1,1 +1,75 @@
-{"sections": [{"type": "section","content": {"title": "The Broken Coast"}},{"type": "text","content": {"text": "The players arrive by ship, anchoring at a deserted coastal village. The sailors refuse to set foot on dry ground here, saying these lands are thrice cursed. The region is known as the Broken Coast, where long stretches of cliffs and jagged rocks fall away to rough, storm tossed seas.\n\nSigns point to Dagger Cove - the largest settlement in the area and home to Lord Baylen. A few miles from their anchorage, the characters come upon a ruined fishing village."}},{"type": "subsection","content": {"title": "Deserted Village"}},{"type": "commentbox","content": {"title": "Read Aloud","text": "There is no one left in the village, only the sad song of gulls. There are signs of recent struggle - broken doors, smoldering thatch, dead sheep, shattered spearheads in the sand, but no survivors. Not even a corpse."}}]}
+[ '\\documentclass[10pt,twoside,twocolumn]{article}'+
+  '\\usepackage[bg-letter]{dnd} % Options: bg-a4, bg-letter, bg-full, bg-print.'+
+  '\\usepackage[ngerman]{babel} % Trennungsregeln und autom. Überschriften in n. dt. RS'+
+  '\\usepackage[utf8]{inputenc}'+
+  ''+
+  '% Start document'+
+  '\\begin{document}'+
+  '\\fontfamily{ppl}\\selectfont % Set text font'+
+  ''+
+  '% Your content goes here'+
+  ''+
+  '\\section{Main Section}'+
+  '\\lipsum[1] % filler text'+
+  ''+
+  '\\subsection{Fun with boxes}'+
+  '\\subsubsection{Even more fun!}'+
+  ''+
+  '\\begin{commentbox}{Neat Green Box!}'+
+  '\t\\lipsum[1]'+
+  '\\end{commentbox}'+
+  ''+
+  '\\begin{quotebox}'+
+  '\tAs you approach this template you get a sense that the blood and tears of many generations went into its making. A warm feeling welcomes you as you type your first words.'+
+  '\\end{quotebox}'+
+  ''+
+  '\\newpage % Acts as columbreak because of twocolumn option; for pagebreak use \\clearpage'+
+  ''+
+  '\\begin{dndtable}'+
+  '   \t\\textbf{Table head}  & \\textbf{Table head} \\\\'+
+  '   \tSome value  & Some value \\\\'+
+  '   \tSome value  & Some value \\\\'+
+  '   \tSome value  & Some value'+
+  '\\end{dndtable}'+
+  ''+
+  '\\begin{paperbox}{Do the Players need direction?}'+
+  '\t\\lipsum[1]'+
+  '\\end{paperbox}'+
+  ''+
+  '\\begin{monsterbox}{Monster Foo}'+
+  '\t\\textit{Small metasyntatic variable (golbinoid), neutral evil}\\\\'+
+  '\t\\hline'+
+  '\t\\basics[%'+
+  '\tarmorclass = 12,'+
+  '\thitpoints  = 16 (3d8 + 3),'+
+  '\tspeed      = 50 ft'+
+  '\t]'+
+  '\t\\hline'+
+  '\t\\stats['+
+  '\tSTR = 12 (+1),'+
+  '\tDEX = 14 (+2)'+
+  '\t]'+
+  '\t\\hline'+
+  '\t\\details[%'+
+  '\t% If you want to use commas in these sections, enclose the'+
+  '\t% description in braces.'+
+  '\t% I\'m so sorry.'+
+  '\tlanguages = {Common Lisp, Erlang},'+
+  '\t]'+
+  '\t\\hline \\\\[1mm]'+
+  '\t\\begin{monsteraction}[Monster-super-powers]'+
+  '\t\tThis Monster has some serious superpowers!'+
+  '\t\\end{monsteraction}'+
+  '\t\\monstersection{Actions}'+
+  '\t\\begin{monsteraction}[Generate text]'+
+  '\t\tThis one can generate tremendous amounts of text! Though only when it wants to.'+
+  '\t\\end{monsteraction}'+
+  ''+
+  '\t\\begin{monsteraction}[More actions]'+
+  '    See, here he goes again! Yet more text.'+
+  '\t\\end{monsteraction}'+
+  '\\end{monsterbox}'+
+  ''+
+  '% End document'+
+  '\\end{document}'+
+  '' ]

@@ -1,0 +1,54 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dndcover}[2016/02/215 dnd cover package]
+\usepackage{wallpaper}
+\usepackage{color}
+\usepackage{tikz}
+\newtoks\subtitle \newtoks\title \newtoks\author \newtoks\vv \newtoks\coverimage
+\usetikzlibrary{shadows}
+\tikzset{
+    text shadow/.code args={[#1]#2at#3(#4)#5}{
+        \pgfkeysalso{/tikz/.cd,#1}%
+        \foreach \angle in {0,5,...,359}{
+                \node[#1,text=black] at ([shift={(\angle:1.3pt)}] #4){#5};
+        }
+    }
+}
+\def \wlin {6.75in}
+\newcommand{\fmtsubtitle}{\textbf{\the\subtitle}}
+\newcommand{\fmtauthor}{\textbf{\the\author}}
+\newcommand{\fmtvv}{\textbf{\the\vv}}
+\newcommand{\fmttitle}{\textbf{\expandafter\MakeUppercase\expandafter{\the\title}}}
+\newcommand{\makecover}{%
+\begin{titlepage}
+\ThisCenterWallPaper{1.1}{\the\coverimage}
+\noindent\begin{tikzpicture}[remember picture, overlay,anchor = north west]
+\begin{scope}[xshift=-2mm,yshift=10mm]
+\begin{scope}[xshift=-3mm]
+\fontfamily{RobotoCondensed-LF}\fontsize{50}{60}\selectfont
+\node[text shadow={[color=white,align=center,text width=\linewidth] 
+  at (0,0) {\fmttitle}}] 
+  at (0,0) {\fmttitle} ;
+\end{scope}
+\begin{scope}[yshift=-248mm, anchor=south west]
+\fontfamily{RobotoCondensed-LF}\fontsize{25}{30}\selectfont
+\node[text shadow={[color=white,align=center,text width=\linewidth] 
+  at (0,0) {\fmtsubtitle}}] 
+  at (0,0) {\fmtsubtitle} ;        
+\end{scope}
+\begin{scope}[yshift=-253mm]
+\fontfamily{RobotoCondensed-LF}\fontsize{15}{20}\selectfont
+\node[text shadow={[color=white,align=left,text width=\linewidth] 
+  at (0,0) {\fmtvv}}] 
+  at (0,0) {\fmtvv} ;        
+\end{scope}
+\begin{scope}[yshift=-253mm]
+\fontfamily{RobotoCondensed-LF}\fontsize{15}{20}\selectfont
+\node[text shadow={[color=white,align=right,text width=\linewidth] 
+  at (0,0) {\fmtauthor}}] 
+  at (0,0) {\fmtauthor} ;        
+\end{scope}
+\end{scope}
+\end{tikzpicture}
+\end{titlepage}
+\clearpage
+}

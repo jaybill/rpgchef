@@ -10,16 +10,19 @@ const markdown = (md) => {
 };
 
 const templates = {
-  document: '\\documentclass[10pt]{article}\n' +
-    '\\usepackage{dnd}\n' +
-    '\\usepackage{graphicx}\n' +
+  document: '\\documentclass[10pt,twoside,twocolumn]{article}\n' +
+    '\\usepackage[bg-letter]{dnd} % Options: bg-a4, bg-letter, bg-full, bg-print.\n' +
+    '\\usepackage[ngerman]{babel} % Trennungsregeln und autom. Überschriften in n. dt. RS\n' +
+    '\\usepackage{dndsectionscustom}\n' +
+    '\\usepackage[utf8]{inputenc}\n' +
+    '\\usepackage{tikz}\n' +
+    '\\usepackage{enumitem}\n' +
+    '\\usepackage[normalem]{ulem}\n' +
     '% Start document\n' +
     '\\begin{document}\n' +
-    '<%= cover %>' +
-    '\\begin{multicols}{2}\n' +
     '\\fontfamily{ppl}\\selectfont % Set text font\n' +
+    //    '<%= cover %>' +
     '<%= content %>\n' +
-    '\\end{multicols}\n' +
     '\\end{document}\n',
   cover: '\\title{<%= title %>}\n' +
     '\\subtitle{<%= subtitle %>}\n' +
@@ -27,41 +30,46 @@ const templates = {
     '\\vv{<%= version %>}\n' +
     '\\coverimage{<%= coverImage %>}\n' +
     '\\makecover\n' +
-    '\\addtocounter{page}{1}',
+    '\\addtocounter{page}{1}\n',
   image: '\n\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n',
   largeImage: '\n\\end{multicols}' +
     '\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\\begin{multicols}{2}\n',
-  section: '\\section*{<%= title %>}\n',
-  subsection: '\\subsection*{<%= title %>}',
+  section: '\\section{<%= title %>}\n',
+  subsection: '\\subsection{<%= title %>}',
+  subsubsection: '\\subsubsection{<%= title %>}',
   commentBox: '\\begin{commentbox}{<%= title %>}\n' +
     '<%=content %>\n' +
     '\\end{commentbox}\n',
-  monster: '\\begin{monster}{<%= name  %>}{<%= size %> <%= raceOrType %>, <%= alignment %>}' +
-    '\\basics[%\n' +
-    'armorclass = <%= armorclass %>,\n' +
-    'hitpoints  = <%= hitpoints %>,\n' +
-    'speed      = <%= speed %>\n' +
-    ']\n' +
-    '\\hline\n' +
+  monster: '\\begin{monsterbox}{<%= name  %>}\n' +
+    '\t\\textit{<%= size %> <%= raceOrType %>, <%= alignment %>}\\\\\n' +
+    '\t\\hline\n' +
+    '\t\\basics[%\n' +
+    '\tarmorclass = <%= armorclass %>,\n' +
+    '\thitpoints  = <%= hitpoints %>,\n' +
+    '\tspeed      = <%= speed %>\n' +
+    '\t]\n' +
+    '\t\\hline\n' +
     '<%= stats %>' +
     '\\hline\n' +
     '<%= details %>' +
     '\\hline\n' +
     '<%= traitsAndActions %>' +
-    '\\end{monster}\n',
-  largeMonster: '\\end{multicols}\\begin{largemonster}{<%= name  %>}{<%= size %> <%= raceOrType %>, <%= alignment %>}' +
-    '\\basics[%\n' +
-    'armorclass = <%= armorclass %>,\n' +
-    'hitpoints  = <%= hitpoints %>,\n' +
-    'speed      = <%= speed %>\n' +
-    ']\n' +
-    '\\hline\n' +
+    '\\end{monsterbox}',
+  largeMonster: '\\begin{monsterbox}{<%= name  %>}\n' +
+    '\t\\textit{<%= size %> <%= raceOrType %>, <%= alignment %>}\\\\\n' +
+    '\t\\hline\n' +
+    '\t\\basics[%\n' +
+    '\tarmorclass = <%= armorclass %>,\n' +
+    '\thitpoints  = <%= hitpoints %>,\n' +
+    '\tspeed      = <%= speed %>\n' +
+    '\t]\n' +
+    '\t\\hline\n' +
     '<%= stats %>' +
     '\\hline\n' +
     '<%= details %>' +
     '\\hline\n' +
     '<%= traitsAndActions %>' +
-    '\\end{largemonster}\\begin{multicols}{2}\n',
+    '\\end{monsterbox}',
   monsterStats: '\\stats[\n' +
     '<%= statlines %>' +
     ']\n',
@@ -95,6 +103,7 @@ class Dnd5eLaTeX {
     this.getLatexForModule = this.getLatexForModule.bind(this);
     this.createSection = this.createSection.bind(this);
     this.createSubsection = this.createSubsection.bind(this);
+    this.createSubSubsection = this.createSubSubsection.bind(this);
     this.createDocument = this.createDocument.bind(this);
     this.createCommentBox = this.createCommentBox.bind(this);
     this.createMonster = this.createMonster.bind(this);
@@ -143,7 +152,6 @@ class Dnd5eLaTeX {
     return o;
   }
 
-
   getLatexForModule(m, imagePath) {
     let lt = "";
     const j = m.content;
@@ -165,6 +173,10 @@ class Dnd5eLaTeX {
 
         case "subsection":
           lt += this.createSubsection(s.content.title);
+          break;
+
+        case "subsubsection":
+          lt += this.createSubSubsection(s.content.title);
           break;
 
         case "monster":
@@ -240,6 +252,13 @@ class Dnd5eLaTeX {
     });
   };
 
+  createSubSubsection(title) {
+    return this.compiled.subsubsection({
+      title: this.escape(title)
+    });
+  };
+
+
   createTable(data) {
     if (data[0] && data[0].length) {
       const rows = [];
@@ -306,14 +325,26 @@ class Dnd5eLaTeX {
     const detaillines = [];
 
     ds.forEach((ddd, i) => {
-      if (c[ddd] || c[ddd] == "languages" || c[ddd] == "senses" || c[ddd] == "challenge") {
+      if (c[ddd]) {
+
+        let vvv;
+        if (ddd == "challenge") {
+          vvv = this.escape(c[ddd]) + " (" + clean.xp + ")";
+        } else {
+          vvv = this.escape(c[ddd]);
+        }
+
         detaillines.push(this.compiled.monsterDetail({
           key: ddd.toLowerCase(),
-          value: this.escape(c[ddd]) || "--"
+          value: vvv || "--"
         }));
+
       }
     });
-
+    /*
+        console.log(detaillines);
+        process.exit();
+    */
     clean.details = this.compiled.monsterDetails({
       detaillines: detaillines
     });

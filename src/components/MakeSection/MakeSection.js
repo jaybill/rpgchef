@@ -13,12 +13,22 @@ export default class MakeSection extends Component {
     const k = this.props.k;
     const sub = this.props.sub;
     const ref = this.props.refName;
+    let hint;
+    let htype;
 
-    let icon = "fa fa-header fa-fw";
-    let hint = "Section Header";
-    if (sub) {
-      icon = "fa fa-h-square fa-fw";
-      hint = "Subsection Header";
+
+    switch (sub) {
+      case 3:
+        hint = "Subsubsection Header";
+        htype = "H3";
+        break;
+      case 2:
+        hint = "Subsection Header";
+        htype = "H2";
+        break;
+      default:
+        hint = "Section Header";
+        htype = "H1";
     }
 
     return <section key={ k }
@@ -28,7 +38,7 @@ export default class MakeSection extends Component {
              id={ k }>
              { this.props.toolbar }
              <div className="input-group">
-               <span title={ hint } className="input-group-addon"><i className={ icon }></i></span>
+               <span title={ hint } className="input-group-addon">{ htype }</span>
                <CtrldInputText type="text"
                  className="form-control input-lg"
                  value={ h.content.title }

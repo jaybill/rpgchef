@@ -6,7 +6,6 @@ import SimplePage from '../SimplePage';
 export default class About extends Component {
 
   render() {
-
     return (
       <div className="About">
         <h2>About RPG Chef</h2>
@@ -28,6 +27,11 @@ export default class About extends Component {
             most popular <a target="_new" href="http://dnd.wizards.com">role-playing game</a>. (There, that ought to do it. Whew!) While you certainly could use
             RPG Chef to create content for other systems, things like stat blocks are very 5e specific. That said, we are planning to add direct support for other systems
             if there is enough interest.
+          </p>
+          <h3>Technology</h3>
+          <p>
+            RPG Chef is built using <a href="https://facebook.github.io/react/">React</a> and <a href="http://redux.js.org">Redux</a>. We employ a microservice architecture
+            that uses <a href="http://hapijs.com/">hapi.js</a> and <a href="http://www.postgresql.org">PostgreSQL</a>. We render content with <a href="https://www.latex-project.org">LaTeX</a>      using the most excellent <a href="https://github.com/evanbergeron/DND-5e-LaTeX-Template">DnD 5 LaTeX Template</a>.
           </p>
         </Panel>
         <Label bsStyle="info">

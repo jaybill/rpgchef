@@ -13,7 +13,10 @@ const templates = {
   document: '\\documentclass[10pt,twoside,twocolumn]{article}\n' +
     '\\usepackage[bg-none]{dnd}\n' +
     '\\usepackage[ngerman]{babel}\n' +
+    '\\usepackage{dndcover}\n' +
     '\\usepackage{dndsectionscustom}\n' +
+    '\\usepackage{xltxtra}\n' +
+    '\\usepackage{fontspec}\n' +
     '\\usepackage[utf8]{inputenc}\n' +
     '\\usepackage{tikz}\n' +
     '\\usepackage{enumitem}\n' +
@@ -21,7 +24,7 @@ const templates = {
     '% Start document\n' +
     '\\begin{document}\n' +
     '\\fontfamily{ppl}\\selectfont % Set text font\n' +
-    //    '<%= cover %>' +
+    '<%= cover %>' +
     '<%= content %>\n' +
     '\\end{document}\n',
   cover: '\\title{<%= title %>}\n' +

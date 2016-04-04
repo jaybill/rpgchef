@@ -3,6 +3,9 @@
 \usepackage{wallpaper}
 \usepackage{color}
 \usepackage{tikz}
+\usepackage{fontspec}
+\usepackage{hyphenat}
+
 \newtoks\subtitle \newtoks\title \newtoks\author \newtoks\vv \newtoks\coverimage
 \usetikzlibrary{shadows}
 \tikzset{
@@ -14,35 +17,38 @@
     }
 }
 \def \wlin {6.75in}
+\newfontfamily\bigtitlefont{Kirsty}
+\newfontfamily\smalltitlefont{Roboto Condensed}
+
 \newcommand{\fmtsubtitle}{\textbf{\the\subtitle}}
 \newcommand{\fmtauthor}{\textbf{\the\author}}
 \newcommand{\fmtvv}{\textbf{\the\vv}}
-\newcommand{\fmttitle}{\textbf{\expandafter\MakeUppercase\expandafter{\the\title}}}
+\newcommand{\fmttitle}{\nohyphens{\textbf{\expandafter\MakeUppercase\expandafter{\the\title}}}}
 \newcommand{\makecover}{%
 \begin{titlepage}
 \ThisCenterWallPaper{1.1}{\the\coverimage}
 \noindent\begin{tikzpicture}[remember picture, overlay,anchor = north west]
 \begin{scope}[xshift=-2mm,yshift=10mm]
 \begin{scope}[xshift=-3mm]
-\fontfamily{RobotoCondensed-LF}\fontsize{50}{60}\selectfont
+\bigtitlefont\fontsize{50}{60}\selectfont
 \node[text shadow={[color=white,align=center,text width=\linewidth] 
   at (0,0) {\fmttitle}}] 
   at (0,0) {\fmttitle} ;
 \end{scope}
 \begin{scope}[yshift=-248mm, anchor=south west]
-\fontfamily{RobotoCondensed-LF}\fontsize{25}{30}\selectfont
+\smalltitlefont\fontsize{25}{30}\selectfont
 \node[text shadow={[color=white,align=center,text width=\linewidth] 
   at (0,0) {\fmtsubtitle}}] 
   at (0,0) {\fmtsubtitle} ;        
 \end{scope}
 \begin{scope}[yshift=-253mm]
-\fontfamily{RobotoCondensed-LF}\fontsize{15}{20}\selectfont
+\smalltitlefont\fontsize{15}{20}\selectfont
 \node[text shadow={[color=white,align=left,text width=\linewidth] 
   at (0,0) {\fmtvv}}] 
   at (0,0) {\fmtvv} ;        
 \end{scope}
 \begin{scope}[yshift=-253mm]
-\fontfamily{RobotoCondensed-LF}\fontsize{15}{20}\selectfont
+\smalltitlefont\fontsize{15}{20}\selectfont
 \node[text shadow={[color=white,align=right,text width=\linewidth] 
   at (0,0) {\fmtauthor}}] 
   at (0,0) {\fmtauthor} ;        

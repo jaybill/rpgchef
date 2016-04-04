@@ -209,7 +209,7 @@ gulp.task('clean', function() {
 });
 
 // 3rd party libraries
-gulp.task('latex', ['dndlatex', 'customlatex']);
+gulp.task('latex', ['dndlatex', 'customlatex', 'latexfonts']);
 
 gulp.task('dndlatex', function() {
   return gulp.src(['../dnd-5e-latex-template/**/*.*'])
@@ -220,6 +220,12 @@ gulp.task('customlatex', function() {
   return gulp.src(['./src/latex/**/*.*'])
     .pipe(gulp.dest(path.join(outputDir, 'latex', 'rpgchef')));
 });
+
+gulp.task('latexfonts', function() {
+  return gulp.src(['./src/fonts/**/*.*'])
+    .pipe(gulp.dest(path.join(outputDir, 'fonts')));
+});
+
 
 gulp.task('prodnode', function() {
   return gulp.src(['tempnode/node_modules/**/*'])

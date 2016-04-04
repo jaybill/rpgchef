@@ -14,7 +14,6 @@ import Log from 'log';
 import path from 'path';
 import tmp from 'tmp';
 
-
 export const print = (m, callback) => {
   const log = new Log('debug', fs.createWriteStream('/tmp/worker.log'));
 
@@ -137,7 +136,9 @@ export const print = (m, callback) => {
     Prefix: getModulePath(m.userId, m.id)
   }, tmpdir.name).then(() => {
     log.debug("Generating LaTeX and pouring into pipe");
-    Latex(latexContent)
+    Latex(latexContent, {
+      command: "xelatex"
+    })
       .pipe(gsStream)
       .pipe(exiftoolStream)
       .pipe(upload);

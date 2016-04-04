@@ -11,8 +11,8 @@ const markdown = (md) => {
 
 const templates = {
   document: '\\documentclass[10pt,twoside,twocolumn]{article}\n' +
-    '\\usepackage[bg-letter]{dnd} % Options: bg-a4, bg-letter, bg-full, bg-print.\n' +
-    '\\usepackage[ngerman]{babel} % Trennungsregeln und autom. Überschriften in n. dt. RS\n' +
+    '\\usepackage[bg-none]{dnd}\n' +
+    '\\usepackage[ngerman]{babel}\n' +
     '\\usepackage{dndsectionscustom}\n' +
     '\\usepackage[utf8]{inputenc}\n' +
     '\\usepackage{tikz}\n' +
@@ -92,7 +92,7 @@ const templates = {
     '<%= rows %>\n' +
     '\\end{dndtable}\n',
   tableHeading: '\\textbf{<%= h %>}',
-  columnBreak: '\n\\vfill\\columnbreak\n',
+  columnBreak: '\n\\newpage\n',
   pageBreak: '\n\\clearpage\n',
   text: '<%= text %>\n\n'
 };

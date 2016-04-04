@@ -14,6 +14,7 @@ const templates = {
     '\\usepackage[bg-none]{dnd}\n' +
     '\\usepackage[ngerman]{babel}\n' +
     '\\usepackage{dndcover}\n' +
+    '\\usepackage{wallpaper}\n' +
     '\\usepackage{dndsectionscustom}\n' +
     '\\usepackage{xltxtra}\n' +
     '\\usepackage{fontspec}\n' +
@@ -25,6 +26,7 @@ const templates = {
     '\\begin{document}\n' +
     '\\fontfamily{ppl}\\selectfont % Set text font\n' +
     '<%= cover %>' +
+    '\\CenterWallPaper{1.1}{rpgchefpaper.jpg}\n' +
     '<%= content %>\n' +
     '\\end{document}\n',
   cover: '\\title{<%= title %>}\n' +

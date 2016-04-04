@@ -33,6 +33,10 @@ export default class About extends Component {
             RPG Chef is built using <a href="https://facebook.github.io/react/">React</a> and <a href="http://redux.js.org">Redux</a>. We employ a microservice architecture
             that uses <a href="http://hapijs.com/">hapi.js</a> and <a href="http://www.postgresql.org">PostgreSQL</a>. We render content with <a href="https://www.latex-project.org">LaTeX</a>      using the most excellent <a href="https://github.com/evanbergeron/DND-5e-LaTeX-Template">DnD 5 LaTeX Template</a>.
           </p>
+          <h3>Acknowledgments</h3>
+          <p>
+            Certain <a href="http://knald.deviantart.com/art/Vintage-paper-TEXTURE-PACK-152400787">paper textures</a> by <a href="http://knald.deviantart.com/">knald</a>      licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 License.</a>.
+          </p>
         </Panel>
         <Label bsStyle="info">
           { "Version: " + (process.env.RPGCHEF_VERSION || "Local") }

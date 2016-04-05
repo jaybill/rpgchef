@@ -35,7 +35,7 @@ export default class About extends Component {
           </p>
           <h3>Acknowledgments</h3>
           <p>
-            Certain <a href="http://knald.deviantart.com/art/Vintage-paper-TEXTURE-PACK-152400787">paper textures</a> by <a href="http://knald.deviantart.com/">knald</a>      licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 License.</a>.
+            Certain <a href="http://bashcorpo.deviantart.com/art/Grungy-paper-texture-v-5-22966998">paper textures</a> by <a href="http://bashcorpo.deviantart.com/">bashcorpo</a>      licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 License.</a>.
           </p>
         </Panel>
         <Label bsStyle="info">

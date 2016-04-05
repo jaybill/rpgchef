@@ -10,23 +10,26 @@ const markdown = (md) => {
 };
 
 const templates = {
-  document: '\\documentclass[10pt,twoside,twocolumn]{article}\n' +
+  document: '\\documentclass[10pt,twoside]{article}\n' +
     '\\usepackage[bg-none]{dnd}\n' +
     '\\usepackage[ngerman]{babel}\n' +
     '\\usepackage{dndcover}\n' +
     '\\usepackage{wallpaper}\n' +
     '\\usepackage{dndsectionscustom}\n' +
+    '\\usepackage{dndmonstercustom}\n' +
     '\\usepackage{xltxtra}\n' +
     '\\usepackage{fontspec}\n' +
-    '\\usepackage[utf8]{inputenc}\n' +
     '\\usepackage{tikz}\n' +
+    '\\usepackage{multicol}\n' +
+    '\\usepackage{dndutil}\n' +
     '\\usepackage{enumitem}\n' +
     '\\usepackage[normalem]{ulem}\n' +
     '% Start document\n' +
     '\\begin{document}\n' +
-    '\\fontfamily{ppl}\\selectfont % Set text font\n' +
     '<%= cover %>' +
+    '\\twocolumn\n' +
     '\\CenterWallPaper{1.1}{rpgchefpaper.jpg}\n' +
+    '\\setmainfont{TeX Gyre Bonum}\n' +
     '<%= content %>\n' +
     '\\end{document}\n',
   cover: '\\title{<%= title %>}\n' +
@@ -37,8 +40,8 @@ const templates = {
     '\\makecover\n' +
     '\\addtocounter{page}{1}\n',
   image: '\n\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n',
-  largeImage: '\n\\end{multicols}' +
-    '\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\\begin{multicols}{2}\n',
+  largeImage: '\n\\onecolumn\n' +
+    '\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n\\twocolumn\n',
   section: '\\section{<%= title %>}\n',
   subsection: '\\subsection{<%= title %>}',
   subsubsection: '\\subsubsection{<%= title %>}',
@@ -60,21 +63,23 @@ const templates = {
     '\\hline\n' +
     '<%= traitsAndActions %>' +
     '\\end{monsterbox}',
-  largeMonster: '\\begin{monsterbox}{<%= name  %>}\n' +
+  largeMonster: '\\onecolumn\n\\begin{lmonsterbox}{<%= name  %>}\n' +
+    '\\begin{multicols}{2}\n' +
     '\t\\textit{<%= size %> <%= raceOrType %>, <%= alignment %>}\\\\\n' +
-    '\t\\hline\n' +
+    '\t\\hlinehalf\n' +
     '\t\\basics[%\n' +
     '\tarmorclass = <%= armorclass %>,\n' +
     '\thitpoints  = <%= hitpoints %>,\n' +
     '\tspeed      = <%= speed %>\n' +
     '\t]\n' +
-    '\t\\hline\n' +
+    '\t\\hlinehalf\n' +
     '<%= stats %>' +
-    '\\hline\n' +
+    '\\hlinehalf\n' +
     '<%= details %>' +
-    '\\hline\n' +
+    '\\hlinehalf\n' +
     '<%= traitsAndActions %>' +
-    '\\end{monsterbox}',
+    '\\end{multicols}\n\\smallskip\n' +
+    '\\end{lmonsterbox}\n\\twocolumn\n',
   monsterStats: '\\stats[\n' +
     '<%= statlines %>' +
     ']\n',

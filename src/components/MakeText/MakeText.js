@@ -1,5 +1,6 @@
 import './MakeText.less';
 import React, { Component, PropTypes } from 'react';
+import { Panel } from 'react-bootstrap';
 import CtrldInputText from '../ControlledField';
 export default class MakeText extends Component {
 
@@ -17,12 +18,19 @@ export default class MakeText extends Component {
              ref={ ref }
              className={ ref }>
              { this.props.toolbar }
-             <CtrldInputText type="textarea"
-               className="form-control"
-               value={ t.content.text }
-               name={ ["content", k, "content", "text"] }
-               rows={ 6 }
-               onFieldChange={ this.props.onFieldChange } />
+             <Panel className="MakeText">
+               <div className="form">
+                 <div className="form-group">
+                   <CtrldInputText type="textarea"
+                     className="form-control"
+                     value={ t.content.text }
+                     name={ ["content", k, "content", "text"] }
+                     rows={ 6 }
+                     onFieldChange={ this.props.onFieldChange } />
+                   <span className="pull-right help-block"><strong>*bold*</strong> <em>_italics_</em></span>
+                 </div>
+               </div>
+             </Panel>
            </section>;
   }
 

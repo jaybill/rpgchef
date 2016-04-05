@@ -89,11 +89,12 @@ export default class MetadataModal extends Component {
 
   render() {
     let imageUrl;
-    let dropContent;
+
+    let dropDiv;
     let imagestyle;
 
     if (this.state.hasCover) {
-
+      let dropContent;
       if (this.state.coverUrl) {
         imageUrl = process.env.SERVER_URL +
           "/api/upload/display/" + this.props.moduleId +
@@ -143,6 +144,28 @@ export default class MetadataModal extends Component {
             </div>);
         }
       }
+      dropDiv = (<Row>
+                   <Col md={ 4 }>
+                   { dropContent }
+                   </Col>
+                   <Col md={ 8 }>
+                   <h4>Cover Image</h4>
+                   <p>
+                     Cover images should be:
+                   </p>
+                   <ul>
+                     <li>
+                       PNG or JPG
+                     </li>
+                     <li>
+                       1275 pixels wide by 1650 pixels high
+                     </li>
+                     <li>
+                       150 DPI
+                     </li>
+                   </ul>
+                   </Col>
+                 </Row>);
     }
 
     return (
@@ -186,7 +209,7 @@ export default class MetadataModal extends Component {
             Yes
           </option>
           </Input>
-          { dropContent }
+          { dropDiv }
           <Button disabled={ this.state.uploadingImage == "cover" }
             onClick={ this.onSave }
             bsStyle="primary"

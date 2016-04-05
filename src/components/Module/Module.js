@@ -443,9 +443,17 @@ export default class Module extends Component {
         newSection.type = "commentbox";
         newSection.content = {
           title: "",
+          text: "",
+          displayFormat: "paper"
+        };
+        break;
+      case "quote":
+        newSection.type = "quote";
+        newSection.content = {
           text: ""
         };
         break;
+
       default:
         newSection.type = "text";
         newSection.content = {
@@ -651,6 +659,9 @@ export default class Module extends Component {
           case "subsubsection":
             sec = <MakeSection {...commonProps} sub={ 3 } />;
             break;
+          case "quote":
+            sec = <MakeText {...commonProps} quote={ true } />;
+            break;
           case "text":
             sec = <MakeText {...commonProps} />;
             break;
@@ -717,6 +728,9 @@ export default class Module extends Component {
                     </NavDropdown>
                     <NavItem onClick={ self.addSection } title="Insert Text">
                       <i className="fa fa-paragraph fa-fw"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "quote") } title="Insert Quote">
+                      <i className="fa fa-quote-left fa-fw"></i>
                     </NavItem>
                     <NavItem onClick={ self.addSection.bind(this, "commentbox") } title="Insert Text Box">
                       <i className="fa fa-list-alt fa-fw"></i>

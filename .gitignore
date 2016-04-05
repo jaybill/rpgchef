@@ -7,3 +7,4 @@ deploy.env
 *~
 tempnode
 worker.log
+auto

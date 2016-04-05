@@ -13,12 +13,20 @@ export default class MakeText extends Component {
     const t = this.props.content;
     const ref = this.props.refName;
     const k = this.props.k;
+    const quote = this.props.quote;
+    let qh;
+    if (quote) {
+      qh = <h4>Quote</h4>;
+    }
+
+
     return <section key={ k }
              onClick={ this.props.onOpenSection }
              ref={ ref }
              className={ ref }>
              { this.props.toolbar }
              <Panel className="MakeText">
+               { qh }
                <div className="form">
                  <div className="form-group">
                    <CtrldInputText type="textarea"

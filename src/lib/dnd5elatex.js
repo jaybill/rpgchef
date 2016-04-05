@@ -45,9 +45,15 @@ const templates = {
   section: '\\section{<%= title %>}\n',
   subsection: '\\subsection{<%= title %>}',
   subsubsection: '\\subsubsection{<%= title %>}',
-  commentBox: '\\begin{commentbox}{<%= title %>}\n' +
-    '<%=content %>\n' +
-    '\\end{commentbox}\n',
+  commentBox: '\\begin{commentboxcustom}{<%= title %>}\n' +
+    '<%= content %>\n' +
+    '\\end{commentboxcustom}\n',
+  paperBox: '\\begin{paperboxcustom}{<%= title %>}\n' +
+    '<%= content %>\n' +
+    '\\end{paperboxcustom}\n',
+  quote: '\\begin{quotebox}\n' +
+    '<%= text %>\n' +
+    '\\end{quotebox}\n',
   monster: '\\begin{monsterbox}{<%= name  %>}\n' +
     '\t\\textit{<%= size %> <%= raceOrType %>, <%= alignment %>}\\\\\n' +
     '\t\\hline\n' +
@@ -121,6 +127,7 @@ class Dnd5eLaTeX {
     this.createPageBreak = this.createPageBreak.bind(this);
     this.createImage = this.createImage.bind(this);
     this.createText = this.createText.bind(this);
+    this.createQuote = this.createQuote.bind(this);
     this.dd = new DnD5e();
 
     this.compiled = {};
@@ -180,6 +187,9 @@ class Dnd5eLaTeX {
         case "text":
           lt += this.createText(s.content.text);
           break;
+        case "quote":
+          lt += this.createQuote(s.content.text);
+          break;
 
         case "subsection":
           lt += this.createSubsection(s.content.title);
@@ -195,7 +205,7 @@ class Dnd5eLaTeX {
 
         case "commentbox":
           lt += this.createCommentBox(s.content.title,
-            s.content.text);
+            s.content.text, s.content.displayFormat);
           break;
 
         case "columnbreak":
@@ -226,6 +236,12 @@ class Dnd5eLaTeX {
 
   createText(t) {
     return this.compiled.text({
+      text: this.escape(t, true)
+    });
+  }
+
+  createQuote(t) {
+    return this.compiled.quote({
       text: this.escape(t, true)
     });
   }
@@ -437,10 +453,16 @@ class Dnd5eLaTeX {
   }
 
 
-  createCommentBox(title, content) {
-    return this.compiled.commentBox({
+  createCommentBox(title, content, format) {
+
+    let f = "paperBox";
+    if (format == "comment") {
+      f = "commentBox";
+    }
+
+    return this.compiled[f]({
       title: this.escape(title),
-      content: this.escape(content)
+      content: this.escape(content, true)
     });
   }
 

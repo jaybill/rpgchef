@@ -133,7 +133,7 @@ class ModuleContainer extends Component {
   }
 
   onPost(formdata) {
-    log.debug("in container", formdata);
+
     const {dispatch, module} = this.props;
     dispatch(doModulePost(formdata));
     this.setState({

@@ -27,7 +27,7 @@ export default class MakeText extends Component {
                      name={ ["content", k, "content", "text"] }
                      rows={ 6 }
                      onFieldChange={ this.props.onFieldChange } />
-                   <span className="pull-right help-block"><strong>*bold*</strong> <em>_italics_</em></span>
+                   <span title="Very basic Markdown support." className="pull-right help-block"><strong>**bold**</strong> <em>_italics_</em> ~~<s>strikeout</s>~~ * bullet list</span>
                  </div>
                </div>
              </Panel>

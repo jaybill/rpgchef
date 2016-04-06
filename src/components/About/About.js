@@ -31,11 +31,15 @@ export default class About extends Component {
           <h3>Technology</h3>
           <p>
             RPG Chef is built using <a href="https://facebook.github.io/react/">React</a> and <a href="http://redux.js.org">Redux</a>. We employ a microservice architecture
-            that uses <a href="http://hapijs.com/">hapi.js</a> and <a href="http://www.postgresql.org">PostgreSQL</a>. We render content with <a href="https://www.latex-project.org">LaTeX</a>      using the most excellent <a href="https://github.com/evanbergeron/DND-5e-LaTeX-Template">DnD 5 LaTeX Template</a>.
+            that uses <a href="http://hapijs.com/">hapi.js</a> and <a href="http://www.postgresql.org">PostgreSQL</a>. We render content with <a href="https://www.latex-project.org">LaTeX</a>.
           </p>
           <h3>Acknowledgments</h3>
           <p>
-            Certain <a href="http://bashcorpo.deviantart.com/art/Grungy-paper-texture-v-5-22966998">paper textures</a> by <a href="http://bashcorpo.deviantart.com/">bashcorpo</a>      licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 License.</a>.
+            We use a modified version of the most excellent <a href="https://github.com/evanbergeron/DND-5e-LaTeX-Template">DnD 5 LaTeX Template</a>, which was, in part,
+            the inspiration for this project.
+          </p>
+          <p>
+            Certain print <a href="https://drive.google.com/a/jaybill.com/folderview?id=0B2UyuHLUuCjxRkJYUzBlYkpzSVU&usp=sharing">fonts</a> by <a href="https://www.reddit.com/u/Solbera">Solbera</a>      licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0">Creative Commons (CC BY-SA 4.0)</a>.
           </p>
         </Panel>
         <Label bsStyle="info">

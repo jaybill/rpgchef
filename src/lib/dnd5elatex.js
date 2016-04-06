@@ -28,7 +28,7 @@ const templates = {
     '\\begin{document}\n' +
     '<%= cover %>' +
     '\\twocolumn\n' +
-    '\\CenterWallPaper{1.1}{rpgchefpaper.jpg}\n' +
+    '\\CenterWallPaper{1.0}{rpgchefpaper.jpg}\n' +
     '\\setmainfont{TeX Gyre Bonum}\n' +
     '<%= content %>\n' +
     '\\end{document}\n',
@@ -38,7 +38,7 @@ const templates = {
     '\\vv{<%= version %>}\n' +
     '\\coverimage{<%= coverImage %>}\n' +
     '\\makecover\n' +
-    '\\addtocounter{page}{1}\n',
+    '\\setcounter{page}{2}\n',
   image: '\n\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n',
   largeImage: '\n\\onecolumn\n' +
     '\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n\\twocolumn\n',

@@ -104,7 +104,7 @@ const templates = {
     "can be used at a time and only at the end of another creature's turn. " +
     "The <%= name %> regains spent legendary actions at the start of its turn.\n" +
     "\\newline\n\\newline\n",
-  table: '\\begin{dndtable}[<%= cols %>]\n' +
+  table: '\\begin{dndtable}\n' +
     '<%= rows %>\n' +
     '\\end{dndtable}\n',
   tableHeading: '\\textbf{<%= h %>}',

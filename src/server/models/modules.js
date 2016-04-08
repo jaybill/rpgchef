@@ -32,7 +32,8 @@ export default function NewModule(DbConn) {
     subtitle: Sequelize.STRING,
     hasCover: Sequelize.BOOLEAN,
     coverUrl: Sequelize.STRING,
-    version: Sequelize.STRING
+    version: Sequelize.STRING,
+    metadata: Sequelize.JSONB
   });
   Modules.beforeUpdate(updatePdfCreatedOn);
   return Modules;

@@ -233,7 +233,8 @@ export default class Module extends Component {
       author: this.state.author,
       hasCover: this.state.hasCover,
       coverUrl: this.state.coverUrl,
-      version: this.state.version
+      version: this.state.version,
+      metadata: this.state.metadata
     };
     return willSave;
   }
@@ -286,6 +287,7 @@ export default class Module extends Component {
       author: module.author,
       hasCover: module.hasCover,
       version: module.version,
+      metadata: module.metadata || {},
       coverUrl: module.coverUrl,
       content: module.content,
       succeeded: succeeded,
@@ -688,7 +690,8 @@ export default class Module extends Component {
       author: this.state.author,
       hasCover: this.state.hasCover,
       version: this.state.version,
-      coverUrl: this.state.coverUrl
+      coverUrl: this.state.coverUrl,
+      metadata: this.state.metadata
     };
 
     return (<div className="Module">
@@ -745,7 +748,7 @@ export default class Module extends Component {
                       <i className="icon icon-column-break"></i>
                     </NavItem>
                     <NavDropdown eventKey={ 4 } title={ monsterTitle } id="nav-dropdown">
-                      <MenuItem onClick={ self.addSection.bind(this, "monster") } eventKey="4.1"> New Monster
+                      <MenuItem onClick={ self.addSection.bind(this, "monster") } eventKey="4.1"> Empty Stat Block
                       </MenuItem>
                       <MenuItem onClick={ this.openMonsterModal } eventKey="4.2"> 5e Monster
                       </MenuItem>

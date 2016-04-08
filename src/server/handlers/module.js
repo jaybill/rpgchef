@@ -99,7 +99,8 @@ Module.handlers = {
         hasCover: [Joi.boolean().optional(), Joi.allow(null)],
         content: Joi.array().required().label('Content'),
         version: [Joi.string().optional().max(10), Joi.allow(null)],
-        coverUrl: [Joi.string().optional(), Joi.allow(null)]
+        coverUrl: [Joi.string().optional(), Joi.allow(null)],
+        metadata: [Joi.object().optional(), Joi.allow(null)]
       }
     },
     handler: (request, reply) => {

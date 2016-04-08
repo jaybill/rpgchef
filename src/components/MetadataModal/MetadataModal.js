@@ -14,6 +14,8 @@ export default class MetadataModal extends Component {
     this.onHide = this.onHide.bind(this);
     this.onSave = this.onSave.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleMetaSelect = this.handleMetaSelect.bind(this);
+    this.onChangeMeta = this.onChangeMeta.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.state = {};
   }
@@ -68,6 +70,26 @@ export default class MetadataModal extends Component {
     p[name] = value;
     this.setState(p);
   }
+
+  handleMetaSelect(name, e) {
+    const m = Object.assign({}, this.state.metadata);
+    let val = e.target.value;
+    if (val == "false" || val == "true") {
+      val = stringToBoolean(val);
+    }
+    m[name] = val;
+    this.setState({
+      metadata: m
+    });
+  }
+  onChangeMeta(name, val) {
+    const m = Object.assign({}, this.state.metadata);
+    m[name] = val;
+    this.setState({
+      metadata: m
+    });
+  }
+
 
   componentWillMount() {
     this.setState(this.props.meta);
@@ -176,46 +198,91 @@ export default class MetadataModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="form-group">
-            <label>
-              Author
-            </label>
-            <CtrldInputText type="text"
-              className="form-control"
-              value={ this.state.author }
-              name="author"
-              placeholder="i.e. George R. R. Martin"
-              onFieldChange={ this.onFieldChange } />
-          </div>
-          <div className="form-group">
-            <label>
-              Version
-            </label>
-            <CtrldInputText type="text"
-              className="form-control"
-              value={ this.state.version }
-              name="version"
-              placeholder="i.e. 1.0"
-              onFieldChange={ this.onFieldChange } />
-          </div>
-          <Input value={ this.state.hasCover }
-            onChange={ this.handleSelect.bind(this, "hasCover") }
-            label="Has cover?"
-            type="select">
-          <option value={ false }>
-            No
-          </option>
-          <option value={ true }>
-            Yes
-          </option>
-          </Input>
-          { dropDiv }
-          <Button disabled={ this.state.uploadingImage == "cover" }
-            onClick={ this.onSave }
-            bsStyle="primary"
-            block>
-            Save
-          </Button>
+          <Row>
+            <Col md={ 6 }>
+            <div className="form-group">
+              <label>
+                Author
+              </label>
+              <CtrldInputText type="text"
+                className="form-control"
+                value={ this.state.author }
+                name="author"
+                placeholder="i.e. George R. R. Martin"
+                onFieldChange={ this.onFieldChange } />
+            </div>
+            <div className="form-group">
+              <label>
+                Copyright Holder
+              </label>
+              <CtrldInputText type="text"
+                className="form-control"
+                value={ this.state.metadata.copyrightHolder }
+                name="copyrightHolder"
+                placeholder="i.e. Author or Organization"
+                onFieldChange={ this.onChangeMeta } />
+            </div>
+            <div className="form-group">
+              <label>
+                Copyright Year
+              </label>
+              <CtrldInputText type="text"
+                className="form-control"
+                value={ this.state.metadata.copyrightYear }
+                name="copyrightYear"
+                placeholder="i.e. 2016"
+                onFieldChange={ this.onChangeMeta } />
+            </div>
+            <div className="form-group">
+              <label>
+                Version
+              </label>
+              <CtrldInputText type="text"
+                className="form-control"
+                value={ this.state.version }
+                name="version"
+                placeholder="i.e. 1.0"
+                onFieldChange={ this.onFieldChange } />
+            </div>
+            <Input value={ this.state.metadata.dmsguild }
+              onChange={ this.handleMetaSelect.bind(this, "dmsguild") }
+              label="Will this DMs Guild content?"
+              type="select">
+            <option value={ false }>
+              No
+            </option>
+            <option value={ true }>
+              Yes
+            </option>
+            </Input>
+            </Col>
+            <Col md={ 6 }>
+            <Input value={ this.state.hasCover }
+              onChange={ this.handleSelect.bind(this, "hasCover") }
+              label="Has cover?"
+              type="select">
+            <option value={ false }>
+              No
+            </option>
+            <option value={ true }>
+              Yes
+            </option>
+            </Input>
+            <div className="drop-holder">
+              { dropDiv }
+            </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={ 2 } mdOffset={ 10 }>
+            <Button block
+              disabled={ this.state.uploadingImage == "cover" }
+              onClick={ this.onSave }
+              bsStyle="primary">
+              Save
+            </Button>
+            </Col>
+          </Row>
         </Modal.Body>
       </Modal>);
   }

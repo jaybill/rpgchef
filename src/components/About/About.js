@@ -23,10 +23,10 @@ export default class About extends Component {
           </p>
           <h3>A Note About Game Systems</h3>
           <p>
-            As of this writing, RPG Chef is very focused around content creation for (Oh boy...how do we say this without getting in trouble?) the fifth edition of the world's
-            most popular <a target="_new" href="http://dnd.wizards.com">role-playing game</a>. (There, that ought to do it. Whew!) While you certainly could use
-            RPG Chef to create content for other systems, things like stat blocks are very 5e specific. That said, we are planning to add direct support for other systems
-            if there is enough interest.
+            As of this writing, RPG Chef is very focused on content creation for (Oh boy...how do we say this without getting in trouble?) the fifth edition of the world's most
+            popular <a target="_new" href="http://dnd.wizards.com">role-playing game</a>. (There, that ought to do it. Whew!) While you certainly could use RPG Chef
+            to create content for other systems, things like stat blocks are very 5e specific. That said, we are planning to add direct support for other systems if there
+            is enough interest.
           </p>
           <h3>Technology</h3>
           <p>

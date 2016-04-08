@@ -31,6 +31,7 @@ const templates = {
     '\\CenterWallPaper{1.0}{rpgchefpaper.jpg}\n' +
     '\\setmainfont{TeX Gyre Bonum}\n' +
     '<%= content %>\n' +
+    '<%= endPage %>\n' +
     '\\end{document}\n',
   cover: '\\title{<%= title %>}\n' +
     '\\subtitle{<%= subtitle %>}\n' +
@@ -110,7 +111,21 @@ const templates = {
   tableHeading: '\\textbf{<%= h %>}',
   columnBreak: '\n\\newpage\n',
   pageBreak: '\n\\clearpage\n',
-  text: '<%= text %>\n\n'
+  text: '<%= text %>\n\n',
+  dmGuild: '\\onecolumn\n' +
+    '\\noindent\\minipage[c][\\textheight][s]{\\textwidth}\n' +
+    '\\setlength{\\parskip}{4mm}\n' +
+    '\\vfill\n' +
+    '\\noindent\\begin{center}\n' +
+    '\\noindent\\includegraphics[width=0.25\\linewidth]{dm.pdf}\n' +
+    '\n' +
+    'DUNGEONS \\& DRAGONS, D\\&D, Wizards of the Coast, Forgotten Realms, the dragon ampersand, and all other Wizards of the Coast product names, and their respective logos are trademarks of Wizards of the Coast in the USA and other countries.\n' +
+    '\n' +
+    'This work contains material that is copyright Wizards of the Coast and/or other authors. Such material is used with permission under the Community Content Agreement for Dungeon Masters Guild.\n' +
+    '\n' +
+    'All other original material in this work is copyright <%= year %> by <%= name %>  and published under the Community Content Agreement for Dungeon Masters Guild.\n' +
+    '\\end{center}\n' +
+    '\\endminipage\n'
 };
 
 class Dnd5eLaTeX {
@@ -231,7 +246,16 @@ class Dnd5eLaTeX {
         coverImage: path.join(imagePath, m.coverUrl)
       });
     }
-    return this.createDocument(lt, cover);
+
+    let endb;
+    if (m.metadata && m.metadata.dmsguild) {
+      endb = this.compiled.dmGuild({
+        year: m.metadata.copyrightYear || new Date().getFullYear(),
+        name: m.metadata.copyrightHolder || m.author || "the author"
+      });
+    }
+
+    return this.createDocument(lt, cover, endb);
   }
 
   createText(t) {
@@ -284,7 +308,6 @@ class Dnd5eLaTeX {
     });
   };
 
-
   createTable(data) {
     if (data[0] && data[0].length) {
       const rows = [];
@@ -311,10 +334,11 @@ class Dnd5eLaTeX {
     }
   };
 
-  createDocument(content, cover) {
+  createDocument(content, cover, endPage) {
     return this.compiled.document({
       content: content,
-      cover: cover
+      cover: cover,
+      endPage: endPage
     });
   }
 
@@ -451,7 +475,6 @@ class Dnd5eLaTeX {
 
     return this.compiled[dds](clean);
   }
-
 
   createCommentBox(title, content, format) {
 

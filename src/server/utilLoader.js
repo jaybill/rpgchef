@@ -21,7 +21,7 @@ export const latex = () => {
 };
 
 export const escape = () => {
-  const t = fs.readFileSync('./build/latex/dnd/example.tex', {
+  const t = fs.readFileSync('../templatex/test.tex', {
     encoding: 'utf-8'
   });
   const allLines = t;

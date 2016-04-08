@@ -27,6 +27,11 @@ export default class BottomNav extends Component {
                <Navbar.Toggle />
              </Navbar.Header>
              <Navbar.Collapse>
+               <Nav>
+                 <NavItem>
+                   <span className="dim">{ "v. " + (process.env.RPGCHEF_VERSION || "Local") }</span>
+                 </NavItem>
+               </Nav>
                <Nav pullRight>
                  <NavItem>
                    <OverlayTrigger rootClose={ true }
@@ -43,13 +48,11 @@ export default class BottomNav extends Component {
                  </LinkContainer>
                  <NavDropdown eventKey={ 3 } title={ legalIcon } id="legal">
                    <LinkContainer to="/app/terms">
-                     <MenuItem eventKey={ 3.1 }>
-                       Terms of Service
+                     <MenuItem eventKey={ 3.1 }> Terms of Service
                      </MenuItem>
                    </LinkContainer>
                    <LinkContainer to="/app/privacy">
-                     <MenuItem eventKey={ 3.2 }>
-                       Privacy Policy
+                     <MenuItem eventKey={ 3.2 }> Privacy Policy
                      </MenuItem>
                    </LinkContainer>
                  </NavDropdown>

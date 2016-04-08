@@ -10,7 +10,7 @@ const markdown = (md) => {
 };
 
 const templates = {
-  document: '\\documentclass[10pt,twoside]{article}\n' +
+  document: '\\documentclass[9pt,twoside]{article}\n' +
     '\\usepackage[bg-none]{dnd}\n' +
     '\\usepackage[ngerman]{babel}\n' +
     '\\usepackage{dndcover}\n' +

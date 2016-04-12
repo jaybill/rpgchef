@@ -41,6 +41,13 @@ export default class About extends Component {
           <p>
             Certain print <a href="https://drive.google.com/a/jaybill.com/folderview?id=0B2UyuHLUuCjxRkJYUzBlYkpzSVU&usp=sharing">fonts</a> by <a href="https://www.reddit.com/u/Solbera">Solbera</a>      licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0">Creative Commons (CC BY-SA 4.0)</a>.
           </p>
+          <p>
+            Cover art on front page includes <a href="http://ejlowell.deviantart.com/art/The-Werewolf-461806291">The Werewolf</a> by <a href="http://ejlowell.deviantart.com">EjLowell</a>      and <a href="http://darkgift.ru/gallery.html">The Great Battle</a> by <a href="http://darkgift.ru">Julia Alekseeva</a>. Both licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0">Creative Commons (CC BY-SA 4.0)</a>.
+          </p>
+          <p>
+            Background image is <a href="http://fav.me/d6sq6ee">Fantasy Landscape: Mountains</a> by <a href="http://fpesantez.deviantart.com">Felipe Pesantez</a> licensed
+            under a <a href="http://creativecommons.org/licenses/by-nd/3.0/">Creative Commons Attribution-No Derivative Works 3.0 License.</a>
+          </p>
         </Panel>
         <Label bsStyle="info">
           { "Version: " + (process.env.RPGCHEF_VERSION || "Local") }

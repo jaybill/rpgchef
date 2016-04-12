@@ -28,12 +28,16 @@ export default class SimplePage extends Component {
                   </NavItem>
                 </LinkContainer>
                 <NavDropdown eventKey={ 3 } title="Legal" id="legal">
+                  <LinkContainer to="/legal">
+                    <MenuItem eventKey={ 3.1 }> General
+                    </MenuItem>
+                  </LinkContainer>
                   <LinkContainer to="/terms">
-                    <MenuItem eventKey={ 3.1 }> Terms of Service
+                    <MenuItem eventKey={ 3.2 }> Terms of Service
                     </MenuItem>
                   </LinkContainer>
                   <LinkContainer to="/privacy">
-                    <MenuItem eventKey={ 3.2 }> Privacy Policy
+                    <MenuItem eventKey={ 3.3 }> Privacy Policy
                     </MenuItem>
                   </LinkContainer>
                 </NavDropdown>

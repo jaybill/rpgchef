@@ -47,12 +47,16 @@ export default class BottomNav extends Component {
                    </NavItem>
                  </LinkContainer>
                  <NavDropdown eventKey={ 3 } title={ legalIcon } id="legal">
+                   <LinkContainer to="/app/legal">
+                     <MenuItem eventKey={ 3.1 }> Legal Information
+                     </MenuItem>
+                   </LinkContainer>
                    <LinkContainer to="/app/terms">
-                     <MenuItem eventKey={ 3.1 }> Terms of Service
+                     <MenuItem eventKey={ 3.2 }> Terms of Service
                      </MenuItem>
                    </LinkContainer>
                    <LinkContainer to="/app/privacy">
-                     <MenuItem eventKey={ 3.2 }> Privacy Policy
+                     <MenuItem eventKey={ 3.3 }> Privacy Policy
                      </MenuItem>
                    </LinkContainer>
                  </NavDropdown>

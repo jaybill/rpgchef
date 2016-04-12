@@ -22,6 +22,7 @@ import TermsOfService from '../components/TermsOfService';
 import PrivacyPolicy from '../components/PrivacyPolicy';
 import NotFound from '../components/NotFound';
 import About from '../components/About';
+import Legal from '../components/Legal';
 import SimplePage from '../components/SimplePage';
 
 export default function getRoutes() {
@@ -37,6 +38,7 @@ export default function getRoutes() {
         <Route path="subscribe" component={ Subscribe } />
         <Route path="cancel" component={ Cancel } />
         <Route path="about" component={ About } />
+        <Route path="legal" component={ Legal } />
         <Route path="terms" component={ TermsOfService } />
         <Route path="privacy" component={ PrivacyPolicy } />
       </Route>
@@ -45,6 +47,7 @@ export default function getRoutes() {
         <Route path="register" component={ Register } />
         <Route path="login" component={ Login } />
         <Route path="about" component={ About } />
+        <Route path="legal" component={ Legal } />
         <Route path="terms" component={ TermsOfService } />
         <Route path="privacy" component={ PrivacyPolicy } />
         <Route path="logout" component={ Logout } />

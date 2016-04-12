@@ -60,7 +60,7 @@
     "popsicle-basic-auth": "^0.1.0",
     "procstreams": "^0.3.0",
     "react": "^0.14.2",
-    "react-bootstrap": "^0.28.1",
+    "react-bootstrap": "^0.28.5",
     "react-cookie": "^0.4.1",
     "react-datepicker": "^0.15.2",
     "react-document-title": "^2.0.1",

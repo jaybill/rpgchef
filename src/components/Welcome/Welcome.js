@@ -2,7 +2,7 @@
 import './Welcome.less';
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Carousel, Button, Jumbotron, Grid, Col, Row } from 'react-bootstrap';
+import { Image, Carousel, Button, Jumbotron, Grid, Col, Row } from 'react-bootstrap';
 import SimplePage from '../SimplePage';
 import _ from 'lodash';
 export default class Welcome extends Component {
@@ -36,7 +36,7 @@ export default class Welcome extends Component {
       slides.push(
         <Carousel.Item key={ i } interval={ 7000 }>
           <div className="slide">
-            <div className="slide-text">
+            <div className="hidden-sm hidden-xs slide-text">
               <div>
                 <h2>{ s.title }</h2>
                 <p>
@@ -57,13 +57,23 @@ export default class Welcome extends Component {
       <div className="Welcome">
         <Jumbotron>
           <SimplePage>
-            <Carousel className="fade-carousel">
+            <div className="visible-xs-block visible-sm-block">
+              <h2>RPG Chef helps you create content for tabletop role-playing games, especially 5e.</h2>
+              <Button block
+                href="/mailinglist.html"
+                bsSize="large"
+                bsStyle="primary">
+                Request Beta Invitation
+              </Button>
+              <Image src="/slides/slide2.png" responsive/>
+            </div>
+            <Carousel className="hidden-sm hidden-xs fade-carousel">
               { slides }
             </Carousel>
           </SimplePage>
         </Jumbotron>
-        <div className="container purpose">
-          <h3>RPG Chef helps you is create content for tabletop role-playing games, especially 5e.</h3>
+        <div className="container purpose hidden-sm hidden-xs fade-carousel">
+          <h3>RPG Chef helps you create content for tabletop role-playing games, especially 5e.</h3>
           <Button href="/mailinglist.html" bsSize="large" bsStyle="primary">
             Request Beta Invitation
           </Button>

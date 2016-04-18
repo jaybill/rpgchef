@@ -214,17 +214,34 @@ export default class MakeMonster extends Component {
           { this.props.toolbar }
           <Panel>
             <div className="form">
-              <div className="form-group">
-                <div className="input-group">
-                  <span title="Monster" className="input-group-addon"><i onClick={ this.props.onCloseSection } className="icon icon-goblin"></i></span>
-                  <CtrldInputText type="text"
-                    placeholder="i.e.'Goblin'"
-                    className="form-control"
-                    value={ c.content.name }
-                    name={ ["content", k, "content", "name"] }
-                    onFieldChange={ this.props.onFieldChange } />
+              <Row>
+                <Col md={ 8 }>
+                <div className="form-group">
+                  <div className="input-group">
+                    <span title="Monster" className="input-group-addon"><i onClick={ this.props.onCloseSection } className="icon icon-goblin"></i></span>
+                    <CtrldInputText type="text"
+                      placeholder="i.e.'Goblin'"
+                      className="form-control"
+                      value={ c.content.name }
+                      name={ ["content", k, "content", "name"] }
+                      onFieldChange={ this.props.onFieldChange } />
+                  </div>
                 </div>
-              </div>
+                </Col>
+                <Col md={ 4 }>
+                <Input value={ c.content.displaySize }
+                  onChange={ this.handleSelect.bind(this, ["content", k, "content", "displaySize"]) }
+                  addonBefore="Display Format"
+                  type="select">
+                <option value="normal">
+                  Normal (1 column)
+                </option>
+                <option value="large">
+                  Large (2 column)
+                </option>
+                </Input>
+                </Col>
+              </Row>
               <Row>
                 <Col md={ 4 }>
                 <div className="form-group ">
@@ -399,40 +416,12 @@ export default class MakeMonster extends Component {
                 <Col md={ 4 }>
                 <div className="form-group ">
                   <div className="input-group">
-                    <span title="Size" className="input-group-addon">Damage Immunities</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e. 'acid, lightning'"
-                      className="form-control"
-                      value={ c.content.damageImmunities }
-                      name={ ["content", k, "content", "damageImmunities"] }
-                      onFieldChange={ this.props.onFieldChange } />
-                  </div>
-                </div>
-                </Col>
-                <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
                     <span title="Size" className="input-group-addon">Damage Resistance</span>
                     <CtrldInputText type="text"
                       placeholder="i.e. 'acid, lightning'"
                       className="form-control"
                       value={ c.content.damageResistances }
                       name={ ["content", k, "content", "damageResistances"] }
-                      onFieldChange={ this.props.onFieldChange } />
-                  </div>
-                </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={ 4 }>
-                <div className="form-group ">
-                  <div className="input-group">
-                    <span title="Size" className="input-group-addon">Senses</span>
-                    <CtrldInputText type="text"
-                      placeholder="i.e.'darkvision 120 ft'"
-                      className="form-control"
-                      value={ c.content.senses }
-                      name={ ["content", k, "content", "senses"] }
                       onFieldChange={ this.props.onFieldChange } />
                   </div>
                 </div>
@@ -450,7 +439,22 @@ export default class MakeMonster extends Component {
                   </div>
                 </div>
                 </Col>
-                <Col md={ 4 }>
+              </Row>
+              <Row>
+                <Col md={ 6 }>
+                <div className="form-group ">
+                  <div className="input-group">
+                    <span title="Size" className="input-group-addon">Senses</span>
+                    <CtrldInputText type="text"
+                      placeholder="i.e.'darkvision 120 ft'"
+                      className="form-control"
+                      value={ c.content.senses }
+                      name={ ["content", k, "content", "senses"] }
+                      onFieldChange={ this.props.onFieldChange } />
+                  </div>
+                </div>
+                </Col>
+                <Col md={ 6 }>
                 <div className="form-group ">
                   <div className="input-group">
                     <span title="Size" className="input-group-addon">Skills</span>
@@ -475,19 +479,6 @@ export default class MakeMonster extends Component {
               </Row>
               <Row>
                 { legendaryActions }
-                <Col md={ 6 }>
-                <Input value={ c.content.displaySize }
-                  onChange={ this.handleSelect.bind(this, ["content", k, "content", "displaySize"]) }
-                  addonBefore="Display Format"
-                  type="select">
-                <option value="normal">
-                  Normal (1 column)
-                </option>
-                <option value="large">
-                  Large (2 column)
-                </option>
-                </Input>
-                </Col>
               </Row>
             </div>
           </Panel>

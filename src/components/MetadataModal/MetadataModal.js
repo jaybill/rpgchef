@@ -246,7 +246,7 @@ export default class MetadataModal extends Component {
             </div>
             <Input value={ this.state.metadata.dmsguild }
               onChange={ this.handleMetaSelect.bind(this, "dmsguild") }
-              label="Will this DMs Guild content?"
+              label="Will this be DMs Guild content?"
               type="select">
             <option value={ false }>
               No

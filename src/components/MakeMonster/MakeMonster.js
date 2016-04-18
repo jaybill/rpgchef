@@ -212,13 +212,16 @@ export default class MakeMonster extends Component {
       wtr = (
         <section key={ k } ref={ ref } className={ ref }>
           { this.props.toolbar }
-          <Panel>
+          <Panel className="MakeMonster">
             <div className="form">
               <Row>
                 <Col md={ 8 }>
                 <div className="form-group">
                   <div className="input-group">
-                    <span title="Monster" className="input-group-addon"><i onClick={ this.props.onCloseSection } className="icon icon-goblin"></i></span>
+                    <span title="Click to collapse"
+                      onClick={ this.props.onCloseSection }
+                      title="Click to collapse"
+                      className="input-group-addon section-collapse"><i className="icon icon-goblin"></i></span>
                     <CtrldInputText type="text"
                       placeholder="i.e.'Goblin'"
                       className="form-control"
@@ -484,12 +487,19 @@ export default class MakeMonster extends Component {
           </Panel>
         </section>);
     } else {
-      wtr = (<section key={ k } ref={ ref } className={ ref }>
-               { this.props.toolbar }
-               <Panel onClick={ this.props.onOpenSection }>
-                 <h4><i className="icon icon-goblin"/> { c.content.name || "Monster" }</h4>
-               </Panel>
-             </section>);
+      wtr = (
+        <section onClick={ this.props.onOpenSection }
+          key={ k }
+          title="Click to expand"
+          ref={ ref }
+          className={ ref }>
+          { this.props.toolbar }
+          <div className="MakeMonster">
+            <Panel className="section-collapse">
+              <h4><i className="icon icon-goblin"/> { c.content.name || "Monster" }</h4>
+            </Panel>
+          </div>
+        </section>);
     }
     return wtr;
   }

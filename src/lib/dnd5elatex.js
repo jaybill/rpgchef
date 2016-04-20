@@ -319,11 +319,13 @@ class Dnd5eLaTeX {
         t = "image";
         break;
     }
-
-
-    return this.compiled[t]({
-      path: path.join(imagePath, filename)
-    });
+    if (filename) {
+      return this.compiled[t]({
+        path: path.join(imagePath, filename)
+      });
+    } else {
+      return "";
+    }
   }
 
   createSubsection(title) {

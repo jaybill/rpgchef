@@ -52,9 +52,10 @@ const templates = {
   paperBox: '\\begin{paperboxcustom}{<%= title %>}\n' +
     '<%= content %>\n' +
     '\\end{paperboxcustom}\n',
-  quote: '\\begin{quotebox}\n' +
+  readAloud: '\\begin{quotebox}\n' +
     '<%= text %>\n' +
     '\\end{quotebox}\n',
+  quote: '\\racequote{<%= firstLine %>}{<%= text %>}{<%= attributeTo %>}\n',
   monster: '\\begin{monsterbox}{<%= name  %>}\n' +
     '\t\\textit{<%= size %> <%= raceOrType %>, <%= alignment %>}\\\\\n' +
     '\t\\hline\n' +
@@ -143,6 +144,7 @@ class Dnd5eLaTeX {
     this.createImage = this.createImage.bind(this);
     this.createText = this.createText.bind(this);
     this.createQuote = this.createQuote.bind(this);
+    this.createReadAloud = this.createReadAloud.bind(this);
     this.dd = new DnD5e();
 
     this.compiled = {};
@@ -202,8 +204,13 @@ class Dnd5eLaTeX {
         case "text":
           lt += this.createText(s.content.text);
           break;
+
+        case "racequote":
+          lt += this.createQuote(s.content.text, s.content.attributeTo);
+          break;
+
         case "quote":
-          lt += this.createQuote(s.content.text);
+          lt += this.createReadAloud(s.content.text);
           break;
 
         case "subsection":
@@ -264,9 +271,32 @@ class Dnd5eLaTeX {
     });
   }
 
-  createQuote(t) {
+  createReadAloud(t) {
     return this.compiled.quote({
       text: this.escape(t, true)
+    });
+  }
+
+  createQuote(t, a) {
+    let fl;
+    let tt;
+
+
+
+    if (t) {
+      const ttt = t.split("\n\n");
+      if (ttt.length > 1) {
+        fl = ttt.shift();
+        tt = ttt.join("\n\n");
+      } else {
+        fl = t;
+      }
+    }
+
+    return this.compiled.quote({
+      firstLine: this.escape(fl),
+      attributeTo: this.escape(a, true),
+      text: this.escape(tt)
     });
   }
 

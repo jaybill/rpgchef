@@ -10,7 +10,7 @@ import DnD5e from '../lib/dnd5e';
 import Dnd5eLaTeX from '../lib/dnd5elatex';
 
 export const latex = () => {
-  Db.Modules.findById(2).then((mm) => {
+  Db.Modules.findById(4).then((mm) => {
     const latexContent = Dnd5eLaTeX.getLatexForModule(mm, "/tmp");
     console.log(latexContent);
   }).catch((err) => {

@@ -370,40 +370,48 @@ export default class Module extends Component {
     const self = this;
     let newSection = {};
     switch (type) {
+
       case "pagebreak":
         newSection.type = "pagebreak";
         break;
+
       case "columnbreak":
         newSection.type = "columnbreak";
         break;
+
       case "section":
         newSection.type = "section";
         newSection.content = {
           title: ""
         };
         break;
+
       case "image":
         newSection.type = "image";
         newSection.content = {};
         break;
+
       case "subsection":
         newSection.type = "subsection";
         newSection.content = {
           title: ""
         };
         break;
+
       case "subsubsection":
         newSection.type = "subsubsection";
         newSection.content = {
           title: ""
         };
         break;
+
       case "table":
         newSection.type = "table";
         newSection.content = {
           data: []
         };
         break;
+
       case "monster":
         newSection.type = "monster";
         newSection.content = {
@@ -449,6 +457,14 @@ export default class Module extends Component {
           displayFormat: "paper"
         };
         break;
+
+      case "racequote":
+        newSection.type = "racequote";
+        newSection.content = {
+          text: ""
+        };
+        break;
+
       case "quote":
         newSection.type = "quote";
         newSection.content = {
@@ -662,7 +678,10 @@ export default class Module extends Component {
             sec = <MakeSection {...commonProps} sub={ 3 } />;
             break;
           case "quote":
-            sec = <MakeText {...commonProps} quote={ true } />;
+            sec = <MakeText {...commonProps} quoteType="quote" />;
+            break;
+          case "racequote":
+            sec = <MakeText {...commonProps} quoteType="racequote" />;
             break;
           case "text":
             sec = <MakeText {...commonProps} />;
@@ -732,8 +751,11 @@ export default class Module extends Component {
                     <NavItem onClick={ self.addSection } title="Insert Text">
                       <i className="fa fa-paragraph fa-fw"></i>
                     </NavItem>
-                    <NavItem onClick={ self.addSection.bind(this, "quote") } title="Insert Quote">
+                    <NavItem onClick={ self.addSection.bind(this, "racequote") } title="Insert Quote">
                       <i className="fa fa-quote-left fa-fw"></i>
+                    </NavItem>
+                    <NavItem onClick={ self.addSection.bind(this, "quote") } title="Insert Read Aloud Text">
+                      <i className="fa fa-comment fa-fw"></i>
                     </NavItem>
                     <NavItem onClick={ self.addSection.bind(this, "commentbox") } title="Insert Text Box">
                       <i className="fa fa-list-alt fa-fw"></i>

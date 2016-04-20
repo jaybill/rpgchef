@@ -13,6 +13,26 @@ export default class SectionToolbar extends Component {
     const k = this.props.keyName;
     const disabled = this.props.disabled;
     const last = this.props.last;
+
+    const mbProps = {
+      title: "Mark",
+      bsSize: "xs",
+      bsStyle: "default",
+      onClick: () => {
+        this.props.toggleSectionMark(k);
+      }
+    };
+
+    if (this.props.marked) {
+      mbProps.bsStyle = "success";
+    }
+
+    let markButton = (
+    <Button {...mbProps}>
+      <i className="fa fa-check fa-fw"></i>
+    </Button>
+    );
+
     return <ButtonToolbar>
              <ButtonGroup className="pull-right">
                <Button title="Move to top"
@@ -39,6 +59,7 @@ export default class SectionToolbar extends Component {
                  bsSize="xs">
                  <i className="fa fa-arrow-down fa-fw"></i>
                </Button>
+               { markButton }
              </ButtonGroup>
              <ConfirmDelete disabled={ disabled }
                className="pull-right"

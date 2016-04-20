@@ -18,6 +18,7 @@ import MonstersContainer from '../../frontend/containers/MonstersContainer';
 import PdfPreview from '../PdfPreview';
 import ScrollToElement from 'scroll-to-element';
 import MetadataModal from '../MetadataModal';
+import ConfirmDelete from '../ConfirmDelete';
 
 export default class Module extends Component {
 
@@ -36,10 +37,6 @@ export default class Module extends Component {
     this.moveToBottom = this.moveToBottom.bind(this);
     this.addSection = this.addSection.bind(this);
     this.makeEditable = this.makeEditable.bind(this);
-    this.lazyUpdate = _.throttle((newstate, callback) => {
-      this.setState(newstate, callback);
-    }, 100);
-    this.lazyUpdate = this.lazyUpdate.bind(this);
     this.save = this.save.bind(this);
     this.openMonsterModal = this.openMonsterModal.bind(this);
     this.closeMonsterModal = this.closeMonsterModal.bind(this);
@@ -49,15 +46,22 @@ export default class Module extends Component {
     this.closePreviewModal = this.closePreviewModal.bind(this);
     this.openMetaModal = this.openMetaModal.bind(this);
     this.closeMetaModal = this.closeMetaModal.bind(this);
-
     this.resetMetaDone = this.resetMetaDone.bind(this);
-
     this.getSaveable = this.getSaveable.bind(this);
+    this.toggleSectionMark = this.toggleSectionMark.bind(this);
+    this.removeMarked = this.removeMarked.bind(this);
+    this.removeSections = this.removeSections.bind(this);
+
+    this.lazyUpdate = _.throttle((newstate, callback) => {
+      this.setState(newstate, callback);
+    }, 100);
+    this.lazyUpdate = this.lazyUpdate.bind(this);
+
     this.state = {
-      previewModalOpen: false
+      previewModalOpen: false,
+      marked: []
     };
   }
-
 
   resetMetaDone() {
     this.setState({
@@ -86,7 +90,6 @@ export default class Module extends Component {
     this.props.resetPreview();
   }
 
-
   openMetaModal() {
     this.setState({
       metaModalOpen: true,
@@ -99,7 +102,6 @@ export default class Module extends Component {
       metaModalOpen: false
     }, () => {
       if (save) {
-
         if (!this.state.hasCover) {
           if (this.state.coverUrl) {
             this.props.onDeleteImage(this.state.coverUrl);
@@ -108,7 +110,6 @@ export default class Module extends Component {
           w.coverUrl = null;
           w.hasCover = false;
           this.save(w);
-
         } else {
           this.onPost();
         }
@@ -144,7 +145,6 @@ export default class Module extends Component {
       this.onPost();
     });
   }
-
 
   makePdf() {
     this.props.makePdf(this.getSaveable());
@@ -306,6 +306,27 @@ export default class Module extends Component {
     }
   }
 
+  removeMarked() {
+    if (this.state.marked.length) {
+      this.removeSections(this.state.marked);
+      this.setState({
+        marked: []
+      });
+    }
+  }
+
+  toggleSectionMark(k) {
+    let marks = Object.assign([], this.state.marked);
+    if (this.state.marked.indexOf(k) == -1) {
+      marks.push(k);
+    } else {
+      _.pull(marks, k);
+    }
+    this.setState({
+      marked: marks
+    });
+  }
+
   moveSection(k, a) {
     const newContent = Object.assign([], this.state.content);
     [newContent[k], newContent[k + a]] = [newContent[k + a], newContent[k]];
@@ -360,6 +381,32 @@ export default class Module extends Component {
       if (filename) {
         this.props.onDeleteImage(filename);
       }
+      this.onPost();
+      this.openSection(null);
+    });
+  }
+
+  removeSections(ks) {
+    let newContent = Object.assign([], this.state.content);
+
+    for (let i = ks.length - 1; i >= 0; i--) {
+      let filename;
+      if (newContent[i].type == "image"
+        && newContent[i].content
+        && newContent[i].content.filename) {
+        filename = newContent[i].content.filename;
+      }
+      if (filename) {
+        this.props.onDeleteImage(filename);
+      }
+      newContent.splice(ks[i], 1);
+    }
+
+    this.setState({
+      content: newContent,
+      scrollToLast: false,
+      skipUpdate: false
+    }, () => {
       this.onPost();
       this.openSection(null);
     });
@@ -621,13 +668,23 @@ export default class Module extends Component {
                             </Button>
                           </Popover>;
 
+    const deleteMarkedPopover = <Popover id="confirm-delete" rootClose={ true } title="Confirm Delete">
+                                  <p>
+                                    Are you sure you want to delete all marked items? This cannot be undone.
+                                  </p>
+                                  <Button onClick={ this.removeMarked }
+                                    block
+                                    bsSize="small"
+                                    bsStyle="danger">
+                                    Delete Marked
+                                  </Button>
+                                </Popover>;
 
 
     const {content} = this.props;
     const sections = [];
 
     if (this.state.content) {
-
       _.forEach(this.state.content, (s, key) => {
         let sec;
         const st = (
@@ -636,7 +693,10 @@ export default class Module extends Component {
           moveToTop={ this.moveToTop }
           moveToBottom={ this.moveToBottom }
           moveSection={ this.moveSection }
-          removeSection={ this.removeSection } />);
+          removeSection={ this.removeSection }
+          marked={ this.state.marked.indexOf(key) != -1 }
+          toggleSectionMark={ this.toggleSectionMark } />
+        );
         const commonProps = {
           refName: ref,
           ref: "section-" + key,
@@ -704,6 +764,7 @@ export default class Module extends Component {
 
     const monsterTitle = <i className="icon icon-goblin"></i>;
     const sectionTitle = <i className="fa fa-header fa-fw"></i>;
+    const markedTitle = <i className="fa fa-check fa-fw"></i>;
 
     const meta = {
       author: this.state.author,
@@ -712,6 +773,23 @@ export default class Module extends Component {
       coverUrl: this.state.coverUrl,
       metadata: this.state.metadata
     };
+
+    let markedMenu;
+
+    if (this.state.marked.length) {
+      markedMenu = (
+        <NavDropdown eventKey={ 7 } title={ markedTitle } id="nav-dropdown">
+          <OverlayTrigger rootClose={ true }
+            trigger="click"
+            placement="left"
+            overlay={ deleteMarkedPopover }>
+            <MenuItem title="Delete">
+            <i className="fa fa-trash-o fa-fw"></i> Delete Marked
+            </MenuItem>
+          </OverlayTrigger>
+        </NavDropdown>);
+
+    }
 
     return (<div className="Module">
               <Navbar fixedTop>
@@ -781,6 +859,7 @@ export default class Module extends Component {
                     <NavItem onClick={ this.openMetaModal } title="Edit Metadata">
                       <i className="fa fa-book fa-fw"></i>
                     </NavItem>
+                    { markedMenu }
                   </Nav>
                   <Nav pullRight>
                     { displayMessage }

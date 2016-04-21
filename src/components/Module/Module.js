@@ -19,6 +19,7 @@ import PdfPreview from '../PdfPreview';
 import ScrollToElement from 'scroll-to-element';
 import MetadataModal from '../MetadataModal';
 import ConfirmDelete from '../ConfirmDelete';
+import Sidebar from '../Sidebar';
 
 export default class Module extends Component {
 
@@ -781,6 +782,7 @@ export default class Module extends Component {
 
     let markedMenu;
 
+
     if (this.state.marked.length) {
       markedMenu = (
         <NavDropdown eventKey={ 7 } title={ markedTitle } id="nav-dropdown">
@@ -797,6 +799,12 @@ export default class Module extends Component {
         </NavDropdown>);
 
     }
+
+    let sidebar;
+
+    sidebar = (
+      <Sidebar/>
+    );
 
     return (<div className="Module">
               <Navbar fixedTop>
@@ -891,6 +899,7 @@ export default class Module extends Component {
                 uploadImage={ this.props.uploadImage }
                 uploadReset={ this.props.uploadReset }
                 moduleId={ this.state.id } />
+              { sidebar }
               { heading }
               { subtitleHeading }
               { editor }

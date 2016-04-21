@@ -51,6 +51,7 @@ export default class Module extends Component {
     this.toggleSectionMark = this.toggleSectionMark.bind(this);
     this.removeMarked = this.removeMarked.bind(this);
     this.removeSections = this.removeSections.bind(this);
+    this.unmarkAll = this.unmarkAll.bind(this);
 
     this.lazyUpdate = _.throttle((newstate, callback) => {
       this.setState(newstate, callback);
@@ -264,13 +265,11 @@ export default class Module extends Component {
     const deleteImage = newProps.deleteImage;
 
     if (deleteImage.succeeded && deleteImage.payload.k == "cover") {
-
       this.setState({
         hasCover: false,
         coverUrl: null,
         resetMeta: true
       }, this.props.onDeleteImageReset);
-
     }
 
     if (!delSuccceeded && !delWorking && (succeeded || failed)) {
@@ -313,6 +312,12 @@ export default class Module extends Component {
         marked: []
       });
     }
+  }
+
+  unmarkAll() {
+    this.setState({
+      marked: []
+    });
   }
 
   toggleSectionMark(k) {
@@ -787,6 +792,8 @@ export default class Module extends Component {
             <i className="fa fa-trash-o fa-fw"></i> Delete Marked
             </MenuItem>
           </OverlayTrigger>
+          <MenuItem onClick={ this.unmarkAll }> Unmark All
+          </MenuItem>
         </NavDropdown>);
 
     }

@@ -61,8 +61,15 @@ export default class Module extends Component {
 
     this.state = {
       previewModalOpen: false,
-      marked: []
+      marked: [],
+      openSidebar: false
     };
+  }
+
+  openSidebar(open) {
+    this.setState({
+      openSidebar: !!open
+    });
   }
 
   resetMetaDone() {
@@ -800,11 +807,9 @@ export default class Module extends Component {
 
     }
 
-    let sidebar;
 
-    sidebar = (
-      <Sidebar/>
-    );
+
+
 
     return (<div className="Module">
               <Navbar fixedTop>
@@ -899,7 +904,7 @@ export default class Module extends Component {
                 uploadImage={ this.props.uploadImage }
                 uploadReset={ this.props.uploadReset }
                 moduleId={ this.state.id } />
-              { sidebar }
+              <Sidebar onOpen={ this.openSidebar.bind(this, true) } onClose={ this.openSidebar.bind(this, false) } open={ this.state.openSidebar } />
               { heading }
               { subtitleHeading }
               { editor }

@@ -1,13 +1,49 @@
 .Sidebar {
+    h4{
+        margin-top: 4px;
+    }
     display: block;
+    padding: 4px;
     width: 300px;
     position: fixed;
     top: 120px;
     bottom: auto;
     right: auto;
-    left: 0px;
-    background: #fff;
+    color: #fff;
+    background: #000;
     min-height: 100%;
     z-index: 10000;
-    box-shadow: 10px 0px rgba(0,0,0,0.4);
+    .button {
+        float: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        color: #000;
+        background: #fff;
+        border-radius: 50%;
+        i {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+}
+
+.Sidebar.closed {
+    left: -300px + 8px + 32px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.Sidebar.open {
+    left: 0px;
+    background-color: rgba(0, 0, 0, 1);
+    box-shadow: 10px 0px rgba(0, 0, 0, 0.4);
+    .button{
+        opacity: 0.5;
+    }
+    .button:hover{
+        opacity: 1;
+                 }
 }

@@ -20,6 +20,8 @@ import ScrollToElement from 'scroll-to-element';
 import MetadataModal from '../MetadataModal';
 import ConfirmDelete from '../ConfirmDelete';
 import Sidebar from '../Sidebar';
+import OutlineCard from '../OutlineCard';
+import update from 'react/lib/update';
 
 export default class Module extends Component {
 
@@ -53,6 +55,7 @@ export default class Module extends Component {
     this.removeMarked = this.removeMarked.bind(this);
     this.removeSections = this.removeSections.bind(this);
     this.unmarkAll = this.unmarkAll.bind(this);
+    this.swapSections = this.swapSections.bind(this);
 
     this.lazyUpdate = _.throttle((newstate, callback) => {
       this.setState(newstate, callback);
@@ -79,9 +82,15 @@ export default class Module extends Component {
   }
 
   openSection(k) {
+    let o;
+    if (typeof k != "undefined" && typeof k != "null") {
+      o = true;
+    } else {
+      o = false;
+    }
     this.setState({
       openSection: k,
-      scrollToOpen: !!k
+      scrollToOpen: o
     });
   }
 
@@ -338,6 +347,20 @@ export default class Module extends Component {
     this.setState({
       marked: marks
     });
+  }
+
+  swapSections(k, n) {
+    const {content} = this.state;
+    const movingItem = content[k];
+
+    this.setState(update(this.state, {
+      content: {
+        $splice: [
+          [k, 1],
+          [n, 0, movingItem]
+        ]
+      }
+    }));
   }
 
   moveSection(k, a) {
@@ -698,7 +721,7 @@ export default class Module extends Component {
     const sections = [];
     const outline = [];
 
-    log.debug(this.state.content);
+
     if (this.state.content) {
       _.forEach(this.state.content, (s, key) => {
         let sec;
@@ -732,15 +755,15 @@ export default class Module extends Component {
         switch (s.type) {
           case "pagebreak":
             sec = <MakeBreak {...commonProps} breakType="page" />;
-            outlineItem.text = "- page break -";
+            outlineItem.text = <OutlineCard iconClass="icon icon-page-break" text="Page Break" />;
             break;
           case "columnbreak":
             sec = <MakeBreak {...commonProps} />;
-            outlineItem.text = "- column break -";
+            outlineItem.text = <OutlineCard iconClass="icon icon-column-break" text="Column Break" />;
             break;
           case "table":
             sec = <MakeTable {...commonProps} />;
-            outlineItem.text = "- table -";
+            outlineItem.text = <OutlineCard iconClass="fa fa-table fa-fw" text="Table" />;
             break;
           case "image":
             sec = <MakeImage {...commonProps}
@@ -748,39 +771,41 @@ export default class Module extends Component {
                     uploadImage={ this.props.uploadImage }
                     uploadReset={ this.props.uploadReset }
                     moduleId={ this.state.id } />;
-            outlineItem.text = "- image -";
+            outlineItem.text = <OutlineCard iconClass="fa fa-picture-o fa-fw" text="Image" />;
             break;
           case "section":
             sec = <MakeSection {...commonProps} />;
-            outlineItem.text = _.trunc("H1: " + s.content.title);
+            outlineItem.text = <OutlineCard iconClass="fa fa-header fa-fw" text={ _.trunc(s.content.title) } />;
             break;
           case "subsection":
             sec = <MakeSection {...commonProps} sub={ 2 } />;
-            outlineItem.text = _.trunc("H2: " + s.content.title);
+            outlineItem.text = <OutlineCard iconClass="fa fa-header fa-fw" text={ _.trunc(s.content.title) } />;
+
             break;
           case "subsubsection":
             sec = <MakeSection {...commonProps} sub={ 3 } />;
-            outlineItem.text = _.trunc("H3: " + s.content.title);
+            outlineItem.text = <OutlineCard iconClass="fa fa-header fa-fw" text={ _.trunc(s.content.title) } />;
             break;
           case "quote":
             sec = <MakeText {...commonProps} quoteType="quote" />;
-            outlineItem.text = _.trunc(s.content.text);
+            outlineItem.text = <OutlineCard iconClass="fa fa-comment fa-fw" text={ _.trunc(s.content.text) } />;
+
             break;
           case "racequote":
             sec = <MakeText {...commonProps} quoteType="racequote" />;
-            outlineItem.text = _.trunc(s.content.text);
+            outlineItem.text = <OutlineCard iconClass="fa fa-quote-left fa-fw" text={ _.trunc(s.content.text) } />;
             break;
           case "text":
             sec = <MakeText {...commonProps} />;
-            outlineItem.text = _.trunc(s.content.text);
+            outlineItem.text = <OutlineCard iconClass="fa fa-paragraph fa-fw" text={ _.trunc(s.content.text) } />;
             break;
           case "commentbox":
             sec = <MakeCommentBox {...commonProps} />;
-            outlineItem.text = _.trunc(s.content.title);
+            outlineItem.text = <OutlineCard iconClass="fa fa-list-alt fa-fw" text={ _.trunc(s.content.title) } />;
             break;
           case "monster":
             sec = <MakeMonster {...commonProps} />;
-            outlineItem.text = _.trunc(s.content.name);
+            outlineItem.text = <OutlineCard iconClass="icon icon-goblin" text={ _.trunc(s.content.name) } />;
             break;
         }
         sections.push(sec);
@@ -926,6 +951,8 @@ export default class Module extends Component {
                 uploadReset={ this.props.uploadReset }
                 moduleId={ this.state.id } />
               <Sidebar cards={ outline }
+                clickOn={ this.openSection }
+                onMoveSection={ this.swapSections }
                 onOpen={ this.openSidebar.bind(this, true) }
                 onClose={ this.openSidebar.bind(this, false) }
                 open={ this.state.openSidebar } />

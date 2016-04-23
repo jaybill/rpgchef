@@ -9,11 +9,11 @@
     width: 300px;
     position: fixed;
     top: 120px;
-    bottom: auto;
+    bottom: 0px;
     right: auto;
     color: #fff;
     background: #000;
-    min-height: 100%;
+    
     z-index: 10000;
     .button {
         float: right;
@@ -31,14 +31,20 @@
         }
     }
     .outline{
-        padding-top: 4px;
-        width: 100%;
+        position: absolute;
+        top: 50px;
+        width: 291px;
+        bottom: 10px;
+        overflow-y: auto;
+        .icon{
+            margin-left: 4px;
+        }
     }
 }
 
 .Sidebar.closed {
     left: -300px + 8px + 32px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .Sidebar.open {

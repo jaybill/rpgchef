@@ -54,7 +54,11 @@ export default class Sidebar extends Component {
             index={ i }
             id={ card.id }
             text={ card.text }
-            moveCard={ this.moveCard } />
+            moveCard={ this.moveCard }
+            clickOn={ () => {
+                        this.props.clickOn(card.id);
+                      } }
+            dropCard={ this.props.onMoveSection } />
           );
       });
 

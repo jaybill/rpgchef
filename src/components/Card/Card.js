@@ -4,18 +4,27 @@ import ItemTypes from './ItemTypes';
 import { DragSource, DropTarget } from 'react-dnd';
 import { Nav, NavItem } from 'react-bootstrap';
 import './Card.less';
+import log from 'loglevel';
 
+let cardIndexAtStart;
 
 const cardSource = {
   beginDrag(props) {
+    cardIndexAtStart = props.index;
     return {
       id: props.id,
       index: props.index
     };
   }
+
 };
 
 const cardTarget = {
+
+  drop(props, monitor, component) {
+    props.dropCard(cardIndexAtStart, props.index);
+  },
+
   hover(props, monitor, component) {
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
@@ -78,8 +87,9 @@ class Card extends Component {
       index: PropTypes.number.isRequired,
       isDragging: PropTypes.bool.isRequired,
       id: PropTypes.any.isRequired,
-      text: PropTypes.string.isRequired,
-      moveCard: PropTypes.func.isRequired
+      text: PropTypes.node.isRequired,
+      moveCard: PropTypes.func.isRequired,
+      dropCard: PropTypes.func.isRequired
   };
 
   render() {
@@ -87,7 +97,7 @@ class Card extends Component {
     const clname = isDragging ? "Card dragging-over" : "Card";
 
     return connectDragSource(connectDropTarget(
-      <div className={ clname }>
+      <div onClick={ this.props.clickOn } className={ clname }>
         { text }
       </div>
     ));

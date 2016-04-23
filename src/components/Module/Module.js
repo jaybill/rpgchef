@@ -696,10 +696,15 @@ export default class Module extends Component {
 
     const {content} = this.props;
     const sections = [];
+    const outline = [];
 
+    log.debug(this.state.content);
     if (this.state.content) {
       _.forEach(this.state.content, (s, key) => {
         let sec;
+        const outlineItem = {
+          id: key
+        };
         const st = (
         <SectionToolbar keyName={ key }
           last={ this.state.content.length - 1 }
@@ -727,12 +732,15 @@ export default class Module extends Component {
         switch (s.type) {
           case "pagebreak":
             sec = <MakeBreak {...commonProps} breakType="page" />;
+            outlineItem.text = "- page break -";
             break;
           case "columnbreak":
             sec = <MakeBreak {...commonProps} />;
+            outlineItem.text = "- column break -";
             break;
           case "table":
             sec = <MakeTable {...commonProps} />;
+            outlineItem.text = "- table -";
             break;
           case "image":
             sec = <MakeImage {...commonProps}
@@ -740,33 +748,46 @@ export default class Module extends Component {
                     uploadImage={ this.props.uploadImage }
                     uploadReset={ this.props.uploadReset }
                     moduleId={ this.state.id } />;
+            outlineItem.text = "- image -";
             break;
           case "section":
             sec = <MakeSection {...commonProps} />;
+            outlineItem.text = _.trunc("H1: " + s.content.title);
             break;
           case "subsection":
             sec = <MakeSection {...commonProps} sub={ 2 } />;
+            outlineItem.text = _.trunc("H2: " + s.content.title);
             break;
           case "subsubsection":
             sec = <MakeSection {...commonProps} sub={ 3 } />;
+            outlineItem.text = _.trunc("H3: " + s.content.title);
             break;
           case "quote":
             sec = <MakeText {...commonProps} quoteType="quote" />;
+            outlineItem.text = _.trunc(s.content.text);
             break;
           case "racequote":
             sec = <MakeText {...commonProps} quoteType="racequote" />;
+            outlineItem.text = _.trunc(s.content.text);
             break;
           case "text":
             sec = <MakeText {...commonProps} />;
+            outlineItem.text = _.trunc(s.content.text);
             break;
           case "commentbox":
             sec = <MakeCommentBox {...commonProps} />;
+            outlineItem.text = _.trunc(s.content.title);
             break;
           case "monster":
             sec = <MakeMonster {...commonProps} />;
+            outlineItem.text = _.trunc(s.content.name);
             break;
         }
         sections.push(sec);
+        if (!outlineItem.text) {
+          outlineItem.text = "- empty -";
+        }
+        outline.push(outlineItem);
       });
 
 
@@ -904,7 +925,10 @@ export default class Module extends Component {
                 uploadImage={ this.props.uploadImage }
                 uploadReset={ this.props.uploadReset }
                 moduleId={ this.state.id } />
-              <Sidebar onOpen={ this.openSidebar.bind(this, true) } onClose={ this.openSidebar.bind(this, false) } open={ this.state.openSidebar } />
+              <Sidebar cards={ outline }
+                onOpen={ this.openSidebar.bind(this, true) }
+                onClose={ this.openSidebar.bind(this, false) }
+                open={ this.state.openSidebar } />
               { heading }
               { subtitleHeading }
               { editor }

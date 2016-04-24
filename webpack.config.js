@@ -29,7 +29,7 @@ var GLOBALS = {
 var babelQuery = {
   cacheDirectory: true,
   presets: ['es2015', 'stage-0', 'react'],
-  plugins: ["check-es2015-constants", "transform-es2015-block-scoping", "transform-es2015-constants", "transform-runtime", "transform-decorators-legacy"]
+  plugins: ["check-es2015-constants", "transform-es2015-block-scoping", "transform-es2015-constants", "transform-runtime", "transform-decorators-legacy", "transform-es2015-template-literals"]
 };
 
 //

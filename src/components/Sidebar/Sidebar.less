@@ -4,17 +4,19 @@
         margin-left: 6px;
         margin-bottom: 6px;
     }
+    
     display: block;
     padding: 4px;
     width: 300px;
     position: fixed;
     top: 120px;
+    left: 0px;
     bottom: 0px;
     right: auto;
     color: #fff;
-    background: #000;
-    
+    background: #000;    
     z-index: 10000;
+
     .button {
         float: right;
         display: flex;
@@ -30,32 +32,17 @@
             padding: 0;
         }
     }
+    
     .outline{
         position: absolute;
         top: 40px;
         width: 291px;
         bottom: 10px;
         overflow-y: scroll;
+        overflow-x: hidden;
         cursor: pointer;
         .icon{
             margin-left: 4px;
         }
     }
-}
-
-.Sidebar.closed {
-    left: -300px + 8px + 32px;
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.Sidebar.open {
-    left: 0px;
-    background-color: rgba(0, 0, 0, 1);
-    box-shadow: 10px 0px rgba(0, 0, 0, 0.4);
-    .button{
-        opacity: 0.5;
-    }
-    .button:hover{
-        opacity: 1;
-                 }
 }

@@ -5,7 +5,7 @@ import update from 'react/lib/update';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Card from '../Card';
-import ScrollArea from 'react-scrollbar';
+import { Motion, spring } from 'react-motion';
 
 @DragDropContext(HTML5Backend)
 export default class Sidebar extends Component {
@@ -13,7 +13,6 @@ export default class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.moveCard = this.moveCard.bind(this);
-
 
     this.state = {
       cards: props.cards
@@ -46,39 +45,44 @@ export default class Sidebar extends Component {
     let wtr;
     const {cards} = this.state;
 
-    if (this.props.open) {
 
-      const ccc = cards.map((card, i) => {
-        return (
-          <Card key={ card.id }
-            index={ i }
-            id={ card.id }
-            text={ card.text }
-            moveCard={ this.moveCard }
-            clickOn={ () => {
-                        this.props.clickOn(card.id);
-                      } }
-            dropCard={ this.props.onMoveSection } />
-          );
-      });
 
-      wtr = <div className="Sidebar open">
-              <div onClick={ this.props.onClose } className="button">
-                <i className="fa fa-chevron-left fa-fw"></i>
-              </div>
-              <h4>Outline</h4>
-              <div title="Click to navigate, drag to reorder." className="outline">
-                { ccc }
-              </div>
-            </div>;
+    const ccc = cards.map((card, i) => {
+      return (
+        <Card key={ card.id }
+          index={ i }
+          id={ card.id }
+          text={ card.text }
+          moveCard={ this.moveCard }
+          clickOn={ () => {
+                      this.props.clickOn(card.id);
+                    } }
+          dropCard={ this.props.onMoveSection } />
+        );
+    });
 
-    } else {
-      wtr = (<div className="Sidebar closed">
-               <div onClick={ this.props.onOpen } className="button">
-                 <i className="fa fa-chevron-right fa-fw"></i>
-               </div>
-             </div>);
-    }
+    const ss = {
+      x: spring(this.props.open ? 0 : -260),
+      r: spring(this.props.open ? 0 : -180),
+      o: spring(this.props.open ? 1 : 0),
+      s: spring(this.props.open ? 0.4 : 0)
+    };
+
+    wtr = <Motion style={ ss }>
+            { ({x, r, o, s}) => <div style={ {  boxShadow: `10px 0px rgba(0, 0, 0, ${s})`,  backgroundColor: `rgba(0,0,0,${o})`,  left: `${x}px`} } className="Sidebar hidden-xs hidden-sm">
+                                  <div onClick={ this.props.open ? this.props.onClose : this.props.onOpen } className="button">
+                                    <i style={ {  transform: `rotate(${r}deg)`} } className="fa fa-chevron-left fa-fw"></i>
+                                  </div>
+                                  <div>
+                                    <h4>Outline</h4>
+                                    <div style={ {  opacity: `${o}`} } title="Click to navigate, drag to reorder." className="outline">
+                                      { ccc }
+                                    </div>
+                                  </div>
+                                </div> }
+          </Motion>
+
+
 
 
 

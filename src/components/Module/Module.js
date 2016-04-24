@@ -361,7 +361,7 @@ export default class Module extends Component {
           [n, 0, movingItem]
         ]
       }
-    }));
+    }), this.onPost);
   }
 
   moveSection(k, a) {

@@ -23,6 +23,7 @@ import Sidebar from '../Sidebar';
 import OutlineCard from '../OutlineCard';
 import update from 'react/lib/update';
 
+
 export default class Module extends Component {
 
   constructor() {

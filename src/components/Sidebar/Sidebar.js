@@ -5,7 +5,7 @@ import update from 'react/lib/update';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Card from '../Card';
-
+import ScrollArea from 'react-scrollbar';
 
 @DragDropContext(HTML5Backend)
 export default class Sidebar extends Component {
@@ -67,7 +67,7 @@ export default class Sidebar extends Component {
                 <i className="fa fa-chevron-left fa-fw"></i>
               </div>
               <h4>Outline</h4>
-              <div className="outline">
+              <div title="Click to navigate, drag to reorder." className="outline">
                 { ccc }
               </div>
             </div>;

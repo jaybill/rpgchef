@@ -32,7 +32,7 @@ export default class MetadataModal extends Component {
       }
     }
 
-    if (newProps.uploadImage.failed && newProps.uploadImage.payload.k == "cover") {
+    if (newProps.uploadImage.failed && newProps.uploadImage.payload && newProps.uploadImage.payload.k == "cover") {
       this.props.uploadReset();
       this.setState({
         uploadingImage: null,

@@ -822,9 +822,9 @@ export default class Module extends Component {
                 </div>);
     }
 
-    const monsterTitle = <i className="icon icon-goblin"></i>;
-    const sectionTitle = <i className="fa fa-header fa-fw"></i>;
-    const markedTitle = <i className="fa fa-check fa-fw"></i>;
+    const monsterTitle = <i title="Insert Stat Block" className="icon icon-goblin"></i>;
+    const sectionTitle = <i title="Insert Heading" className="fa fa-header fa-fw"></i>;
+    const markedTitle = <i title="Marked Operations" className="fa fa-check fa-fw"></i>;
 
     const meta = {
       author: this.state.author,

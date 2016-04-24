@@ -70,12 +70,12 @@ export default class Sidebar extends Component {
 
     wtr = <Motion style={ ss }>
             { ({x, r, o, s}) => <div style={ {  boxShadow: `10px 0px rgba(0, 0, 0, ${s})`,  backgroundColor: `rgba(0,0,0,${o})`,  left: `${x}px`} } className="Sidebar hidden-xs hidden-sm">
-                                  <div onClick={ this.props.open ? this.props.onClose : this.props.onOpen } className="button">
+                                  <div title={ this.props.open ? "Close Outline View" : "Open Outline View" } onClick={ this.props.open ? this.props.onClose : this.props.onOpen } className="button">
                                     <i style={ {  transform: `rotate(${r}deg)`} } className="fa fa-chevron-left fa-fw"></i>
                                   </div>
                                   <div>
                                     <h4>Outline</h4>
-                                    <div style={ {  opacity: `${o}`} } title="Click to navigate, drag to reorder." className="outline">
+                                    <div style={ {  opacity: `${o}`} } title={ this.props.open ? "Click to navigate, drag and drop to reorder. Dragon drop?" : null } className="outline">
                                       { ccc }
                                     </div>
                                   </div>

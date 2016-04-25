@@ -1,6 +1,6 @@
 import './MakeImage.less';
 import React, { Component, PropTypes } from 'react';
-import { Alert, Image, Modal, Well, Row, Col, Panel, Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { ProgressBar, Alert, Image, Modal, Well, Row, Col, Panel, Input, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import DropZone from 'react-dropzone';
 import log from 'loglevel';
 
@@ -35,7 +35,6 @@ export default class MakeImage extends Component {
     return nameArray.join("___");
   }
 
-
   openModal() {
     this.setState({
       modalOpen: true
@@ -49,6 +48,10 @@ export default class MakeImage extends Component {
   }
 
   componentWillReceiveProps(newProps) {
+
+    if (newProps.uploadProgress && newProps.k == this.props.k) {
+      log.debug(newProps.uploadProgress);
+    }
     if (newProps.uploadImage.succeeded) {
       const ni = newProps.uploadImage.payload;
       const name = ["content", ni.k, "content", "filename"];
@@ -96,17 +99,33 @@ export default class MakeImage extends Component {
       };
     }
 
+    let loadingBar;
+    let loadLabel = "Uploading...";
 
     if (this.state.uploadingImage == k) {
       dropContent = <div className="drop-target">
                       <Well bsSize="large">
-                        <div>
-                          <p>
-                            <i className="fa fa-cog fa-spin fa-5x"></i>
-                          </p>
-                        </div>
+                        <i className="fa fa-cog fa-fw fa-5x fa-spin" />
                       </Well>
                     </div>;
+      if (this.props.uploadProgress && this.props.uploadProgress.k == k) {
+        if (this.props.uploadProgress.r > 99) {
+          loadLabel = "Processing...";
+        }
+        loadingBar = <div>
+                       <div>
+                         { loadLabel }
+                       </div>
+                       <ProgressBar active now={ this.props.uploadProgress.r } />
+                     </div>;
+      } else {
+        loadingBar = <div>
+                       <div>
+                         { loadLabel }
+                       </div>
+                       <ProgressBar active now={ 5 } />
+                     </div>;
+      }
     } else {
       if (!h.content.filename) {
         dropContent = (
@@ -191,6 +210,7 @@ export default class MakeImage extends Component {
               </Col>
               <Col md={ 9 }>
               { message }
+              { loadingBar }
               <Input value={ h.content.displaySize }
                 onChange={ this.handleSelect.bind(this, ["content", k, "content", "displaySize"]) }
                 addonBefore="Display Format"
@@ -218,3 +238,4 @@ export default class MakeImage extends Component {
     return wtr;
   }
 }
+

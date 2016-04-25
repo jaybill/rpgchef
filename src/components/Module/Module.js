@@ -771,6 +771,7 @@ export default class Module extends Component {
                     onUploadImage={ self.props.onUploadImage }
                     uploadImage={ this.props.uploadImage }
                     uploadReset={ this.props.uploadReset }
+                    uploadProgress={ this.props.uploadProgress }
                     moduleId={ this.state.id } />;
             outlineItem.text = <OutlineCard iconClass="fa fa-picture-o fa-fw" text="Image" />;
             break;
@@ -950,6 +951,7 @@ export default class Module extends Component {
                 deleteImageReset={ this.props.deleteImageReset }
                 uploadImage={ this.props.uploadImage }
                 uploadReset={ this.props.uploadReset }
+                uploadProgress={ this.props.uploadProgress }
                 moduleId={ this.state.id } />
               <Sidebar cards={ outline }
                 clickOn={ this.openSection }

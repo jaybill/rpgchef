@@ -121,7 +121,8 @@ File.handlers = {
     payload: {
       output: 'stream',
       parse: true,
-      allow: ['multipart/form-data']
+      allow: ['multipart/form-data'],
+      maxBytes: 5242880
     },
     auth: 'session',
     plugins: {

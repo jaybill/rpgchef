@@ -56,7 +56,7 @@
     "pg": "^4.4.3",
     "pg-hstore": "^2.3.2",
     "poll-until": "^1.0.0",
-    "popsicle": "^1.3.2",
+    "popsicle": "^5.0.1",
     "popsicle-basic-auth": "^0.1.0",
     "procstreams": "^0.3.0",
     "react": "^0.14.2",

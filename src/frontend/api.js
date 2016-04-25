@@ -1,6 +1,6 @@
 import popsicle from 'popsicle';
 import urijs from 'urijs';
-
+import log from 'loglevel';
 export const login = (credentials) => {
   return callServer('/login', 'POST', null, credentials);
 };
@@ -120,7 +120,7 @@ export const monster = (id) => {
 };
 
 
-export const uploadFile = (file, moduleId, replaces) => {
+export const uploadFile = (file, moduleId, replaces, onDone, onError, onProgress) => {
 
   const dd = {
     file: file,
@@ -130,9 +130,30 @@ export const uploadFile = (file, moduleId, replaces) => {
     dd.replaces = replaces;
   }
 
-  return callServer('/upload', 'POST', null, dd, {
-    "Content-Type": "multipart/form-data"
+  const uri = new urijs(process.env.API_URL + "/upload");
+
+  const request = popsicle({
+    method: "POST",
+    body: dd,
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    url: uri.toString(),
+    options: {
+      withCredentials: true
+    }
   });
+
+  request.progress(() => {
+    onProgress(request);
+  });
+
+  request.then((response) => {
+    onDone(response);
+  }).catch(err => {
+    onError(err);
+  });
+
 };
 
 export const deleteFile = (file, moduleId) => {

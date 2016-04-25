@@ -3,10 +3,9 @@ import { createAction } from 'redux-actions';
 import log from 'loglevel';
 import { makeModulePdf as makePdfCall, getModulePdf as getPdfCall, postModule as postModuleCall, getModules as getModulesCall, getModule as getModuleCall, delModule as delModuleCall, uploadFile as uploadCall, deleteFile as deleteImageCall } from '../api';
 import ActionConstants from '../actionconstants';
-
+import _ from 'lodash';
 export const moduleReset = createAction(ActionConstants.MODULE_RESET);
 export const modulePostReset = createAction(ActionConstants.MODULE_POST_RESET);
-
 const moduleGetActions = createAsyncActionGroup("MODULE_GET", {});
 
 export const moduleGet = function(id) {
@@ -32,30 +31,30 @@ export const modulePostFailure = modulePostActions.failure;
 
 export const modulePost = function(m) {
   return dispatch => {
-    dispatch(moduleGetActions.success(m));
-    dispatch(modulePostActions.start());
-    postModuleCall(m).then((result) => {
-      if (result.status == 200) {
-        return [
-          dispatch(modulePostActions.success(result.body)),
-          dispatch(moduleGetActions.success(result.body)),
-          dispatch(modulesGet())];
-      } else {
-        log.error(result);
-        throw new Error("Bad response");
-      }
+    return [dispatch(moduleGetActions.success(m)),
+      dispatch(modulePostActions.start()),
+      postModuleCall(m).then((result) => {
+        if (result.status == 200) {
+          return [
+            dispatch(modulePostActions.success(result.body)),
+            dispatch(moduleGetActions.success(result.body)),
+            dispatch(modulesGet())];
+        } else {
+          log.error(result);
+          throw new Error("Bad response");
+        }
 
-    }).catch(err => {
-      log.error(err);
-      if (typeof m.content == "object") {
-        m.content = JSON.stringify(m.content);
-      }
+      }).catch(err => {
+        log.error(err);
+        if (typeof m.content == "object") {
+          m.content = JSON.stringify(m.content);
+        }
 
-      return dispatch(modulePostActions.failure({
-        message: "Unable to save",
-        payload: m
-      }));
-    });
+        return dispatch(modulePostActions.failure({
+          message: "Unable to save",
+          payload: m
+        }));
+      })];
   };
 };
 
@@ -97,31 +96,65 @@ export const moduleDel = function(id) {
   };
 };
 export const uploadReset = createAction(ActionConstants.UPLOAD_IMAGE_RESET);
+export const uploadProgress = createAction(ActionConstants.UPLOAD_PROGRESS);
 const uploadActions = createAsyncActionGroup("UPLOAD_IMAGE", {});
 export const upload = function(k, file, moduleId, replaces) {
-  return dispatch => {
-    dispatch(uploadActions.start());
-    return uploadCall(file, moduleId, replaces).then((result) => {
-      if (result.status == 200) {
-        return dispatch(uploadActions.success({
+  return (dispatch) => {
+    const onDone = (result) => {
+      try {
+        if (result.status == 200) {
+          return dispatch(uploadActions.success({
+            k: k,
+            moduleId: moduleId,
+            filename: result.body.filename
+          }));
+        } else if (result.status == 422) {
+          throw new Error(result.body.message);
+        } else if (result.status == 400) {
+
+          if (_.startsWith(result.body.message, "Payload content length greater than maximum")) {
+            throw new Error("Maxium image size must be less than 5MB");
+          }
+
+          throw new Error(result.body.message);
+        } else {
+
+          log.error(result);
+          throw new Error("Bad Response");
+        }
+      } catch ( e ) {
+        log.error(e);
+        return dispatch(uploadActions.failure({
           k: k,
           moduleId: moduleId,
-          filename: result.body.filename
+          message: e.message
         }));
-      } else if (result.status == 422) {
-        throw new Error(result.body.message);
-      } else {
-        log.error(result);
-        throw new Error("Bad response");
-      }
-    }).catch(err => {
+      };
+    };
+
+    const onError = (err) => {
       log.error(err);
       dispatch(uploadActions.failure({
         k: k,
         moduleId: moduleId,
         message: err.message
       }));
-    });
+    };
+
+    const onProgress = (r) => {
+      dispatch(uploadProgress({
+        k,
+        r: (r.uploadedBytes / r.uploadLength) * 100
+      }));
+    };
+
+    dispatch(uploadActions.start());
+    uploadCall(file, moduleId, replaces, onDone, onError, onProgress);
+    return null;
+    /*r.post.progress(function() {
+      log.debug(r); //=> { uploaded: 1, downloaded: 0, completed: 0.5, aborted: false }
+    });*/
+
   };
 };
 

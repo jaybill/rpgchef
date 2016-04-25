@@ -178,6 +178,7 @@ class ModuleContainer extends Component {
              getPdf={ module.getPdf }
              post={ module.post }
              onUploadImage={ (k, file) => this.onUploadImage(k, file) }
+             uploadProgress={ module.uploadProgress }
              uploadImage={ module.uploadImage }
              deleteImage={ module.deleteImage }
              resetPost={ this.resetPost }
@@ -203,9 +204,6 @@ class ModuleContainer extends Component {
     }
   };
 }
-
-
-
 
 function select(state) {
   return {

@@ -206,6 +206,7 @@ class Dnd5eLaTeX {
           break;
 
         case "racequote":
+
           lt += this.createQuote(s.content.text, s.content.attributeTo);
           break;
 
@@ -272,7 +273,7 @@ class Dnd5eLaTeX {
   }
 
   createReadAloud(t) {
-    return this.compiled.quote({
+    return this.compiled.readAloud({
       text: this.escape(t, true)
     });
   }
@@ -280,8 +281,6 @@ class Dnd5eLaTeX {
   createQuote(t, a) {
     let fl;
     let tt;
-
-
 
     if (t) {
       const ttt = t.split("\n\n");
@@ -291,13 +290,15 @@ class Dnd5eLaTeX {
       } else {
         fl = t;
       }
-    }
 
-    return this.compiled.quote({
-      firstLine: this.escape(fl),
-      attributeTo: this.escape(a, true),
-      text: this.escape(tt)
-    });
+
+      return this.compiled.quote({
+        firstLine: this.escape(fl),
+        attributeTo: this.escape(a, true),
+        text: this.escape(tt)
+      });
+    }
+    return "";
   }
 
   createColumnBreak() {

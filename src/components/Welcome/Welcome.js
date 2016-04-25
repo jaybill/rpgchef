@@ -9,8 +9,6 @@ export default class Welcome extends Component {
 
   render() {
 
-
-
     const slideContent = [
       {
         title: "Create 5e Content",
@@ -28,7 +26,6 @@ export default class Welcome extends Component {
         caption: "PDFs you create meet all technical requirements for DM Guild submission. Include the logo and legal copy with one click.",
         imageUrl: "/slides/slide3.png"
       }
-
     ];
 
     const slides = [];
@@ -60,10 +57,10 @@ export default class Welcome extends Component {
             <div className="visible-xs-block visible-sm-block">
               <h2>RPG Chef helps you create content for tabletop role-playing games, especially 5e.</h2>
               <Button block
-                href="/mailinglist.html"
+                href="/register"
                 bsSize="large"
                 bsStyle="primary">
-                Request Beta Invitation
+                Register Now
               </Button>
               <Image src="/slides/slide2.png" responsive/>
             </div>
@@ -74,8 +71,8 @@ export default class Welcome extends Component {
         </Jumbotron>
         <div className="container purpose hidden-sm hidden-xs fade-carousel">
           <h3>RPG Chef helps you create content for tabletop role-playing games, especially 5e.</h3>
-          <Button href="/mailinglist.html" bsSize="large" bsStyle="primary">
-            Request Beta Invitation
+          <Button href="/register" bsSize="large" bsStyle="primary">
+            Register Now
           </Button>
         </div>
       </div>

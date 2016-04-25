@@ -40,6 +40,7 @@ const templates = {
     '\\coverimage{<%= coverImage %>}\n' +
     '\\makecover\n' +
     '\\setcounter{page}{2}\n',
+  wallpaper: '\\<%= placement %>WallPaper{1.0}{<%= path %>}\n',
   image: '\n\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n',
   largeImage: '\n\\onecolumn\n' +
     '\\noindent\\includegraphics[width=\\linewidth]{<%= path %>}\n\\twocolumn\n',
@@ -311,8 +312,28 @@ class Dnd5eLaTeX {
 
   createImage(filename, displaySize, imagePath) {
     let t;
-
+    const opts = {};
     switch (displaySize) {
+      case "Center":
+        t = "wallpaper";
+        opts.placement = "Center";
+        break;
+      case "LRCorner":
+        t = "wallpaper";
+        opts.placement = "LRCorner";
+        break;
+      case "LLCorner":
+        t = "wallpaper";
+        opts.placement = "LLCorner";
+        break;
+      case "URCorner":
+        t = "wallpaper";
+        opts.placement = "URCorner";
+        break;
+      case "ULCorner":
+        t = "wallpaper";
+        opts.placement = "ULCorner";
+        break;
       case "large":
         t = "largeImage";
         break;
@@ -321,9 +342,8 @@ class Dnd5eLaTeX {
         break;
     }
     if (filename) {
-      return this.compiled[t]({
-        path: path.join(imagePath, filename)
-      });
+      opts.path = path.join(imagePath, filename);
+      return this.compiled[t](opts);
     } else {
       return "";
     }

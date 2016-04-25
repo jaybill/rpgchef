@@ -215,12 +215,33 @@ export default class MakeImage extends Component {
                 onChange={ this.handleSelect.bind(this, ["content", k, "content", "displaySize"]) }
                 addonBefore="Display Format"
                 type="select">
-              <option value="normal">
-                Normal (1 column)
-              </option>
-              <option value="large">
-                Large (2 column)
-              </option>
+              { [{
+                  text: "Normal (1 column)",
+                  val: "normal"
+                }, {
+                  text: "Large (2 column)",
+                  val: "large"
+                }, {
+                  text: "Current Page Background (Center)",
+                  val: "Center"
+                }, {
+                  text: "Current Page Background (Lower Right)",
+                  val: "LRCorner"
+                }, {
+                  text: "Current Page Background (Lower Left)",
+                  val: "LLCorner"
+                }, {
+                  text: "Current Page Background (Upper Right)",
+                  val: "URCorner"
+                }, {
+                  text: "Current Page Background (Upper Left)",
+                  val: "ULCorner"
+                }].map((op, i) => {
+                  return <option value={ op.val } key={ i }>
+                           { op.text }
+                         </option>;
+                
+                }) }
               </Input>
               </Col>
             </Row>

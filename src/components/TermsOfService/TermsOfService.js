@@ -66,17 +66,11 @@ export default class TermsOfService extends Component {
           <p>
             You retain any and all of your rights to any Content you submit, post or display on or through the Service and you are responsible for protecting those rights. We
             take no responsibility and assume no liability for Content you or any third party posts on or through the Service. However, by posting Content using the Service
-            you grant us the right and license to use, modify, publicly perform, publicly display, reproduce, and distribute such Content on and through the Service. You
-            agree that this license includes the right for us to make your Content available to other users of the Service, who may also use your Content subject to these
-            Terms.
+            you grant us the right and license to use, display, reproduce, and distribute such Content on and through the Service, exclusively for the purpose of making
+            Content you submit avilable to you and your agents.
           </p>
           <p>
-            RPG Chef has the right but not the obligation to monitor and edit all Content provided by users.
-          </p>
-          <p>
-            In addition, Content found on or through this Service are the property of RPG Chef or used with permission. You may not distribute, modify, transmit, reuse, download,
-            repost, copy, or use said Content, whether in whole or in part, for commercial purposes or for personal gain, without express advance written permission from
-            us.
+            RPG Chef has the right but not the obligation to monitor, edit and remove all Content provided by users.
           </p>
           <p>
             <strong>Accounts</strong>
@@ -206,7 +200,6 @@ export default class TermsOfService extends Component {
           </p>
         </Panel>
       </div>
-
       );
   }
 }

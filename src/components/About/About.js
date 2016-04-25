@@ -4,7 +4,6 @@ import { Label, Panel } from 'react-bootstrap';
 import SimplePage from '../SimplePage';
 
 export default class About extends Component {
-
   render() {
     return (
       <div className="About">
@@ -33,6 +32,22 @@ export default class About extends Component {
             RPG Chef is built using <a href="https://facebook.github.io/react/">React</a> and <a href="http://redux.js.org">Redux</a>. We employ a microservice architecture
             that uses <a href="http://hapijs.com/">hapi.js</a> and <a href="http://www.postgresql.org">PostgreSQL</a>. We render content with <a href="https://www.latex-project.org">LaTeX</a>.
           </p>
+          <h3>Data Safety</h3>
+          <p>
+            You very likely put a lot of work into your content. If you're like us, you've often spent days, sometimes <em>weeks</em> working on stuff. We're committed
+            to keeping your work safe, secure and available. To this end, we do all of the following, and lots of other stuff:
+          </p>
+          <ul>
+            <li>
+              Nightly database backups
+            </li>
+            <li>
+              Cloud-based, load balanced servers
+            </li>
+            <li>
+              Site access if via HTTPS exclusively
+            </li>
+          </ul>
           <h3>Acknowledgments</h3>
           <p>
             We use a modified version of the most excellent <a href="https://github.com/evanbergeron/DND-5e-LaTeX-Template">DnD 5 LaTeX Template</a>, which was, in part,

@@ -13,7 +13,6 @@ export default class Subscribe extends Component {
   }
 
   onSubmit() {
-
     this.props.onSubmit(
       {
         number: this.refs.number.getValue(),
@@ -32,22 +31,21 @@ export default class Subscribe extends Component {
     const levels = [{
       plan: "Novice",
       cost: "Free",
-      copy: "You only use our site occasionally, just want to try it out, or can't afford to pay us."
+      copy: "You only use our site occasionally, just want to try it out, or can't afford to pay us.  You rarely create content for others."
     }, {
-
       plan: "Evoker",
       cost: "$1.99 per month",
-      copy: "You use our site to prep for one play session per month.",
+      copy: "You use our site mainly to prepare for gaming sessions, i.e. you mostly use it print monster stat blocks.",
       style: "info"
     }, {
       plan: "Conjurer",
       cost: "$4.99 per month",
-      copy: "You use our site to prep for one play session per week.",
+      copy: "You use our site to create content that you distribute to others for free or \"Pay what you want\" pricing.",
       style: "success"
     }, {
       plan: "Wizard",
       cost: "$9.99 per month",
-      copy: "You use our site to prep for more than one play session per week, or you plan to sell the content you create.",
+      copy: "You use our site frequently or you create content that you intend to sell at a fixed price.",
       style: "primary"
     }];
 
@@ -61,9 +59,9 @@ export default class Subscribe extends Component {
                        </div>
                      </div>;
       panels.push(<Col key={ i++ } md={ 3 }>
-                    <Panel bsStyle={ level.style } header={ header }>
-                      { level.copy }
-                    </Panel>
+                  <Panel bsStyle={ level.style } header={ header }>
+                    { level.copy }
+                  </Panel>
                   </Col>
       );
 
@@ -113,19 +111,19 @@ export default class Subscribe extends Component {
                              ref="number" />
                            <Row>
                              <Col md={ 4 }>
-                               <Input type="text"
-                                 placeholder="MM"
-                                 label="Exp. Month"
-                                 ref="exp_month" />
+                             <Input type="text"
+                               placeholder="MM"
+                               label="Exp. Month"
+                               ref="exp_month" />
                              </Col>
                              <Col md={ 4 }>
-                               <Input type="text"
-                                 placeholder="YYYY"
-                                 label="Exp. Year"
-                                 ref="exp_year" />
+                             <Input type="text"
+                               placeholder="YYYY"
+                               label="Exp. Year"
+                               ref="exp_year" />
                              </Col>
                              <Col md={ 4 }>
-                               <Input type="text" label={ cvcLabel } ref="cvc" />
+                             <Input type="text" label={ cvcLabel } ref="cvc" />
                              </Col>
                            </Row>
                            <Button onClick={ this.onSubmit } bsStyle="primary" bsSize="large">
@@ -175,21 +173,22 @@ export default class Subscribe extends Component {
               <Grid>
                 <Row className="no-gutter">
                   <Col md={ 12 }>
-                    <Well>
-                      <p>
-                        RPG Chef is a "pay what you want" subscription service. We&apos;re not talking about <em>donations</em> here. We do ask that you pay for the service
-                        if you actively use it. We just think you should decide how much you pay and that payment should be on the honor system. What we <em>don&apos;t</em>            have are "premium accounts" where people who pay us get access to special features and other people don&apos;t. Instead, we&apos;ve created a couple
-                        of subscription plans that are loosely based on how much you use our site:
-                      </p>
-                    </Well>
-                    <Row>
-                      { panels }
-                    </Row>
+                  <Well>
+                    <p>
+                      RPG Chef is a "pay what you want" subscription service. We&apos;re not talking about <em>donations</em> here. We do ask that you pay for the service if
+                      you actively use it. We just think you should decide how much you pay and that payment should be on the honor system. What we <em>don&apos;t</em> have
+                      are "premium accounts" where people who pay us get access to special features and other people don&apos;t. Instead, we&apos;ve created a couple of subscription
+                      plans that are loosely based on how much you use our site:
+                    </p>
+                  </Well>
+                  <Row>
+                    { panels }
+                  </Row>
                   </Col>
                   <Col md={ 6 }>
-                    <h2>Payment Details</h2>
-                    { displayMessage }
-                    { wtr }
+                  <h2>Payment Details</h2>
+                  { displayMessage }
+                  { wtr }
                   </Col>
                 </Row>
               </Grid>

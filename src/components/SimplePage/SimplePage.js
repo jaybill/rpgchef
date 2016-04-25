@@ -22,6 +22,11 @@ export default class SimplePage extends Component {
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav pullRight>
+                <LinkContainer to="/register">
+                  <NavItem eventKey={ 1 }>
+                    Register
+                  </NavItem>
+                </LinkContainer>
                 <LinkContainer to="/about">
                   <NavItem eventKey={ 2 }>
                     About

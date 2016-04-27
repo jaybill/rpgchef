@@ -33,3 +33,42 @@
 - Fixed typo
 
 - Added mobile styles to front page
+- Updated logged-in homepage, added copy
+
+- Updated copy, redid logged-in landing page
+
+- Updated copy, removed beta button
+
+- Added progress bar to image uploader
+
+- Fixed bug where failed image upload does not throw error
+
+- Fixed tooltips
+
+- Updated sidebar position/animation
+
+- cleaned up sidebar, added tooltip
+
+- Got outline reordering implemented, got sidebar visuals cleaned up a bit
+
+- Got basic outline ordering working
+
+- Got sidebar working
+
+- Sidebar WIP
+
+- Added unmark all
+
+- Added ability to mark/delete multiple sections
+
+- Fixed issue where PDF won't render if image isn't loaded
+
+- Made 'racequote' feature that allows attribution and formats the text correctly
+
+- Made monster boxes expand and collapse more reasonably
+
+- Removed second damage immunity block, moved format selection
+
+- Fixed typo
+
+- Added mobile styles to front page

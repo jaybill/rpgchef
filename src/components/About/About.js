@@ -60,13 +60,13 @@ export default class About extends Component {
             Cover art on front page includes <a href="http://ejlowell.deviantart.com/art/The-Werewolf-461806291">The Werewolf</a> by <a href="http://ejlowell.deviantart.com">EjLowell</a>      and <a href="http://darkgift.ru/gallery.html">The Great Battle</a> by <a href="http://darkgift.ru">Julia Alekseeva</a>. Both licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0">Creative Commons (CC BY-SA 4.0)</a>.
           </p>
           <p>
-            Art on logged in homepage includes <a href="http://deevad.deviantart.com/art/Fantasy-Landscape-335768202">Fantasy Landscape</a> by <a href="http://deevad.deviantart.com">Deevad</a>,&nbsp;
-            <a href="http://takiidesign.deviantart.com/art/Fantasy-Landscape-Wallpaper-4-293751432">Fantasy Landscape 4</a> by <a href="http://takiidesign.deviantart.com">takiidesign</a>      and <a href="http://fpesantez.deviantart.com/art/Snow-landscape-Sci-fi-fantasy-411303158">Snow landscape Sci-fi fantasy</a> by <a href="http://fpesantez.deviantart.com">fpesantez</a>,
-            which are all licensed under a <a href="http://creativecommons.org/licenses/by-nd/3.0/">Creative Commons Attribution-No Derivative Works 3.0 License.</a>
-          </p>
-          <p>
             Background image is <a href="http://fav.me/d6sq6ee">Fantasy Landscape: Mountains</a> by <a href="http://fpesantez.deviantart.com">Felipe Pesantez</a> licensed
             under a <a href="http://creativecommons.org/licenses/by-nd/3.0/">Creative Commons Attribution-No Derivative Works 3.0 License.</a>
+          </p>
+          <h3>Contact Us</h3>
+          <p>
+            Need help? Got an idea? Want a place to send an angry legal notice? Feel free to email <a href="mailto:jaybill@rpgchef.com">jaybill@rpgchef.com</a> and we'll
+            get back to you as soon as we can.
           </p>
         </Panel>
         <Label bsStyle="info">

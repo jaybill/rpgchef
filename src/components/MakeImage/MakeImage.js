@@ -213,7 +213,7 @@ export default class MakeImage extends Component {
               { loadingBar }
               <Input value={ h.content.displaySize }
                 onChange={ this.handleSelect.bind(this, ["content", k, "content", "displaySize"]) }
-                addonBefore="Display Format"
+                addonBefore={ <span>Display Format <a title="More information about images" href="" target="__new"><i className="fa fa-question-circle"></i></a></span> }
                 type="select">
               { [{
                   text: "Normal (1 column)",

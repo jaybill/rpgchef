@@ -1,6 +1,7 @@
 export default [{
   "tag": "v0.9.39",
-  "revisions": ["Added padding to bottom of about page, fixed mobile styles on logged in homepage"]
+  "revisions": ["Vastly improved formatting of changelog",
+    "Added padding to bottom of about page, fixed mobile styles on logged in homepage"]
 }, {
   "tag": "v0.9.38",
   "revisions": ["Updated changelog", "Added analytics code"]

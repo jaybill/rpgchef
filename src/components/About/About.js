@@ -72,7 +72,11 @@ export default class About extends Component {
         <Label bsStyle="info">
           { "Version: " + (process.env.RPGCHEF_VERSION || "Local") }
         </Label>
+        <p>
+          &nbsp;
+        </p>
       </div>
       );
   }
 }
+

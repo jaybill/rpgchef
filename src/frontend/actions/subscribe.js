@@ -2,7 +2,7 @@ import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
 import log from 'loglevel';
 import { subscribePost as subscribeCall, subscribeGet as subscribeGetCall, getStripeToken } from '../api';
-
+import { logEvent } from '../analytics';
 
 const subscribeGetActions = createAsyncActionGroup("SUBSCRIBE_GET", {});
 export const subscribeGet = function() {
@@ -17,9 +17,9 @@ export const subscribeGet = function() {
       return null;
     }).catch(err => {
       log.error(err);
-      dispatch(subscribeGetActions.failure("Get subscription failed."))
+      dispatch(subscribeGetActions.failure("Get subscription failed."));
     });
-  }
+  };
 };
 
 
@@ -40,6 +40,7 @@ export const subscribePost = function(sub) {
       });
     }).then((result) => {
       if (result.status == 200) {
+        logEvent("Subscription", "Plan", sub.plan);
         dispatch(subscribePostActions.success(result.body));
       } else {
         log.error(result);
@@ -48,7 +49,7 @@ export const subscribePost = function(sub) {
       return;
     }).catch(err => {
       log.debug(err);
-      dispatch(subscribePostActions.failure(err.message || "Card Verification Error"))
+      dispatch(subscribePostActions.failure(err.message || "Card Verification Error"));
     });
-  }
+  };
 };

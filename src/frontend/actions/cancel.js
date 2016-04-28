@@ -2,6 +2,7 @@ import { createAsyncActionGroup } from './util';
 import { createAction } from 'redux-actions';
 import log from 'loglevel';
 import { subscribeDel as cancelCall } from '../api';
+import { logEvent } from '../analytics';
 
 const cancelActions = createAsyncActionGroup("SUBSCRIBE_DEL", {});
 export const cancel = function() {
@@ -9,6 +10,7 @@ export const cancel = function() {
     dispatch(cancelActions.start());
     cancelCall().then((result) => {
       if (result.status == 200) {
+        logEvent("Subscription", "Cancel", "Cancelled");
         dispatch(cancelActions.success(result.body));
       } else {
         log.error(result);
@@ -17,7 +19,7 @@ export const cancel = function() {
       return;
     }).catch(err => {
       log.debug(err);
-      dispatch(cancelActions.failure("cancel failed"))
+      dispatch(cancelActions.failure("cancel failed"));
     });
-  }
+  };
 };

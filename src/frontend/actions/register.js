@@ -1,6 +1,7 @@
 import { createAsyncActionGroup, extractMessage } from './util';
 import { createAction } from 'redux-actions';
 import { register as registerCall } from '../api';
+import { logEvent } from '../analytics';
 
 // REGISTER
 const registerActions = createAsyncActionGroup("register", {});
@@ -13,7 +14,7 @@ export const register = function(registration) {
     registerCall(registration).then((result) => {
 
       if (result.status == 200) {
-
+        logEvent("Account", "Create", "Register");
         dispatch(registerActions.success(result.body.username));
         return;
       } else {

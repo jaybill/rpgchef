@@ -36,7 +36,7 @@ export var componentDef = {
           <Col md={ 6 }>
           <Panel bsStyle="primary">
             <h2>Changelog</h2>
-            <h3>v 0.9.38</h3>
+            <h3>v 0.9.39</h3>
             <ul>
               <li>
                 Updated copy, removed beta button

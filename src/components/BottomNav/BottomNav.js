@@ -33,6 +33,12 @@ export default class BottomNav extends Component {
                  </NavItem>
                </Nav>
                <Nav pullRight>
+                 <NavItem href="https://www.facebook.com/rpgchef" eventKey={ 0 }>
+                   <i className="fa fa-facebook"></i>
+                 </NavItem>
+                 <NavItem href="https://twitter.com/rpgchef" eventKey={ 0.1 }>
+                   <i className="fa fa-twitter"></i>
+                 </NavItem>
                  <NavItem>
                    <OverlayTrigger rootClose={ true }
                      trigger="click"

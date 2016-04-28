@@ -5,7 +5,7 @@ import { RouteHandler } from 'react-router';
 import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Panel, Alert, Button, Jumbotron, Grid, Col, Row } from 'react-bootstrap';
-
+import changelog from '../../lib/changelog';
 
 export var componentDef = {
 
@@ -13,6 +13,20 @@ export var componentDef = {
   },
 
   render() {
+
+    const ccl = changelog.map((cl, i) => {
+      return (<div key={ i }>
+                <h4>{ cl.tag }</h4>
+                <ul>
+                  { cl.revisions.map((rr, j) => {
+                      return (<li key={ j }>
+                                { rr }
+                              </li>);
+                    }) }
+                </ul>
+              </div>
+        );
+    });
 
     const buttons = [{
       l: "/app/modules",
@@ -27,7 +41,7 @@ export var componentDef = {
       t: "Resources",
       i: "fa fa-cubes"
     }].map((jj, i) => {
-      return (<LinkContainer to={ jj.l }>
+      return (<LinkContainer to={ jj.l } key={ i }>
                 <Button className={ "btn-xlarge b-" + (i + 1) }>
                   <span><i className={ jj.i }></i> { jj.t }</span>
                 </Button>
@@ -51,64 +65,10 @@ export var componentDef = {
           </Col>
           <Col md={ 6 }>
           <Panel bsStyle="primary">
-            <h2>Changelog</h2>
-            <h3>v 0.9.39</h3>
-            <ul>
-              <li>
-                Updated copy, removed beta button
-              </li>
-              <li>
-                Added additional image display options
-              </li>
-              <li>
-                Added progress bar to image uploader
-              </li>
-              <li>
-                Fixed bug where failed image upload does not throw error
-              </li>
-              <li>
-                Fixed tooltips
-              </li>
-              <li>
-                Updated sidebar position/animation
-              </li>
-              <li>
-                cleaned up sidebar, added tooltip
-              </li>
-              <li>
-                Got outline reordering implemented, got sidebar visuals cleaned up a bit
-              </li>
-              <li>
-                Got basic outline ordering working
-              </li>
-              <li>
-                Got sidebar working
-              </li>
-              <li>
-                Added unmark all
-              </li>
-              <li>
-                Added ability to mark/delete multiple sections
-              </li>
-              <li>
-                Fixed issue where PDF won't render if image isn't loaded
-              </li>
-              <li>
-                Made 'racequote' feature that allows attribution and formats the text correctly
-              </li>
-              <li>
-                Made monster boxes expand and collapse more reasonably
-              </li>
-              <li>
-                Removed second damage immunity block, moved format selection
-              </li>
-              <li>
-                Fixed typos
-              </li>
-              <li>
-                Added mobile styles to front page
-              </li>
-            </ul>
+            <h3>Change Log</h3>
+            <div className="changes">
+              { ccl }
+            </div>
           </Panel>
           </Col>
         </Row>

@@ -14,21 +14,37 @@ export var componentDef = {
 
   render() {
 
+    const buttons = [{
+      l: "/app/modules",
+      t: "Create and edit modules",
+      i: "fa fa-edit"
+    }, {
+      l: "https://rpgchef.wiki.zoho.com",
+      t: "Learn and get help",
+      i: "fa fa-question-circle"
+    }, {
+      l: "https://rpgchef.wiki.zoho.com/Resources.html",
+      t: "Resources",
+      i: "fa fa-cubes"
+    }].map((jj, i) => {
+      return (<LinkContainer to={ jj.l }>
+                <Button className={ "btn-xlarge b-" + (i + 1) }>
+                  <span><i className={ jj.i }></i> { jj.t }</span>
+                </Button>
+              </LinkContainer>
+        );
+    });
+
     return (
       <div className="Home">
         <Row>
           <Col md={ 6 }>
-          <LinkContainer to="/app/modules">
-            <Button className="btn-xlarge b-1">
-              <span><i className="fa fa-edit"></i> Create and edit modules</span>
-            </Button>
-          </LinkContainer>
-          <Button className="btn-xlarge b-2" href="https://rpgchef.wiki.zoho.com/" target="__new">
-            <span><i className="fa fa-question-circle"></i> Learn and get help</span>
-          </Button>
-          <Button className="btn-xlarge b-3" href="https://rpgchef.wiki.zoho.com/Resources.html" target="__new">
-            <span><i className="fa fa-cubes"></i> Resources</span>
-          </Button>
+          <div className="visible-xs-block hidden-sm mobile">
+            { buttons }
+          </div>
+          <div className="visible-sm-block visible-md-block visible-sm-block visible-lg-block hidden-xs">
+            { buttons }
+          </div>
           <Alert bsStyle="info">
             Have you found a bug? Want to request a feature? <strong><a href="https://rpgchef.lighthouseapp.com/projects/132376-rpg-chef/tickets" target="new">Open a ticket!</a></strong>
           </Alert>

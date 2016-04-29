@@ -29,10 +29,6 @@ export var componentDef = {
     });
 
     const buttons = [{
-      l: "/app/modules",
-      t: "Create and edit modules",
-      i: "fa fa-edit"
-    }, {
       l: "https://rpgchef.wiki.zoho.com",
       t: "Learn and get help",
       i: "fa fa-question-circle"
@@ -41,22 +37,33 @@ export var componentDef = {
       t: "Resources",
       i: "fa fa-cubes"
     }].map((jj, i) => {
-      return (<LinkContainer to={ jj.l } key={ i }>
-                <Button className={ "btn-xlarge b-" + (i + 1) }>
-                  <span><i className={ jj.i }></i> { jj.t }</span>
-                </Button>
-              </LinkContainer>
+      return (
+        <Button target="_new"
+          href={ jj.l }
+          key={ i }
+          className={ "btn-xlarge b-" + (i + 2) }>
+          <span><i className={ jj.i }></i> { jj.t }</span>
+        </Button>
         );
     });
+
+    const buttonOne = <LinkContainer to="/app/modules">
+                        <Button className={ "btn-xlarge b-1" }>
+                          <span><i className="fa fa-edit"></i> Create and edit modules</span>
+                        </Button>
+                      </LinkContainer>;
+
 
     return (
       <div className="Home">
         <Row>
           <Col md={ 6 }>
           <div className="visible-xs-block hidden-sm mobile">
+            { buttonOne }
             { buttons }
           </div>
           <div className="visible-sm-block visible-md-block visible-sm-block visible-lg-block hidden-xs">
+            { buttonOne }
             { buttons }
           </div>
           <Alert bsStyle="info">

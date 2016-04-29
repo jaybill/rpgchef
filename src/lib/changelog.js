@@ -1,7 +1,7 @@
 export default [
   {
-    "tag": "v0.9.42",
-    revisions: ["Added social media links", "Added opengraph tags"]
+    "tag": "v0.9.44",
+    revisions: ["Fixed broken buttons on front page", "Added social media links", "Added opengraph tags"]
   },
   {
     "tag": "v0.9.39",

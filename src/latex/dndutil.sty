@@ -3,6 +3,7 @@
 \usepackage{magaz}
 \usepackage{lipsum}
 \usepackage{etoolbox}
+\usepackage{setspace}
 \definecolor{midgrey}{HTML}{454545}		% e.g. used for background and quotebox
 
 % Fancy DnD 5e-style hline
@@ -79,11 +80,12 @@
 \renewcommand\FirstLineFont{\noindent\normalfont\scshape}
 
 \renewcommand{\racequote}[3]{
-\fontsize{\normal}{18pt}{
-\itshape\FirstLine{#1}\par
+\begin{spacing}{1.5}
+\begin{em}
+\FirstLine{#1}\par
 #2
-}
-\normalfont
+\end{em}
 \ifcsdef{#3}{\flushright{---#3}}
+\end{spacing}
 \bigskip
 }

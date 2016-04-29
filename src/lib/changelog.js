@@ -1,6 +1,10 @@
 export default [
   {
     "tag": "v0.9.44",
+    revisions: ["Fixed line spacing after 'racequote'"]
+  },
+  {
+    "tag": "v0.9.43",
     revisions: ["Fixed broken buttons on front page", "Added social media links", "Added opengraph tags"]
   },
   {

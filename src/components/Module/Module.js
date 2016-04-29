@@ -351,6 +351,7 @@ export default class Module extends Component {
   }
 
   swapSections(k, n) {
+
     const {content} = this.state;
     const movingItem = content[k];
 

@@ -107,9 +107,9 @@ const templates = {
     "can be used at a time and only at the end of another creature's turn. " +
     "The <%= name %> regains spent legendary actions at the start of its turn.\n" +
     "\\newline\n\\newline\n",
-  table: '\\begin{dndtable}\n' +
+  table: '\\begin{dndcustomtable}{<%= cols %>}\n' +
     '<%= rows %>\n' +
-    '\\end{dndtable}\n',
+    '\\end{dndcustomtable}\n',
   tableHeading: '\\textbf{<%= h %>}',
   columnBreak: '\n\\newpage\n',
   pageBreak: '\n\\clearpage\n',
@@ -379,8 +379,10 @@ class Dnd5eLaTeX {
       }
 
       return this.compiled.table({
-        cols: data[0].length,
-        rows: rows.join(' \\\\\n')
+        cols: data[0].map(() => {
+          return "X";
+        }).join(""),
+        rows: rows.join(' \\\\\n') + " \\\\"
       });
     } else {
       return "";

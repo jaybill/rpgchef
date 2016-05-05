@@ -46,6 +46,29 @@
 	#1
 }
 
+% Green comment box definition
+\newtcolorbox{largetablebox}[2][]{
+	frame hidden,
+	boxrule=0pt,
+	breakable,
+	enhanced,
+	before skip=8pt plus 1pt,
+	toptitle=3mm,
+	boxsep=0.25ex,
+	left=8pt,
+	right=8pt,
+	arc=0mm,
+	fonttitle=\cbheading\selectfont\scshape\bfseries\color{black},
+	fontupper=\cbcontent\selectfont,
+	title=#2,
+	parbox = false,
+	colback=commentgreen,
+	colframe=commentgreen,
+	colbacktitle=commentgreen,
+	after={\vspace{5pt plus 1pt}\noindent},
+	#1
+}
+
 \newtcolorbox{paperboxcustom}[2][]{
 	frame hidden,
 	boxrule=0pt,
@@ -90,12 +113,18 @@
 \bigskip
 }
 
+\renewcommand{\tabletitle}[1]{
+  \begin{large}
+  \noindent\scshape{#1}
+  \end{large}
+}
+
 % Table Environment
-\newenvironment{dndcustomtable}[1]{
+\newenvironment{dndcustomtable}[2]{
 	\par\vspace*{8pt}
-    \noindent
-    \fontfamily{lmss}\selectfont %Select font
+   \fontfamily{lmss}\selectfont %Select font
     \rowcolors{1}{bgtan}{commentgreen} % Alternate colors
-    \tabularx{\linewidth}{#1}
+    \noindent\tabularx{\linewidth}{#1}
 	}
 	{\endtabularx\vspace{8pt plus 1pt}\noindent}
+

@@ -24,6 +24,8 @@ const templates = {
     '\\usepackage{dndutil}\n' +
     '\\usepackage{enumitem}\n' +
     '\\usepackage[normalem]{ulem}\n' +
+    '\\usepackage[framemthod=tikz]{mdframed}\n' +
+    '\\mdfsetup{backgroundcolor=bgtan,linecolor=black,innertopmargin=12pt}\n' +
     '% Start document\n' +
     '\\begin{document}\n' +
     '<%= cover %>' +
@@ -107,9 +109,12 @@ const templates = {
     "can be used at a time and only at the end of another creature's turn. " +
     "The <%= name %> regains spent legendary actions at the start of its turn.\n" +
     "\\newline\n\\newline\n",
-  table: '\\begin{dndcustomtable}{<%= cols %>}\n' +
+  table: '\\begin{dndcustomtable}{<%= cols %>}{<%= title %>}\n' +
     '<%= rows %>\n' +
     '\\end{dndcustomtable}\n',
+  largeTable: '\\onecolumn\n\\begin{mdframed}\n\\tabletitle{<%= title %>}\n\\begin{dndcustomtable}{<%= cols %>}\n' +
+    '<%= rows %>\n' +
+    '\\end{dndcustomtable}\n\\begin{footnotesize}<%= notes %>\\end{footnotesize}\n\\end{mdframed}\n\\twocolumn\n',
   tableHeading: '\\textbf{<%= h %>}',
   columnBreak: '\n\\newpage\n',
   pageBreak: '\n\\clearpage\n',
@@ -199,7 +204,7 @@ class Dnd5eLaTeX {
           break;
 
         case "table":
-          lt += this.createTable(s.content.data);
+          lt += this.createTable(s.content.data, s.content.displayFormat, s.content.title, s.content.notes);
           break;
 
         case "text":
@@ -353,15 +358,15 @@ class Dnd5eLaTeX {
     return this.compiled.subsection({
       title: this.escape(title)
     });
-  };
+  }
 
   createSubSubsection(title) {
     return this.compiled.subsubsection({
       title: this.escape(title)
     });
-  };
+  }
 
-  createTable(data) {
+  createTable(data, size, title, notes) {
     if (data[0] && data[0].length) {
       const rows = [];
       const headingRows = [];
@@ -374,20 +379,26 @@ class Dnd5eLaTeX {
       rows.push(headingRows.join("\t&\t"));
 
       for (let i = 1; i < data.length; i++) {
-        data[i].map(this.escape);
-        rows.push(data[i].join("\t&\t"));
+        const iii = data[i].map((rrr, i) => {
+          return rrr ? this.escape(rrr, true).trim() : null;
+        });
+        rows.push(iii.join("\t&\t"));
       }
 
-      return this.compiled.table({
+      const tt = size == "large" ? "largeTable" : "table";
+
+      return this.compiled[tt]({
+        title: title,
         cols: data[0].map(() => {
           return "X";
         }).join(""),
-        rows: rows.join(' \\\\\n') + " \\\\"
+        rows: "\\noindent" + rows.join(' \\\\\n') + " \\\\",
+        notes: this.escape(notes, true)
       });
     } else {
       return "";
     }
-  };
+  }
 
   createDocument(content, cover, endPage) {
     return this.compiled.document({

@@ -1,6 +1,6 @@
 import './TableEditor.less';
 import React, { Component, PropTypes } from 'react';
-import { Table, Panel, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Row, Col, Grid, Input, Table, Panel, Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import CtrldInputText from '../ControlledField';
 import ConfirmDelete from '../ConfirmDelete';
 import log from 'loglevel';
@@ -205,23 +205,40 @@ export default class TableEditor extends Component {
       </tbody>
     );
 
+
+
     return (<div className="TableEditor">
-              <ButtonToolbar>
-                <ButtonGroup>
-                  <Button onClick={ self.addColumn } bsSize="xs">
+              <Panel>
+                <Row>
+                  <Col md={ 2 }>
+                  <h4 onClick={ this.props.onCloseSection }><i className="fa fa-table fa-fw"></i> Table</h4>
+                  </Col>
+                  <Col md={ 2 }>
+                  { this.props.displayFormatSelect }
+                  </Col>
+                  <Col md={ 4 }>
+                  { this.props.titleField }
+                  </Col>
+                  <Col md={ 2 }>
+                  <Button block onClick={ self.addColumn } bsSize="small">
                     <i className="fa fa-plus-square fa-fw"></i> Add Column
                   </Button>
-                </ButtonGroup>
-                <ButtonGroup>
-                  <Button bsSize="xs" disabled={ self.state.data.length < 1 } onClick={ self.addRow }>
+                  </Col>
+                  <Col md={ 2 }>
+                  <Button block
+                    bsSize="small"
+                    disabled={ self.state.data.length < 1 }
+                    onClick={ self.addRow }>
                     <i className="fa fa-plus-square fa-fw"></i> Add Row
                   </Button>
-                </ButtonGroup>
-              </ButtonToolbar>
-              <Panel>
+                  </Col>
+                </Row>
                 <Table bordered striped condensed>
                   { rows }
                 </Table>
+                <div>
+                  { this.props.noteField }
+                </div>
               </Panel>
             </div>);
   }

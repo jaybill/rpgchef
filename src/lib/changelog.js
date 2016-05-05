@@ -1,5 +1,11 @@
 export default [
   {
+    "tag": "v0.9.45",
+    revisions: ["Added full-page table format",
+      "Fixed issue with incorrectly formatting tables with more than two cols"]
+  },
+
+  {
     "tag": "v0.9.44",
     revisions: ["Fixed line spacing after 'racequote'"]
   },

@@ -25,7 +25,7 @@ const templates = {
     '\\usepackage{enumitem}\n' +
     '\\usepackage[normalem]{ulem}\n' +
     '\\usepackage[framemthod=tikz]{mdframed}\n' +
-    '\\mdfsetup{backgroundcolor=bgtan,linecolor=black,innertopmargin=12pt}\n' +
+    '\\mdfsetup{backgroundcolor=bgtan,linewidth=0.5pt,linecolor=black,innertopmargin=12pt}\n' +
     '% Start document\n' +
     '\\begin{document}\n' +
     '<%= cover %>' +
@@ -118,7 +118,7 @@ const templates = {
   tableHeading: '\\textbf{<%= h %>}',
   columnBreak: '\n\\newpage\n',
   pageBreak: '\n\\clearpage\n',
-  text: '<%= text %>\n\n',
+  text: '\n<%= text %>\n\n',
   dmGuild: '\\onecolumn\n' +
     '\\noindent\\minipage[c][\\textheight][s]{\\textwidth}\n' +
     '\\setlength{\\parskip}{4mm}\n' +
@@ -388,9 +388,9 @@ class Dnd5eLaTeX {
       const tt = size == "large" ? "largeTable" : "table";
 
       return this.compiled[tt]({
-        title: title,
+        title: size == "large" ? title : null,
         cols: data[0].map(() => {
-          return "X";
+          return "L";
         }).join(""),
         rows: "\\noindent" + rows.join(' \\\\\n') + " \\\\",
         notes: this.escape(notes, true)

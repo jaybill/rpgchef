@@ -4,6 +4,9 @@
 \usepackage{lipsum}
 \usepackage{etoolbox}
 \usepackage{setspace}
+\usepackage{array}
+\usepackage{tabulary}
+
 \definecolor{midgrey}{HTML}{454545}		% e.g. used for background and quotebox
 
 % Fancy DnD 5e-style hline
@@ -117,14 +120,30 @@
   \begin{large}
   \noindent\scshape{#1}
   \end{large}
+  \par
 }
 
+% This patch is required to make tables span entire width correctly.
+ 
+\makeatletter
+\patchcmd\TY@checkmin
+{\def\TY@ratio{1}}
+{%
+  \@tempdima\dimexpr\p@*\TY@linewidth/\TY@tablewidth\relax
+  \edef\TY@ratio{\strip@pt\@tempdima}%
+}{}{}
+\let\TY@@checkmin\TY@checkmin
+\makeatother
+
 % Table Environment
-\newenvironment{dndcustomtable}[2]{
-	\par\vspace*{8pt}
-   \fontfamily{lmss}\selectfont %Select font
-    \rowcolors{1}{bgtan}{commentgreen} % Alternate colors
-    \noindent\tabularx{\linewidth}{#1}
-	}
-	{\endtabularx\vspace{8pt plus 1pt}\noindent}
+\newenvironment{dndcustomtable}[1]{
+  \vspace*{8pt}
+  \fontfamily{lmss}\selectfont %Select font
+  \rowcolors{1}{bgtan}{commentgreen} % Alternate colors
+  \noindent\tabulary{\columnwidth}{#1}
+}
+{
+  \endtabulary
+  \vspace{8pt plus 1pt}
+}
 

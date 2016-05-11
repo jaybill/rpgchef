@@ -1,5 +1,10 @@
 export default [
   {
+    "tag": "v0.9.47",
+    "revisions": ["Added ability to supress title and author text on cover page"]
+  },
+
+  {
     "tag": "v0.9.46",
     "revisions": ["Fixed column spacing in tables, updated full page tables"]
   },

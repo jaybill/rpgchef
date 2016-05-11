@@ -35,6 +35,9 @@ const templates = {
     '<%= content %>\n' +
     '<%= endPage %>\n' +
     '\\end{document}\n',
+  emptyCover: '\\coverimage{<%= coverImage %>}\n' +
+    '\\makecover\n' +
+    '\\setcounter{page}{2}\n',
   cover: '\\title{<%= title %>}\n' +
     '\\subtitle{<%= subtitle %>}\n' +
     '\\author{<%= author %>}\n' +
@@ -252,15 +255,20 @@ class Dnd5eLaTeX {
     });
     let cover;
     if (m.hasCover && m.coverUrl) {
-      cover = this.compiled.cover({
-        title: m.name,
-        subtitle: m.subtitle,
-        author: "by " + (m.author || "Anonymous"),
-        version: m.version ? "Version " + m.version : null,
-        coverImage: path.join(imagePath, m.coverUrl)
-      });
+      if (m.metadata.supressCover) {
+        cover = this.compiled.emptyCover({
+          coverImage: path.join(imagePath, m.coverUrl)
+        });
+      } else {
+        cover = this.compiled.cover({
+          title: m.name,
+          subtitle: m.subtitle,
+          author: "by " + (m.author || "Anonymous"),
+          version: m.version ? "Version " + m.version : null,
+          coverImage: path.join(imagePath, m.coverUrl)
+        });
+      }
     }
-
     let endb;
     if (m.metadata && m.metadata.dmsguild) {
       endb = this.compiled.dmGuild({

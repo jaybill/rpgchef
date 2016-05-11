@@ -90,7 +90,6 @@ export default class MetadataModal extends Component {
     });
   }
 
-
   componentWillMount() {
     this.setState(this.props.meta);
     if (!this.props.meta.hasCover) {
@@ -111,7 +110,7 @@ export default class MetadataModal extends Component {
 
   render() {
     let imageUrl;
-
+    let coverDisplay;
     let dropDiv;
     let imagestyle;
 
@@ -166,28 +165,49 @@ export default class MetadataModal extends Component {
             </div>);
         }
       }
-      dropDiv = (<Row>
-                   <Col md={ 4 }>
-                   { dropContent }
-                   </Col>
-                   <Col md={ 8 }>
-                   <h4>Cover Image</h4>
-                   <p>
-                     Cover images should be:
-                   </p>
-                   <ul>
-                     <li>
-                       PNG or JPG
-                     </li>
-                     <li>
-                       1275 pixels wide by 1650 pixels high
-                     </li>
-                     <li>
-                       150 DPI
-                     </li>
-                   </ul>
-                   </Col>
-                 </Row>);
+
+      coverDisplay = (
+        <Input value={ this.state.metadata.supressCover }
+          onChange={ this.handleMetaSelect.bind(this, "supressCover") }
+          label="Supress title and author on cover?"
+          type="select">
+        <option value={ false }>
+          No
+        </option>
+        <option value={ true }>
+          Yes
+        </option>
+        </Input>
+      );
+
+      dropDiv = (<div>
+                   <Row>
+                     <Col md={ 4 }>
+                     { dropContent }
+                     </Col>
+                     <Col md={ 8 }>
+                     <h4>Cover Image</h4>
+                     <p>
+                       Cover images should be:
+                     </p>
+                     <ul>
+                       <li>
+                         PNG or JPG
+                       </li>
+                       <li>
+                         1275 pixels wide by 1650 pixels high
+                       </li>
+                       <li>
+                         150 DPI
+                       </li>
+                     </ul>
+                     </Col>
+                   </Row>
+                   <Row>
+                     <Col md={ 12 }>
+                     </Col>
+                   </Row>
+                 </div>);
     }
 
     return (
@@ -271,6 +291,7 @@ export default class MetadataModal extends Component {
             <div className="drop-holder">
               { dropDiv }
             </div>
+            { coverDisplay }
             </Col>
           </Row>
           <Row>

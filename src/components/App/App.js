@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Button, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-
+import { Alert,Button, Nav, NavItem, NavDropdown, MenuItem,Row,Col } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/lib/Navbar';
 
 import './App.less';
@@ -12,8 +11,36 @@ import BottomNav from '../BottomNav';
 
 class App extends Component {
 
+  constructor(){
+    super();
+  }
+  
   render() {
-
+    let nag;
+    if(this.props.nag){
+      nag = (<div className="nag">
+             <Alert>
+             <Row>
+             <Col md={6}>
+             <h4>It&apos; your time to shine!</h4>
+             <p>Help us keep the lights on and make more awesome stuff by purchasing a subscription! They start at just $1.99 a month!</p>
+             </Col>
+             <Col md={3}>
+             <LinkContainer to="/app/subscribe">
+             <Button title="Yes! :)" block bsStyle="primary"><i className="fa fa-smile-o"/> Let&apos;s do this!</Button>
+             </LinkContainer>
+             <p className="hidden-md hidden-lg">&nbsp;</p>
+             </Col>
+             <Col md={3}>
+             <Button title="Okay. *sigh* :(" block bsStyle="default" onClick={this.props.onDismissNag}>
+             <i className="fa fa-frown-o"/> Ignore Reasonable Plea
+             </Button>
+             </Col>
+             </Row>
+             </Alert>             
+             </div>);
+    }
+    
     return (
       <div className="App">
         <div className="container">
@@ -59,8 +86,9 @@ class App extends Component {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-          <div className="App-Holder">
-            { this.props.children }
+        <div className="App-Holder">
+        {nag}
+        { this.props.children }
           </div>
           <BottomNav/>
         </div>

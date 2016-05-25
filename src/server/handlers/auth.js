@@ -77,11 +77,6 @@ Auth.handlers = {
           }
         }
       });
-
-
-
-
-
     }
   },
 
@@ -326,7 +321,8 @@ Auth.handlers = {
         request.auth.session.clear();
       }
 
-      var user;
+      let user;
+      let validPassword;
       return Db.Users.findOne({
         where: {
           username: request.payload.username
@@ -334,12 +330,26 @@ Auth.handlers = {
       }).then((dbUser) => {
         user = dbUser;
         return Bcrypt.compare(request.payload.password, user.password);
-
-      }).then((validPassword) => {
+      }).then((vp) => {
+        validPassword = vp;
+        let userAccount;
+        if(user && user.id){
+          userAccount = Db.StripeUsers.findOne(
+            {
+              where: {
+                userId: user.id
+              }
+            }
+          );
+        }
+        return userAccount;
+      }).then((userAccount) => {
         if (validPassword) {
-          user.password = null;
+          const justUser = user.get();
+          justUser.password = null;
+          justUser.paid = userAccount ? true : false;
           request.auth.session.set(user);
-          return reply(user);
+          return reply(justUser);
         } else {
           throw new Error("bad password");
         }

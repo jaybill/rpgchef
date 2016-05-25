@@ -174,12 +174,10 @@ export default class Subscribe extends Component {
                 <Row className="no-gutter">
                   <Col md={ 12 }>
                   <Well>
-                    <p>
-                      RPG Chef is a "pay what you want" subscription service. We&apos;re not talking about <em>donations</em> here. We do ask that you pay for the service if
-                      you actively use it. We just think you should decide how much you pay and that payment should be on the honor system. What we <em>don&apos;t</em> have
-                      are "premium accounts" where people who pay us get access to special features and other people don&apos;t. Instead, we&apos;ve created a couple of subscription
-                      plans that are loosely based on how much you use our site:
-                    </p>
+            <p>
+            RPG Chef is 100% supported by subscriptions. We don&apos;t run ads, we don&apos;t have "premium accounts" and we&apos;re not financed by venture capital. Buying a subscription helps us pay our operating costs and lets us build new and awesome features. Help us do what we love so we can continue to help you do what you love: Make great content!
+            </p>
+            <p>Subscriptions are priced according to how you use (or plan to use) the site, but are really just guidelines. Pay us what you think we&apos;re worth! You can cancel at any time.</p>
                   </Well>
                   <Row>
                     { panels }

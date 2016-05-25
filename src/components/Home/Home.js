@@ -53,7 +53,6 @@ export var componentDef = {
                         </Button>
                       </LinkContainer>;
 
-
     return (
       <div className="Home">
         <Row>

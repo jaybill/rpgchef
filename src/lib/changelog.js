@@ -1,5 +1,9 @@
 export default [
   {
+    "tag": "v0.9.48",
+    "revisions": ["Updated subscription system"]
+  },
+  {
     "tag": "v0.9.47",
     "revisions": ["Added ability to supress title and author text on cover page"]
   },

@@ -22,7 +22,7 @@ class App extends Component {
              <Alert>
              <Row>
              <Col md={6}>
-             <h4>It&apos; your time to shine!</h4>
+             <h4>It&apos;s your time to shine!</h4>
              <p>Help us keep the lights on and make more awesome stuff by purchasing a subscription! They start at just $1.99 a month!</p>
              </Col>
              <Col md={3}>

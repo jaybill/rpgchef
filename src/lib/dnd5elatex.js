@@ -24,7 +24,7 @@ const templates = {
     '\\usepackage{dndutil}\n' +
     '\\usepackage{enumitem}\n' +
     '\\usepackage[normalem]{ulem}\n' +
-    '\\usepackage[framemthod=tikz]{mdframed}\n' +
+    '\\usepackage{mdframed}\n' +
     '\\mdfsetup{backgroundcolor=bgtan,linewidth=0.5pt,linecolor=black,innertopmargin=12pt}\n' +
     '% Start document\n' +
     '\\begin{document}\n' +

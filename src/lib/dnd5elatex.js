@@ -12,6 +12,7 @@ const markdown = (md) => {
 const templates = {
   document: '\\documentclass[9pt,twoside]{article}\n' +
     '\\usepackage[bg-none]{dnd}\n' +
+    '\\usepackage{dndutil}\n' +
     '\\usepackage[ngerman]{babel}\n' +
     '\\usepackage{dndcover}\n' +
     '\\usepackage{wallpaper}\n' +
@@ -21,7 +22,6 @@ const templates = {
     '\\usepackage{fontspec}\n' +
     '\\usepackage{tikz}\n' +
     '\\usepackage{multicol}\n' +
-    '\\usepackage{dndutil}\n' +
     '\\usepackage{enumitem}\n' +
     '\\usepackage[normalem]{ulem}\n' +
     '\\usepackage[framemthod=tikz]{mdframed}\n' +

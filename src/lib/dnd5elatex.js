@@ -26,13 +26,13 @@ const templates = {
     '\\usepackage[normalem]{ulem}\n' +
     '\\usepackage[framemethod=tikz]{mdframed}\n' +
     '\\mdfsetup{backgroundcolor=bgtan,linewidth=0.5pt,linecolor=black,innertopmargin=12pt}\n' +
-    '\\addtolength{\\wpXoffset}{1in}\n'+
-    '\\addtolength{\\wpYoffset}{-1in}\n'+        
+    '\\addtolength{\\wpXoffset}{-1in}\n'+
+    '\\addtolength{\\wpYoffset}{1in}\n'+        
     '% Start document\n' +
     '\\begin{document}\n' +
     '<%= cover %>' +
     '\\twocolumn\n' +
-    '\\ULCornerWallPaper{1.0}{rpgchefpaper.jpg}\n' +
+    '\\CenterWallPaper{1.0}{rpgchefpaper.jpg}\n' +
     '\\setmainfont{TeX Gyre Bonum}\n' +
     '<%= content %>\n' +
     '<%= endPage %>\n' +

@@ -10,7 +10,7 @@ It's doubtful that you'd want to take this application "as is" and run it as a p
 
 Not really. I'll be the first to tell you that writing a nifty web application is only one part of getting a successful startup off the ground. There's a ton of marketing, branding, devOps, customer support and a boatload of other details that need to be worked out. And besides, [Reddit did it](https://github.com/reddit/reddit), and they don't seem to have any problem competing with people that use their code.
 
-Truth be told so much of what I've done with this is depends on open source projects built by other people that it seems kind of selfish not to make my code avaiable.
+Truth be told so much of what I've done with this project depends on open source projects built by other people that it seems kind of selfish not to make my code avaiable.
 
 ## Requirements
 

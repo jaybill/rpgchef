@@ -12,6 +12,7 @@ const markdown = (md) => {
 const templates = {
   document: '\\documentclass[9pt,twoside]{article}\n' +
     '\\usepackage[bg-none]{dnd}\n' +
+    '\\usepackage{dndutil}\n' +
     '\\usepackage[ngerman]{babel}\n' +
     '\\usepackage{dndcover}\n' +
     '\\usepackage{wallpaper}\n' +
@@ -21,11 +22,12 @@ const templates = {
     '\\usepackage{fontspec}\n' +
     '\\usepackage{tikz}\n' +
     '\\usepackage{multicol}\n' +
-    '\\usepackage{dndutil}\n' +
     '\\usepackage{enumitem}\n' +
     '\\usepackage[normalem]{ulem}\n' +
-    '\\usepackage{mdframed}\n' +
+    '\\usepackage[framemethod=tikz]{mdframed}\n' +
     '\\mdfsetup{backgroundcolor=bgtan,linewidth=0.5pt,linecolor=black,innertopmargin=12pt}\n' +
+    '\\addtolength{\\wpXoffset}{-1in}\n'+
+    '\\addtolength{\\wpYoffset}{1in}\n'+        
     '% Start document\n' +
     '\\begin{document}\n' +
     '<%= cover %>' +

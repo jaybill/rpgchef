@@ -137,7 +137,7 @@ export const print = (m, callback) => {
   }, tmpdir.name).then(() => {
     log.debug("Generating LaTeX and pouring into pipe");
     Latex(latexContent, {
-      command: "xelatex"
+      command: "lualatex"
     })
       .pipe(gsStream)
       .pipe(exiftoolStream)

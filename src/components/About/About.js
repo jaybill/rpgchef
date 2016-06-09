@@ -31,7 +31,9 @@ export default class About extends Component {
           <p>
             RPG Chef is built using <a href="https://facebook.github.io/react/">React</a> and <a href="http://redux.js.org">Redux</a>. We employ a microservice architecture
             that uses <a href="http://hapijs.com/">hapi.js</a> and <a href="http://www.postgresql.org">PostgreSQL</a>. We render content with <a href="https://www.latex-project.org">LaTeX</a>.
-          </p>
+        </p>
+          <h3>Open Source</h3>
+          <p>The software that runs RPG Chef is open source. Check out our <a href="https://github.com/jaybill/rpgchef">Github project</a> if you're interested in seeing how this thing is put together.</p>
           <h3>Data Safety</h3>
           <p>
             You very likely put a lot of work into your content. If you're like us, you've often spent days, sometimes <em>weeks</em> working on stuff. We're committed

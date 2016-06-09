@@ -1,5 +1,12 @@
 export default [
   {
+    "tag": "v0.9.58",
+    "revisions": [
+      "Updated about page",
+      "Fixed wallpaper for luatex"
+    ]
+  },
+  {
     "tag": "v0.9.48",
     "revisions": ["Updated subscription system"]
   },

@@ -41,3 +41,7 @@ I'm not expecting that I'll be deluged with contributions on this thing, but if 
 # Bugs  
   
 If you are a user of the RPG Chef website and need help with that, as in the one at https://rpgchef.com - DO NOT submit an issue here, instead use our regular [issue tracker](https://rpgchef.lighthouseapp.com/projects/132376-rpg-chef/tickets).
+
+# Support
+
+I will try to answer questions if I can, but be aware that it may take me some time to respond.

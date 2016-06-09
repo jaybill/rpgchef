@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "rpgchef site",
   "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jaybil/rpgchef"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,5 +1,7 @@
 # RPG Chef
 
+UPDATED 3/14/19
+
 RPG Chef is a web application that helps you create content for DnD 5e.
 
 RPG Chef is built using React and Redux. It employs a microservice architecture that uses hapi.js and PostgreSQL. It renders content with LaTeX.
